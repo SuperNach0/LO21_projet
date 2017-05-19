@@ -3,27 +3,29 @@
 #include <QString>
 
 
-char* formatTime ();
+std::string formatTime ();
 
 class note {
 
 private :
     unsigned int id;
     std::string titre ;
-    char* JourCreation ;
-    char* JourModif;
+    std::string JourCreation ;
+    std::string JourModif;
 
 public :
 
      note (int i,std::string t): id(i),titre(t)
       {
-        time_t _time;
+
+
         this->JourCreation = formatTime();
+        std::cout<<formatTime()<<std::endl;
         this ->JourModif = formatTime();}
-     unsigned int getID() const {return id;}
+    unsigned int getID() const {return id;}
     const std::string getTitre() const {return titre;}
-    const char* getJourCreation() const {return JourCreation;}
-    const char* getJourModif() const {return JourModif;}
+    const std::string getJourCreation() const {return JourCreation;}
+    const std::string getJourModif() const {return JourModif;}
 
     void afficher(std::ostream& f= std::cout) const;
 

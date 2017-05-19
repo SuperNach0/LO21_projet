@@ -13,23 +13,18 @@ void note::afficher(std::ostream& f) const
     f<<"***** note ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getJourCreation()<<" date modif="<<getJourModif()<<"\n";
 }
 
+//**********************fonction qui récupere lheure du système************************/
 
+std::string formatTime (){
 
-
-char* formatTime (){
-
-
+         char tmps[32];
         time_t _time;
+        struct tm timeInfo;
+        time(&_time);
+        localtime_s(&timeInfo, &_time);
 
-    struct tm timeInfo;
-    char format[32];
-
-    time(&_time);
-    localtime_s(&timeInfo, &_time);
-
-    strftime(format, 32, "%Y-%m-%d %H-%M", &timeInfo);
-
-    std::cout << format << std::endl;
-
-return format;
+    strftime(tmps, 32, "%Y-%m-%d %H-%M", &timeInfo);
+    std::string temps = tmps;
+return temps;
 }
+//**********************
