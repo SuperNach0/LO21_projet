@@ -10,8 +10,8 @@ class note {
 private :
     unsigned int id;
     std::string titre ;
-    std::string JourCreation ;
-    std::string JourModif;
+    std::string Creation ;
+    std::string Modif;
 
 public :
 
@@ -19,16 +19,18 @@ public :
       {
 
 
-        this->JourCreation = formatTime();
+        this->Creation = formatTime();
         std::cout<<formatTime()<<std::endl;
-        this ->JourModif = formatTime();}
+        this ->Modif = formatTime();}
     unsigned int getID() const {return id;}
     const std::string getTitre() const {return titre;}
-    const std::string getJourCreation() const {return JourCreation;}
-    const std::string getJourModif() const {return JourModif;}
+    const std::string getCreation() const {return Creation;}
+    const std::string getModif() const {return Modif;}
 
     void afficher(std::ostream& f= std::cout) const;
+    void setModif () ;
 
+    ~note () {std::cout<<"suppression de la note "<<std::endl;};
 
 
 

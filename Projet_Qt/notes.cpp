@@ -8,9 +8,13 @@
 #include <time.h>
 #include "notes.h"
 
+
+
+
+
 void note::afficher(std::ostream& f) const
 {
-    f<<"***** note ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getJourCreation()<<" date modif="<<getJourModif()<<"\n";
+    f<<"***** note ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n";
 }
 
 //**********************fonction qui récupere lheure du système************************/
@@ -28,3 +32,10 @@ std::string formatTime (){
 return temps;
 }
 //**********************
+
+
+
+
+void note::setModif () {
+    this->Modif = formatTime();
+}
