@@ -34,8 +34,6 @@ return temps;
 //**********************
 
 
-
-
 void note::setModif () {
     this->Modif = formatTime();
 }
