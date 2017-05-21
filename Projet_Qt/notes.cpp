@@ -12,10 +12,6 @@
 
 
 
-void note::afficher(std::ostream& f) const
-{
-    f<<"***** note ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n";
-}
 
 //**********************fonction qui récupere lheure du système************************/
 
@@ -37,3 +33,21 @@ return temps;
 void note::setModif () {
     this->Modif = formatTime();
 }
+
+//***********fonction de article
+
+ void article ::afficher(std::ostream& f) const {
+
+     f<<"***** article ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
+     <<"texte ="<<texte<<std::endl;
+
+}
+
+
+   void article ::  MiseAJour () {
+
+     formatTime();
+     std::cout <<"mettez a jour le texte "<<std::endl;
+     std::cin>> texte;
+
+ }

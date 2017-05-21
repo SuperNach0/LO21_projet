@@ -2,6 +2,8 @@
 #define NOTES_H
 #include <QString>
 
+enum etat {en_attente,en_cours,terminee};
+
 
 std::string formatTime ();
 
@@ -28,16 +30,18 @@ public :
     const std::string getCreation() const {return Creation;}
     const std::string getModif() const {return Modif;}
 
-    void afficher(std::ostream& f= std::cout) const;//définie des cpp
-    void setModif () ;
+    virtual void afficher(std::ostream& f= std::cout) const = 0; // virtuelle pure ( a definir dans les filles)
+    virtual void MiseAJour () =0 ;
 
-    ~note () {std::cout<<"suppression de la note "<<std::endl;};
+     void setModif () ;
+
+   virtual ~note () {std::cout<<"suppression de la note "<<std::endl;};
 
 
 };
 
 
-//*******************NOtes manager que j'ai pompé d'un td
+//*******************NOtes manager que j'ai pompé d'un td6
 // les exeptions sont pas encore fait du coup -> en commentaire
 //pareil pour tout  ce qui contennait du Qstring et des file name
 
@@ -108,12 +112,59 @@ public:
 
 
 class article : public note {
-private :
+protected :
+    std::string texte ; //ce sera un QString après
+
+public :
+    article ( const unsigned int i, std::string t,std::string txt)
+        : note (i,t) , texte (txt){}
+
+    const std::string getTexte() const  {return texte;}
+
+
+    virtual void afficher(std::ostream& f= std::cout) const;
+     virtual void MiseAJour (); //PROBLEME : ne prend que le premier mot qu'on ecrit... jpese que le QString reglera le problème
+
+
+
+
+};
+
+class media : public note { // héritage nécessaire ? ou ptite énumération ?
+
+protected :
+
+    std::string  description ;
+    std::string image ;//à changer avec QT : chemin vers l'image ?
+
+public :
+    media ( const unsigned int i, std::string t,std::string d,std::string im)
+        : note (i,t) , description (d), image(im){}
+    const std::string getDescription()const {return description;}
+    const std::string getImage() const {return image;}
+
+// AFFICHER ET MISE A JOUR A METTRE §
 
 
 };
 
 
+class tache : public note{// faut ajouter l'optionalité des trucs : constructeur ?
 
+protected :
+    std::string action;
+    unsigned int priorite;
+    std::string echeance; //date ?
+    enum etat status;
+
+public :
+    const std::string getAction() const {return action;}
+    const std::string getecheance() const {return echeance;}
+    enum etat getEtat() const  {return status;}
+    unsigned int getPriorite() const {return priorite;}
+
+
+// AFFICHER ET MISE A JOUR A METTRE §
+};
 
 #endif // NOTES_H

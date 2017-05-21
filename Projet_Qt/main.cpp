@@ -31,12 +31,14 @@ int menu =0;
 
 int main( ) {
 
-     note p (5,"hellowww");
+     article a (2,"bonjour","je suis un sacré sacripan");
 
 
 
 
-    p.afficher();
+    a.afficher();
+    a.MiseAJour();
+    a.afficher();
 
 
 
