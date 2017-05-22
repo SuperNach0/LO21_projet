@@ -24,6 +24,11 @@
  * hésite pas a changer des trucs si tu veux ;) */
 
 
+
+
+//jpense faire une sorte de classe ou type pour le temps et les dates pourrait nous aider  !
+
+
 int menu =0;
 
 
