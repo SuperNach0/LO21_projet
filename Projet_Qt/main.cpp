@@ -21,7 +21,14 @@
  * la j'ai fait principalement la classe mere note et j'ai adapté un
  * manager(c'est lui qui gerera tout comme au médian)
  *
- * hésite pas a changer des trucs si tu veux ;) */
+ * hésite pas a changer des trucs si tu veux ;)
+
+
+
+ * ALRIGHT MISTER TERTRAIS, bien reçu 5/5
+ * Le travail intensif peut commenceeeeeeer !
+
+*/
 
 
 int menu =0;
@@ -41,7 +48,7 @@ int main( ) {
     a.afficher();
 
 
-
+    std::cout<< "test" << std::endl;
 
     return  0;
 }
