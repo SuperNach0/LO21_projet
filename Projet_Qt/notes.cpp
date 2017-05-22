@@ -46,8 +46,38 @@ void note::setModif () {
 
    void article ::  MiseAJour () {
 
-     formatTime();
+
      std::cout <<"mettez a jour le texte "<<std::endl;
      std::cin>> texte;
+     setModif();
 
  }
+
+
+//************************fonction de media****************
+
+
+ void media :: afficher(std::ostream& f) const {
+     f<<"***** media ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
+     <<"description ="<<description<<std::endl;
+     }
+ void media :: MiseAJour () {
+
+     std::cout <<"mettez a jour la description "<<std::endl;
+     std::cin>> description;
+     setModif();
+     }
+
+
+ //*****************************fonctions de taches ***************
+
+  void tache :: afficher(std::ostream& f ) const {
+      f<<"***** tache ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
+      <<"action ="<<action<<"priorité :"<< priorite << "echeance : "<< echeance<<"etat = "<<status <<std::endl;
+
+  }
+  void tache:: MiseAJour () {
+      // trucs a faire wallah
+      setModif();
+
+  }

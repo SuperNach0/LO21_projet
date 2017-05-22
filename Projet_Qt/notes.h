@@ -33,7 +33,7 @@ public :
     virtual void afficher(std::ostream& f= std::cout) const = 0; // virtuelle pure ( a definir dans les filles)
     virtual void MiseAJour () =0 ;
 
-     void setModif () ;
+    void setModif () ;
 
    virtual ~note () {std::cout<<"suppression de la note "<<std::endl;};
 
@@ -143,7 +143,11 @@ public :
     const std::string getDescription()const {return description;}
     const std::string getImage() const {return image;}
 
-// AFFICHER ET MISE A JOUR A METTRE §
+    virtual void afficher(std::ostream& f= std::cout) const ;
+    virtual void MiseAJour ();
+
+
+
 
 
 };
@@ -158,13 +162,19 @@ protected :
     enum etat status;
 
 public :
+
+    tache (const unsigned int i, std::string t,std::string a, unsigned int p , std::string e, enum etat s)
+        : note (i,t),action (a), priorite(p), echeance (e), status (s) {}
+
     const std::string getAction() const {return action;}
     const std::string getecheance() const {return echeance;}
     enum etat getEtat() const  {return status;}
     unsigned int getPriorite() const {return priorite;}
 
+    virtual void afficher(std::ostream& f= std::cout) const ;
+    virtual void MiseAJour () ;
 
-// AFFICHER ET MISE A JOUR A METTRE §
+
 };
 
 #endif // NOTES_H

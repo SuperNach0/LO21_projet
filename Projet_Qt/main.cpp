@@ -31,6 +31,11 @@
 */
 
 
+
+
+//jpense faire une sorte de classe ou type pour le temps et les dates pourrait nous aider  !
+
+
 int menu =0;
 
 
