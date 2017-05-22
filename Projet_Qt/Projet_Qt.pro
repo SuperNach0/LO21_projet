@@ -1,13 +1,14 @@
 QT += widgets
 CONFIG += console
 
-
 QMAKE_CXXFLAGS = -std=c++11
 QMAKE_LFLAGS = -std=c++11
 
 SOURCES += \
     main.cpp \
-    notes.cpp
+    notes.cpp \
+    fenprincipale.cpp
 
 HEADERS += \
-    notes.h
+    notes.h \
+    fenprincipale.h

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <time.h>
 #include "notes.h"
+#include "fenprincipale.h"
 
 
 /* A LIRE MONSIEUR LAY
@@ -25,8 +26,7 @@
 
 
 
- * ALRIGHT MISTER TERTRAIS, bien reçu 5/5
- * Le travail intensif peut commenceeeeeeer !
+*là je viens de charger en 2-2 une vieille GUI que j'avais faite ya longtemps, je la modifie bientot pour l'adapter
 
 */
 
@@ -41,19 +41,23 @@ int menu =0;
 
 
 
-int main( ) {
+int main(int argc,  char *argv[]){
 
      article a (2,"bonjour","je suis un sacré sacripan");
 
 
-
+     ///pour afficher l'interface graphique, décommenter les 4 lignes suivantes
+     /*
+     QApplication app(argc, argv);
+     FenPrincipale fenetre;
+     fenetre.show();
+     return app.exec();
+    */
 
     a.afficher();
     a.MiseAJour();
     a.afficher();
 
-
-    std::cout<< "test" << std::endl;
 
     return  0;
 }

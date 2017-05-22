@@ -45,8 +45,6 @@ void note::setModif () {
 
 
    void article ::  MiseAJour () {
-
-
      std::cout <<"mettez a jour le texte "<<std::endl;
      std::cin>> texte;
      setModif();

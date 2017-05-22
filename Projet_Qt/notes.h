@@ -9,6 +9,8 @@ std::string formatTime ();
 
 
 
+
+
 //****************** SUPER CLASSE NOTE***********************/
 class note {
 
