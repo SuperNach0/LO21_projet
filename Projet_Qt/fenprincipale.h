@@ -28,6 +28,8 @@
 #include <QMenuBar>
 #include <QMainWindow>
 
+#include <iostream>
+
 class FenPrincipale : public QMainWindow
 {
     Q_OBJECT
@@ -43,29 +45,24 @@ private:
 
     QVBoxLayout* m_layout_principal;
 
-    QGroupBox* m_formulaire;
-        QFormLayout* m_layout_formulaire;
-        QLineEdit* m_champ1;
-        QLineEdit* m_champ2;
-
-    QGroupBox* m_cases;
-        QVBoxLayout* m_layout_cases;
-        QCheckBox* m_check1;
-        QCheckBox* m_check2;
-        QCheckBox* m_check3;
-
-    QGroupBox* m_commentaires;
-        QFormLayout* m_layout_commentaires;
-        QCheckBox* m_check4;
-        QLineEdit* m_com1;
-        QDateTimeEdit *m_date;
-        QTextEdit* m_texte;
-        QString m_code;
 
     QPushButton* m_bouton1;
     QPushButton* m_bouton2;
 
+};
 
+class fenetre_creation_note : public QWidget
+{
+    Q_OBJECT
+
+public:
+    fenetre_creation_note();
+
+private:
+    QVBoxLayout* m_layout_choix;
+
+    QLineEdit* id;
+    QLineEdit* titre;
 
 };
 

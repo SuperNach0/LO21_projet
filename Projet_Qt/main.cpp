@@ -46,13 +46,13 @@ int main(int argc,  char *argv[]){
      article a (2,"bonjour","je suis un sacré sacripan");
 
 
-     ///pour afficher l'interface graphique, décommenter les 4 lignes suivantes
-     /*
+     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
+
      QApplication app(argc, argv);
      FenPrincipale fenetre;
      fenetre.show();
      return app.exec();
-    */
+
 
     a.afficher();
     a.MiseAJour();
