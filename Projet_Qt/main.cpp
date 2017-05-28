@@ -34,7 +34,7 @@ int main(int argc,  char *argv[]){
 
     NotesManager2& m1 = NotesManager2::getManager();
 
-int menu =99;
+int menu =99; int j=0;
 while (menu!=10) {
 
     std::cout << "  tu as actuellement "<<m1.getnbNote()<<" notes ; que voulez vous faire  ?"<<std::endl<<
@@ -57,9 +57,39 @@ while (menu!=10) {
 
         std::cout<<" quel est le titre de la note a creer ?"<<std::endl;
         std::cin>> t;
-     m1.getNote(id).setTitre(t);
-     std::cout<<" NOTE CREEE "<<std::endl;break;
+
+        std::cout << " tu veux ?"<<std::endl<<
+                     "1- article"<<std::endl<<
+                     "2- multimedia "<<std::endl<<
+                     "3- tache"<<std::endl;
+        std::cin>>j;
+
+                if (j==1){ std::string txt;
+                    std::cout<<" le texte de larticle ?"<<std::endl;
+                    std::cin>> txt;
+                    m1.ajArticle(id,txt).setTitre(t);
+                }
+                if (j==2){ std::string description;std::string image;
+                    std::cout<<" la description ?"<<std::endl;
+                    std::cin>> description;
+                    std::cout<<" la image ?"<<std::endl;
+                    std::cin>> image;
+                    m1.ajMulti(id,description,image).setTitre(t);
+                }
+                if (j==3){ std::string action ;  unsigned int priorite;  std::string echeance;
+
+                    std::cout<<" action?"<<std::endl;
+                    std::cin>> action;
+                    std::cout<<" priorite (int)?"<<std::endl;
+                    std::cin>> priorite;
+                    std::cout<<" echeance?"<<std::endl;
+                    std::cin>> echeance;
+
+                    m1.ajTache(id,action,priorite,echeance).setTitre(t);
+                }break;
     }
+
+
 
 
 

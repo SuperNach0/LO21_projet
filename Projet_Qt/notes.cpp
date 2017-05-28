@@ -66,15 +66,36 @@ NotesManager2::~NotesManager2(){
 
 NotesManager2::Handler NotesManager2::handler=Handler();
 
-note& NotesManager2::getNote(const std::string& id){
+
+/*note& NotesManager2::getNote(const std::string& id){
     // si l'article existe déjà, on en renvoie une référence
     for(unsigned int i=0; i<nbNote; i++){
         if (Note[i]->getID()==id) return *Note[i];
     }
-    // sinon il est créé
+    // sinon il est créé                                    // dire que y'en a pas ?
     note* n=new note(id,"");
     addNote (n);
     return *n;
+}*/
+
+
+note& NotesManager2::ajArticle(const std::string& id,const std::string& txt){
+    article* n=new article(id,"",txt);
+    addNote (n);
+    return *n;
+}
+note& NotesManager2::ajMulti(const std::string& id,const std::string& description,const std::string& image){
+
+    media* n=new media(id,"",description,image);
+    addNote (n);
+    return *n;
+}
+
+note& NotesManager2::ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance) {
+    tache* n=new tache(id,"",action,priorite,echeance);
+    addNote (n);
+    return *n;
+
 }
 
 /*                                                       A FAIRE EN Qt PAREIL POUR SAVE
@@ -187,7 +208,7 @@ void note::setModif () {
  void article ::afficher(std::ostream& f) const {
 
      f<<"***** article ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
-     <<"texte ="<<texte<<std::endl;
+     <<"texte ="<<texte<<std::endl<<std::endl;
 
 }
 
@@ -205,7 +226,7 @@ void note::setModif () {
 
  void media :: afficher(std::ostream& f) const {
      f<<"***** media ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
-     <<"description ="<<description<<std::endl;
+     <<" description ="<<description<<std::endl<<" image ="<<image<<std::endl<<std::endl;
      }
  void media :: MiseAJour () {
 
@@ -219,7 +240,7 @@ void note::setModif () {
 
   void tache :: afficher(std::ostream& f ) const {
       f<<"***** tache ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
-      <<"action ="<<action<<"priorité :"<< priorite << "echeance : "<< echeance<<"etat = "<<status <<std::endl;
+      <<" action ="<<action<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
 
   }
   void tache:: MiseAJour () {
