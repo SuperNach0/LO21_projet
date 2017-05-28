@@ -8,6 +8,7 @@ enum etat {en_attente,en_cours,terminee};
 std::string formatTime ();
 
 class note;
+
 class NotesManager2;
 
 
@@ -45,10 +46,10 @@ public :
 
      void setTitre(const std::string& t) {titre = t;}
 
-     void afficher(std::ostream& f= std::cout) const ;
 
-//    virtual void afficher(std::ostream& f= std::cout) const = 0; // virtuelle pure ( a definir dans les filles)
-//    virtual void MiseAJour () =0 ;
+
+    virtual void afficher(std::ostream& f= std::cout) const = 0; // virtuelle pure ( a definir dans les filles)
+    virtual void MiseAJour () =0 ;
 
     void setModif () ;
 
@@ -74,9 +75,9 @@ class NotesManager2 {
     static Handler handler;
     NotesManager2();
     ~NotesManager2();
-    NotesManager2(const NotesManager2& m);//j'en suis la mais pas trouvé 1
-    NotesManager2& operator=(const NotesManager2& m);//2
-     //void addNote (const QString& i, const QString& ti, const QString& te);//3
+    NotesManager2(const NotesManager2& m);
+    NotesManager2& operator=(const NotesManager2& m);
+    void addNote (const QString& i, const QString& ti, const QString& te);//3
 
 
  public:
@@ -84,6 +85,15 @@ class NotesManager2 {
     unsigned int getnbNote() const {return nbNote;}
 
     note& getNote (const std::string& id); // return the article with identificator id (create a new one if it not exists)
+
+    note& ajArticle(const std::string& id,const std::string& txt);
+    note& ajMulti(const std::string& id,const std::string& description,const std::string& image);
+    note& ajTache(const std::string& id,const std::string& action ,const unsigned int priorite,const std::string& echeance);
+
+
+
+
+
     std::string getFilename() const { return filename; }
     void setFilename(const std::string& f) { filename=f; }
     //void load(); // load notes from file filename
@@ -217,8 +227,8 @@ protected :
 
 public :
 
-    tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e, enum etat s)
-        : note (i,t),action (a), priorite(p), echeance (e), status (s) {}
+    tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e)
+        : note (i,t),action (a), priorite(p), echeance (e) {}
 
     const std::string getAction() const {return action;}
     const std::string getecheance() const {return echeance;}
