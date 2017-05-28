@@ -66,6 +66,7 @@ public:
 
 public slots:
     void choisir_fichier();
+    void save();
 
 private:
     QVBoxLayout* m_layout_choix;
@@ -85,6 +86,10 @@ private:
     QWidget* m_groupe_tache;
     QCalendarWidget* m_calendrier;
         QCheckBox* m_case_calendrier;
+
+    //Boutons de fin
+    QPushButton* m_save;
+    QPushButton* m_quit;
 
 };
 

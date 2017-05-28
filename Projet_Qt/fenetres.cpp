@@ -1,4 +1,6 @@
 #include "fenetres.h"
+#include "notes.h"
+
 
 
 
@@ -63,6 +65,7 @@ FenPrincipale::FenPrincipale()
 // FENETRE QUI S'AFFICHE QUAND ON CLIQUE sur "Nouvelle Note"
 fenetre_creation_note::fenetre_creation_note() : QWidget()
 {
+
     m_layout_choix = new QVBoxLayout; //création layout
 
     //Création des différents champs du formulaire
@@ -97,6 +100,11 @@ fenetre_creation_note::fenetre_creation_note() : QWidget()
             m_selection_fichier->connect(m_selection_fichier,SIGNAL(clicked(bool)),this,SLOT(choisir_fichier()));
         m_media->connect(m_media,SIGNAL(toggled(bool)),m_selection_fichier,SLOT(setVisible(bool)));
 
+    m_save = new QPushButton("Sauvegarder",this);
+        m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
+    m_quit = new QPushButton("Annuler",this);
+        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
+
 
 
 
@@ -120,8 +128,8 @@ fenetre_creation_note::fenetre_creation_note() : QWidget()
     m_layout_tache->addWidget(m_calendrier);
 
     m_layout_choix->addWidget(m_groupe_tache);
-
-
+    m_layout_choix->addWidget(m_save);
+    m_layout_choix->addWidget(m_quit);
 
 
     this->setLayout(m_layout_choix); //affectation du layout
@@ -135,9 +143,26 @@ void fenetre_creation_note :: choisir_fichier()
     *m_fichier = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Images (*.png *.gif *.jpg *.jpeg)");
 }
 
+void fenetre_creation_note :: save()
+{
+    NotesManager2& m1 = NotesManager2::getManager();
+    if (m_article->isChecked())
+    {
+        m1.ajArticle(m_id->text().toStdString(),m_texte->toPlainText().toStdString()).setTitre(m_titre->text().toStdString());
+    }
+    if (m_tache->isChecked())
+    {
+        /*
+        m1.ajTache(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),m_calendrier->)
+        */ //A FINIR
+    }
+    this->close();
+}
+
 void FenPrincipale :: popup()
 {
     fenetre_creation_note* fenetre = new fenetre_creation_note;
     fenetre->show();
 }
+
 
