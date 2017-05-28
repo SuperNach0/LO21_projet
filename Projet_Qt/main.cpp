@@ -89,12 +89,12 @@ while (menu!=10) {
 
 
      ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
-
+/*
     QApplication app(argc, argv);
      FenPrincipale fenetre;
      fenetre.show();
      return app.exec();
-
+*/
 
 
 
