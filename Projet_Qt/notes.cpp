@@ -94,16 +94,12 @@ NotesManager2::~NotesManager2(){
 NotesManager2::Handler NotesManager2::handler=Handler();
 
 
-/*note& NotesManager2::getNote(const std::string& id){
+note& NotesManager2::getNote(const std::string& id){
     // si l'article existe déjà, on en renvoie une référence
     for(unsigned int i=0; i<nbNote; i++){
-        if (Note[i]->getID()==id) return *Note[i];
-    }
-    // sinon il est créé                                    // dire que y'en a pas ?
-    note* n=new note(id,"");
-    addNote (n);
-    return *n;
-}*/
+        if (Note[i]->getID()==id) return *Note[i];}
+
+}
 
 
 note& NotesManager2::ajArticle(const std::string& id,const std::string& txt){
@@ -275,7 +271,10 @@ void note::setModif () {
 
   }
   void tache:: MiseAJour () {
-      // trucs a faire wallah
+      std::string act;
+      std::cout<< "mettez a jour laction"<<std::endl;
+      std::cin>> act;
+      this->action = act;
       setModif();
 
   }
