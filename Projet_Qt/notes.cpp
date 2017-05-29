@@ -8,10 +8,35 @@
 #include <time.h>
 #include "notes.h"
 
+//Cyril : j'ai modifié les fonctions "afficher" des classes filles pour qu'elles utilisent celle de la classe mère : économie de code
+//j'ai essayé de surcharger << sur note pour le spécialiser ensuite dans les classes filles (pour que l'affichage soit encore plus simple)
+// mais j'ai pas réussi :'(
+// (c'est les 2 blocs en dessous, supprime les si tu veux ou sinon si tu arrives à régler le souci..
+
+
 /*********************fonctions de note************/
 
+/*
+std::ostream& operator<<(std::ostream& f, const note& n)
+{
+    f<<"id: "<<n.getID() << std::endl;
+    f<<"titre:"<<n.getTitre() << std::endl;
+    f<<"date creation:"<<n.getCreation() << std::endl;
+    f <<"date modif:"<< n.getModif()<<std::endl;
+    return f;
+}
+
+std::ostream& operator<<(std::ostream& f, article const& article_a_afficher)
+{
+    f << "cote la mif\n";
+    return f;
+}
+*/
 void note :: afficher(std::ostream& f ) const {
-    f<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"<<std::endl;
+    f<<"id: "<<getID() << std::endl;
+    f<<"titre:"<<getTitre() << std::endl;
+    f<<"date creation:"<<getCreation() << std::endl;
+    f <<"date modif:"<< getModif()<<std::endl;
 
 }
 
@@ -34,6 +59,8 @@ return temps;
 
 ////**************************MANAGER*********/
 ///
+
+
 
 void NotesManager2::addNote(note* n){
     for(unsigned int i=0; i<nbNote; i++){
@@ -93,6 +120,7 @@ note& NotesManager2::ajMulti(const std::string& id,const std::string& descriptio
 
 note& NotesManager2::ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance) {
     tache* n=new tache(id,"",action,priorite,echeance);
+    //
     addNote (n);
     return *n;
 
@@ -207,8 +235,9 @@ void note::setModif () {
 
  void article ::afficher(std::ostream& f) const {
 
-     f<<"***** article ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
-     <<"texte ="<<texte<<std::endl<<std::endl;
+     f<<"*** Article ***" << std::endl;
+     note::afficher();
+     f<< "texte="<<getTexte() << std::endl;
 
 }
 
@@ -225,8 +254,9 @@ void note::setModif () {
 
 
  void media :: afficher(std::ostream& f) const {
-     f<<"***** media ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
-     <<" description ="<<description<<std::endl<<" image ="<<image<<std::endl<<std::endl;
+     f<<"***Media***" << std::endl;
+     note::afficher();
+     f <<" description ="<<description<<std::endl<<" image ="<<image<<std::endl<<std::endl;
      }
  void media :: MiseAJour () {
 
@@ -239,8 +269,9 @@ void note::setModif () {
  //*****************************fonctions de taches ***************
 
   void tache :: afficher(std::ostream& f ) const {
-      f<<"***** tache ********"<<"\n"<<"id="<<getID()<<" titre="<<getTitre()<<" date creation="<<getCreation()<<" date modif="<<getModif()<<"\n"
-      <<" action ="<<action<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
+      f<< "*** Tache ***"<<"\n";
+      note::afficher();
+      f<<" action ="<<action<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
 
   }
   void tache:: MiseAJour () {

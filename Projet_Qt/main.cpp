@@ -17,8 +17,13 @@
 *
 * 27/05 : manager effectif (seulement sur la superclasse pour le moment)/ajout d'un menu SWAG
 * 28/05 : l'ajout d'un article via GUI l'ajoute aussi dans le manager
-*   prochain taff : finaliser l'ajout pour note et media
 *
+* 29/05 : l'ajout de n'importe quel objet via GUI l'ajoute aussi dans le manager
+*
+* est-ce que tu pourras rajouter l'initialisation de l'état à "en attente" quand on crée une tache ?
+*
+* faudra tu m'expliques pourquoi quand tu crée un objet tu fais m1.ajMulti(id,description,image).setTitre(t); pourquoi le titre est pas dans le constructeur ?
+* prochain taff pour cycy : visualiser les objets via la GUI + structurer la fenetre principale pour avoir l'interface du sujet
 
 */
 
@@ -62,9 +67,17 @@ int main(int argc,  char *argv[]){
                          "3- tache"<<std::endl;
             std::cin>>j;
 
-                    if (j==1){ std::string txt;
+                    if (j==1){  std::string txt;
                         std::cout<<" le texte de larticle ?"<<std::endl;
-                        std::cin>> txt;
+                        //std::cin>>txt;
+                        //std::getline(std::cin,txt);
+
+                        //std::cin.sync(); //clear buffer
+                        //std::cin.get();
+
+                        //std::getline(std::cin, txt);
+                        std::cin>>txt;
+
                         m1.ajArticle(id,txt).setTitre(t);
                     }
                     if (j==2){ std::string description;std::string image;
@@ -93,7 +106,11 @@ int main(int argc,  char *argv[]){
 
 
         case 2 :{
-            for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next()){ it.current().afficher(); }break;
+            for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
+            {
+                    it.current().afficher();
+            }
+            break;
                 }
 
         case 3 :{
@@ -104,6 +121,7 @@ int main(int argc,  char *argv[]){
                     next())
                     {
                         it.current().afficher();
+                        //std::cout << it.current(); marche pas :'(
                     } break;
                 }
 

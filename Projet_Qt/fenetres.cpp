@@ -55,8 +55,11 @@ FenPrincipale::FenPrincipale()
     QMenu *menuAffichage = menuBar()->addMenu("&Affichage");
 
 
-    QWidget* zoneCentrale = new QWidget;
+    QMdiArea* zoneCentrale = new QMdiArea;
     zoneCentrale->setLayout(m_layout_principal);
+
+    fenetre_creation_note* creation = new fenetre_creation_note;
+    QMdiSubWindow *sousFenetre1 = zoneCentrale->addSubWindow(creation);
     setCentralWidget(zoneCentrale);
 
 
@@ -65,7 +68,7 @@ FenPrincipale::FenPrincipale()
 // FENETRE QUI S'AFFICHE QUAND ON CLIQUE sur "Nouvelle Note"
 fenetre_creation_note::fenetre_creation_note() : QWidget()
 {
-
+    this->setWindowModality(Qt::ApplicationModal);
     m_layout_choix = new QVBoxLayout; //création layout
 
     //Création des différents champs du formulaire
@@ -146,16 +149,30 @@ void fenetre_creation_note :: choisir_fichier()
 void fenetre_creation_note :: save()
 {
     NotesManager2& m1 = NotesManager2::getManager();
+
+    //à faire : gérer cas ou il n'y a pas d'échéance/pas de fichier selectionné
+
+    try{
+
+        ///faudrait faire un Design pattern sur l'ajout d'une note pour éviter d'avoir 3 fonctions
     if (m_article->isChecked())
     {
         m1.ajArticle(m_id->text().toStdString(),m_texte->toPlainText().toStdString()).setTitre(m_titre->text().toStdString());
     }
     if (m_tache->isChecked())
     {
-        /*
-        m1.ajTache(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),m_calendrier->)
-        */ //A FINIR
+        m1.ajTache(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),m_calendrier->selectedDate().toString("dddd dd MMMM yyyy").toStdString()).setTitre(m_titre->text().toStdString());
     }
+    if (m_media->isChecked())
+    {
+        m1.ajMulti(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString()).setTitre(m_titre->text().toStdString());
+    }
+
+    } catch (NotesException& a)
+    {
+        std::cout<< "Erreur lors de la creation de la note (fenetre_creation_note->save() )\n";
+    }
+
     this->close();
 }
 

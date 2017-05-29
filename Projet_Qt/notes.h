@@ -49,6 +49,9 @@ public :
 
 
     virtual void afficher(std::ostream& f= std::cout) const = 0; // virtuelle pure ( a definir dans les filles)
+
+
+
     virtual void MiseAJour () =0 ;
 
     void setModif () ;
