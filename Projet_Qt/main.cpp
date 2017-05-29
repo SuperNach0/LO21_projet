@@ -11,12 +11,22 @@
 * est-ce que tu pourras rajouter l'initialisation de l'état à "en attente" quand on crée une tache ?
 *
 * faudra tu m'expliques pourquoi quand tu crée un objet tu fais m1.ajMulti(id,description,image).setTitre(t); pourquoi le titre est pas dans le constructeur ?
+
 *
 * 29/05 : ajout de docks dans l'app, l'ajout d'une note ajoute son ID dans le menu de gauche (j'en ai chié sa daronne)
 *       : la sélection d'une note dans le menu de gauche affiche son titre dans la partie centrale
 *           ->je sais pas trop comment gérer l'affichage selon le type de note (article, etc..) sans avoir de la redondance de code, si t'a des pistes écrit les ici
 *
+
+* cest pour "séparer" et pas tout faire d'un coup pmai son peut changer si tu veux
+*
+* prochain taff pour cycy : visualiser les objets via la GUI + structurer la fenetre principale pour avoir l'interface du sujet
+
+
 */
+
+//std::cout << it.current(); marche pas :'( c'est parce que it.current te renvoie un référence sur une note et tu peux pas
+// afficher une référence sur le flux.
 
 int menu =0;
 
@@ -38,6 +48,7 @@ int main(int argc,  char *argv[]){
                      "1- ajouter une note"<<std::endl<<
                      "2- afficher les notes "<<std::endl<<
                      "3- rechercher une note"<<std::endl<<
+                     "4- mettre a jour note(que tachepour le moment)"<<std::endl<<
                      "10- quitter"<<std::endl;
         std::cin>>menu;
 
@@ -88,6 +99,8 @@ int main(int argc,  char *argv[]){
                         std::cin>> echeance;
 
                         m1.ajTache(id,action,priorite,echeance).setTitre(t);
+
+
                     }break;
         }
 
@@ -112,10 +125,18 @@ int main(int argc,  char *argv[]){
                     next())
                     {
                         it.current().afficher();
-                        //std::cout << it.current(); marche pas :'(
+                        //std::cout << it.current(); marche pas :'( c'est parce que it.current te renvoie un eréférence
                     } break;
                 }
 
+        case 4 :{
+            std::string tf;
+            std::cout<<" ID de la note a changer?"<<std::endl;
+            std::cin>> tf;
+            m1.getNote(tf).MiseAJour();// plymorphisme à definir dans les classes filles
+                                          // faudrait que ca les affiche comme si on en créait non ?
+                     break;
+                }
 
          case 10 : break;
         }
