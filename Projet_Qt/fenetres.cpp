@@ -5,36 +5,26 @@
 
 
 
-FenPrincipale::FenPrincipale()
+FenPrincipale::FenPrincipale() //: m_fenetre_affichage(new fenetre_affichage)
 {
-
-
     ///LAYOUT PRINCIPAL
     m_layout_principal = new QVBoxLayout;
 
-        ///Objets
 
-            ///boutons de fin
-            m_bouton1 = new QPushButton("Nouvelle note",this);
-                m_bouton1->connect(m_bouton1,SIGNAL(clicked(bool)),this,SLOT(popup()));
-
-
-            m_bouton2 = new QPushButton("Quitter",this);
-                m_bouton2->connect(m_bouton2,SIGNAL(clicked(bool)),this,SLOT(close()));
-
-    ///ajouts
-
-    m_layout_principal->addWidget(m_bouton1,Qt::AlignRight);
-    m_layout_principal->addWidget(m_bouton2,Qt::AlignRight);
-
-    //*** MENU : RIEN NEFONCTIONNE C'EST JUSTE DES TESTS POUR L'INSTANT, je finirais après
+    //********* MENU FICHIER **********
 
     QMenu *menuFichier = menuBar()->addMenu("&Fichier");
         //ajout d'une action
         QAction *actionQuitter = new QAction("&Quitter", this);
+            actionQuitter->setShortcut(QKeySequence("Ctrl+Q"));
+            connect(actionQuitter,SIGNAL(triggered(bool)),this,SLOT(close()));
+        QAction *actionNouveau = new QAction("&Nouvelle Note",this);
+            actionNouveau->setShortcut(QKeySequence("Ctrl+N"));
+            connect(actionNouveau,SIGNAL(triggered(bool)),this,SLOT(popup()));
+
         menuFichier->addAction(actionQuitter);
-        actionQuitter->setShortcut(QKeySequence("Ctrl+Q"));
-        connect(actionQuitter,SIGNAL(triggered(bool)),this,SLOT(close()));
+        menuFichier->addAction(actionNouveau);
+
 
     //ajout d'un 2e menu
     QMenu *menuEdition = menuBar()->addMenu("&Edition");
@@ -54,23 +44,38 @@ FenPrincipale::FenPrincipale()
 
     QMenu *menuAffichage = menuBar()->addMenu("&Affichage");
 
+    //Barre d'outils
+    m_toolbar = addToolBar("fichier");
+        actionNouveau->setIcon(QIcon("icone_nouveau.png"));
+        m_toolbar->addAction(actionNouveau);
+        m_toolbar->addAction(actionQuitter);
 
+    //Zone centrale d'affichage d'une seule note
+    m_label_note = new QLabel("test",this);
+
+
+    //Ajout au layout
+    m_layout_principal->addWidget(m_label_note);
+
+    //Configuration emplacement des fenetres
     QMdiArea* zoneCentrale = new QMdiArea;
     zoneCentrale->setLayout(m_layout_principal);
 
-    fenetre_creation_note* creation = new fenetre_creation_note;
-    QMdiSubWindow *sousFenetre1 = zoneCentrale->addSubWindow(creation);
+    //CREATION DES DOCKS
+    creation_docks();
+
     setCentralWidget(zoneCentrale);
 
 
 }
 
-// FENETRE QUI S'AFFICHE QUAND ON CLIQUE sur "Nouvelle Note"
+// *************** FENETRE CREATION NOTE ****************
+
+
 fenetre_creation_note::fenetre_creation_note() : QWidget()
 {
-    this->setWindowModality(Qt::ApplicationModal);
+    this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
     m_layout_choix = new QVBoxLayout; //création layout
-
     //Création des différents champs du formulaire
     m_id = new QLineEdit("Entre l'id poulet",this);
     m_titre = new QLineEdit("Titre ici",this);
@@ -108,12 +113,6 @@ fenetre_creation_note::fenetre_creation_note() : QWidget()
     m_quit = new QPushButton("Annuler",this);
         m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
 
-
-
-
-    //Connexions signaux/slots pour afficher/cacher les champs concernés
-
-
     //Ajout des objets au layout
     m_layout_choix->addWidget(m_id);
     m_layout_choix->addWidget(m_titre);
@@ -140,13 +139,56 @@ fenetre_creation_note::fenetre_creation_note() : QWidget()
 
 }
 
+void FenPrincipale::creation_docks()
+{
+
+    m_dock_affichage_notes = new QDockWidget("Notes", this);    //nouveau dock
+    m_dock_affichage_notes->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+
+    m_listeNotes = new QListWidget(m_dock_affichage_notes);     //nouvelle liste qui contiendra les notes crées au fur et à mesure
+        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),m_label_note,SLOT(setText(QString)));
+
+
+    m_dock_affichage_notes->setWidget(m_listeNotes);
+    addDockWidget(Qt::LeftDockWidgetArea, m_dock_affichage_notes);
+
+    ///2e dock
+/*
+    dock = new QDockWidget(tr("Paragraphs"), this);
+    QListWidget* paragraphsList = new QListWidget(dock);
+    paragraphsList->addItems(QStringList()
+            << "Thank you for your payment which we have received today."
+            << "Your order has been dispatched and should be with you "
+               "within 28 days.";
+
+    dock->setWidget(paragraphsList);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    */
+
+}
+
+///ATTENTION, à chaque ajout de note, le dock de gauche supprime la liste et la réaffiche pour l'actualiser avec les nouveaux,
+/// ça va peut être causer des bugs plus tard
+/// mais c'est la seule solution que j'ai trouvé pour l'instant
+void FenPrincipale::affichage_notes()
+{
+    NotesManager2& m1 = NotesManager2::getManager();
+    m_listeNotes->clear();
+    for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
+    {
+        m_listeNotes->addItem(QString::fromStdString(it.current().getID()));
+            //it.current().afficher();
+    }
+}
+
+
 void fenetre_creation_note :: choisir_fichier()
 {
     m_fichier = new QString("");
     *m_fichier = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Images (*.png *.gif *.jpg *.jpeg)");
 }
 
-void fenetre_creation_note :: save()
+void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet
 {
     NotesManager2& m1 = NotesManager2::getManager();
 
@@ -174,12 +216,14 @@ void fenetre_creation_note :: save()
     }
 
     this->close();
+    delete this; //forcer la destruction pour que le signal soit bien reçu par la FenPrincipale
 }
 
-void FenPrincipale :: popup()
+void FenPrincipale :: popup()   //affichage de la fenetre de création de note
 {
-    fenetre_creation_note* fenetre = new fenetre_creation_note;
-    fenetre->show();
+    m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
+    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
+    m_fenetre_creation->show();
 }
 
 

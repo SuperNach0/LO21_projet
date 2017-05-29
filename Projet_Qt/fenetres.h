@@ -2,35 +2,6 @@
 #define FENPRINCIPALE_H
 
 #include <QApplication>
-/*
-#include <QPushButton>
-#include <QWidget>
-#include <QFont>
-#include <QIcon>
-#include <QWidget>
-#include <QTextCodec>
-#include <QTranslator>
-#include <QLocale>
-#include <QLibraryInfo>
-#include <QLayout>
-#include <QFormLayout>
-#include <QLineEdit>
-#include <QGroupBox>
-#include <QRadioButton>
-#include <QCheckBox>
-#include <QDateTimeEdit>
-#include <QTextEdit>
-#include <QMessageBox>
-#include <QFile>
-#include <QTextStream>
-#include <QInputDialog>
-#include <QFileDialog>
-//#include <QMenu>
-#include <QMenuBar>
-#include <QMainWindow>
-#include <QDateTime>
-#include <QLabel>
-*/
 #include <QtWidgets>
 #include <iostream>
 
@@ -46,17 +17,26 @@ public:
 
 private slots:
     void popup();
+    void affichage_notes();
 
 private:
+    void creation_docks(); //Création du dock de gauche, et affichage des notes
 
-    QVBoxLayout* m_layout_principal;
-    QPushButton* m_bouton1;
-    QPushButton* m_bouton2;
+    QToolBar* m_toolbar; //barre d'outils
+
+    QVBoxLayout* m_layout_principal; //layout pour les objets de la vue principale (au centre)
+        QLabel* m_label_note;
+
+    QDockWidget *m_dock_affichage_notes;
+        QListWidget* m_listeNotes;
+
+    QWidget* m_fenetre_creation; //attribut vers la fenetre de création de note
+
+
 
 };
 
 /* ********** FENETRE DE CREATION DE NOTE ************* */
-
 class fenetre_creation_note : public QWidget
 {
     Q_OBJECT

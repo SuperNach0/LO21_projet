@@ -13,6 +13,8 @@
 // mais j'ai pas réussi :'(
 // (c'est les 2 blocs en dessous, supprime les si tu veux ou sinon si tu arrives à régler le souci..
 
+//29/05 : en fait pas sur à 100% que ce soit utile vu que à la fin l'affichage sera uniquement via QT donc surcharge de << inutile ?
+
 
 /*********************fonctions de note************/
 
