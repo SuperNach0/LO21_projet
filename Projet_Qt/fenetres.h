@@ -18,19 +18,29 @@ public:
 private slots:
     void popup();
     void affichage_notes();
+    void affichage_single_note(QString texte);
 
 private:
     void creation_docks(); //Création du dock de gauche, et affichage des notes
+    void creation_tabs(); //Création des différents onglets de la vue principale
 
     QToolBar* m_toolbar; //barre d'outils
 
     QVBoxLayout* m_layout_principal; //layout pour les objets de la vue principale (au centre)
         QLabel* m_label_note;
+        QGroupBox* m_box_single_note;
+
 
     QDockWidget *m_dock_affichage_notes;
         QListWidget* m_listeNotes;
 
     QWidget* m_fenetre_creation; //attribut vers la fenetre de création de note
+
+    //onglets
+    QTabWidget *m_onglets;
+        QWidget* m_page_affichage_note;
+            QVBoxLayout* m_layout_onglet_affichage;
+        QWidget* m_page_affichage_relations;
 
 
 

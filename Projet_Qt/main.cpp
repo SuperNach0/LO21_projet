@@ -28,6 +28,9 @@
 //std::cout << it.current(); marche pas :'( c'est parce que it.current te renvoie un référence sur une note et tu peux pas
 // afficher une référence sur le flux.
 
+
+//Question que je me pose: vaut mieux avoir chaque widget/objet en attribut de sa fenetre ou vaut mieux les créer à chaque fois dans le constructeur/fonction de la fenetre?
+
 int menu =0;
 
 

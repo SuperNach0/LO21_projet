@@ -5,7 +5,7 @@
 
 
 
-FenPrincipale::FenPrincipale() //: m_fenetre_affichage(new fenetre_affichage)
+FenPrincipale::FenPrincipale()
 {
     ///LAYOUT PRINCIPAL
     m_layout_principal = new QVBoxLayout;
@@ -50,19 +50,21 @@ FenPrincipale::FenPrincipale() //: m_fenetre_affichage(new fenetre_affichage)
         m_toolbar->addAction(actionNouveau);
         m_toolbar->addAction(actionQuitter);
 
-    //Zone centrale d'affichage d'une seule note
-    m_label_note = new QLabel("test",this);
 
-
-    //Ajout au layout
-    m_layout_principal->addWidget(m_label_note);
 
     //Configuration emplacement des fenetres
     QMdiArea* zoneCentrale = new QMdiArea;
     zoneCentrale->setLayout(m_layout_principal);
 
+
+    //CREATION ONGLETS
+    creation_tabs();
+        m_layout_principal->addWidget(m_onglets);
+
     //CREATION DES DOCKS
     creation_docks();
+
+
 
     setCentralWidget(zoneCentrale);
 
@@ -146,7 +148,7 @@ void FenPrincipale::creation_docks()
     m_dock_affichage_notes->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
     m_listeNotes = new QListWidget(m_dock_affichage_notes);     //nouvelle liste qui contiendra les notes crées au fur et à mesure
-        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),m_label_note,SLOT(setText(QString)));
+        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_single_note(QString)));
 
 
     m_dock_affichage_notes->setWidget(m_listeNotes);
@@ -167,6 +169,46 @@ void FenPrincipale::creation_docks()
 
 }
 
+void FenPrincipale::creation_tabs()
+{
+    // 1 : Créer le QTabWidget
+    m_onglets = new QTabWidget(this);
+
+    // 2 : Créer les pages
+    m_page_affichage_note = new QWidget;
+    m_page_affichage_relations = new QWidget;
+
+    // 3 : Créer le contenu des pages de widgets
+
+        // Page affichage note
+
+        m_label_note = new QLabel("test");
+
+        m_layout_onglet_affichage = new QVBoxLayout;
+        m_layout_onglet_affichage->addWidget(m_label_note);
+
+        m_page_affichage_note->setLayout(m_layout_onglet_affichage);
+
+        // Page 2
+
+        QProgressBar *progress = new QProgressBar;
+        progress->setValue(50);
+        QSlider *slider = new QSlider(Qt::Horizontal);
+        QPushButton *bouton3 = new QPushButton("Valider");
+
+        QVBoxLayout *vbox2 = new QVBoxLayout;
+        vbox2->addWidget(progress);
+        vbox2->addWidget(slider);
+        vbox2->addWidget(bouton3);
+
+        m_page_affichage_relations->setLayout(vbox2);
+
+
+    // 4 : ajouter les onglets au QTabWidget, en indiquant la page qu'ils contiennent
+    m_onglets->addTab(m_page_affichage_note, "Affichage d'une note");
+    m_onglets->addTab(m_page_affichage_relations, "Affichage des relations");
+}
+
 ///ATTENTION, à chaque ajout de note, le dock de gauche supprime la liste et la réaffiche pour l'actualiser avec les nouveaux,
 /// ça va peut être causer des bugs plus tard
 /// mais c'est la seule solution que j'ai trouvé pour l'instant
@@ -179,6 +221,21 @@ void FenPrincipale::affichage_notes()
         m_listeNotes->addItem(QString::fromStdString(it.current().getID()));
             //it.current().afficher();
     }
+}
+
+void FenPrincipale::affichage_single_note(QString texte)
+{
+/*
+    m_box_single_note = new QGroupBox("test",m_page_affichage_note);
+        QVBoxLayout* layout = new QVBoxLayout;
+        layout->addWidget(m_label_note);
+    m_box_single_note->setLayout(layout);
+    */
+    ///A FINIR
+    m_label_note->setText(texte);
+
+    //QPushButton* test = new QPushButton("okkkk",this);
+      //  m_layout_onglet_affichage->addWidget(test);
 }
 
 
