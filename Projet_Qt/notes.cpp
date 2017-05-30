@@ -108,7 +108,7 @@ note& NotesManager2::getNote(const std::string& id){
     // si l'article existe déjà, on en renvoie une référence
     for(unsigned int i=0; i<nbNote; i++){
         if (Note[i]->getID()==id) return *Note[i];}
-
+    throw NotesException("Note non trouvée\n");
 }
 
 

@@ -18,7 +18,7 @@ public:
 private slots:
     void popup();
     void affichage_notes();
-    void affichage_single_note(QString texte);
+    void affichage_single_note(QString id);
     void menuContextuel(const QPoint&);
     void supprimerNote();
 
@@ -41,6 +41,7 @@ private:
         QWidget* m_page_affichage_note;
             QVBoxLayout* m_layout_onglet_affichage;
                 QLabel* m_label_ID_note;
+                QLabel* m_titre_note;
         QWidget* m_page_affichage_relations;
 
 

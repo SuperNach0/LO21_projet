@@ -221,30 +221,24 @@ void FenPrincipale::affichage_notes()
     }
 }
 
-void FenPrincipale::affichage_single_note(QString texte)
+void FenPrincipale::affichage_single_note(QString id)
 {
-    //NotesManager2& m1 = NotesManager2::getManager();
-    if (m_label_ID_note == nullptr)
+    NotesManager2& m1 = NotesManager2::getManager();
+    if (m_label_ID_note == nullptr) //si c'est la première fois qu'on affiche une note, on crée les labels (et on les ajoute au layout)
     {
         m_label_ID_note = new QLabel("texte");
-
-
-
-        //QLabel* titre_note = new QLabel(QString::fromStdString(it.current().getTitre()));
+        m_titre_note = new QLabel(QString::fromStdString(m1.getNote(id.toStdString()).getTitre()));
         m_layout_onglet_affichage->addWidget(m_label_ID_note);
-        //m_layout_onglet_affichage->addWidget(titre_note);
+        m_layout_onglet_affichage->addWidget(m_titre_note);
     }
-/*
-    NotesManager2::ConstIterator it= m1.getIterator();
 
-    while (!it.isDone() && QString::fromStdString(it.current().getID())!=texte)
+
+    if (id.toStdString() != "")
     {
-        it.next();
+        m_label_ID_note->setText("<b> ID : </b>"+id);
+        QString titre = QString::fromStdString(m1.getNote(id.toStdString()).getTitre());
+        m_titre_note->setText("<b>Titre : </b>"+titre);
     }
-    it.current().afficher();
-*/
-    ///à voir quand y'aura un bon searchiterator
-    m_label_ID_note->setText(texte);
 
 
 }

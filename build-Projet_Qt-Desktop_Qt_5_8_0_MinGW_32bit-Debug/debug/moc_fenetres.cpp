@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FenPrincipale_t {
     QByteArrayData data[8];
-    char stringdata0[94];
+    char stringdata0[91];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,13 +36,13 @@ QT_MOC_LITERAL(1, 14, 5), // "popup"
 QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 15), // "affichage_notes"
 QT_MOC_LITERAL(4, 37, 21), // "affichage_single_note"
-QT_MOC_LITERAL(5, 59, 5), // "texte"
-QT_MOC_LITERAL(6, 65, 14), // "menuContextuel"
-QT_MOC_LITERAL(7, 80, 13) // "supprimerNote"
+QT_MOC_LITERAL(5, 59, 2), // "id"
+QT_MOC_LITERAL(6, 62, 14), // "menuContextuel"
+QT_MOC_LITERAL(7, 77, 13) // "supprimerNote"
 
     },
     "FenPrincipale\0popup\0\0affichage_notes\0"
-    "affichage_single_note\0texte\0menuContextuel\0"
+    "affichage_single_note\0id\0menuContextuel\0"
     "supprimerNote"
 };
 #undef QT_MOC_LITERAL
