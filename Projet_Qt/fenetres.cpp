@@ -148,6 +148,8 @@ void FenPrincipale::creation_docks()
     m_dock_affichage_notes->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
     m_listeNotes = new QListWidget(m_dock_affichage_notes);     //nouvelle liste qui contiendra les notes crées au fur et à mesure
+        m_listeNotes->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(m_listeNotes,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(menuContextuel(QPoint)));
         connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_single_note(QString)));
 
 
@@ -181,12 +183,8 @@ void FenPrincipale::creation_tabs()
     // 3 : Créer le contenu des pages de widgets
 
         // Page affichage note
-
-        m_label_note = new QLabel("test");
-
         m_layout_onglet_affichage = new QVBoxLayout;
-        m_layout_onglet_affichage->addWidget(m_label_note);
-
+        m_label_ID_note = nullptr;
         m_page_affichage_note->setLayout(m_layout_onglet_affichage);
 
         // Page 2
@@ -225,24 +223,63 @@ void FenPrincipale::affichage_notes()
 
 void FenPrincipale::affichage_single_note(QString texte)
 {
-/*
-    m_box_single_note = new QGroupBox("test",m_page_affichage_note);
-        QVBoxLayout* layout = new QVBoxLayout;
-        layout->addWidget(m_label_note);
-    m_box_single_note->setLayout(layout);
-    */
-    ///A FINIR
-    m_label_note->setText(texte);
+    //NotesManager2& m1 = NotesManager2::getManager();
+    if (m_label_ID_note == nullptr)
+    {
+        m_label_ID_note = new QLabel("texte");
 
-    //QPushButton* test = new QPushButton("okkkk",this);
-      //  m_layout_onglet_affichage->addWidget(test);
+
+
+        //QLabel* titre_note = new QLabel(QString::fromStdString(it.current().getTitre()));
+        m_layout_onglet_affichage->addWidget(m_label_ID_note);
+        //m_layout_onglet_affichage->addWidget(titre_note);
+    }
+/*
+    NotesManager2::ConstIterator it= m1.getIterator();
+
+    while (!it.isDone() && QString::fromStdString(it.current().getID())!=texte)
+    {
+        it.next();
+    }
+    it.current().afficher();
+*/
+    ///à voir quand y'aura un bon searchiterator
+    m_label_ID_note->setText(texte);
+
+
+}
+
+void FenPrincipale::supprimerNote()
+{
+    NotesManager2& m1 = NotesManager2::getManager();
+    // If multiple selection is on, we need to erase all selected items
+    for (int i = 0; i < m_listeNotes->selectedItems().size(); ++i)
+    {
+       // Get curent item on selected row
+       QListWidgetItem *item = m_listeNotes->takeItem(m_listeNotes->currentRow());
+       delete &(m1.getNote(item->text().toStdString()));
+       delete item;
+    }
+}
+
+void FenPrincipale::menuContextuel(const QPoint &pos)
+{
+    // Handle global position
+    QPoint globalPos = m_listeNotes->mapToGlobal(pos);
+
+    // Create menu and insert some actions
+    QMenu myMenu;
+    myMenu.addAction("Supprimer", this, SLOT(supprimerNote()));
+
+    // Show context menu at handling position
+    myMenu.exec(globalPos);
 }
 
 
 void fenetre_creation_note :: choisir_fichier()
 {
     m_fichier = new QString("");
-    *m_fichier = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Images (*.png *.gif *.jpg *.jpeg)");
+    *m_fichier = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Images (*.png *.gif *.jpg *.jpeg *.avi *.mp4)");
 }
 
 void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet

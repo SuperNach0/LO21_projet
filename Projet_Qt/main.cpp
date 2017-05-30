@@ -11,25 +11,14 @@
 * est-ce que tu pourras rajouter l'initialisation de l'état à "en attente" quand on crée une tache ?
 *
 * faudra tu m'expliques pourquoi quand tu crée un objet tu fais m1.ajMulti(id,description,image).setTitre(t); pourquoi le titre est pas dans le constructeur ?
-
-*
-* 29/05 : ajout de docks dans l'app, l'ajout d'une note ajoute son ID dans le menu de gauche (j'en ai chié sa daronne)
-*       : la sélection d'une note dans le menu de gauche affiche son titre dans la partie centrale
-*           ->je sais pas trop comment gérer l'affichage selon le type de note (article, etc..) sans avoir de la redondance de code, si t'a des pistes écrit les ici
-*
-
 * cest pour "séparer" et pas tout faire d'un coup pmai son peut changer si tu veux
+*   --> je suis chaud que tu changes ouais ça parait beaucoup plus logique
 *
-* prochain taff pour cycy : visualiser les objets via la GUI + structurer la fenetre principale pour avoir l'interface du sujet
-
+* 30/05 : ajout d'un menu contextuel pour supprimer une note
+*   non fonctionnel, j'ai essayé un delete &(m1.getNote(item->text().toStdString())); mais ça ne marche pas "appel d'une fonction virtuelle pure"
 
 */
-// Erwan : j'ai mis en place la fonction save mais tan que on utilisera des std::string on pourra pas sauvegarder
-// j'ai pensé à un truc : faudrait peut etre ajouter un attribut a la classe note qui determine si quelle sous classe c'est
-// comme ca on pourrait les différencier et tout ?
 
-
-//Question que je me pose: vaut mieux avoir chaque widget/objet en attribut de sa fenetre ou vaut mieux les créer à chaque fois dans le constructeur/fonction de la fenetre?
 
 int menu =0;
 
@@ -41,9 +30,9 @@ int main(int argc,  char *argv[]){
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
     NotesManager2 &m1 = NotesManager2::getManager();
-    QString filename = QFileDialog::getOpenFileName();
+    //QString filename = QFileDialog::getOpenFileName();
 
-    m1.setFilename(filename);
+    //m1.setFilename(filename);
     FenPrincipale fenetre;
     fenetre.show();
     app.exec();
