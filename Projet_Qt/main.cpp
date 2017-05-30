@@ -28,6 +28,9 @@
 // j'ai pensé à un truc : faudrait peut etre ajouter un attribut a la classe note qui determine si quelle sous classe c'est
 // comme ca on pourrait les différencier et tout ?
 
+
+//Question que je me pose: vaut mieux avoir chaque widget/objet en attribut de sa fenetre ou vaut mieux les créer à chaque fois dans le constructeur/fonction de la fenetre?
+
 int menu =0;
 
 
