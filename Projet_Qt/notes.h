@@ -1,6 +1,9 @@
 #ifndef NOTES_H
 #define NOTES_H
 #include <QString>
+#include <QApplication>
+#include <QtWidgets>
+#include <iostream>
 
 enum etat {en_attente,en_cours,terminee};
 
@@ -68,7 +71,7 @@ class NotesManager2 {
     unsigned int nbNote;
     unsigned int nbMaxNote;
     void addNote (note * n);
-    mutable  std::string filename;
+    mutable  QString filename;
 
     struct Handler {
              NotesManager2* instance; // pointeur sur l'unique instance
@@ -97,10 +100,10 @@ class NotesManager2 {
 
 
 
-    std::string getFilename() const { return filename; }
-    void setFilename(const std::string& f) { filename=f; }
+    QString getFilename() const { return filename; }
+    void setFilename(const QString& f) { filename=f; }
     //void load(); // load notes from file filename
-    //void save() const; // save notes in file filename
+    void save() const; // save notes in file filename
     static NotesManager2& getManager();
     static void freeManager();
 

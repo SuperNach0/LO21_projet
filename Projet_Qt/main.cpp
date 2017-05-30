@@ -24,22 +24,27 @@
 
 
 */
-
-//std::cout << it.current(); marche pas :'( c'est parce que it.current te renvoie un référence sur une note et tu peux pas
-// afficher une référence sur le flux.
+// Erwan : j'ai mis en place la fonction save mais tan que on utilisera des std::string on pourra pas sauvegarder
+// j'ai pensé à un truc : faudrait peut etre ajouter un attribut a la classe note qui determine si quelle sous classe c'est
+// comme ca on pourrait les différencier et tout ?
 
 int menu =0;
 
 
-NotesManager2& m1 = NotesManager2::getManager();
+
 
 int main(int argc,  char *argv[]){
 
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
+    NotesManager2 &m1 = NotesManager2::getManager();
+    QString filename = QFileDialog::getOpenFileName();
+
+    m1.setFilename(filename);
     FenPrincipale fenetre;
     fenetre.show();
     app.exec();
+
 
     int menu =99; int j=0;
     while (menu!=10) {
@@ -55,6 +60,7 @@ int main(int argc,  char *argv[]){
         switch (menu){
 
         case 1 : {std::cout<<" creer"<<std::endl;
+
             std::string t;
             std::string id;
             std::cout<<" ID ?"<<std::endl;
@@ -143,6 +149,7 @@ int main(int argc,  char *argv[]){
 
 
     };
+
 
     return  0;
 }
