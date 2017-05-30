@@ -1,3 +1,8 @@
+#include <QFile>
+#include <QTextCodec>
+#include <QtXml>
+#include <QMessageBox>
+
 #include<QApplication>
 #include<QWidget>
 #include <QLabel>
@@ -7,6 +12,7 @@
 #include <iostream>
 #include <time.h>
 #include "notes.h"
+
 
 //Cyril : j'ai modifié les fonctions "afficher" des classes filles pour qu'elles utilisent celle de la classe mère : économie de code
 //j'ai essayé de surcharger << sur note pour le spécialiser ensuite dans les classes filles (pour que l'affichage soit encore plus simple)
@@ -82,11 +88,13 @@ void NotesManager2::addNote(note* n){
 
 
 
-NotesManager2::NotesManager2():Note (nullptr),nbNote(0),nbMaxNote(0),filename(""){} // constructeur de manager
+NotesManager2::NotesManager2():Note (nullptr),nbNote(0),nbMaxNote(0),filename(""){
+
+} // constructeur de manager
 
 
 NotesManager2::~NotesManager2(){
-    //if (filename!="") save();               // SAVE PAS ENCORE DEFINIE car SAVE en Qt
+    if (filename!="") save();               // SAVE PAS ENCORE DEFINIE car SAVE en Qt
     for(unsigned int i=0; i<nbNote; i++) delete Note[i];
     delete[] Note;
     std::cout<<"le manager est detruit"<<std::endl;
@@ -191,27 +199,27 @@ void NotesManager::load() {
     qDebug()<<"fin load\n";
 }
 
-
-void NotesManager::save() const {
+*/
+void NotesManager2::save() const {
     QFile newfile(filename);
     if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text))
-        throw NotesException(QString("erreur sauvegarde notes : ouverture fichier xml"));
+        throw NotesException("erreur sauvegarde notes : ouverture fichier xml");
     QXmlStreamWriter stream(&newfile);
     stream.setAutoFormatting(true);
     stream.writeStartDocument();
     stream.writeStartElement("notes");
-    for(unsigned int i=0; i<nbArticles; i++){
+    for(unsigned int i=0; i<nbNote; i++){
         stream.writeStartElement("article");
-        stream.writeTextElement("id",articles[i]->getId());
-        stream.writeTextElement("title",articles[i]->getTitle());
-        stream.writeTextElement("text",articles[i]->getText());
+        stream.writeTextElement("id","LA BITE EN BOIS");
+
+        //stream.writeTextElement("text",Note[i]->getText());
         stream.writeEndElement();
     }
     stream.writeEndElement();
     stream.writeEndDocument();
     newfile.close();
 }
-*/
+
 
 NotesManager2& NotesManager2::getManager(){
     if (!handler.instance) handler.instance=new NotesManager2;
