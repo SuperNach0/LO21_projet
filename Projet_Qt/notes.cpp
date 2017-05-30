@@ -210,7 +210,7 @@ void NotesManager2::save() const {
     stream.writeStartElement("notes");
     for(unsigned int i=0; i<nbNote; i++){
         stream.writeStartElement("article");
-        stream.writeTextElement("id","LA BITE EN BOIS");
+        stream.writeTextElement("id",QString::fromStdString(Note[i]->getID()));
 
         //stream.writeTextElement("text",Note[i]->getText());
         stream.writeEndElement();
