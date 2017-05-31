@@ -258,9 +258,38 @@ void FenPrincipale::supprimerNote()
 
 void FenPrincipale::editerNote()
 {
+    NotesManager2& m1 = NotesManager2::getManager();
+    note& current = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
+
     m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
     connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
     m_fenetre_creation->show();
+
+    fenetre_creation_note* nouv = static_cast<fenetre_creation_note*>(m_fenetre_creation); //conversion de QWidget* vers fenetre_creation_note*
+    std::cout << "id de la note a editer : " << m_listeNotes->currentItem()->text().toStdString() << std::endl;
+
+    nouv->m_id->setDisabled(true);
+    nouv->m_id->setText(QString::fromStdString(current.getID()));
+
+    if (typeid(current) == typeid(article))
+    {
+        nouv->m_article->setChecked(true);
+    }
+    else if (typeid(current) == typeid(tache))
+    {
+        nouv->m_tache->setChecked(true);
+    }
+    else if (typeid(current) == typeid(media))
+    {
+        nouv->m_media->setChecked(true);
+    }
+    else
+        throw NotesException("Erreur, type inconnu!");
+
+    nouv->m_article->setDisabled(true);
+    nouv->m_tache->setDisabled(true);
+    nouv->m_media->setDisabled(true);
+
 }
 
 void FenPrincipale::menuContextuel(const QPoint &pos)
@@ -277,7 +306,6 @@ void FenPrincipale::menuContextuel(const QPoint &pos)
     myMenu.exec(globalPos);
 }
 
-
 void fenetre_creation_note :: choisir_fichier()
 {
     m_fichier = new QString("");
@@ -289,6 +317,14 @@ void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet
     NotesManager2& m1 = NotesManager2::getManager();
 
     //à faire : gérer cas ou il n'y a pas d'échéance/pas de fichier selectionné
+
+    if (m1.getNote(m_id->text().toStdString()).getID()!="")
+    {
+        std::cout << "La note va etre modifiée\n";
+        /// A COMPLETER AVEC LA V2 de mise à jour
+        m1.getNote(m_id->text().toStdString()).setTitre(m_titre->text().toStdString() );
+        //m1.getNote(m_id->text().toStdString()).MiseAJour();
+    }
 
     try{
 

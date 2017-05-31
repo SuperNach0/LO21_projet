@@ -15,8 +15,9 @@
 *   --> je suis chaud que tu changes ouais ça parait beaucoup plus logique
 *
 * 30/05 : ajout d'un menu contextuel pour supprimer une note
-*   non fonctionnel, j'ai essayé un delete &(m1.getNote(item->text().toStdString())); mais ça ne marche pas "appel d'une fonction virtuelle pure"
-
+* 31/05 : modification du getNote : retourne un article("","","") si la note n'existe pas (en plus de throw une erreur) : à voir si on peut faire mieux
+*
+* A FAIRE MON PETIT ERWAN : changer la fonction mise_a_jour pour qu'elle prenne en paramètre les modifications et que ça change direct
 */
 
 
