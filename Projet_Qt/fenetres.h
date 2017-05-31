@@ -53,7 +53,7 @@ private:
 class fenetre_creation_note : public QWidget
 {
     Q_OBJECT
-
+    friend FenPrincipale;
 public:
     fenetre_creation_note();
 
@@ -61,7 +61,7 @@ public slots:
     void choisir_fichier();
     void save();
 
-private:
+protected:
     QVBoxLayout* m_layout_choix;
     QLineEdit* m_id;
     QLineEdit* m_titre;
