@@ -21,6 +21,7 @@ private slots:
     void affichage_single_note(QString id);
     void menuContextuel(const QPoint&);
     void supprimerNote();
+    void editerNote();
 
 private:
     void creation_docks(); //Création du dock de gauche, et affichage des notes

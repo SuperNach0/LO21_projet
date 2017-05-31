@@ -256,6 +256,13 @@ void FenPrincipale::supprimerNote()
     }
 }
 
+void FenPrincipale::editerNote()
+{
+    m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
+    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
+    m_fenetre_creation->show();
+}
+
 void FenPrincipale::menuContextuel(const QPoint &pos)
 {
     // Handle global position
@@ -264,6 +271,7 @@ void FenPrincipale::menuContextuel(const QPoint &pos)
     // Create menu and insert some actions
     QMenu myMenu;
     myMenu.addAction("Supprimer", this, SLOT(supprimerNote()));
+    myMenu.addAction("Editer",this,SLOT(editerNote()));
 
     // Show context menu at handling position
     myMenu.exec(globalPos);
