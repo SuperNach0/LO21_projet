@@ -96,6 +96,8 @@ class NotesManager2 {
     note& ajMulti(const std::string& id,const std::string& description,const std::string& image);
     note& ajTache(const std::string& id,const std::string& action ,const unsigned int priorite,const std::string& echeance);
 
+    void SupprimerNote (note& toDelete);
+
 
 
 

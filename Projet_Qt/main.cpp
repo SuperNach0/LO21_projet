@@ -46,6 +46,7 @@ int main(int argc,  char *argv[]){
                      "2- afficher les notes "<<std::endl<<
                      "3- rechercher une note"<<std::endl<<
                      "4- mettre a jour note(que tachepour le moment)"<<std::endl<<
+                     "5- supprimer une note"<<std::endl<<
                      "10- quitter"<<std::endl;
         std::cin>>menu;
 
@@ -135,6 +136,15 @@ int main(int argc,  char *argv[]){
                                           // faudrait que ca les affiche comme si on en créait non ?
                      break;
                 }
+
+      /*  case 5 :{
+                std::cout<<"id de la note à supprimer?"<<std::endl;
+                std::string td;
+                std::cin>> td;
+
+              m1.SupprimerNote(m1.getNote(td));
+            break;
+                }*/
 
          case 10 : break;
         }

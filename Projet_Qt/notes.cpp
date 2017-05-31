@@ -131,6 +131,34 @@ note& NotesManager2::ajTache(const std::string& id, const std::string& action , 
     //
     addNote (n);
     return *n;
+}
+
+void NotesManager2::SupprimerNote (note& toDelete) {
+    unsigned int i =0;
+    note** newNotes= new note*[nbMaxNote];
+    for (i;i<nbNote;i++)
+    {
+        if (Note[i]->getID()!=toDelete.getID()){
+            newNotes [i] = Note[i];
+
+        }else break;
+    }
+
+    i++;
+    for (i;i<nbNote;i++)
+    {
+       newNotes [i-1] = Note[i];
+    }
+
+    delete Note[nbNote] ;
+    nbNote--;
+
+    for (i=0;i<nbNote;i++)
+    {
+        Note[i] = newNotes[i];
+    }
+
+    delete[] newNotes;
 
 }
 
