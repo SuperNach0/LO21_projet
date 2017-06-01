@@ -42,8 +42,6 @@ FenPrincipale::FenPrincipale()
         QAction* action_test = new QAction("&test");
         menuEdition->addAction(action_test);
 
-    QMenu *menuAffichage = menuBar()->addMenu("&Affichage");
-
     //Barre d'outils
     m_toolbar = addToolBar("fichier");
         actionNouveau->setIcon(QIcon("icone_nouveau.png"));
@@ -251,8 +249,7 @@ void FenPrincipale::supprimerNote()
     {
        // Get curent item on selected row
        QListWidgetItem *item = m_listeNotes->takeItem(m_listeNotes->currentRow());
-       delete &(m1.getNote(item->text().toStdString()));
-       delete item;
+       m1.SupprimerNote(m1.getNote(item->text().toStdString()));
     }
 }
 
@@ -265,30 +262,31 @@ void FenPrincipale::editerNote()
     connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
     m_fenetre_creation->show();
 
-    fenetre_creation_note* nouv = static_cast<fenetre_creation_note*>(m_fenetre_creation); //conversion de QWidget* vers fenetre_creation_note*
+    fenetre_creation_note* fenetre = static_cast<fenetre_creation_note*>(m_fenetre_creation); //conversion de QWidget* vers fenetre_creation_note*
     std::cout << "id de la note a editer : " << m_listeNotes->currentItem()->text().toStdString() << std::endl;
 
-    nouv->m_id->setDisabled(true);
-    nouv->m_id->setText(QString::fromStdString(current.getID()));
+    fenetre->m_id->setDisabled(true);
+    fenetre->m_id->setText(QString::fromStdString(current.getID()));
 
     if (typeid(current) == typeid(article))
     {
-        nouv->m_article->setChecked(true);
+        fenetre->m_article->setChecked(true);
+
     }
     else if (typeid(current) == typeid(tache))
     {
-        nouv->m_tache->setChecked(true);
+        fenetre->m_tache->setChecked(true);
     }
     else if (typeid(current) == typeid(media))
     {
-        nouv->m_media->setChecked(true);
+        fenetre->m_media->setChecked(true);
     }
     else
         throw NotesException("Erreur, type inconnu!");
 
-    nouv->m_article->setDisabled(true);
-    nouv->m_tache->setDisabled(true);
-    nouv->m_media->setDisabled(true);
+    fenetre->m_article->setDisabled(true);
+    fenetre->m_tache->setDisabled(true);
+    fenetre->m_media->setDisabled(true);
 
 }
 
@@ -314,14 +312,38 @@ void fenetre_creation_note :: choisir_fichier()
 
 void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet
 {
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager2& m1 = NotesManager2::getManager(); ///A FINIIIIIIIIIR
 
     //à faire : gérer cas ou il n'y a pas d'échéance/pas de fichier selectionné
 
+
     if (m1.getNote(m_id->text().toStdString()).getID()!="")
     {
-        std::cout << "La note va etre modifiée\n";
+        std::cout << "La note existe deja et va etre modifiée\n";
         /// A COMPLETER AVEC LA V2 de mise à jour
+        note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
+
+
+        std::cout << "type reel : " << typeid(note_modif).name() << std::endl;
+
+        if (typeid(note_modif) == typeid(article))
+        {
+            article& current = static_cast<article&>(note_modif);
+            article* article_nouv(&current);    //on copie la note à modifier
+            note_modif.getOldNotes().push_back(article_nouv); //on ajoute la copie dans les anciennes versions
+            ///on fait les modifs
+        }
+        else if (typeid(note_modif) == typeid(tache))
+        {
+            //fenetre->m_tache->setChecked(true);
+        }
+        else if (typeid(note_modif) == typeid(media))
+        {
+            //fenetre->m_media->setChecked(true);
+        }
+
+
+
         m1.getNote(m_id->text().toStdString()).setTitre(m_titre->text().toStdString() );
         //m1.getNote(m_id->text().toStdString()).MiseAJour();
     }

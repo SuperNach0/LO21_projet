@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QtWidgets>
 #include <iostream>
+#include <vector>
 
 enum etat {en_attente,en_cours,terminee};
 
@@ -29,23 +30,28 @@ private:
 //****************** SUPER CLASSE NOTE***********************/
 class note {
 
-private :
+protected :
     std::string id;
     std::string titre ;
     std::string Creation ;
     std::string Modif;
+    std::vector<note*> oldNotes;
 
 public :
 
-     note (std::string i,std::string t): id(i),titre(t)
-      {
+     note (std::string i,std::string t): id(i),titre(t),oldNotes(0)
+     {
         this->Creation = formatTime();
-        this ->Modif = formatTime();}
+        this ->Modif = formatTime();
+     }
 
     const std::string getID() const {return id;}
     const std::string getTitre() const {return titre;}
     const std::string getCreation() const {return Creation;}
     const std::string getModif() const {return Modif;}
+    std::vector<note*>& getOldNotes() {return oldNotes;}
+
+
 
      void setTitre(const std::string& t) {titre = t;}
 
@@ -91,6 +97,7 @@ class NotesManager2 {
     unsigned int getnbNote() const {return nbNote;}
 
     note& getNote (const std::string& id); // return the article with identificator id (create a new one if it not exists)
+    note& getOldNote(const std::string& id);
 
     note& ajArticle(const std::string& id,const std::string& txt);
     note& ajMulti(const std::string& id,const std::string& description,const std::string& image);
@@ -185,11 +192,12 @@ class NotesManager2 {
 
 class article : public note {
 protected :
-    std::string texte ; //ce sera un QString après
+    std::string texte ;
 
 public :
     article ( const std::string i, std::string t,std::string txt)
         : note (i,t) , texte (txt){}
+    article (const article& article_a_copier);
 
     const std::string getTexte() const  {return texte;}
 
@@ -212,15 +220,12 @@ protected :
 public :
     media ( const std::string i, std::string t,std::string d,std::string im)
         : note (i,t) , description (d), image(im){}
+    media(const media& media_a_copier);
     const std::string getDescription()const {return description;}
     const std::string getImage() const {return image;}
 
     virtual void afficher(std::ostream& f= std::cout) const ;
     virtual void MiseAJour ();
-
-
-
-
 
 };
 
@@ -237,6 +242,7 @@ public :
 
     tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e)
         : note (i,t),action (a), priorite(p), echeance (e) {}
+    tache(tache const& tache_a_copier); //constructeur recopie (sert pour gérer les versions)
 
     const std::string getAction() const {return action;}
     const std::string getecheance() const {return echeance;}

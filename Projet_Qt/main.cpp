@@ -18,6 +18,10 @@
 * 31/05 : modification du getNote : retourne un article("","","") si la note n'existe pas (en plus de throw une erreur) : à voir si on peut faire mieux
 *
 * A FAIRE MON PETIT ERWAN : changer la fonction mise_a_jour pour qu'elle prenne en paramètre les modifications et que ça change direct
+*
+* 01/06 : fonction supprimer OK, début du taff sur les versions de notes
+*   Edition presque fonctionnel sur article
+*
 */
 
 
@@ -71,13 +75,6 @@ int main(int argc,  char *argv[]){
 
                     if (j==1){  std::string txt;
                         std::cout<<" le texte de larticle ?"<<std::endl;
-                        //std::cin>>txt;
-                        //std::getline(std::cin,txt);
-
-                        //std::cin.sync(); //clear buffer
-                        //std::cin.get();
-
-                        //std::getline(std::cin, txt);
                         std::cin>>txt;
 
                         m1.ajArticle(id,txt).setTitre(t);
@@ -138,14 +135,21 @@ int main(int argc,  char *argv[]){
                      break;
                 }
 
-      /*  case 5 :{
+        case 5 :{
                 std::cout<<"id de la note à supprimer?"<<std::endl;
                 std::string td;
                 std::cin>> td;
 
               m1.SupprimerNote(m1.getNote(td));
             break;
-                }*/
+                }
+
+         case 7 :
+        {
+            std::cout << "ESSAIS CYRIL VERSION DE NOTES\n";
+            std::cout << "txt de la V2 de la note : " << (m1.getNote("id2").getOldNotes()[0])->getTitre() << std::endl;
+
+        }
 
          case 10 : break;
         }

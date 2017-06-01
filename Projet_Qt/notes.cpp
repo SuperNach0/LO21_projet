@@ -14,14 +14,6 @@
 #include "notes.h"
 
 
-//Cyril : j'ai modifié les fonctions "afficher" des classes filles pour qu'elles utilisent celle de la classe mère : économie de code
-//j'ai essayé de surcharger << sur note pour le spécialiser ensuite dans les classes filles (pour que l'affichage soit encore plus simple)
-// mais j'ai pas réussi :'(
-// (c'est les 2 blocs en dessous, supprime les si tu veux ou sinon si tu arrives à régler le souci..
-
-//29/05 : en fait pas sur à 100% que ce soit utile vu que à la fin l'affichage sera uniquement via QT donc surcharge de << inutile ?
-
-
 /*********************fonctions de note************/
 
 /*
@@ -114,6 +106,16 @@ note& NotesManager2::getNote(const std::string& id){
 
 }
 
+note& NotesManager2::getOldNote(const std::string& id)
+{
+    note& version_actuelle=getNote(id);
+    for(unsigned int i=0; i<version_actuelle.getOldNotes().size(); i++)
+    {
+        if (version_actuelle.getOldNotes()[i]->getID()==id) return *version_actuelle.getOldNotes()[i];
+    }
+    throw NotesException("Version de note non trouvee\n");
+}
+
 
 note& NotesManager2::ajArticle(const std::string& id,const std::string& txt){
     article* n=new article(id,"",txt);
@@ -133,7 +135,7 @@ note& NotesManager2::ajTache(const std::string& id, const std::string& action , 
     addNote (n);
     return *n;
 }
-
+/*
 void NotesManager2::SupprimerNote (note& toDelete) {
     unsigned int i =0;
     note** newNotes= new note*[nbMaxNote];
@@ -162,6 +164,24 @@ void NotesManager2::SupprimerNote (note& toDelete) {
     delete[] newNotes;
 
 }
+*/
+
+void NotesManager2::SupprimerNote (note& toDelete)
+{
+    int i=0;
+    while (Note[i]->getID() != toDelete.getID())
+    {
+        i++;
+    }
+
+    for (i;i<nbNote;i++)
+    {
+        Note[i]=Note[i+1];
+    }
+    nbNote--;
+    delete &toDelete;
+}
+
 
 /*                                                       A FAIRE EN Qt PAREIL POUR SAVE
 void NotesManager::load() {
@@ -231,6 +251,8 @@ void NotesManager::load() {
 }
 
 */
+
+
 void NotesManager2::save() const {
     QFile newfile(filename);
     if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -269,6 +291,12 @@ void note::setModif () {
 }
 
 //***********fonction de article
+
+//constructeur de recopie
+article::article(const article &article_a_copier) : note(article_a_copier.id,article_a_copier.titre), texte(article_a_copier.texte)
+{
+    oldNotes.clear();
+}
 
  void article ::afficher(std::ostream& f) const {
 
