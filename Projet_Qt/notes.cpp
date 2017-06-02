@@ -51,7 +51,7 @@ std::string formatTime (){
         time(&_time);
         localtime_s(&timeInfo, &_time);
 
-    strftime(tmps, 32, "%Y-%m-%d %H-%M", &timeInfo);
+    strftime(tmps, 32, "%Y-%m-%d %H:%M", &timeInfo);
     std::string temps = tmps;
 return temps;
 }

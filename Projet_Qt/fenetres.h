@@ -43,6 +43,8 @@ private:
             QVBoxLayout* m_layout_onglet_affichage;
                 QLabel* m_label_ID_note;
                 QLabel* m_titre_note;
+                QLabel* m_date_creation_note;
+                QLabel* m_date_modif_note;
         QWidget* m_page_affichage_relations;
 
 

@@ -17,10 +17,10 @@
 * 30/05 : ajout d'un menu contextuel pour supprimer une note
 * 31/05 : modification du getNote : retourne un article("","","") si la note n'existe pas (en plus de throw une erreur) : à voir si on peut faire mieux
 *
-* A FAIRE MON PETIT ERWAN : changer la fonction mise_a_jour pour qu'elle prenne en paramètre les modifications et que ça change direct
 *
 * 01/06 : fonction supprimer OK, début du taff sur les versions de notes
 *   Edition presque fonctionnel sur article
+* 02/06 : progression sur l'édition, il me manque des fonctions setEcheance, setDescription etc. pour toutes les classes filles, je ferais ça plus tard sinon tu peux si ta le time
 *
 */
 
@@ -147,7 +147,8 @@ int main(int argc,  char *argv[]){
          case 7 :
         {
             std::cout << "ESSAIS CYRIL VERSION DE NOTES\n";
-            std::cout << "txt de la V2 de la note : " << (m1.getNote("id2").getOldNotes()[0])->getTitre() << std::endl;
+            //std::cout << "txt de la V2 de la note : " << (m1.getNote("id2").getOldNotes()[0])->getTitre() << std::endl;
+            m1.ajTache("id","action",4,"echeance").setTitre("titre");
 
         }
 

@@ -65,7 +65,7 @@ public :
 
     void setModif () ;
 
-   virtual ~note () {std::cout<<"suppression de la note "<<std::endl;};
+   virtual ~note () {std::cout<<"suppression de la note "<<std::endl;}; //à rajouter dans le destructeur : destruction de toutes les vieilles versions
 
 
 };
@@ -183,8 +183,6 @@ class NotesManager2 {
 
 
 };
-
-
 
 
 //******SOUS CLASSE ARTICLE /  note avec un texte ******//

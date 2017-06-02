@@ -222,20 +222,30 @@ void FenPrincipale::affichage_notes()
 void FenPrincipale::affichage_single_note(QString id)
 {
     NotesManager2& m1 = NotesManager2::getManager();
+    note& note_affichee = m1.getNote(id.toStdString()); //on récupère une référence sur la note à afficher
+
     if (m_label_ID_note == nullptr) //si c'est la première fois qu'on affiche une note, on crée les labels (et on les ajoute au layout)
     {
         m_label_ID_note = new QLabel("texte");
-        m_titre_note = new QLabel(QString::fromStdString(m1.getNote(id.toStdString()).getTitre()));
+        m_titre_note = new QLabel(QString::fromStdString(note_affichee.getTitre()));
+        m_date_creation_note = new QLabel(QString::fromStdString(note_affichee.getCreation()));
+        m_date_modif_note = new QLabel(QString::fromStdString(note_affichee.getModif()));
         m_layout_onglet_affichage->addWidget(m_label_ID_note);
         m_layout_onglet_affichage->addWidget(m_titre_note);
+        m_layout_onglet_affichage->addWidget(m_date_creation_note);
+        m_layout_onglet_affichage->addWidget(m_date_modif_note);
     }
 
 
     if (id.toStdString() != "")
     {
         m_label_ID_note->setText("<b> ID : </b>"+id);
-        QString titre = QString::fromStdString(m1.getNote(id.toStdString()).getTitre());
+        QString titre = QString::fromStdString(note_affichee.getTitre());
         m_titre_note->setText("<b>Titre : </b>"+titre);
+        QString date_creation = QString::fromStdString(note_affichee.getCreation());
+        m_date_creation_note->setText("<b>Création le: </b>"+ date_creation);
+        QString date_modification = QString::fromStdString(note_affichee.getModif());
+        m_date_modif_note->setText("<b>Dernière modification le: </b>"+date_modification);
     }
 
 
@@ -256,33 +266,52 @@ void FenPrincipale::supprimerNote()
 void FenPrincipale::editerNote()
 {
     NotesManager2& m1 = NotesManager2::getManager();
-    note& current = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
+    note& note_a_editer = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
 
     m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
     connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
     m_fenetre_creation->show();
 
     fenetre_creation_note* fenetre = static_cast<fenetre_creation_note*>(m_fenetre_creation); //conversion de QWidget* vers fenetre_creation_note*
-    std::cout << "id de la note a editer : " << m_listeNotes->currentItem()->text().toStdString() << std::endl;
 
     fenetre->m_id->setDisabled(true);
-    fenetre->m_id->setText(QString::fromStdString(current.getID()));
+    fenetre->m_id->setText(QString::fromStdString(note_a_editer.getID()));
 
-    if (typeid(current) == typeid(article))
+    if (typeid(note_a_editer) == typeid(article))
     {
-        fenetre->m_article->setChecked(true);
+        fenetre->m_article->setChecked(true); //on coche la bonne case
+
+        article& current = static_cast<article&>(note_a_editer); //on convertit la note dans le type correspondant pour récupérer les attributs des sous classes
+        fenetre->m_texte->setText(QString::fromStdString(current.getTexte()));
 
     }
-    else if (typeid(current) == typeid(tache))
+    else if (typeid(note_a_editer) == typeid(tache))
     {
         fenetre->m_tache->setChecked(true);
+
+        tache& current = static_cast<tache&>(note_a_editer);
+        fenetre->m_texte->setText(QString::fromStdString(current.getAction()));
+        fenetre->m_priorite->setValue(current.getPriorite());
+        if (current.getecheance()!="")
+        {
+            fenetre->m_case_calendrier->setChecked(true);
+            ///afficher sur le calendrier la date d'échéance
+        }
+
+
     }
-    else if (typeid(current) == typeid(media))
+    else if (typeid(note_a_editer) == typeid(media))
     {
         fenetre->m_media->setChecked(true);
+
+        media& current = static_cast<media&>(note_a_editer);
+        fenetre->m_texte->setText(QString::fromStdString(current.getDescription()));
     }
     else
         throw NotesException("Erreur, type inconnu!");
+
+    fenetre->m_date_modif.setDate(QDate::currentDate());
+    fenetre->m_titre->setText(QString::fromStdString(note_a_editer.getTitre()));
 
     fenetre->m_article->setDisabled(true);
     fenetre->m_tache->setDisabled(true);
@@ -310,19 +339,18 @@ void fenetre_creation_note :: choisir_fichier()
     *m_fichier = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Images (*.png *.gif *.jpg *.jpeg *.avi *.mp4)");
 }
 
-void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet
+void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tant qu'objet
 {
     NotesManager2& m1 = NotesManager2::getManager(); ///A FINIIIIIIIIIR
 
-    //à faire : gérer cas ou il n'y a pas d'échéance/pas de fichier selectionné
+    //à faire : gérer cas ou il n'y pas de fichier selectionné
 
-
-    if (m1.getNote(m_id->text().toStdString()).getID()!="")
+    //Si la note existe déjà
+    if (m1.getNote(m_id->text().toStdString()).getID()!="") //si la note n'existe pas, m1.getNote(...) renvoie un article avec un id vide
     {
-        std::cout << "La note existe deja et va etre modifiée\n";
+        std::cout << "La note existe deja et va etre modifiee\n";
         /// A COMPLETER AVEC LA V2 de mise à jour
         note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
-
 
         std::cout << "type reel : " << typeid(note_modif).name() << std::endl;
 
@@ -331,21 +359,27 @@ void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet
             article& current = static_cast<article&>(note_modif);
             article* article_nouv(&current);    //on copie la note à modifier
             note_modif.getOldNotes().push_back(article_nouv); //on ajoute la copie dans les anciennes versions
-            ///on fait les modifs
+
         }
         else if (typeid(note_modif) == typeid(tache))
         {
-            //fenetre->m_tache->setChecked(true);
+            tache& current = static_cast<tache&>(note_modif);
+            tache* tache_nouv(&current);    //on copie la note à modifier
+            note_modif.getOldNotes().push_back(tache_nouv); //on ajoute la copie dans les anciennes versions
+
+            //on fait les modifs
+
         }
         else if (typeid(note_modif) == typeid(media))
         {
-            //fenetre->m_media->setChecked(true);
+            media& current = static_cast<media&>(note_modif);
+            media* media_nouv(&current);    //on copie la note à modifier
+            note_modif.getOldNotes().push_back(media_nouv); //on ajoute la copie dans les anciennes versions
         }
 
-
-
-        m1.getNote(m_id->text().toStdString()).setTitre(m_titre->text().toStdString() );
-        //m1.getNote(m_id->text().toStdString()).MiseAJour();
+        //m1.getNote(m_id->text().toStdString()).setTitre(m_titre->text().toStdString());
+        note_modif.setTitre(m_titre->text().toStdString());
+        note_modif.setModif();
     }
 
     try{
@@ -357,7 +391,10 @@ void fenetre_creation_note :: save() //Sauvegarde d'une note en tant qu'objet
     }
     if (m_tache->isChecked())
     {
-        m1.ajTache(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),m_calendrier->selectedDate().toString("dddd dd MMMM yyyy").toStdString()).setTitre(m_titre->text().toStdString());
+        QString date = m_calendrier->selectedDate().toString("dddd dd MMMM yyyy");
+        if (!m_case_calendrier->isChecked())    //si pas d'échéance
+            date = "";
+        m1.ajTache(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString()).setTitre(m_titre->text().toStdString());
     }
     if (m_media->isChecked())
     {
@@ -379,5 +416,3 @@ void FenPrincipale :: popup()   //affichage de la fenetre de création de note
     connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
     m_fenetre_creation->show();
 }
-
-
