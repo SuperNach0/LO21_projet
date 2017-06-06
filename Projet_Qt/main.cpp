@@ -35,9 +35,9 @@ int main(int argc,  char *argv[]){
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
     NotesManager2 &m1 = NotesManager2::getManager();
-    //QString filename = QFileDialog::getOpenFileName();
+    QString filename = QFileDialog::getOpenFileName();
 
-    //m1.setFilename(filename);
+    m1.setFilename(filename);
     FenPrincipale fenetre;
     fenetre.show();
     app.exec();

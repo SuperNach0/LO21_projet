@@ -261,12 +261,43 @@ void NotesManager2::save() const {
     stream.setAutoFormatting(true);
     stream.writeStartDocument();
     stream.writeStartElement("notes");
-    for(unsigned int i=0; i<nbNote; i++){
-        stream.writeStartElement("article");
-        stream.writeTextElement("id",QString::fromStdString(Note[i]->getID()));
+    for(NotesManager2::ConstIterator it= this->getIterator(); !it.isDone(); it.next())
+    {
+            std::cout<<typeid(it.current()).name()<<std::endl;
+        if (typeid(it.current()).name()==typeid(article).name()) {
 
-        //stream.writeTextElement("text",Note[i]->getText());
+        stream.writeStartElement("article");
+        stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
+        stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
+         stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
+          stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
+
+
         stream.writeEndElement();
+        }
+
+        else if (typeid(it.current()).name()==typeid(media).name()) {
+            stream.writeStartElement("media");
+            stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
+            stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
+             stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
+              stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
+
+
+            stream.writeEndElement();
+        }
+
+         else if (typeid(it.current()).name()==typeid(tache).name()) {
+            stream.writeStartElement("tache");
+            stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
+            stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
+             stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
+              stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
+
+
+            stream.writeEndElement();
+
+        }
     }
     stream.writeEndElement();
     stream.writeEndDocument();
@@ -335,6 +366,7 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
 
   void tache :: afficher(std::ostream& f ) const {
       f<< "*** Tache ***"<<"\n";
+
       note::afficher();
       f<<" action ="<<action<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
 
