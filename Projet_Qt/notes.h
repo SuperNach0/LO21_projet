@@ -8,6 +8,8 @@
 
 enum etat {en_attente,en_cours,terminee};
 
+std::string etatToString(enum etat s);
+
 
 std::string formatTime ();
 
@@ -35,11 +37,12 @@ protected :
     std::string titre ;
     std::string Creation ;
     std::string Modif;
+    std::string texte;
     std::vector<note*> oldNotes;
 
 public :
 
-     note (std::string i,std::string t): id(i),titre(t),oldNotes(0)
+     note (std::string i,std::string t,std::string txt): id(i),titre(t),texte(txt),oldNotes(0)
      {
         this->Creation = formatTime();
         this ->Modif = formatTime();
@@ -49,11 +52,13 @@ public :
     const std::string getTitre() const {return titre;}
     const std::string getCreation() const {return Creation;}
     const std::string getModif() const {return Modif;}
+    const std::string getTexte() const {return texte;}
     std::vector<note*>& getOldNotes() {return oldNotes;}
 
+    void setTexte(const std::string& text) {texte = text;}
 
 
-     void setTitre(const std::string& t) {titre = t;}
+    void setTitre(const std::string& t) {titre = t;}
 
 
 
@@ -61,7 +66,7 @@ public :
 
 
 
-    virtual void MiseAJour () =0 ;
+    //virtual void MiseAJour () =0 ;
 
     void setModif () ;
 
@@ -101,7 +106,7 @@ class NotesManager2 {
 
     note& ajArticle(const std::string& id,const std::string& txt);
     note& ajMulti(const std::string& id,const std::string& description,const std::string& image);
-    note& ajTache(const std::string& id,const std::string& action ,const unsigned int priorite,const std::string& echeance);
+    note& ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat);
 
     void SupprimerNote (note& toDelete);
 
@@ -189,19 +194,14 @@ class NotesManager2 {
 
 
 class article : public note {
-protected :
-    std::string texte ;
 
 public :
     article ( const std::string i, std::string t,std::string txt)
-        : note (i,t) , texte (txt){}
+        : note (i,t,txt){}
     article (const article& article_a_copier);
 
-    const std::string getTexte() const  {return texte;}
-
-
     virtual void afficher(std::ostream& f= std::cout) const;
-    virtual void MiseAJour (); //PROBLEME : ne prend que le premier mot qu'on ecrit... jpese que le QString reglera le problème
+    //virtual void MiseAJour (); //PROBLEME : ne prend que le premier mot qu'on ecrit... jpese que le QString reglera le problème
 
 
 
@@ -212,18 +212,17 @@ class media : public note { // héritage nécessaire ? ou ptite énumération ?
 
 protected :
 
-    std::string  description ;
-    std::string image ;//à changer avec QT : chemin vers l'image ?
+    std::string chemin ;//à changer avec QT : chemin vers l'image ?
 
 public :
     media ( const std::string i, std::string t,std::string d,std::string im)
-        : note (i,t) , description (d), image(im){}
+        : note (i,t,d),chemin(im){}
     media(const media& media_a_copier);
-    const std::string getDescription()const {return description;}
-    const std::string getImage() const {return image;}
+    const std::string getChemin() const {return chemin;}
+    void setChemin(const std::string& text) {chemin = text;}
 
     virtual void afficher(std::ostream& f= std::cout) const ;
-    virtual void MiseAJour ();
+    //virtual void MiseAJour ();
 
 };
 
@@ -231,24 +230,26 @@ public :
 class tache : public note{// faut ajouter l'optionalité des trucs : constructeur ?
 
 protected :
-    std::string action;
     unsigned int priorite;
     std::string echeance; //date ?
     enum etat status;
 
 public :
 
-    tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e)
-        : note (i,t),action (a), priorite(p), echeance (e) {}
+    tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e,enum etat s)
+        : note (i,t,a), priorite(p), echeance (e),status(s) {}
     tache(tache const& tache_a_copier); //constructeur recopie (sert pour gérer les versions)
 
-    const std::string getAction() const {return action;}
     const std::string getecheance() const {return echeance;}
     enum etat getEtat() const  {return status;}
     unsigned int getPriorite() const {return priorite;}
 
+    void setPriorite(int prio){priorite=prio;}
+    void setEcheance(const std::string& date){echeance=date;}
+    void setStatus(enum etat stat){status=stat;}
+
     virtual void afficher(std::ostream& f= std::cout) const ;
-    virtual void MiseAJour () ;
+    //virtual void MiseAJour () ;
 
 
 };

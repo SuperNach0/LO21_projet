@@ -7,6 +7,8 @@
 
 /* *********** FENETRE PRINCIPALE ************* */
 
+class fenetre_anciennes_versions;
+
 class FenPrincipale : public QMainWindow
 {
     Q_OBJECT
@@ -17,6 +19,7 @@ public:
 
 private slots:
     void popup();
+    void popupAnciennesVersions();
     void affichage_notes();
     void affichage_single_note(QString id);
     void menuContextuel(const QPoint&);
@@ -36,6 +39,7 @@ private:
         QListWidget* m_listeNotes;
 
     QWidget* m_fenetre_creation; //attribut vers la fenetre de création de note
+    fenetre_anciennes_versions* m_fenetre_ancienne_versions;
 
     //onglets
     QTabWidget *m_onglets;
@@ -45,6 +49,11 @@ private:
                 QLabel* m_titre_note;
                 QLabel* m_date_creation_note;
                 QLabel* m_date_modif_note;
+                QLabel* m_texte_note;
+                QLabel* m_echeance_note;
+                QLabel* m_statut_note;
+                QLabel* m_chemin_note;
+                QLabel* m_priorite_note;
         QWidget* m_page_affichage_relations;
 
 
@@ -73,14 +82,15 @@ protected:
     QTextEdit* m_texte;
 
     ///objets qui peuvent être affichés ou non selon la case cochée
-    QPushButton* m_selection_fichier;
-    QString* m_fichier;
-    QSpinBox* m_priorite;
-
     QVBoxLayout* m_layout_tache;
+    QSpinBox* m_priorite;
+    QComboBox* m_statut;
     QWidget* m_groupe_tache;
     QCalendarWidget* m_calendrier;
         QCheckBox* m_case_calendrier;
+
+    QPushButton* m_selection_fichier;
+    QString* m_fichier;
 
     //Boutons de fin
     QPushButton* m_save;
@@ -88,5 +98,19 @@ protected:
 
 };
 
+class fenetre_anciennes_versions : public QWidget
+{
+    Q_OBJECT
+
+    friend FenPrincipale;
+public:
+fenetre_anciennes_versions();
+private:
+
+    QVBoxLayout* m_layout_choix;
+
+    QPushButton* m_restaurer;
+    QPushButton* m_quit;
+};
 
 #endif // FENPRINCIPALE_H

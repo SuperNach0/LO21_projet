@@ -13,6 +13,21 @@
 #include <time.h>
 #include "notes.h"
 
+std::string etatToString(enum etat s)
+{
+    switch (s)
+    {
+        case 0:
+            return "En attente";
+            break;
+        case 1:
+            return "En cours";
+            break;
+        case 2:
+            return "Terminee";
+            break;
+    }
+}
 
 /*********************fonctions de note************/
 
@@ -35,17 +50,19 @@ std::ostream& operator<<(std::ostream& f, article const& article_a_afficher)
 void note :: afficher(std::ostream& f ) const {
     f<<"id: "<<getID() << std::endl;
     f<<"titre:"<<getTitre() << std::endl;
+    f<<"Texte:"<<getTexte() << std::endl;
     f<<"date creation:"<<getCreation() << std::endl;
     f <<"date modif:"<< getModif()<<std::endl;
 
 }
 
 
+
 //**********************fonction qui récupere lheure du système************************/
 
 std::string formatTime (){
 
-         char tmps[32];
+        char tmps[32];
         time_t _time;
         struct tm timeInfo;
         time(&_time);
@@ -129,9 +146,8 @@ note& NotesManager2::ajMulti(const std::string& id,const std::string& descriptio
     return *n;
 }
 
-note& NotesManager2::ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance) {
-    tache* n=new tache(id,"",action,priorite,echeance);
-    //
+note& NotesManager2::ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat) {
+    tache* n=new tache(id,"",action,priorite,echeance,stat);
     addNote (n);
     return *n;
 }
@@ -324,7 +340,7 @@ void note::setModif () {
 //***********fonction de article
 
 //constructeur de recopie
-article::article(const article &article_a_copier) : note(article_a_copier.id,article_a_copier.titre), texte(article_a_copier.texte)
+article::article(const article &article_a_copier) : note(article_a_copier.id,article_a_copier.titre,article_a_copier.texte)
 {
     oldNotes.clear();
 }
@@ -337,14 +353,14 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
 
 }
 
-
+/*
    void article ::  MiseAJour () {
      std::cout <<"mettez a jour le texte "<<std::endl;
      std::cin>> texte;
      setModif();
 
  }
-
+*/
 
 //************************fonction de media****************
 
@@ -352,15 +368,16 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
  void media :: afficher(std::ostream& f) const {
      f<<"***Media***" << std::endl;
      note::afficher();
-     f <<" description ="<<description<<std::endl<<" image ="<<image<<std::endl<<std::endl;
+     f <<" chemin ="<<chemin<<std::endl<<std::endl;
      }
+ /*
  void media :: MiseAJour () {
 
      std::cout <<"mettez a jour la description "<<std::endl;
      std::cin>> description;
      setModif();
      }
-
+*/
 
  //*****************************fonctions de taches ***************
 
@@ -368,9 +385,10 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
       f<< "*** Tache ***"<<"\n";
 
       note::afficher();
-      f<<" action ="<<action<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
+      f<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
 
   }
+  /*
   void tache:: MiseAJour () {
       std::string act;
       std::cout<< "mettez a jour laction"<<std::endl;
@@ -379,3 +397,4 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
       setModif();
 
   }
+*/

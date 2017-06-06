@@ -22,6 +22,10 @@
 *   Edition presque fonctionnel sur article
 * 02/06 : progression sur l'édition, il me manque des fonctions setEcheance, setDescription etc. pour toutes les classes filles, je ferais ça plus tard sinon tu peux si ta le time
 *
+* 06/06 : affichage d'une seule note OK (enfin)
+*       : j'ai modifié la classe note pour avoir direct un attribut "texte" qui était présent dans chaque sous classe
+*       : du coup j'ai enlevé tes fonctions "mise à jour" qui de toute façon ne sont pas utilisées avec la GUI
+*       : Edition d'une note OK, manque à gérer les versions (en progrès)
 */
 
 
@@ -35,9 +39,9 @@ int main(int argc,  char *argv[]){
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
     NotesManager2 &m1 = NotesManager2::getManager();
-    QString filename = QFileDialog::getOpenFileName();
+    //QString filename = QFileDialog::getOpenFileName();
 
-    m1.setFilename(filename);
+    //m1.setFilename(filename);
     FenPrincipale fenetre;
     fenetre.show();
     app.exec();
@@ -95,7 +99,7 @@ int main(int argc,  char *argv[]){
                         std::cout<<" echeance?"<<std::endl;
                         std::cin>> echeance;
 
-                        m1.ajTache(id,action,priorite,echeance).setTitre(t);
+                        m1.ajTache(id,action,priorite,echeance,en_attente).setTitre(t);
 
 
                     }break;
@@ -130,7 +134,7 @@ int main(int argc,  char *argv[]){
             std::string tf;
             std::cout<<" ID de la note a changer?"<<std::endl;
             std::cin>> tf;
-            m1.getNote(tf).MiseAJour();// plymorphisme à definir dans les classes filles
+            //m1.getNote(tf).MiseAJour();// plymorphisme à definir dans les classes filles
                                           // faudrait que ca les affiche comme si on en créait non ?
                      break;
                 }
@@ -148,7 +152,7 @@ int main(int argc,  char *argv[]){
         {
             std::cout << "ESSAIS CYRIL VERSION DE NOTES\n";
             //std::cout << "txt de la V2 de la note : " << (m1.getNote("id2").getOldNotes()[0])->getTitre() << std::endl;
-            m1.ajTache("id","action",4,"echeance").setTitre("titre");
+            m1.ajTache("id","action",4,"echeance",(etat)2).setTitre("titre");
 
         }
 
