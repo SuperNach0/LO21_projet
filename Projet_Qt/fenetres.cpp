@@ -478,36 +478,40 @@ void FenPrincipale :: popup()   //affichage de la fenetre de création de note
 
 void FenPrincipale::popupAnciennesVersions()
 {
-    m_fenetre_ancienne_versions = new fenetre_anciennes_versions;
+    m_fenetre_ancienne_versions = new fenetre_anciennes_versions(this);
     connect(m_fenetre_ancienne_versions,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes()));
     m_fenetre_ancienne_versions->show();
 }
 
-fenetre_anciennes_versions::fenetre_anciennes_versions()
+fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
 {
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
-
     NotesManager2& m1 = NotesManager2::getManager();
-    //note& current = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
-/*
-    for (unsigned int i=0;i<current.getOldNotes().size();i++)
-    {
-        current.getOldNotes()[i]->afficher();
-    }
-*/
+    m_parent = parent;
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+    note& current = m1.getNote(fenetre_parente->getCurrentNote());
+
     m_layout_choix = new QVBoxLayout; //création layout
     //Création des différents champs du formulaire
     m_restaurer = new QPushButton("Restaurer",this);
         //m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
     m_quit = new QPushButton("Quitter",this);
         m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
+    m_listeNotes = new QListWidget(this);
+        //connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),fenetre_parente,SLOT(affichage_single_note(QString)));
 
 
+    for (unsigned int i=0;i<current.getOldNotes().size();i++)
+    {
+        m_listeNotes->addItem(QString::fromStdString(current.getOldNotes()[i]->getModif()));
+    }
 
     //Ajout des objets au layout
-
+    m_layout_choix->addWidget(new QLabel("<b>Modifié le :</b>"));
+    m_layout_choix->addWidget(m_listeNotes);
     m_layout_choix->addWidget(m_restaurer);
     m_layout_choix->addWidget(m_quit);
+
 
 
     this->setLayout(m_layout_choix); //affectation du layout

@@ -13,20 +13,7 @@ class FenPrincipale : public QMainWindow
 {
     Q_OBJECT
 
-public:
-
-    FenPrincipale();
-
-private slots:
-    void popup();
-    void popupAnciennesVersions();
-    void affichage_notes();
-    void affichage_single_note(QString id);
-    void menuContextuel(const QPoint&);
-    void supprimerNote();
-    void editerNote();
-
-private:
+protected:
     void creation_docks(); //Création du dock de gauche, et affichage des notes
     void creation_tabs(); //Création des différents onglets de la vue principale
 
@@ -56,6 +43,19 @@ private:
                 QLabel* m_priorite_note;
         QWidget* m_page_affichage_relations;
 
+public:
+
+    FenPrincipale();
+    const std::string getCurrentNote() {return m_listeNotes->currentItem()->text().toStdString();}
+
+private slots:
+    void popup();
+    void popupAnciennesVersions();
+    void affichage_notes();
+    void affichage_single_note(QString id);
+    void menuContextuel(const QPoint&);
+    void supprimerNote();
+    void editerNote();
 
 
 };
@@ -104,13 +104,14 @@ class fenetre_anciennes_versions : public QWidget
 
     friend FenPrincipale;
 public:
-fenetre_anciennes_versions();
+fenetre_anciennes_versions(QWidget *parent);
 private:
 
     QVBoxLayout* m_layout_choix;
-
+    QListWidget* m_listeNotes;
     QPushButton* m_restaurer;
     QPushButton* m_quit;
+    QWidget* m_parent;
 };
 
 #endif // FENPRINCIPALE_H
