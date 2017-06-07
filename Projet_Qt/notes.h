@@ -116,7 +116,7 @@ class NotesManager2 {
 
     QString getFilename() const { return filename; }
     void setFilename(const QString& f) { filename=f; }
-    //void load(); // load notes from file filename
+    void load(); // load notes from file filename
     void save() const; // save notes in file filename
     static NotesManager2& getManager();
     static void freeManager();

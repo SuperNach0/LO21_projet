@@ -199,8 +199,8 @@ void NotesManager2::SupprimerNote (note& toDelete)
 }
 
 
-/*                                                       A FAIRE EN Qt PAREIL POUR SAVE
-void NotesManager::load() {
+                                                    // A FAIRE EN Qt PAREIL POUR SAVE
+void NotesManager2::load() {
     QFile fin(filename);
     // If we can't open it, let's show an error message.
     if (!fin.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -220,10 +220,12 @@ void NotesManager::load() {
             // If it's named taches, we'll go to the next.
             if(xml.name() == "notes") continue;
             // If it's named tache, we'll dig the information from there.
-            if(xml.name() == "article") {
+            if(xml.name() == "article") {// µ**********************************************ARTICLE
                 qDebug()<<"new article\n";
                 QString identificateur;
                 QString titre;
+                QString creation;
+                QString modif;
                 QString text;
                 QXmlStreamAttributes attributes = xml.attributes();
                 xml.readNext();
@@ -238,22 +240,34 @@ void NotesManager::load() {
                         }
 
                         // We've found titre.
-                        if(xml.name() == "title") {
+                        if(xml.name() == "titre") {
                             xml.readNext(); titre=xml.text().toString();
                             qDebug()<<"titre="<<titre<<"\n";
                         }
+                        // We've found creation
+                        if(xml.name() == "creation") {
+                            xml.readNext();
+                            creation=xml.text().toString();
+                            qDebug()<<"creation="<<text<<"\n";
+                        }
+                        // We've found modif
+                        if(xml.name() == "modif") {
+                            xml.readNext();
+                            modif=xml.text().toString();
+                            qDebug()<<"modif="<<text<<"\n";
+                        }
                         // We've found text
-                        if(xml.name() == "text") {
+                        if(xml.name() == "texte") {
                             xml.readNext();
                             text=xml.text().toString();
-                            qDebug()<<"text="<<text<<"\n";
+                            qDebug()<<"texte="<<text<<"\n";
                         }
                     }
                     // ...and next...
                     xml.readNext();
                 }
-                qDebug()<<"ajout note "<<identificateur<<"\n";
-                addArticle(identificateur,titre,text);
+                qDebug()<<"ajout note "<<identificateur<<"\n";// ICIIIIIIIII
+                NotesManager2::ajArticle(identificateur.toStdString(),text.toStdString());
             }
         }
     }
@@ -266,7 +280,7 @@ void NotesManager::load() {
     qDebug()<<"fin load\n";
 }
 
-*/
+
 
 
 void NotesManager2::save() const {

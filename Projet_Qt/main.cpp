@@ -42,6 +42,7 @@ int main(int argc,  char *argv[]){
     QString filename = QFileDialog::getOpenFileName();
 
     m1.setFilename(filename);
+    m1.load();
     FenPrincipale fenetre;
     fenetre.show();
     app.exec();
