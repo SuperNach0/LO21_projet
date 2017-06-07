@@ -68,7 +68,7 @@ std::string formatTime (){
         time(&_time);
         localtime_s(&timeInfo, &_time);
 
-    strftime(tmps, 32, "%Y-%m-%d %H:%M", &timeInfo);
+    strftime(tmps, 32, "%Y-%m-%d %H:%M:%S", &timeInfo);
     std::string temps = tmps;
 return temps;
 }
@@ -113,11 +113,21 @@ NotesManager2::~NotesManager2(){
 NotesManager2::Handler NotesManager2::handler=Handler();
 
 
-note& NotesManager2::getNote(const std::string& id){
+note& NotesManager2::getNote(const std::string& id, const std::string& date){
     // si l'article existe déjà, on en renvoie une référence
     for(unsigned int i=0; i<nbNote; i++){
-        if (Note[i]->getID()==id) return *Note[i];}
-    //throw NotesException("Note non trouvee\n");
+        if (Note[i]->getID()==id && date=="")
+            return *Note[i];
+        else if (Note[i]->getID()==id && date!="")
+        {
+            unsigned int j =0;
+            while (j<Note[i]->getOldNotes().size() && Note[i]->getOldNotes()[j]->getModif() != date )
+                j++;
+            return *Note[i]->getOldNotes()[j];
+        }
+    }
+
+
     article* vide = new article("","",""); ///A CORRIGER SI POSSIBLE
     return *vide;
 
@@ -151,36 +161,6 @@ note& NotesManager2::ajTache(const std::string& id, const std::string& action , 
     addNote (n);
     return *n;
 }
-/*
-void NotesManager2::SupprimerNote (note& toDelete) {
-    unsigned int i =0;
-    note** newNotes= new note*[nbMaxNote];
-    for (i;i<nbNote;i++)
-    {
-        if (Note[i]->getID()!=toDelete.getID()){
-            newNotes [i] = Note[i];
-
-        }else break;
-    }
-
-    i++;
-    for (i;i<nbNote;i++)
-    {
-       newNotes [i-1] = Note[i];
-    }
-
-    delete Note[nbNote] ;
-    nbNote--;
-
-    for (i=0;i<nbNote;i++)
-    {
-        Note[i] = newNotes[i];
-    }
-
-    delete[] newNotes;
-
-}
-*/
 
 void NotesManager2::SupprimerNote (note& toDelete)
 {
@@ -394,14 +374,13 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
      note::afficher();
      f <<" chemin ="<<chemin<<std::endl<<std::endl;
      }
- /*
- void media :: MiseAJour () {
 
-     std::cout <<"mettez a jour la description "<<std::endl;
-     std::cin>> description;
-     setModif();
-     }
-*/
+ //constructeur de recopie
+ media::media(const media &media_a_copier) : note(media_a_copier.id,media_a_copier.titre,media_a_copier.texte)
+ {
+     chemin = media_a_copier.chemin;
+     oldNotes.clear();
+ }
 
  //*****************************fonctions de taches ***************
 
@@ -412,13 +391,11 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
       f<<" priorite :"<< priorite << " echeance : "<< echeance<<" etat = "<<status <<std::endl<<std::endl;
 
   }
-  /*
-  void tache:: MiseAJour () {
-      std::string act;
-      std::cout<< "mettez a jour laction"<<std::endl;
-      std::cin>> act;
-      this->action = act;
-      setModif();
 
-  }
-*/
+ tache::tache(const tache &tache_a_copier) : note(tache_a_copier.id,tache_a_copier.titre,tache_a_copier.texte)
+ {
+     echeance=tache_a_copier.echeance;
+     priorite=tache_a_copier.priorite;
+     status=tache_a_copier.status;
+     oldNotes.clear();
+ }

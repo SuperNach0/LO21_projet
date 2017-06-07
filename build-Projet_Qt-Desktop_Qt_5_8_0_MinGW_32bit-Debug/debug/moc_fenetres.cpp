@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FenPrincipale_t {
-    QByteArrayData data[10];
-    char stringdata0[125];
+    QByteArrayData data[11];
+    char stringdata0[130];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,14 +38,15 @@ QT_MOC_LITERAL(3, 21, 22), // "popupAnciennesVersions"
 QT_MOC_LITERAL(4, 44, 15), // "affichage_notes"
 QT_MOC_LITERAL(5, 60, 21), // "affichage_single_note"
 QT_MOC_LITERAL(6, 82, 2), // "id"
-QT_MOC_LITERAL(7, 85, 14), // "menuContextuel"
-QT_MOC_LITERAL(8, 100, 13), // "supprimerNote"
-QT_MOC_LITERAL(9, 114, 10) // "editerNote"
+QT_MOC_LITERAL(7, 85, 4), // "date"
+QT_MOC_LITERAL(8, 90, 14), // "menuContextuel"
+QT_MOC_LITERAL(9, 105, 13), // "supprimerNote"
+QT_MOC_LITERAL(10, 119, 10) // "editerNote"
 
     },
     "FenPrincipale\0popup\0\0popupAnciennesVersions\0"
     "affichage_notes\0affichage_single_note\0"
-    "id\0menuContextuel\0supprimerNote\0"
+    "id\0date\0menuContextuel\0supprimerNote\0"
     "editerNote"
 };
 #undef QT_MOC_LITERAL
@@ -56,7 +57,7 @@ static const uint qt_meta_data_FenPrincipale[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,18 +65,20 @@ static const uint qt_meta_data_FenPrincipale[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    1,   52,    2, 0x08 /* Private */,
-       7,    1,   55,    2, 0x08 /* Private */,
-       8,    0,   58,    2, 0x08 /* Private */,
-       9,    0,   59,    2, 0x08 /* Private */,
+       1,    0,   54,    2, 0x0a /* Public */,
+       3,    0,   55,    2, 0x0a /* Public */,
+       4,    0,   56,    2, 0x0a /* Public */,
+       5,    2,   57,    2, 0x0a /* Public */,
+       5,    1,   62,    2, 0x2a /* Public | MethodCloned */,
+       8,    1,   65,    2, 0x0a /* Public */,
+       9,    0,   68,    2, 0x0a /* Public */,
+      10,    0,   69,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    6,    7,
     QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void, QMetaType::QPoint,    2,
     QMetaType::Void,
@@ -93,10 +96,11 @@ void FenPrincipale::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->popup(); break;
         case 1: _t->popupAnciennesVersions(); break;
         case 2: _t->affichage_notes(); break;
-        case 3: _t->affichage_single_note((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: _t->menuContextuel((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
-        case 5: _t->supprimerNote(); break;
-        case 6: _t->editerNote(); break;
+        case 3: _t->affichage_single_note((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 4: _t->affichage_single_note((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->menuContextuel((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 6: _t->supprimerNote(); break;
+        case 7: _t->editerNote(); break;
         default: ;
         }
     }
@@ -127,13 +131,13 @@ int FenPrincipale::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }
@@ -233,8 +237,8 @@ int fenetre_creation_note::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_fenetre_anciennes_versions_t {
-    QByteArrayData data[1];
-    char stringdata0[27];
+    QByteArrayData data[4];
+    char stringdata0[56];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -243,10 +247,14 @@ struct qt_meta_stringdata_fenetre_anciennes_versions_t {
     )
 static const qt_meta_stringdata_fenetre_anciennes_versions_t qt_meta_stringdata_fenetre_anciennes_versions = {
     {
-QT_MOC_LITERAL(0, 0, 26) // "fenetre_anciennes_versions"
+QT_MOC_LITERAL(0, 0, 26), // "fenetre_anciennes_versions"
+QT_MOC_LITERAL(1, 27, 22), // "choix_ancienne_version"
+QT_MOC_LITERAL(2, 50, 0), // ""
+QT_MOC_LITERAL(3, 51, 4) // "date"
 
     },
-    "fenetre_anciennes_versions"
+    "fenetre_anciennes_versions\0"
+    "choix_ancienne_version\0\0date"
 };
 #undef QT_MOC_LITERAL
 
@@ -256,22 +264,32 @@ static const uint qt_meta_data_fenetre_anciennes_versions[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags
+       1,    1,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QString,    3,
+
        0        // eod
 };
 
 void fenetre_anciennes_versions::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        fenetre_anciennes_versions *_t = static_cast<fenetre_anciennes_versions *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->choix_ancienne_version((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
 }
 
 const QMetaObject fenetre_anciennes_versions::staticMetaObject = {
@@ -298,6 +316,15 @@ int fenetre_anciennes_versions::qt_metacall(QMetaObject::Call _c, int _id, void 
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
     return _id;
 }
 QT_WARNING_POP

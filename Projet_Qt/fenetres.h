@@ -48,11 +48,11 @@ public:
     FenPrincipale();
     const std::string getCurrentNote() {return m_listeNotes->currentItem()->text().toStdString();}
 
-private slots:
+public slots:
     void popup();
     void popupAnciennesVersions();
     void affichage_notes();
-    void affichage_single_note(QString id);
+    void affichage_single_note(QString id, QString date="");
     void menuContextuel(const QPoint&);
     void supprimerNote();
     void editerNote();
@@ -102,9 +102,15 @@ class fenetre_anciennes_versions : public QWidget
 {
     Q_OBJECT
 
-    friend FenPrincipale;
+    //friend FenPrincipale;
 public:
+
 fenetre_anciennes_versions(QWidget *parent);
+
+public slots:
+
+void choix_ancienne_version(QString date);
+
 private:
 
     QVBoxLayout* m_layout_choix;

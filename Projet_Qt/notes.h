@@ -45,7 +45,7 @@ public :
      note (std::string i,std::string t,std::string txt): id(i),titre(t),texte(txt),oldNotes(0)
      {
         this->Creation = formatTime();
-        this ->Modif = formatTime();
+        this->Modif = formatTime();
      }
 
     const std::string getID() const {return id;}
@@ -56,8 +56,6 @@ public :
     std::vector<note*>& getOldNotes() {return oldNotes;}
 
     void setTexte(const std::string& text) {texte = text;}
-
-
     void setTitre(const std::string& t) {titre = t;}
 
 
@@ -101,7 +99,7 @@ class NotesManager2 {
 
     unsigned int getnbNote() const {return nbNote;}
 
-    note& getNote (const std::string& id); // return the article with identificator id (create a new one if it not exists)
+    note& getNote (const std::string& id, const std::string& date=""); // return the article with identificator id (create a new one if it not exists)
     note& getOldNote(const std::string& id);
 
     note& ajArticle(const std::string& id,const std::string& txt);
@@ -231,14 +229,14 @@ class tache : public note{// faut ajouter l'optionalité des trucs : constructeu
 
 protected :
     unsigned int priorite;
-    std::string echeance; //date ?
+    std::string echeance;
     enum etat status;
 
 public :
 
     tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e,enum etat s)
         : note (i,t,a), priorite(p), echeance (e),status(s) {}
-    tache(tache const& tache_a_copier); //constructeur recopie (sert pour gérer les versions)
+    tache(const tache &tache_a_copier); //constructeur recopie (sert pour gérer les versions)
 
     const std::string getecheance() const {return echeance;}
     enum etat getEtat() const  {return status;}

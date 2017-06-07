@@ -11,7 +11,7 @@ FenPrincipale::FenPrincipale()
     m_layout_principal = new QVBoxLayout;
 
 
-    //********* MENU FICHIER **********
+    //********* MENU FICHIER ***************
 
     QMenu *menuFichier = menuBar()->addMenu("&Fichier");
         //ajout d'une action
@@ -224,11 +224,24 @@ void FenPrincipale::affichage_notes()
     }
 }
 
-void FenPrincipale::affichage_single_note(QString id)
+void FenPrincipale::affichage_single_note(QString id, QString date)
 {
-    NotesManager2& m1 = NotesManager2::getManager();
-    note& note_affichee = m1.getNote(id.toStdString()); //on récupère une référence sur la note à afficher
 
+
+    NotesManager2& m1 = NotesManager2::getManager();
+    note& note_affichee = m1.getNote(id.toStdString(),date.toStdString());
+
+/*
+    if (date!="") //si la date est "", c'est qu'on affiche une version normale, sinon c'est une ancienne version qu'il faut récup
+    {
+        note& note_affichee = m1.getNote(id.toStdString()); //on récupère une référence sur la note à afficher
+
+        unsigned int i =0;
+        while (i<note_affichee.getOldNotes().size() && note_affichee.getOldNotes()[i]->getModif() != date.toStdString() )
+            i++;
+        note_affichee= note_affichee.getOldNotes()[i];
+    }
+*/
     if (m_label_ID_note == nullptr) //si c'est la première fois qu'on affiche une note, on crée les labels (et on les ajoute au layout)
     {
         m_label_ID_note = new QLabel("texte");
@@ -333,11 +346,10 @@ void FenPrincipale::editerNote()
     if (typeid(note_a_editer) == typeid(article))
     {
         fenetre->m_article->setChecked(true); //on coche la bonne case
-        //article& current = static_cast<article&>(note_a_editer); //on caste la note pour pouvoir accéder aux attributs des classes filles
     }
     else if (typeid(note_a_editer) == typeid(tache))
     {
-        fenetre->m_tache->setChecked(true);
+        fenetre->m_tache->setChecked(true); //on coche la bonne case
         tache& current = static_cast<tache&>(note_a_editer); //on caste la note pour pouvoir accéder aux attributs des classes filles
 
         fenetre->m_priorite->setValue(current.getPriorite());
@@ -414,7 +426,8 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         else if (typeid(note_modif) == typeid(tache))
         {
             tache& current = static_cast<tache&>(note_modif);
-            tache* tache_nouv(&current);    //on copie la note à modifier
+            tache* tache_nouv = new tache(current);    //on copie la note à modifier
+
             note_modif.getOldNotes().push_back(tache_nouv); //on ajoute la copie dans les anciennes version
             //on fait les modifs : echeance, priorité
 
@@ -429,9 +442,8 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         else if (typeid(note_modif) == typeid(media))
         {
             media& current = static_cast<media&>(note_modif);
-            media* media_nouv(&current);    //on copie la note à modifier
+            media* media_nouv = new media(current);    //on copie la note à modifier via constructeur de copie
             note_modif.getOldNotes().push_back(media_nouv); //on ajoute la copie dans les anciennes versions
-
             current.setChemin(m_fichier->toStdString());
         }
 
@@ -498,7 +510,7 @@ fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
     m_quit = new QPushButton("Quitter",this);
         m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
     m_listeNotes = new QListWidget(this);
-        //connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),fenetre_parente,SLOT(affichage_single_note(QString)));
+        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(choix_ancienne_version(QString)));
 
 
     for (unsigned int i=0;i<current.getOldNotes().size();i++)
@@ -516,4 +528,11 @@ fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
 
     this->setLayout(m_layout_choix); //affectation du layout
     this->move(100,100); //décalage de la nouvelle fenetre par rapport à la première
+}
+
+void fenetre_anciennes_versions::choix_ancienne_version(QString date)
+{
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+    std::cout << "id = " << fenetre_parente->getCurrentNote() << "date = " << date.toStdString() << std::endl;
+    fenetre_parente->affichage_single_note(QString::fromStdString(fenetre_parente->getCurrentNote()), date);
 }

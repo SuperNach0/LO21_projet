@@ -7,25 +7,16 @@
 /*
 
 
-*
-* est-ce que tu pourras rajouter l'initialisation de l'état à "en attente" quand on crée une tache ?
-*
-* faudra tu m'expliques pourquoi quand tu crée un objet tu fais m1.ajMulti(id,description,image).setTitre(t); pourquoi le titre est pas dans le constructeur ?
-* cest pour "séparer" et pas tout faire d'un coup pmai son peut changer si tu veux
-*   --> je suis chaud que tu changes ouais ça parait beaucoup plus logique
-*
 * 30/05 : ajout d'un menu contextuel pour supprimer une note
 * 31/05 : modification du getNote : retourne un article("","","") si la note n'existe pas (en plus de throw une erreur) : à voir si on peut faire mieux
-*
-*
-* 01/06 : fonction supprimer OK, début du taff sur les versions de notes
-*   Edition presque fonctionnel sur article
-* 02/06 : progression sur l'édition, il me manque des fonctions setEcheance, setDescription etc. pour toutes les classes filles, je ferais ça plus tard sinon tu peux si ta le time
 *
 * 06/06 : affichage d'une seule note OK (enfin)
 *       : j'ai modifié la classe note pour avoir direct un attribut "texte" qui était présent dans chaque sous classe
 *       : du coup j'ai enlevé tes fonctions "mise à jour" qui de toute façon ne sont pas utilisées avec la GUI
 *       : Edition d'une note OK, manque à gérer les versions (en progrès)
+*
+* 07/06 : affichage des versions de notes OK mashallah
+*       : reste à faire : gérer la restauration, mais ptètre plus urgent de faire d'abord les relations ?
 */
 
 
@@ -39,10 +30,10 @@ int main(int argc,  char *argv[]){
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
     NotesManager2 &m1 = NotesManager2::getManager();
-    QString filename = QFileDialog::getOpenFileName();
+    //QString filename = QFileDialog::getOpenFileName();
 
-    m1.setFilename(filename);
-    m1.load();
+    //m1.setFilename(filename);
+    //m1.load();
     FenPrincipale fenetre;
     fenetre.show();
     app.exec();
@@ -127,7 +118,6 @@ int main(int argc,  char *argv[]){
                     next())
                     {
                         it.current().afficher();
-                        //std::cout << it.current(); marche pas :'( c'est parce que it.current te renvoie un eréférence
                     } break;
                 }
 
