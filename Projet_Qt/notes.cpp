@@ -280,36 +280,46 @@ void NotesManager2::save() const {
     for(NotesManager2::ConstIterator it= this->getIterator(); !it.isDone(); it.next())
     {
             std::cout<<typeid(it.current()).name()<<std::endl;
-        if (typeid(it.current()).name()==typeid(article).name()) {
+        if (typeid(it.current())==typeid(article)) {// ATRICLE
 
         stream.writeStartElement("article");
         stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
         stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
          stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
           stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
+          stream.writeTextElement("texte",QString::fromStdString(it.current().getTexte()));
+
+
 
 
         stream.writeEndElement();
         }
 
-        else if (typeid(it.current()).name()==typeid(media).name()) {
+        else if (typeid(it.current())==typeid(media)) {
             stream.writeStartElement("media");
             stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
             stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
              stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
               stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
+              stream.writeTextElement("texte",QString::fromStdString(it.current().getTexte()));
+          const media& med = static_cast<const media&>(it.current());
+          stream.writeTextElement("chemin",QString::fromStdString(med.getChemin()));
 
 
             stream.writeEndElement();
         }
 
-         else if (typeid(it.current()).name()==typeid(tache).name()) {
+         else if (typeid(it.current())==typeid(tache)) {
             stream.writeStartElement("tache");
             stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
             stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
              stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
-              stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
-
+             stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
+           stream.writeTextElement("texte",QString::fromStdString(it.current().getTexte()));
+           const tache& task = static_cast<const tache&>(it.current());
+           stream.writeTextElement("echeance",QString::fromStdString(task.getecheance()));
+           stream.writeTextElement("priorite",QString::number(task.getPriorite()));
+            stream.writeTextElement("status",QString::fromStdString(etatToString(task.getEtat())));
 
             stream.writeEndElement();
 
