@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 
+
 enum etat {en_attente,en_cours,terminee};
 
 std::string etatToString(enum etat s);
@@ -16,7 +17,6 @@ std::string formatTime ();
 class note;
 
 class NotesManager2;
-
 
 class NotesException{
 public:

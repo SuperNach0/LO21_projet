@@ -1,6 +1,7 @@
 #include "fenetres.h"
 #include "notes.h"
-
+#include "versions.h"
+#include "relations.h"
 
 
 
@@ -18,12 +19,16 @@ FenPrincipale::FenPrincipale()
         QAction *actionQuitter = new QAction("&Quitter", this);
             actionQuitter->setShortcut(QKeySequence("Ctrl+Q"));
             connect(actionQuitter,SIGNAL(triggered(bool)),this,SLOT(close()));
-        QAction *actionNouveau = new QAction("&Nouvelle Note",this);
-            actionNouveau->setShortcut(QKeySequence("Ctrl+N"));
-            connect(actionNouveau,SIGNAL(triggered(bool)),this,SLOT(popup()));
+        QAction *actionNewNote = new QAction("&Nouvelle Note",this);
+            actionNewNote->setShortcut(QKeySequence("Ctrl+N"));
+            connect(actionNewNote,SIGNAL(triggered(bool)),this,SLOT(popup()));
+        QAction *actionNewLink = new QAction("Nouvelle Relation",this);
+            actionNewLink->setShortcut(QKeySequence("Ctrl+R"));
+            connect(actionNewLink,SIGNAL(triggered(bool)),this,SLOT(popupCreationRelation()));
 
         menuFichier->addAction(actionQuitter);
-        menuFichier->addAction(actionNouveau);
+        menuFichier->addAction(actionNewNote);
+        menuFichier->addAction(actionNewLink);
 
 
     //ajout d'un 2e menu
@@ -44,10 +49,12 @@ FenPrincipale::FenPrincipale()
 
     //Barre d'outils
     m_toolbar = addToolBar("fichier");
-        actionNouveau->setIcon(QIcon("icone_nouveau.png"));
-        m_toolbar->addAction(actionNouveau);
+        actionNewNote->setIcon(QIcon("icone_nouveau.png"));
+        actionNewLink->setIcon(QIcon("icone_nouvelle_relation.png"));
+        actionQuitter->setIcon(QIcon("icone_exit.png"));
+        m_toolbar->addAction(actionNewNote);
+        m_toolbar->addAction(actionNewLink);
         m_toolbar->addAction(actionQuitter);
-
 
 
     //Configuration emplacement des fenetres
@@ -143,6 +150,70 @@ fenetre_creation_note::fenetre_creation_note() : QWidget()
     this->move(100,100); //décalage de la nouvelle fenetre par rapport à la première
 
 }
+
+fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
+{
+    this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
+    NotesManager2& m1 = NotesManager2::getManager();
+    m_parent = parent;
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+    note& current = m1.getNote(fenetre_parente->getCurrentNote());
+
+    m_layout_choix = new QVBoxLayout; //création layout
+    //Création des différents champs du formulaire
+    m_restaurer = new QPushButton("Restaurer",this);
+        //m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
+    m_quit = new QPushButton("Quitter",this);
+        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
+    m_listeNotes = new QListWidget(this);
+        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(choix_ancienne_version(QString)));
+
+
+    for (unsigned int i=0;i<current.getOldNotes().size();i++)
+    {
+        m_listeNotes->addItem(QString::fromStdString(current.getOldNotes()[i]->getModif()));
+    }
+
+    //Ajout des objets au layout
+    m_layout_choix->addWidget(new QLabel("<b>Modifié le :</b>"));
+    m_layout_choix->addWidget(m_listeNotes);
+    m_layout_choix->addWidget(m_restaurer);
+    m_layout_choix->addWidget(m_quit);
+
+
+
+    this->setLayout(m_layout_choix); //affectation du layout
+    this->move(100,100); //décalage de la nouvelle fenetre par rapport à la première
+}
+
+fenetre_creation_relation::fenetre_creation_relation(QWidget *parent)
+{
+    this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
+    m_parent = parent;
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+
+
+    m_layout = new QGridLayout(this); //création layout
+    //Création des différents champs du formulaire
+    QPushButton* m_ajouter_couple = new QPushButton("Ajouter Couple",this);
+        //m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
+    QPushButton* m_quit = new QPushButton("Quitter",this);
+        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
+
+
+    m_notes_gauche = new QListWidget(this);
+    m_notes_droite = new QListWidget(this);
+
+
+    m_layout->addWidget(m_notes_gauche,0,0);
+    m_layout->addWidget(m_notes_droite,0,1);
+    m_layout->addWidget(m_ajouter_couple,1,0,1,2);
+    m_layout->addWidget(m_quit,2,0,1,2);
+    this->setLayout(m_layout);
+
+
+}
+
 
 void FenPrincipale::creation_docks()
 {
@@ -331,56 +402,6 @@ void FenPrincipale::supprimerNote()
     }
 }
 
-void FenPrincipale::editerNote()
-{
-    NotesManager2& m1 = NotesManager2::getManager();
-    note& note_a_editer = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
-
-    m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
-    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
-    m_fenetre_creation->show();
-    fenetre_creation_note* fenetre = static_cast<fenetre_creation_note*>(m_fenetre_creation); //conversion de QWidget* vers fenetre_creation_note*
-    fenetre->m_id->setDisabled(true); //on ne peut pas changer d'ID
-
-
-    if (typeid(note_a_editer) == typeid(article))
-    {
-        fenetre->m_article->setChecked(true); //on coche la bonne case
-    }
-    else if (typeid(note_a_editer) == typeid(tache))
-    {
-        fenetre->m_tache->setChecked(true); //on coche la bonne case
-        tache& current = static_cast<tache&>(note_a_editer); //on caste la note pour pouvoir accéder aux attributs des classes filles
-
-        fenetre->m_priorite->setValue(current.getPriorite());
-        if (current.getecheance()!="")
-        {
-            fenetre->m_case_calendrier->setChecked(true);
-            ///afficher sur le calendrier la date d'échéance
-        }
-
-
-    }
-    else if (typeid(note_a_editer) == typeid(media))
-    {
-        fenetre->m_media->setChecked(true);
-        media& current = static_cast<media&>(note_a_editer);
-
-    }
-    else
-        throw NotesException("Erreur, type inconnu!");
-
-    fenetre->m_id->setText(QString::fromStdString(note_a_editer.getID()));
-    fenetre->m_titre->setText(QString::fromStdString(note_a_editer.getTitre()));
-    fenetre->m_texte->setText(QString::fromStdString(note_a_editer.getTexte()));
-    fenetre->m_date_modif.setDate(QDate::currentDate());
-
-
-    fenetre->m_article->setDisabled(true);
-    fenetre->m_tache->setDisabled(true);
-    fenetre->m_media->setDisabled(true);
-
-}
 
 void FenPrincipale::menuContextuel(const QPoint &pos)
 {
@@ -495,44 +516,8 @@ void FenPrincipale::popupAnciennesVersions()
     m_fenetre_ancienne_versions->show();
 }
 
-fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
+void FenPrincipale :: popupCreationRelation()
 {
-    this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
-    NotesManager2& m1 = NotesManager2::getManager();
-    m_parent = parent;
-    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
-    note& current = m1.getNote(fenetre_parente->getCurrentNote());
-
-    m_layout_choix = new QVBoxLayout; //création layout
-    //Création des différents champs du formulaire
-    m_restaurer = new QPushButton("Restaurer",this);
-        //m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
-    m_quit = new QPushButton("Quitter",this);
-        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
-    m_listeNotes = new QListWidget(this);
-        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(choix_ancienne_version(QString)));
-
-
-    for (unsigned int i=0;i<current.getOldNotes().size();i++)
-    {
-        m_listeNotes->addItem(QString::fromStdString(current.getOldNotes()[i]->getModif()));
-    }
-
-    //Ajout des objets au layout
-    m_layout_choix->addWidget(new QLabel("<b>Modifié le :</b>"));
-    m_layout_choix->addWidget(m_listeNotes);
-    m_layout_choix->addWidget(m_restaurer);
-    m_layout_choix->addWidget(m_quit);
-
-
-
-    this->setLayout(m_layout_choix); //affectation du layout
-    this->move(100,100); //décalage de la nouvelle fenetre par rapport à la première
-}
-
-void fenetre_anciennes_versions::choix_ancienne_version(QString date)
-{
-    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
-    std::cout << "id = " << fenetre_parente->getCurrentNote() << "date = " << date.toStdString() << std::endl;
-    fenetre_parente->affichage_single_note(QString::fromStdString(fenetre_parente->getCurrentNote()), date);
+    m_fenetre_creation_relation = new fenetre_creation_relation(this);
+    m_fenetre_creation_relation->show();
 }

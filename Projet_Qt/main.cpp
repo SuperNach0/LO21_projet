@@ -17,6 +17,8 @@
 *
 * 07/06 : affichage des versions de notes OK mashallah
 *       : reste à faire : gérer la restauration, mais ptètre plus urgent de faire d'abord les relations ?
+*
+* 08/06 : début taff relation
 */
 
 

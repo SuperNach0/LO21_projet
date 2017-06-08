@@ -8,8 +8,11 @@ QMAKE_LFLAGS = -std=c++11
 SOURCES += \
     main.cpp \
     notes.cpp \
-    fenetres.cpp
+    fenetres.cpp \
+    versions.cpp
 
 HEADERS += \
     notes.h \
-    fenetres.h
+    fenetres.h \
+    versions.h \
+    relations.h

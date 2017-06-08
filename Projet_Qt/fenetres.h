@@ -8,6 +8,7 @@
 /* *********** FENETRE PRINCIPALE ************* */
 
 class fenetre_anciennes_versions;
+class fenetre_creation_relation;
 
 class FenPrincipale : public QMainWindow
 {
@@ -27,6 +28,9 @@ protected:
 
     QWidget* m_fenetre_creation; //attribut vers la fenetre de création de note
     fenetre_anciennes_versions* m_fenetre_ancienne_versions;
+    //fenetre_creation_relation* m_fenetre_creation_relation;
+    QWidget* m_fenetre_creation_relation;
+
 
     //onglets
     QTabWidget *m_onglets;
@@ -51,6 +55,7 @@ public:
 public slots:
     void popup();
     void popupAnciennesVersions();
+    void popupCreationRelation();
     void affichage_notes();
     void affichage_single_note(QString id, QString date="");
     void menuContextuel(const QPoint&);
@@ -98,26 +103,19 @@ protected:
 
 };
 
-class fenetre_anciennes_versions : public QWidget
+class fenetre_creation_relation : public QWidget
 {
     Q_OBJECT
 
-    //friend FenPrincipale;
 public:
-
-fenetre_anciennes_versions(QWidget *parent);
-
-public slots:
-
-void choix_ancienne_version(QString date);
+    fenetre_creation_relation(QWidget *parent);
 
 private:
-
-    QVBoxLayout* m_layout_choix;
-    QListWidget* m_listeNotes;
-    QPushButton* m_restaurer;
-    QPushButton* m_quit;
     QWidget* m_parent;
+    QListWidget* m_notes_gauche;
+    QListWidget* m_notes_droite;
+    QGridLayout* m_layout;
 };
+
 
 #endif // FENPRINCIPALE_H
