@@ -9,7 +9,8 @@ SOURCES += \
     main.cpp \
     notes.cpp \
     fenetres.cpp \
-    versions.cpp
+    versions.cpp \
+    relations.cpp
 
 HEADERS += \
     notes.h \

@@ -110,10 +110,19 @@ class fenetre_creation_relation : public QWidget
 public:
     fenetre_creation_relation(QWidget *parent);
 
+public slots:
+    void affichage_couples();
+    void save_relation();
+
 private:
     QWidget* m_parent;
     QListWidget* m_notes_gauche;
     QListWidget* m_notes_droite;
+    QListWidget* m_couples;
+    QLineEdit* m_label_couple;
+    QCheckBox* m_orientation;
+    QLineEdit* m_label_relation;
+    QTextEdit* m_description_relation;
     QGridLayout* m_layout;
 };
 

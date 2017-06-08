@@ -7,7 +7,6 @@ class fenetre_anciennes_versions : public QWidget
 {
     Q_OBJECT
 
-    //friend FenPrincipale;
 public:
 
 fenetre_anciennes_versions(QWidget *parent);

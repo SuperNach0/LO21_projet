@@ -2,6 +2,7 @@
 #include <time.h>
 #include "notes.h"
 #include "fenetres.h"
+#include "relations.h"
 
 
 /*
@@ -19,6 +20,8 @@
 *       : reste à faire : gérer la restauration, mais ptètre plus urgent de faire d'abord les relations ?
 *
 * 08/06 : début taff relation
+*       : relation manager OP
+*       : création relation en progrès
 */
 
 
@@ -29,9 +32,13 @@ int menu =0;
 
 int main(int argc,  char *argv[]){
 
+
+    NotesManager2 &m1 = NotesManager2::getManager();
+    RelationManager& m2 = RelationManager::getManager();
+
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
-    NotesManager2 &m1 = NotesManager2::getManager();
+
     //QString filename = QFileDialog::getOpenFileName();
 
     //m1.setFilename(filename);
@@ -143,9 +150,22 @@ int main(int argc,  char *argv[]){
 
          case 7 :
         {
-            std::cout << "ESSAIS CYRIL VERSION DE NOTES\n";
-            //std::cout << "txt de la V2 de la note : " << (m1.getNote("id2").getOldNotes()[0])->getTitre() << std::endl;
-            m1.ajTache("id","action",4,"echeance",(etat)2).setTitre("titre");
+            std::cout << "ESSAIS CYRIL Relations DE NOTES\n";
+            Couple a(m1.getNote("id"),m1.getNote("id2"),"tamer");
+            Couple a1(m1.getNote("id"),m1.getNote("id3"),"OKKK");
+            Relation b("titre","desc");
+            Relation b1("titre2","desc2");
+            b.addCouple(a);
+            b.addCouple(a);
+            b.addCouple(a1);
+            b1.addCouple(a);
+            m2.addRelation(b);
+            m2.addRelation(b1);
+            for (unsigned int i=0;i<m2.getRelation("titre","desc").getCouples().size();i++)
+                std::cout << m2.getRelation("titre","desc").getCouples()[i]->getLabel() << std::endl;
+            for (unsigned int i=0;i<m2.getRelation("titre2","desc2").getCouples().size();i++)
+                std::cout << m2.getRelation("titre2","desc2").getCouples()[i]->getLabel() << std::endl;
+
 
         }
 

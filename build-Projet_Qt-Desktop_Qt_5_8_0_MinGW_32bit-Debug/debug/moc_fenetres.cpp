@@ -241,8 +241,8 @@ int fenetre_creation_note::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_fenetre_creation_relation_t {
-    QByteArrayData data[1];
-    char stringdata0[26];
+    QByteArrayData data[4];
+    char stringdata0[59];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -251,10 +251,14 @@ struct qt_meta_stringdata_fenetre_creation_relation_t {
     )
 static const qt_meta_stringdata_fenetre_creation_relation_t qt_meta_stringdata_fenetre_creation_relation = {
     {
-QT_MOC_LITERAL(0, 0, 25) // "fenetre_creation_relation"
+QT_MOC_LITERAL(0, 0, 25), // "fenetre_creation_relation"
+QT_MOC_LITERAL(1, 26, 17), // "affichage_couples"
+QT_MOC_LITERAL(2, 44, 0), // ""
+QT_MOC_LITERAL(3, 45, 13) // "save_relation"
 
     },
-    "fenetre_creation_relation"
+    "fenetre_creation_relation\0affichage_couples\0"
+    "\0save_relation"
 };
 #undef QT_MOC_LITERAL
 
@@ -264,21 +268,35 @@ static const uint qt_meta_data_fenetre_creation_relation[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   24,    2, 0x0a /* Public */,
+       3,    0,   25,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+
        0        // eod
 };
 
 void fenetre_creation_relation::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        fenetre_creation_relation *_t = static_cast<fenetre_creation_relation *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->affichage_couples(); break;
+        case 1: _t->save_relation(); break;
+        default: ;
+        }
+    }
     Q_UNUSED(_a);
 }
 
@@ -306,6 +324,15 @@ int fenetre_creation_relation::qt_metacall(QMetaObject::Call _c, int _id, void *
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 2;
+    }
     return _id;
 }
 QT_WARNING_POP

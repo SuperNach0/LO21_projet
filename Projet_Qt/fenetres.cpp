@@ -190,30 +190,82 @@ fenetre_creation_relation::fenetre_creation_relation(QWidget *parent)
 {
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
     m_parent = parent;
-    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent); //on caste si l'on veut accéder aux attributs du parent
 
 
     m_layout = new QGridLayout(this); //création layout
-    //Création des différents champs du formulaire
-    QPushButton* m_ajouter_couple = new QPushButton("Ajouter Couple",this);
-        //m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
-    QPushButton* m_quit = new QPushButton("Quitter",this);
-        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
 
+
+    /************* Création des différents champs du formulaire *************/
 
     m_notes_gauche = new QListWidget(this);
     m_notes_droite = new QListWidget(this);
+    m_couples = new QListWidget(this);
+
+    QPushButton* m_quit = new QPushButton("Quitter",this);
+        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
+    QPushButton* m_ajouter_relation = new QPushButton("Ajouter Relation",this);
+        connect(m_ajouter_relation,SIGNAL(clicked(bool)),this,SLOT(save_relation()));
+    m_label_couple = new QLineEdit("Label du couple ?",this);
+    QPushButton* m_ajouter_couple = new QPushButton("Ajouter Couple",this);
+        connect(m_ajouter_couple,SIGNAL(clicked(bool)),this,SLOT(affichage_couples()));
+    m_label_relation = new QLineEdit("Label de la relation ?",this);
+        m_label_relation->setVisible(false);
+    m_description_relation = new QTextEdit("Description de la relation ?",this);
+    m_orientation = new QCheckBox("Relation orientée",this);
+        m_orientation->setChecked(true);
 
 
+
+
+
+    /**** Remplissage des QList avec les notes du manager ****/
+    NotesManager2& m1 = NotesManager2::getManager();
+    for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
+    {
+        m_notes_gauche->addItem(QString::fromStdString(it.current().getID()));
+        m_notes_droite->addItem(QString::fromStdString(it.current().getID()));
+    }
+
+
+    /****** Connexions slots/signaux ******/
+    //connect(m_couples,SIGNAL(itemSelectionChanged()),m_label_relation,SLOT()
+
+
+    /****** Ajouts au layout ******/
     m_layout->addWidget(m_notes_gauche,0,0);
     m_layout->addWidget(m_notes_droite,0,1);
-    m_layout->addWidget(m_ajouter_couple,1,0,1,2);
-    m_layout->addWidget(m_quit,2,0,1,2);
+    m_layout->addWidget(m_label_couple,1,0);
+    m_layout->addWidget(m_orientation,1,1);
+    m_layout->addWidget(m_ajouter_couple,2,0,1,2);
+    m_layout->addWidget(m_couples,3,0,1,2);
+    m_layout->addWidget(m_label_relation,4,0,1,2);
+    m_layout->addWidget(m_description_relation,5,0,1,2);
+    m_layout->addWidget(m_ajouter_relation,6,0,1,2);
+    m_layout->addWidget(m_quit,7,0,1,2);
+
     this->setLayout(m_layout);
-
-
 }
 
+void fenetre_creation_relation::affichage_couples()
+{
+    QString separateur = " <--> ";
+    QString label = "Label : " + m_label_couple->text() +" | ";
+    if (m_orientation->isChecked())
+        separateur = " --> ";
+    m_couples->addItem(label + m_notes_gauche->currentItem()->text() + separateur + m_notes_droite->currentItem()->text());
+}
+
+void fenetre_creation_relation::save_relation()
+{
+
+    RelationManager& m2 = RelationManager::getManager();
+    Couple** couples;
+    //for (unsigned int i =0;i<m_couples->count();i++)
+      //A FINIIIIIIIIIIR
+
+   // m2.addRelation();
+}
 
 void FenPrincipale::creation_docks()
 {
@@ -302,17 +354,6 @@ void FenPrincipale::affichage_single_note(QString id, QString date)
     NotesManager2& m1 = NotesManager2::getManager();
     note& note_affichee = m1.getNote(id.toStdString(),date.toStdString());
 
-/*
-    if (date!="") //si la date est "", c'est qu'on affiche une version normale, sinon c'est une ancienne version qu'il faut récup
-    {
-        note& note_affichee = m1.getNote(id.toStdString()); //on récupère une référence sur la note à afficher
-
-        unsigned int i =0;
-        while (i<note_affichee.getOldNotes().size() && note_affichee.getOldNotes()[i]->getModif() != date.toStdString() )
-            i++;
-        note_affichee= note_affichee.getOldNotes()[i];
-    }
-*/
     if (m_label_ID_note == nullptr) //si c'est la première fois qu'on affiche une note, on crée les labels (et on les ajoute au layout)
     {
         m_label_ID_note = new QLabel("texte");
