@@ -11,6 +11,7 @@ private:
     note* seconde;
     std::string label;
 public:
+
     Couple(note& note1, note& note2, std::string lab):premiere(&note1),seconde(&note2),label(lab){}
     const note& getPremiere() const {return *premiere;}
     const note& getSeconde() const {return *seconde;}
@@ -40,7 +41,9 @@ public:
 
 
 class RelationManager {
- private :
+
+ //private : A CHANGEEEER C JUSTE POUR TEST
+public:
     std::vector<Relation*> relations;
 
     struct Handler {
@@ -62,7 +65,7 @@ class RelationManager {
     static void freeManager();
 
     //const iterator
-    /*
+/*
     class ConstIterator {
         friend class RelationManager;
         Relation** currentR;
@@ -86,8 +89,8 @@ class RelationManager {
     ConstIterator getIterator() const {
         return ConstIterator(relations,nbRelations);
     }
-*/
 
+*/
 };
 
 #endif // RELATIONS_H

@@ -22,6 +22,7 @@
 * 08/06 : début taff relation
 *       : relation manager OP
 *       : création relation en progrès
+*       : création relation presque ok, j'ai pas beaucoup testé mais ça devrait être good, manque à faire un iterator
 */
 
 
@@ -57,6 +58,7 @@ int main(int argc,  char *argv[]){
                      "3- rechercher une note"<<std::endl<<
                      "4- mettre a jour note(que tachepour le moment)"<<std::endl<<
                      "5- supprimer une note"<<std::endl<<
+                     "7- tests cyril affichage relation note "<<std::endl<<
                      "10- quitter"<<std::endl;
         std::cin>>menu;
 
@@ -151,6 +153,7 @@ int main(int argc,  char *argv[]){
          case 7 :
         {
             std::cout << "ESSAIS CYRIL Relations DE NOTES\n";
+            /*
             Couple a(m1.getNote("id"),m1.getNote("id2"),"tamer");
             Couple a1(m1.getNote("id"),m1.getNote("id3"),"OKKK");
             Relation b("titre","desc");
@@ -161,10 +164,22 @@ int main(int argc,  char *argv[]){
             b1.addCouple(a);
             m2.addRelation(b);
             m2.addRelation(b1);
-            for (unsigned int i=0;i<m2.getRelation("titre","desc").getCouples().size();i++)
-                std::cout << m2.getRelation("titre","desc").getCouples()[i]->getLabel() << std::endl;
-            for (unsigned int i=0;i<m2.getRelation("titre2","desc2").getCouples().size();i++)
-                std::cout << m2.getRelation("titre2","desc2").getCouples()[i]->getLabel() << std::endl;
+            */
+            for (unsigned int i=0;i<m2.relations.size();i++)
+            {
+                std::cout << "titre de la relation : " << m2.relations[i]->getTitre() << std::endl;
+                std::cout << "Description de la relation : " << m2.relations[i]->getDescription() << std::endl;
+
+                std::cout << "Couple n°" << i <<":  "<< std::endl;
+                for (unsigned int j=0;j<m2.relations[i]->getCouples().size();j++)
+                {
+                    std::cout << "Label premiere note: : " << m2.relations[i]->getCouples()[j]->getPremiere().getID() << std::endl;
+                }
+
+            }
+
+
+
 
 
         }

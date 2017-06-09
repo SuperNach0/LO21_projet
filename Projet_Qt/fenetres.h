@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QtWidgets>
 #include <iostream>
+#include "relations.h"
 
 /* *********** FENETRE PRINCIPALE ************* */
 
@@ -112,18 +113,23 @@ public:
 
 public slots:
     void affichage_couples();
+    void save_couple();
     void save_relation();
 
 private:
+    bool is_oriented;
     QWidget* m_parent;
     QListWidget* m_notes_gauche;
     QListWidget* m_notes_droite;
-    QListWidget* m_couples;
+    QListWidget* m_liste_couples;
     QLineEdit* m_label_couple;
     QCheckBox* m_orientation;
     QLineEdit* m_label_relation;
     QTextEdit* m_description_relation;
     QGridLayout* m_layout;
+
+    std::vector<Couple> couples;
+
 };
 
 
