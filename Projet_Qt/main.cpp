@@ -23,6 +23,12 @@
 *       : relation manager OP
 *       : création relation en progrès
 *       : création relation presque ok, j'ai pas beaucoup testé mais ça devrait être good, manque à faire un iterator
+*
+*
+* 09/06 : load fonctionne pour aricle normalement.
+*         il faudrait que tu mettes une actualisation de l'affichage des notes dès le chargment de la fenetre
+*         et pas que a la création sionon les anciennes ne s'afficheront pas !
+*          ATTENTION BUG : load sur un XML vide il kiffe pas
 */
 
 
@@ -40,12 +46,15 @@ int main(int argc,  char *argv[]){
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
 
-    //QString filename = QFileDialog::getOpenFileName();
+   // QString filename = QFileDialog::getOpenFileName();
 
-    //m1.setFilename(filename);
-    //m1.load();
+   // m1.setFilename(filename);
+   // m1.load();
+
     FenPrincipale fenetre;
+
     fenetre.show();
+
     app.exec();
 
 

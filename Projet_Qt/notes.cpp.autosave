@@ -255,8 +255,7 @@ void NotesManager2::load() {
                     // ...and next...
                     xml.readNext();
                 }
-                qDebug()<<"ajout note "<<identificateur<<"\n";// ICIIIIIIIII
-               // NotesManager2::ajArticle(identificateur.toStdString(),text.toStdString());
+                qDebug()<<"ajout note "<<identificateur<<"\n";
                 NotesManager2::ajArticleLoad(identificateur.toStdString(),titre.toStdString(), creation.toStdString()
                                              ,modif.toStdString(),text.toStdString());
             }

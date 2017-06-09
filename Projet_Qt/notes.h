@@ -48,6 +48,9 @@ public :
         this->Modif = formatTime();
      }
 
+     note (std::string i,std::string t,std::string crea,std::string modif,std::string txt)
+         : id(i),titre(t),Creation(crea),Modif(modif),texte(txt),oldNotes(0) {}
+
     const std::string getID() const {return id;}
     const std::string getTitre() const {return titre;}
     const std::string getCreation() const {return Creation;}
@@ -103,6 +106,7 @@ class NotesManager2 {
     note& getOldNote(const std::string& id);
 
     note& ajArticle(const std::string& id,const std::string& txt);
+    note& ajArticleLoad(const std::string& id,const std::string& titre,const std::string& crea,const std::string& modif,const std::string& txt);
     note& ajMulti(const std::string& id,const std::string& description,const std::string& image);
     note& ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat);
 
@@ -196,6 +200,8 @@ class article : public note {
 public :
     article ( const std::string i, std::string t,std::string txt)
         : note (i,t,txt){}
+    article ( const std::string i, std::string t,std::string crea,std::string modif ,std::string txt)
+        : note (i,t,crea,modif,txt){}
     article (const article& article_a_copier);
 
     virtual void afficher(std::ostream& f= std::cout) const;
