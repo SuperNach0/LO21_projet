@@ -93,14 +93,14 @@ int main(int argc,  char *argv[]){
                         std::cout<<" le texte de larticle ?"<<std::endl;
                         std::cin>>txt;
 
-                        m1.ajArticle(id,txt).setTitre(t);
+                        m1.ajArticle(id,t,txt);
                     }
                     if (j==2){ std::string description;std::string image;
                         std::cout<<" la description ?"<<std::endl;
                         std::cin>> description;
                         std::cout<<" la image ?"<<std::endl;
                         std::cin>> image;
-                        m1.ajMulti(id,description,image).setTitre(t);
+                        m1.ajMulti(id,t,description,image);
                     }
                     if (j==3){ std::string action ;  unsigned int priorite;  std::string echeance;
 
@@ -111,7 +111,7 @@ int main(int argc,  char *argv[]){
                         std::cout<<" echeance?"<<std::endl;
                         std::cin>> echeance;
 
-                        m1.ajTache(id,action,priorite,echeance,en_attente).setTitre(t);
+                        m1.ajTache(id,t,action,priorite,echeance,en_attente);
 
 
                     }break;

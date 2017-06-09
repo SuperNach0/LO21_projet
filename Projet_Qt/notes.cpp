@@ -128,7 +128,7 @@ note& NotesManager2::getNote(const std::string& id, const std::string& date){
     }
 
 
-    article* vide = new article("","",""); ///A CORRIGER SI POSSIBLE
+    article* vide = new article("","","",""); ///A CORRIGER SI POSSIBLE
     return *vide;
 
 }
@@ -144,8 +144,8 @@ note& NotesManager2::getOldNote(const std::string& id)
 }
 
 
-note& NotesManager2::ajArticle(const std::string& id,const std::string& txt){
-    article* n=new article(id,"",txt);
+note& NotesManager2::ajArticle(const std::string& id,const std::string& titre,const std::string& txt){
+    article* n=new article(id,titre,txt);
     addNote (n);
     return *n;
 }
@@ -158,15 +158,15 @@ note& NotesManager2::ajArticle(const std::string& id,const std::string& txt){
 
 
 
-note& NotesManager2::ajMulti(const std::string& id,const std::string& description,const std::string& image){
+note& NotesManager2::ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image){
 
-    media* n=new media(id,"",description,image);
+    media* n=new media(id,text,description,image);
     addNote (n);
     return *n;
 }
 
-note& NotesManager2::ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat) {
-    tache* n=new tache(id,"",action,priorite,echeance,stat);
+note& NotesManager2::ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat) {
+    tache* n=new tache(id,texte,action,priorite,echeance,stat);
     addNote (n);
     return *n;
 }

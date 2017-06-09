@@ -580,18 +580,18 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
             ///faudrait faire un Design pattern sur l'ajout d'une note pour éviter d'avoir 3 fonctions
         if (m_article->isChecked())
         {
-            m1.ajArticle(m_id->text().toStdString(),m_texte->toPlainText().toStdString()).setTitre(m_titre->text().toStdString());
+            m1.ajArticle(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
         }
         if (m_tache->isChecked())
         {
             QString date = m_calendrier->selectedDate().toString("dddd dd MMMM yyyy");
             if (!m_case_calendrier->isChecked())    //si pas d'échéance
                 date = "";
-            m1.ajTache(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex()).setTitre(m_titre->text().toStdString());
+            m1.ajTache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
         }
         if (m_media->isChecked())
         {
-            m1.ajMulti(m_id->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString()).setTitre(m_titre->text().toStdString());
+            m1.ajMulti(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
         }
 
         } catch (NotesException& a)

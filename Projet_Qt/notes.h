@@ -42,14 +42,18 @@ protected :
 
 public :
 
-     note (std::string i,std::string t,std::string txt): id(i),titre(t),texte(txt),oldNotes(0)
-     {
+     note (std::string i,std::string t,std::string txt,std::string crea="",std::string modif =""): id(i),titre(t),texte(txt),oldNotes(0)
+     { if  (crea=="") {
         this->Creation = formatTime();
         this->Modif = formatTime();
      }
+     else  {
+             this->Creation = crea;
+             this->Modif = modif;
+         }
+     }
 
-     note (std::string i,std::string t,std::string crea,std::string modif,std::string txt)
-         : id(i),titre(t),Creation(crea),Modif(modif),texte(txt),oldNotes(0) {}
+
 
     const std::string getID() const {return id;}
     const std::string getTitre() const {return titre;}
@@ -105,14 +109,13 @@ class NotesManager2 {
     note& getNote (const std::string& id, const std::string& date=""); // return the article with identificator id (create a new one if it not exists)
     note& getOldNote(const std::string& id);
 
-    note& ajArticle(const std::string& id,const std::string& txt);
+    note& ajArticle(const std::string& id,const std::string& titre,const std::string& txt);
     note& ajArticleLoad(const std::string& id,const std::string& titre,const std::string& crea,const std::string& modif,const std::string& txt);
 
-    note& ajMulti(const std::string& id,const std::string& description,const std::string& image);
+    note& ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image);
 
-    note& ajTache(const std::string& id, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat);
-    note& ajTacheLoad(const std::string& id,const std::string& titre,const std::string& crea,const std::string& modif,const std::string& txt,
-                      const unsigned int priorite, const std::string& echeance );
+    note& ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat);
+
 
 
     void SupprimerNote (note& toDelete);
@@ -203,10 +206,9 @@ class NotesManager2 {
 class article : public note {
 
 public :
-    article ( const std::string i, std::string t,std::string txt)
-        : note (i,t,txt){}
-    article ( const std::string i, std::string t,std::string crea,std::string modif ,std::string txt)
-        : note (i,t,crea,modif,txt){}
+
+    article ( const std::string i, std::string t,std::string txt, std::string crea="",std::string modif="" )
+        : note (i,txt,t,crea,modif){}
     article (const article& article_a_copier);
 
     virtual void afficher(std::ostream& f= std::cout) const;
@@ -224,8 +226,8 @@ protected :
     std::string chemin ;//à changer avec QT : chemin vers l'image ?
 
 public :
-    media ( const std::string i, std::string t,std::string d,std::string im)
-        : note (i,t,d),chemin(im){}
+    media ( const std::string i, std::string t,std::string txt, std::string im ,std::string crea="",std::string modif="" )
+        : note (i,t,txt,crea,modif),chemin(im){}
     media(const media& media_a_copier);
     const std::string getChemin() const {return chemin;}
     void setChemin(const std::string& text) {chemin = text;}
@@ -245,10 +247,9 @@ protected :
 
 public :
 
-    tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e,enum etat s)
-        : note (i,t,a), priorite(p), echeance (e),status(s) {}
-   // tache ( const std::string i, std::string t,std::string crea,std::string modif ,std::string txt, unsigned int p , std::string e)
-   //     : note (i,t,crea,modif,txt),priorite(p), echeance (e){}
+
+    tache ( const std::string i, std::string t,std::string txt, unsigned int p , std::string e,enum etat Status,std::string crea="",std::string modif="" )
+        : note (i,t,txt,crea,modif),priorite(p), echeance (e),status(Status){}
 
     tache(const tache &tache_a_copier); //constructeur recopie (sert pour gérer les versions)
 
