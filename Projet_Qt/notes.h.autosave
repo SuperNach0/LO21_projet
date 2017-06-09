@@ -247,8 +247,8 @@ public :
 
     tache (const std::string i, std::string t,std::string a, unsigned int p , std::string e,enum etat s)
         : note (i,t,a), priorite(p), echeance (e),status(s) {}
-    tache ( const std::string i, std::string t,std::string crea,std::string modif ,std::string txt, unsigned int p , std::string e)
-        : note (i,t,crea,modif,txt),priorite(p), echeance (e){}
+   // tache ( const std::string i, std::string t,std::string crea,std::string modif ,std::string txt, unsigned int p , std::string e)
+   //     : note (i,t,crea,modif,txt),priorite(p), echeance (e){}
 
     tache(const tache &tache_a_copier); //constructeur recopie (sert pour gérer les versions)
 
