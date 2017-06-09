@@ -334,7 +334,7 @@ void NotesManager2::load() {
                             status=xml.text().toString();
                             qDebug()<<"status="<<status<<"\n";
                         }
-                    }*/
+                    }
                     // ...and next...
                     xml.readNext();
                 }
@@ -345,7 +345,8 @@ void NotesManager2::load() {
               //                               ,modif.toStdString(),text.toStdString(),priorite,echeance.toStdString());
 
             }
-        }
+
+        */}
     }
     // Error handling.
     if(xml.hasError()) {
