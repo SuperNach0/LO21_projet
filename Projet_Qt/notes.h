@@ -109,12 +109,12 @@ class NotesManager2 {
     note& getNote (const std::string& id, const std::string& date=""); // return the article with identificator id (create a new one if it not exists)
     note& getOldNote(const std::string& id);
 
-    note& ajArticle(const std::string& id,const std::string& titre,const std::string& txt);
-    note& ajArticleLoad(const std::string& id,const std::string& titre,const std::string& crea,const std::string& modif,const std::string& txt);
+    note& ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea="",const std::string& modif="");
 
-    note& ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image);
 
-    note& ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat);
+    note& ajMulti(const std::string& id,const std::string& titre,const std::string& description,const std::string& image,const std::string& crea="",const std::string& modif="");
+
+    note& ajTache(const std::string& id,const std::string& titre, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea="",const std::string& modif="");
 
 
 
@@ -207,7 +207,7 @@ class article : public note {
 
 public :
 
-    article ( const std::string i, std::string t,std::string txt, std::string crea="",std::string modif="" )
+    article (  std::string i, std::string t,std::string txt, std::string crea="",std::string modif="")
         : note (i,txt,t,crea,modif){}
     article (const article& article_a_copier);
 

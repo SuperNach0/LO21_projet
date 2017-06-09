@@ -144,40 +144,29 @@ note& NotesManager2::getOldNote(const std::string& id)
 }
 
 
-note& NotesManager2::ajArticle(const std::string& id,const std::string& titre,const std::string& txt){
-    article* n=new article(id,titre,txt);
+note& NotesManager2::ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea,const std::string& modif){
+    article* n=new article(id,titre,txt,crea,modif);
     addNote (n);
     return *n;
 }
 
- note& NotesManager2::ajArticleLoad(const std::string& id,const std::string& titre,const std::string& crea,const std::string& modif,const std::string& txt){
-     article* n=new article(id,titre,crea,modif,txt);
-     addNote (n);
-     return *n;
- }
 
 
 
-note& NotesManager2::ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image){
+note& NotesManager2::ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image,const std::string& crea,const std::string& modif){
 
-    media* n=new media(id,text,description,image);
+    media* n=new media(id,text,description,image,crea,modif);
     addNote (n);
     return *n;
 }
 
-note& NotesManager2::ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat) {
-    tache* n=new tache(id,texte,action,priorite,echeance,stat);
+note& NotesManager2::ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea,const std::string& modif) {
+    tache* n=new tache(id,texte,action,priorite,echeance,stat,crea,modif);
     addNote (n);
     return *n;
 }
 
-/*note& NotesManager2::ajTacheLoad(const std::string& id,const std::string& titre,const std::string& crea,const std::string& modif,const std::string& txt,
-                  const unsigned int priorite, const std::string& echeance) {
-    tache* n=new tache(id,titre,crea,modif,txt,priorite,echeance);
-    addNote (n);
-    return *n;
 
-}*/
 
 
 void NotesManager2::SupprimerNote (note& toDelete)
@@ -265,11 +254,71 @@ void NotesManager2::load() {
                     xml.readNext();
                 }
                 qDebug()<<"ajout note "<<identificateur<<"\n";
-                NotesManager2::ajArticleLoad(identificateur.toStdString(),titre.toStdString(), creation.toStdString()
-                                             ,modif.toStdString(),text.toStdString());
+                NotesManager2::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
+
             }
 
-           /* else if (xml.name()=="tache"){// **********************************************TACHE
+          else  if(xml.name() == "media") {// µ**********************************************MEDIAA
+                qDebug()<<"new media\n";
+                QString identificateur;
+                QString titre;
+                QString creation;
+                QString modif;
+                QString text;
+                QString path;
+                QXmlStreamAttributes attributes = xml.attributes();
+                xml.readNext();
+                //We're going to loop over the things because the order might change.
+                //We'll continue the loop until we hit an EndElement named article.
+                while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "media")) {
+                    if(xml.tokenType() == QXmlStreamReader::StartElement) {
+                        // We've found identificteur.
+                        if(xml.name() == "id") {
+                            xml.readNext(); identificateur=xml.text().toString();
+                            qDebug()<<"id="<<identificateur<<"\n";
+                        }
+
+                        // We've found titre.
+                        if(xml.name() == "titre") {
+                            xml.readNext(); titre=xml.text().toString();
+                            qDebug()<<"titre="<<titre<<"\n";
+                        }
+                        // We've found creation
+                        if(xml.name() == "creation") {
+                            xml.readNext();
+                            creation=xml.text().toString();
+                            qDebug()<<"creation="<<creation<<"\n";
+                        }
+                        // We've found modif
+                        if(xml.name() == "modif") {
+                            xml.readNext();
+                            modif=xml.text().toString();
+                            qDebug()<<"modif="<<modif<<"\n";
+                        }
+                        // We've found text
+                        if(xml.name() == "texte") {
+                            xml.readNext();
+                            text=xml.text().toString();
+                            qDebug()<<"texte="<<text<<"\n";
+                        }
+                        // We've found path
+                        if(xml.name() == "chemin") {
+                            xml.readNext();
+                            path=xml.text().toString();
+                            qDebug()<<"chemin="<<path<<"\n";
+                        }
+                    }
+                    // ...and next...
+                    xml.readNext();
+                }
+                qDebug()<<"ajout note "<<identificateur<<"\n";
+                NotesManager2::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
+                                         creation.toStdString(),modif.toStdString());
+
+            }
+
+
+            else if (xml.name()=="tache"){// **********************************************TACHE
 
                 qDebug()<<"new tache\n";
                 QString identificateur;
@@ -280,6 +329,7 @@ void NotesManager2::load() {
                 int  priorite;
                 QString echeance;
                 QString status;
+                enum etat state;
 
                 QXmlStreamAttributes attributes = xml.attributes();
                 xml.readNext();
@@ -328,11 +378,17 @@ void NotesManager2::load() {
                             priorite=xml.text().toInt();
                             qDebug()<<"priorite="<<priorite<<"\n";
                         }
-                         We've found statu
+                         //We've found statu
                         if(xml.name() == "status") {
                             xml.readNext();
                             status=xml.text().toString();
                             qDebug()<<"status="<<status<<"\n";
+
+
+                            if (status=="En attente") state=en_attente;
+                            else if (status=="En cours") state=en_cours;
+                            else if (status=="Terminee") state=terminee;
+
                         }
                     }
                     // ...and next...
@@ -341,12 +397,13 @@ void NotesManager2::load() {
                 qDebug()<<"ajout note "<<identificateur<<"\n";
 
 
-               // NotesManager2::ajTacheLoad(identificateur.toStdString(),titre.toStdString(), creation.toStdString()
-              //                               ,modif.toStdString(),text.toStdString(),priorite,echeance.toStdString());
+                NotesManager2::ajTache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
+                                       priorite,echeance.toStdString(),state,
+                                       creation.toStdString(),modif.toStdString());
 
             }
 
-        */}
+        }
     }
     // Error handling.
     if(xml.hasError()) {
