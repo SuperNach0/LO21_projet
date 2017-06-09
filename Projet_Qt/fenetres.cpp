@@ -22,13 +22,17 @@ FenPrincipale::FenPrincipale()
         QAction *actionNewNote = new QAction("&Nouvelle Note",this);
             actionNewNote->setShortcut(QKeySequence("Ctrl+N"));
             connect(actionNewNote,SIGNAL(triggered(bool)),this,SLOT(popup()));
-        QAction *actionNewLink = new QAction("Nouvelle Relation",this);
+        QAction *actionNewLink = new QAction("&Nouvelle Relation",this);
             actionNewLink->setShortcut(QKeySequence("Ctrl+R"));
             connect(actionNewLink,SIGNAL(triggered(bool)),this,SLOT(popupCreationRelation()));
+        QAction *actionLoadXml = new QAction("&Charger un xml",this);
+            actionLoadXml->setShortcut(QKeySequence("Ctrl+L"));
+            connect(actionLoadXml,SIGNAL(triggered(bool)),this,SLOT(load_xml()));
 
         menuFichier->addAction(actionQuitter);
         menuFichier->addAction(actionNewNote);
         menuFichier->addAction(actionNewLink);
+        menuFichier->addAction(actionLoadXml);
 
 
     //ajout d'un 2e menu
@@ -70,6 +74,7 @@ FenPrincipale::FenPrincipale()
     creation_docks();
     setCentralWidget(zoneCentrale);
 
+    this->affichage_notes_relations();
 
 }
 
@@ -279,6 +284,8 @@ void fenetre_creation_relation::save_relation()
 
     //on ajoute au manager la relation créée
     m.addRelation(*nouvelle_relation);
+
+    delete this; //on force la destruction pour l'affichage des relations
 }
 
 void fenetre_creation_relation::save_couple()
@@ -312,6 +319,14 @@ void FenPrincipale::creation_docks()
     addDockWidget(Qt::LeftDockWidgetArea, m_dock_affichage_notes);
 
     ///2e dock
+    m_dock_affichage_relations = new QDockWidget("Relations",this);
+    m_dock_affichage_relations->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+
+    m_listeRelatons = new QListWidget(m_dock_affichage_relations);
+
+
+    m_dock_affichage_relations->setWidget(m_listeRelatons);
+    addDockWidget(Qt::RightDockWidgetArea, m_dock_affichage_relations);
 /*
     dock = new QDockWidget(tr("Paragraphs"), this);
     QListWidget* paragraphsList = new QListWidget(dock);
@@ -365,14 +380,30 @@ void FenPrincipale::creation_tabs()
 ///ATTENTION, à chaque ajout de note, le dock de gauche supprime la liste et la réaffiche pour l'actualiser avec les nouveaux,
 /// ça va peut être causer des bugs plus tard
 /// mais c'est la seule solution que j'ai trouvé pour l'instant
-void FenPrincipale::affichage_notes()
+void FenPrincipale::affichage_notes_relations()
 {
     NotesManager2& m1 = NotesManager2::getManager();
     m_listeNotes->clear();
     for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
     {
         m_listeNotes->addItem(QString::fromStdString(it.current().getID()));
-            //it.current().afficher();
+    }
+    RelationManager& m2 = RelationManager::getManager();
+    m_listeRelatons->clear();
+    for (unsigned int i=0;i<m2.relations.size();i++)
+    {
+        m_listeRelatons->addItem(QString::fromStdString(m2.relations[i]->getTitre()));
+
+        /*
+        std::cout << "titre de la relation : " << m2.relations[i]->getTitre() << std::endl;
+        std::cout << "Description de la relation : " << m2.relations[i]->getDescription() << std::endl;
+
+        std::cout << "Couple " << i <<":  "<< std::endl;
+        for (unsigned int j=0;j<m2.relations[i]->getCouples().size();j++)
+        {
+            std::cout << "Label premiere note: : " << m2.relations[i]->getCouples()[j]->getPremiere().getID() << std::endl;
+        }*/
+
     }
 }
 
@@ -575,14 +606,14 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
 void FenPrincipale :: popup()   //affichage de la fenetre de création de note
 {
     m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
-    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
+    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes_relations())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
     m_fenetre_creation->show();
 }
 
 void FenPrincipale::popupAnciennesVersions()
 {
     m_fenetre_ancienne_versions = new fenetre_anciennes_versions(this);
-    connect(m_fenetre_ancienne_versions,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes()));
+    connect(m_fenetre_ancienne_versions,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes_relations()));
     m_fenetre_ancienne_versions->show();
 }
 
@@ -590,4 +621,15 @@ void FenPrincipale :: popupCreationRelation()
 {
     m_fenetre_creation_relation = new fenetre_creation_relation(this);
     m_fenetre_creation_relation->show();
+    connect(m_fenetre_creation_relation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes_relations())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
+
+}
+
+void FenPrincipale :: load_xml()
+{
+    NotesManager2 &m1 = NotesManager2::getManager();
+    QString filename = QFileDialog::getOpenFileName();
+    m1.setFilename(filename);
+    m1.load();
+    this->affichage_notes_relations();
 }

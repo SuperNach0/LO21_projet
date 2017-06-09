@@ -29,6 +29,10 @@
 *         il faudrait que tu mettes une actualisation de l'affichage des notes dès le chargment de la fenetre
 *         et pas que a la création sionon les anciennes ne s'afficheront pas !
 *          ATTENTION BUG : load sur un XML vide il kiffe pas
+*
+* 09/06 : bouton OK pour load (fichier..charger un xml)
+*       : actualisation des notes dès le chargement de la fenetre c bon
+*       : visualisation de la liste des relations c'est bon, manque affichage de chaque relation
 */
 
 
@@ -46,10 +50,6 @@ int main(int argc,  char *argv[]){
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
 
-    QString filename = QFileDialog::getOpenFileName();
-
-    m1.setFilename(filename);
-    m1.load();
 
     FenPrincipale fenetre;
 
@@ -179,16 +179,13 @@ int main(int argc,  char *argv[]){
                 std::cout << "titre de la relation : " << m2.relations[i]->getTitre() << std::endl;
                 std::cout << "Description de la relation : " << m2.relations[i]->getDescription() << std::endl;
 
-                std::cout << "Couple n°" << i <<":  "<< std::endl;
+                std::cout << "Couple " << i <<":  "<< std::endl;
                 for (unsigned int j=0;j<m2.relations[i]->getCouples().size();j++)
                 {
                     std::cout << "Label premiere note: : " << m2.relations[i]->getCouples()[j]->getPremiere().getID() << std::endl;
                 }
 
             }
-
-
-
 
 
         }

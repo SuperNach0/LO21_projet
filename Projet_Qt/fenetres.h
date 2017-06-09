@@ -26,6 +26,8 @@ protected:
 
     QDockWidget *m_dock_affichage_notes;
         QListWidget* m_listeNotes;
+    QDockWidget* m_dock_affichage_relations;
+        QListWidget* m_listeRelatons;
 
     QWidget* m_fenetre_creation; //attribut vers la fenetre de création de note
     fenetre_anciennes_versions* m_fenetre_ancienne_versions;
@@ -57,11 +59,12 @@ public slots:
     void popup();
     void popupAnciennesVersions();
     void popupCreationRelation();
-    void affichage_notes();
+    void affichage_notes_relations();
     void affichage_single_note(QString id, QString date="");
     void menuContextuel(const QPoint&);
     void supprimerNote();
     void editerNote();
+    void load_xml();
 
 
 };
