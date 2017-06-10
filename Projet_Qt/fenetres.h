@@ -49,6 +49,9 @@ protected:
                 QLabel* m_chemin_note;
                 QLabel* m_priorite_note;
         QWidget* m_page_affichage_relations;
+            QLabel* m_titre_relation;
+            QLabel* m_description_relation;
+            QListWidget* m_liste_couples;
 
 public:
 
@@ -61,6 +64,7 @@ public slots:
     void popupCreationRelation();
     void affichage_notes_relations();
     void affichage_single_note(QString id, QString date="");
+    void affichage_single_relation(QString titre);
     void menuContextuel(const QPoint&);
     void supprimerNote();
     void editerNote();
@@ -107,20 +111,13 @@ protected:
 
 };
 
+
+/* ********** FENETRE DE CREATION DE RELATION ********* */
 class fenetre_creation_relation : public QWidget
 {
     Q_OBJECT
-
-public:
-    fenetre_creation_relation(QWidget *parent);
-
-public slots:
-    void affichage_couples();
-    void save_couple();
-    void save_relation();
-
 private:
-    bool is_oriented;
+
     QWidget* m_parent;
     QListWidget* m_notes_gauche;
     QListWidget* m_notes_droite;
@@ -131,7 +128,18 @@ private:
     QTextEdit* m_description_relation;
     QGridLayout* m_layout;
 
-    std::vector<Couple> couples;
+    std::vector<Couple*> m_couples;
+
+public:
+    fenetre_creation_relation(QWidget *parent);
+    std::vector<Couple*> getCouples() {return m_couples;}
+
+public slots:
+    void affichage_couples();
+    void save_couple();
+    void save_relation();
+
+
 
 };
 

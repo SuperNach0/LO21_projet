@@ -22,14 +22,15 @@ RelationManager::~RelationManager(){
 RelationManager::Handler RelationManager::handler=Handler();
 
 
-Relation& RelationManager::getRelation(const std::string& titre, const std::string& description)
+Relation& RelationManager::getRelation(const std::string& titre)
 {
     unsigned int i=0;
-    while (i<relations.size() && relations[i]->getTitre() != titre && relations[i]->getDescription() != description)
+    while (i<relations.size() && relations[i]->getTitre() != titre)
     {
         i++;
     }
     return *relations[i];
+    throw NotesException("La relation n'existe pas\n");
 
 }
 

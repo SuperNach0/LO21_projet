@@ -10,12 +10,14 @@ private:
     note* premiere;
     note* seconde;
     std::string label;
+    bool orientation;
 public:
 
-    Couple(note& note1, note& note2, std::string lab):premiere(&note1),seconde(&note2),label(lab){}
+    Couple(note& note1, note& note2, std::string lab, bool orientation):premiere(&note1),seconde(&note2),label(lab),orientation(orientation){}
     const note& getPremiere() const {return *premiere;}
     const note& getSeconde() const {return *seconde;}
     const std::string getLabel() const {return label;}
+    bool isOriented() const {return orientation;}
 
 };
 
@@ -29,8 +31,8 @@ private:
     std::string description;
 
 public:
-    Relation(const std::string& tit, const std::string& desc) : titre(tit),description(desc),couples(0){}
-    addCouple(Couple& couple){couples.push_back(&couple);}
+    Relation(const std::string& tit, const std::string& desc) : couples(0),titre(tit),description(desc){}
+    void addCouple(Couple& couple){couples.push_back(&couple);}
 
 
     std::vector<Couple*>& getCouples(){return couples;}
@@ -42,8 +44,7 @@ public:
 
 class RelationManager {
 
- //private : A CHANGEEEER C JUSTE POUR TEST
-public:
+private:
     std::vector<Relation*> relations;
 
     struct Handler {
@@ -59,8 +60,9 @@ public:
 
  public:
 
-    Relation& getRelation (const std::string& titre, const std::string& description);
+    Relation& getRelation (const std::string& titre);
     void addRelation (Relation &relation);
+    std::vector<Relation*> getRelations() {return relations;}
     static RelationManager& getManager();
     static void freeManager();
 

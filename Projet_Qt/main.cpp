@@ -33,6 +33,10 @@
 * 09/06 : bouton OK pour load (fichier..charger un xml)
 *       : actualisation des notes dès le chargement de la fenetre c bon
 *       : visualisation de la liste des relations c'est bon, manque affichage de chaque relation
+*
+* 10/06 : Affichage de chaque relation OK
+*       : un truc qui serait cool à faire : utiliser un design pattern pour pouvoir recycler le manager et/ou l'itérateur de NotesManager
+*       : mais du coup il faudrait changer NotesManager et utiliser un vector, ou changer RelationManager et y mettre un tableau...
 */
 
 
@@ -173,7 +177,8 @@ int main(int argc,  char *argv[]){
             b1.addCouple(a);
             m2.addRelation(b);
             m2.addRelation(b1);
-            */
+
+
             for (unsigned int i=0;i<m2.relations.size();i++)
             {
                 std::cout << "titre de la relation : " << m2.relations[i]->getTitre() << std::endl;
@@ -186,7 +191,7 @@ int main(int argc,  char *argv[]){
                 }
 
             }
-
+            */
 
         }
 

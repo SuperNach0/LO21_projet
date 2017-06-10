@@ -8,7 +8,7 @@ void FenPrincipale::editerNote()
     note& note_a_editer = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
 
     m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation
-    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
+    connect(m_fenetre_creation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes_relations())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
     m_fenetre_creation->show();
     fenetre_creation_note* fenetre = static_cast<fenetre_creation_note*>(m_fenetre_creation); //conversion de QWidget* vers fenetre_creation_note*
     fenetre->m_id->setDisabled(true); //on ne peut pas changer d'ID
@@ -45,7 +45,6 @@ void FenPrincipale::editerNote()
     fenetre->m_titre->setText(QString::fromStdString(note_a_editer.getTitre()));
     fenetre->m_texte->setText(QString::fromStdString(note_a_editer.getTexte()));
     fenetre->m_date_modif.setDate(QDate::currentDate());
-
 
     fenetre->m_article->setDisabled(true);
     fenetre->m_tache->setDisabled(true);
