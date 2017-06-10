@@ -184,7 +184,7 @@ class NotesManager2 {
 
           }
 
-         /*const*/ note & current () const {return ** currentA;}
+          note & current () const {return ** currentA;}
 
      };
 

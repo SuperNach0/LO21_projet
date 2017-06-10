@@ -2,7 +2,7 @@
 #include "notes.h"
 #include "versions.h"
 #include "relations.h"
-
+#include "manager.h"
 
 fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(0)
 {

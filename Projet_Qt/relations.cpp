@@ -1,5 +1,5 @@
 #include "relations.h"
-
+#include "manager.h"
 void RelationManager::addRelation(Relation& relation)
 {
     relations.push_back(&relation);

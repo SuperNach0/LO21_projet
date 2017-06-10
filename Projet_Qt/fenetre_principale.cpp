@@ -2,7 +2,7 @@
 #include "notes.h"
 #include "versions.h"
 #include "relations.h"
-
+#include "manager.h"
 
 
 

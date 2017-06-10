@@ -12,10 +12,12 @@ SOURCES += \
     relations.cpp \
     fenetre_creation_note.cpp \
     fenetre_creation_relation.cpp \
-    fenetre_principale.cpp
+    fenetre_principale.cpp \
+    manager.cpp
 
 HEADERS += \
     notes.h \
     fenetres.h \
     versions.h \
-    relations.h
+    relations.h \
+    manager.h

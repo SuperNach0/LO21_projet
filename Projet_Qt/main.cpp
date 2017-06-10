@@ -3,7 +3,7 @@
 #include "notes.h"
 #include "fenetres.h"
 #include "relations.h"
-
+#include "manager.h"
 
 /*
 

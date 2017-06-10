@@ -1,7 +1,7 @@
 #include "fenetres.h"
 #include "notes.h"
 #include "versions.h"
-
+#include "manager.h"
 void FenPrincipale::editerNote()
 {
     NotesManager2& m1 = NotesManager2::getManager();

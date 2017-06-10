@@ -2,6 +2,7 @@
 #include "notes.h"
 #include "versions.h"
 #include "relations.h"
+#include "manager.h"
 
 
 fenetre_creation_note::fenetre_creation_note() : QWidget()
