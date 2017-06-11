@@ -81,6 +81,55 @@ public :
 };
 /********************************************************/
 
+
+class NotesManager2
+{
+private :
+   std::vector<note*> notes;
+
+   mutable  QString filename;
+
+   struct Handler {
+            NotesManager2* instance; // pointeur sur l'unique instance
+            Handler():instance(nullptr){}
+           ~Handler() { delete instance; }
+       };
+   static Handler handler;
+   NotesManager2();
+   ~NotesManager2();
+   NotesManager2(const NotesManager2& m);
+   NotesManager2& operator=(const NotesManager2& m);
+
+
+   //void addNote (const QString& i, const QString& ti, const QString& te);//3
+
+
+
+
+public:
+
+   note& getNote (const std::string& id, const std::string& date="");
+   note& getOldNote(const std::string& id);
+   void addNote (note& note_a_ajouter);
+   //faudrait se débrou
+   const std::vector<note*> getNotes() const {return notes;}
+
+   void SupprimerNote (note& toDelete);
+   QString getFilename() const { return filename; }
+   void setFilename(const QString& f) { filename=f; }
+   void load(); // load notes from file filename
+   void save(); // save notes in file filename
+
+
+   static NotesManager2& getManager();
+   static void freeManager();
+
+
+
+};
+
+//Vieux manager avec tableau
+/*
 class NotesManager2 {
  private :
     note** Note;
@@ -105,15 +154,10 @@ class NotesManager2 {
  public:
 
     unsigned int getnbNote() const {return nbNote;}
-
     note& getNote (const std::string& id, const std::string& date=""); // return the article with identificator id (create a new one if it not exists)
     note& getOldNote(const std::string& id);
-
     note& ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea="",const std::string& modif="");
-
-
     note& ajMulti(const std::string& id,const std::string& titre,const std::string& description,const std::string& image,const std::string& crea="",const std::string& modif="");
-
     note& ajTache(const std::string& id,const std::string& titre, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea="",const std::string& modif="");
 
 
@@ -198,7 +242,7 @@ class NotesManager2 {
 
 
 };
-
+*/
 
 //******SOUS CLASSE ARTICLE /  note avec un texte ******//
 
@@ -208,7 +252,7 @@ class article : public note {
 public :
 
     article (  std::string i, std::string t,std::string txt, std::string crea="",std::string modif="")
-        : note (i,txt,t,crea,modif){}
+        : note (i,t,txt,crea,modif){}
     article (const article& article_a_copier);
 
     virtual void afficher(std::ostream& f= std::cout) const;

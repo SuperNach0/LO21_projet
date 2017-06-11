@@ -65,6 +65,7 @@ private:
     std::vector<Relation*> getRelations() {return relations;}
     static RelationManager& getManager();
     static void freeManager();
+    bool checkReference(note& current) const;
 
     //const iterator
 /*

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notes>
+    <article>
+        <id>1</id>
+        <creation>11-06-2017</creation>
+        <lastmodif>11-06-2017</lastmodif>
+        <title>Article</title>
+        <text>test article ef{1 tyhjkj    ef}</text>
+    </article>
+    <article>
+        <id>2</id>
+        <creation>11-06-2017</creation>
+        <lastmodif>11-06-2017</lastmodif>
+        <title>Audio</title>
+        <text>test audioqsd</text>
+    </article>
+    <task>
+        <id>15</id>
+        <creation></creation>
+        <lastmodif></lastmodif>
+        <title>Task test</title>
+        <actions></actions>
+        <prio>10</prio>
+        <deadline></deadline>
+        <status>subj</status>
+    </task>
+    <audio>
+        <id>4</id>
+        <creation>11-06-2017</creation>
+        <lastmodif>11-06-2017</lastmodif>
+        <title>t</title>
+        <desc>Audio ef{1}, ef{15}, ef{4}</desc>
+        <file>subj</file>
+    </audio>
+    <article>
+        <id>41</id>
+        <creation>11-06-2017</creation>
+        <lastmodif>11-06-2017</lastmodif>
+        <title>test</title>
+        <text>blabla</text>
+    </article>
+    <article>
+        <id>8467</id>
+        <creation>11-06-2017</creation>
+        <lastmodif>11-06-2017</lastmodif>
+        <title></title>
+        <text></text>
+    </article>
+    <article>
+        <id>6334</id>
+        <creation>11-06-2017</creation>
+        <lastmodif>11-06-2017</lastmodif>
+        <title>test de ref \ref{41}</title>
+        <text>oklm la ref ? \ref{41} sddsdsd</text>
+    </article>
+</notes>

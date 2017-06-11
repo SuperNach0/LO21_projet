@@ -31,22 +31,6 @@ std::string etatToString(enum etat s)
 
 /*********************fonctions de note************/
 
-/*
-std::ostream& operator<<(std::ostream& f, const note& n)
-{
-    f<<"id: "<<n.getID() << std::endl;
-    f<<"titre:"<<n.getTitre() << std::endl;
-    f<<"date creation:"<<n.getCreation() << std::endl;
-    f <<"date modif:"<< n.getModif()<<std::endl;
-    return f;
-}
-
-std::ostream& operator<<(std::ostream& f, article const& article_a_afficher)
-{
-    f << "cote la mif\n";
-    return f;
-}
-*/
 void note :: afficher(std::ostream& f ) const {
     f<<"id: "<<getID() << std::endl;
     f<<"titre:"<<getTitre() << std::endl;
@@ -75,34 +59,34 @@ return temps;
 //**********************
 
 ////**************************MANAGER*********/
-///
-void NotesManager2::addNote(note* n){
-for(unsigned int i=0; i<nbNote; i++){
-    if (Note[i]->getID()==n->getID()) throw NotesException("error, creation of an already existent note");
+
+
+void NotesManager2::addNote(note &note_a_ajouter)
+{
+    for (unsigned int i = 0; i < notes.size(); i++)
+    {
+                                std::cout << "avN\n";
+        if (notes[i]->getID()==note_a_ajouter.getID())
+            throw NotesException("Erreur, note deja existante\n");
+                                std::cout << "APN\n";
+    }
+
+    notes.push_back(&note_a_ajouter);
 }
-if (nbNote==nbMaxNote){
-    note** newNotes= new note*[nbMaxNote+5];
-    for(unsigned int i=0; i<nbNote; i++) newNotes[i]=Note[i];
-    note** oldNotes=Note;
-    Note=newNotes;
-    nbMaxNote+=5;
-    if (oldNotes) delete[] oldNotes;
-}
-Note[nbNote++]=n;
-}
 
 
-
-
-NotesManager2::NotesManager2():Note (nullptr),nbNote(0),nbMaxNote(0),filename(""){
+NotesManager2::NotesManager2():notes(0),filename(""){
 
 } // constructeur de manager
 
 
 NotesManager2::~NotesManager2(){
 if (filename!="") save();               // SAVE PAS ENCORE DEFINIE car SAVE en Qt
-for(unsigned int i=0; i<nbNote; i++) delete Note[i];
-delete[] Note;
+for (unsigned int i = 0; i < notes.size(); i++)
+{
+    delete notes[i];
+}
+notes.clear();
 std::cout<<"le manager est detruit"<<std::endl;
 }
 
@@ -111,24 +95,22 @@ NotesManager2::Handler NotesManager2::handler=Handler();
 
 
 note& NotesManager2::getNote(const std::string& id, const std::string& date){
-// si l'article existe déjà, on en renvoie une référence
-for(unsigned int i=0; i<nbNote; i++){
-    if (Note[i]->getID()==id && date=="")
-        return *Note[i];
-    else if (Note[i]->getID()==id && date!="")
-    {
-        unsigned int j =0;
-        while (j<Note[i]->getOldNotes().size() && Note[i]->getOldNotes()[j]->getModif() != date )
-            j++;
-        return *Note[i]->getOldNotes()[j];
+    // si l'article existe déjà, on en renvoie une référence, sinon on lance une exception
+    for(unsigned int i=0; i<notes.size(); i++){
+        if (notes[i]->getID()==id && date=="")
+            return *notes[i];
+        else if (notes[i]->getID()==id && date!="")
+        {
+            unsigned int j =0;
+            while (j<notes[i]->getOldNotes().size() && notes[i]->getOldNotes()[j]->getModif() != date )
+                j++;
+            return *notes[i]->getOldNotes()[j];
+        }
     }
+
+    throw NotesException("La note n'existe pas\n");
 }
 
-
-article* vide = new article("","","",""); ///A CORRIGER SI POSSIBLE
-return *vide;
-
-}
 
 note& NotesManager2::getOldNote(const std::string& id)
 {
@@ -141,45 +123,16 @@ throw NotesException("Version de note non trouvee\n");
 }
 
 
-note& NotesManager2::ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea,const std::string& modif){
-article* n=new article(id,titre,txt,crea,modif);
-addNote (n);
-return *n;
-}
-
-
-
-
-note& NotesManager2::ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image,const std::string& crea,const std::string& modif){
-
-media* n=new media(id,text,description,image,crea,modif);
-addNote (n);
-return *n;
-}
-
-note& NotesManager2::ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea,const std::string& modif) {
-tache* n=new tache(id,texte,action,priorite,echeance,stat,crea,modif);
-addNote (n);
-return *n;
-}
-
-
-
-
 void NotesManager2::SupprimerNote (note& toDelete)
 {
-int i=0;
-while (Note[i]->getID() != toDelete.getID())
-{
-    i++;
-}
-
-for (i;i<nbNote;i++)
-{
-    Note[i]=Note[i+1];
-}
-nbNote--;
-delete &toDelete;
+    unsigned int i=0;
+    while (notes[i]->getID() != toDelete.getID())
+    {
+        i++;
+    }
+    notes.erase(notes.begin()+i);
+    toDelete.getOldNotes().clear();
+    delete &toDelete;
 }
 
 
@@ -251,8 +204,9 @@ while(!xml.atEnd() && !xml.hasError()) {
                 xml.readNext();
             }
             qDebug()<<"ajout note "<<identificateur<<"\n";
-            NotesManager2::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
-
+            article* nouveau = new article(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
+            //NotesManager2::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
+            NotesManager2::addNote(*nouveau);
         }
 
       else  if(xml.name() == "media") {// µ**********************************************MEDIAA
@@ -309,8 +263,12 @@ while(!xml.atEnd() && !xml.hasError()) {
                 xml.readNext();
             }
             qDebug()<<"ajout note "<<identificateur<<"\n";
-            NotesManager2::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
-                                     creation.toStdString(),modif.toStdString());
+            media* nouveau = new media(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
+                                       creation.toStdString(),modif.toStdString());
+            NotesManager2::addNote(*nouveau);
+
+           // NotesManager2::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
+             //                        creation.toStdString(),modif.toStdString());
 
         }
 
@@ -393,11 +351,17 @@ while(!xml.atEnd() && !xml.hasError()) {
             }
             qDebug()<<"ajout note "<<identificateur<<"\n";
 
+            tache* nouveau = new tache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
+                                       priorite,echeance.toStdString(),state,
+                                       creation.toStdString(),modif.toStdString());
+            NotesManager2::addNote(*nouveau);
 
+            /*
             NotesManager2::ajTache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
                                    priorite,echeance.toStdString(),state,
                                    creation.toStdString(),modif.toStdString());
 
+                                   */
         }
 
     }
@@ -414,7 +378,7 @@ qDebug()<<"fin load\n";
 
 
 
-void NotesManager2::save() const {
+void NotesManager2::save(){
 QFile newfile(filename);
 if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text))
     throw NotesException("erreur sauvegarde notes : ouverture fichier xml");
@@ -422,46 +386,43 @@ QXmlStreamWriter stream(&newfile);
 stream.setAutoFormatting(true);
 stream.writeStartDocument();
 stream.writeStartElement("notes");
-for(NotesManager2::ConstIterator it= this->getIterator(); !it.isDone(); it.next())
+
+for (unsigned int i = 0; i<getNotes().size();i++)
 {
-        std::cout<<typeid(it.current()).name()<<std::endl;
-    if (typeid(it.current())==typeid(article)) {// ATRICLE
-
+    if (typeid(*getNotes()[i])==typeid(article)) {// ATRICLE
     stream.writeStartElement("article");
-    stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
-    stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
-     stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
-      stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
-      stream.writeTextElement("texte",QString::fromStdString(it.current().getTexte()));
-
-
+    stream.writeTextElement("id",QString::fromStdString((getNotes()[i])->getID()));
+    stream.writeTextElement("titre",QString::fromStdString((getNotes()[i])->getTitre()));
+     stream.writeTextElement("creation",QString::fromStdString((getNotes()[i])->getCreation()));
+      stream.writeTextElement("modif",QString::fromStdString((getNotes()[i])->getModif()));
+      stream.writeTextElement("texte",QString::fromStdString((getNotes()[i])->getTexte()));
 
 
     stream.writeEndElement();
     }
 
-    else if (typeid(it.current())==typeid(media)) {
+    else if (typeid(*getNotes()[i])==typeid(media)) {
         stream.writeStartElement("media");
-        stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
-        stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
-         stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
-          stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
-          stream.writeTextElement("texte",QString::fromStdString(it.current().getTexte()));
-      const media& med = static_cast<const media&>(it.current());
+        stream.writeTextElement("id",QString::fromStdString((getNotes()[i])->getID()));
+        stream.writeTextElement("titre",QString::fromStdString((getNotes()[i])->getTitre()));
+         stream.writeTextElement("creation",QString::fromStdString((getNotes()[i])->getCreation()));
+          stream.writeTextElement("modif",QString::fromStdString((getNotes()[i])->getModif()));
+          stream.writeTextElement("texte",QString::fromStdString((getNotes()[i])->getTexte()));
+      const media& med = static_cast<const media&>(*getNotes()[i]);
       stream.writeTextElement("chemin",QString::fromStdString(med.getChemin()));
 
 
         stream.writeEndElement();
     }
 
-     else if (typeid(it.current())==typeid(tache)) {
+     else if (typeid(*getNotes()[i])==typeid(tache)) {
         stream.writeStartElement("tache");
-        stream.writeTextElement("id",QString::fromStdString(it.current().getID()));
-        stream.writeTextElement("titre",QString::fromStdString(it.current().getTitre()));
-         stream.writeTextElement("creation",QString::fromStdString(it.current().getCreation()));
-         stream.writeTextElement("modif",QString::fromStdString(it.current().getModif()));
-       stream.writeTextElement("texte",QString::fromStdString(it.current().getTexte()));
-       const tache& task = static_cast<const tache&>(it.current());
+        stream.writeTextElement("id",QString::fromStdString((getNotes()[i])->getID()));
+        stream.writeTextElement("titre",QString::fromStdString((getNotes()[i])->getTitre()));
+         stream.writeTextElement("creation",QString::fromStdString((getNotes()[i])->getCreation()));
+         stream.writeTextElement("modif",QString::fromStdString((getNotes()[i])->getModif()));
+       stream.writeTextElement("texte",QString::fromStdString((getNotes()[i])->getTexte()));
+       const tache& task = static_cast<const tache&>(*getNotes()[i]);
        stream.writeTextElement("echeance",QString::fromStdString(task.getecheance()));
        stream.writeTextElement("priorite",QString::number(task.getPriorite()));
         stream.writeTextElement("status",QString::fromStdString(etatToString(task.getEtat())));
@@ -491,13 +452,6 @@ handler.instance=nullptr;
 
 
 
-
-
-
-
-
-
-
 void note::setModif () {
     this->Modif = formatTime();
 }
@@ -518,14 +472,6 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
 
 }
 
-/*
-   void article ::  MiseAJour () {
-     std::cout <<"mettez a jour le texte "<<std::endl;
-     std::cin>> texte;
-     setModif();
-
- }
-*/
 
 //************************fonction de media****************
 

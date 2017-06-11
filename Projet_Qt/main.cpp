@@ -37,6 +37,9 @@
 * 10/06 : Affichage de chaque relation OK
 *       : un truc qui serait cool à faire : utiliser un design pattern pour pouvoir recycler le manager et/ou l'itérateur de NotesManager
 *       : mais du coup il faudrait changer NotesManager et utiliser un vector, ou changer RelationManager et y mettre un tableau...
+*
+* 11/06 : Correction de l'ajout d'une relation avec un titre déjà utilisé
+*       : Pareil pour une note, maintenant plus d'article vide créé dans le getNote si la note n'existe pas
 */
 
 
@@ -65,7 +68,7 @@ int main(int argc,  char *argv[]){
     int menu =99; int j=0;
     while (menu!=10) {
 
-        std::cout << "  tu as actuellement "<<m1.getnbNote()<<" notes ; que voulez vous faire  ?"<<std::endl<<
+        std::cout << "  tu as actuellement "<<m1.getNotes().size() <<" notes ; que voulez vous faire  ?"<<std::endl<<
                      "1- ajouter une note"<<std::endl<<
                      "2- afficher les notes "<<std::endl<<
                      "3- rechercher une note"<<std::endl<<
@@ -97,14 +100,14 @@ int main(int argc,  char *argv[]){
                         std::cout<<" le texte de larticle ?"<<std::endl;
                         std::cin>>txt;
 
-                        m1.ajArticle(id,t,txt);
+           //             m1.ajArticle(id,t,txt);
                     }
                     if (j==2){ std::string description;std::string image;
                         std::cout<<" la description ?"<<std::endl;
                         std::cin>> description;
                         std::cout<<" la image ?"<<std::endl;
                         std::cin>> image;
-                        m1.ajMulti(id,t,description,image);
+       //                 m1.ajMulti(id,t,description,image);
                     }
                     if (j==3){ std::string action ;  unsigned int priorite;  std::string echeance;
 
@@ -115,7 +118,7 @@ int main(int argc,  char *argv[]){
                         std::cout<<" echeance?"<<std::endl;
                         std::cin>> echeance;
 
-                        m1.ajTache(id,t,action,priorite,echeance,en_attente);
+           //             m1.ajTache(id,t,action,priorite,echeance,en_attente);
 
 
                     }break;
@@ -127,22 +130,24 @@ int main(int argc,  char *argv[]){
 
 
         case 2 :{
+            /*
             for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
             {
                     it.current().afficher();
             }
-            break;
+            break;*/
                 }
 
         case 3 :{
             std::string tf;
             std::cout<<" titre/ partie du titre a trouver ?"<<std::endl;
             std::cin>> tf;
+            /*
             for(NotesManager2::Searchiterator it= m1.getSearchIterator(tf); !it.isDone(); it.
                     next())
                     {
                         it.current().afficher();
-                    } break;
+                    } break;*/
                 }
 
         case 4 :{
@@ -165,33 +170,14 @@ int main(int argc,  char *argv[]){
 
          case 7 :
         {
-            std::cout << "ESSAIS CYRIL Relations DE NOTES\n";
-            /*
-            Couple a(m1.getNote("id"),m1.getNote("id2"),"tamer");
-            Couple a1(m1.getNote("id"),m1.getNote("id3"),"OKKK");
-            Relation b("titre","desc");
-            Relation b1("titre2","desc2");
-            b.addCouple(a);
-            b.addCouple(a);
-            b.addCouple(a1);
-            b1.addCouple(a);
-            m2.addRelation(b);
-            m2.addRelation(b1);
+            std::cout << "ESSAIS CYRIL Manager note avec vector\n";
+            article* nouv = new article("id","titre","txt");
+            article* nouv2 = new article("id2","titr2222e","txt");
+            m1.addNote(*nouv);
+            m1.addNote(*nouv2);
+            std::cout << "titre = " << m1.getNote("id2").getTitre();
+            std::cout << "txt = " << m1.getNote("id2").getTexte();
 
-
-            for (unsigned int i=0;i<m2.relations.size();i++)
-            {
-                std::cout << "titre de la relation : " << m2.relations[i]->getTitre() << std::endl;
-                std::cout << "Description de la relation : " << m2.relations[i]->getDescription() << std::endl;
-
-                std::cout << "Couple " << i <<":  "<< std::endl;
-                for (unsigned int j=0;j<m2.relations[i]->getCouples().size();j++)
-                {
-                    std::cout << "Label premiere note: : " << m2.relations[i]->getCouples()[j]->getPremiere().getID() << std::endl;
-                }
-
-            }
-            */
 
         }
 

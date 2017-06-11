@@ -3,22 +3,15 @@
     <article>
         <id>Entre l'id poulet</id>
         <titre>Titre ici</titre>
-        <creation></creation>
-        <modif>2017-06-09 15:30:44</modif>
+        <creation>2017-06-11 19:42:05</creation>
+        <modif>2017-06-11 19:42:05</modif>
         <texte>texte/description/action ici</texte>
     </article>
     <article>
-        <id>Entre l'id pouletsqsqs</id>
+        <id>Entre l'id poulet222</id>
         <titre>Titre ici</titre>
-        <creation>2017-06-09 15:23:47</creation>
-        <modif>2017-06-09 15:23:47</modif>
-        <texte>texte/description/action ici</texte>
-    </article>
-    <article>
-        <id>Entre l'id pouletsdsd</id>
-        <titre>Titre ici</titre>
-        <creation>2017-06-09 15:24:41</creation>
-        <modif>2017-06-09 15:24:41</modif>
+        <creation>2017-06-11 19:42:42</creation>
+        <modif>2017-06-11 19:42:42</modif>
         <texte>texte/description/action ici</texte>
     </article>
 </notes>

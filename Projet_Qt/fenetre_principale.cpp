@@ -165,28 +165,25 @@ void FenPrincipale::affichage_notes_relations()
 {
     NotesManager2& m1 = NotesManager2::getManager();
     m_listeNotes->clear();
+    /*
     for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
     {
         m_listeNotes->addItem(QString::fromStdString(it.current().getID()));
+    }*/
+    std::cout << "la alrighlt\n";
+    for (unsigned int i = 0; i<m1.getNotes().size();i++)
+    {
+        m_listeNotes->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
     }
+    std::cout << "la C CHO\n";
     RelationManager& m2 = RelationManager::getManager();
     m_listeRelatons->clear();
 
     for (unsigned int i=0;i<m2.getRelations().size();i++)
     {
         m_listeRelatons->addItem(QString::fromStdString(m2.getRelations()[i]->getTitre()));
-
-        /*
-        std::cout << "titre de la relation : " << m2.relations[i]->getTitre() << std::endl;
-        std::cout << "Description de la relation : " << m2.relations[i]->getDescription() << std::endl;
-
-        std::cout << "Couple " << i <<":  "<< std::endl;
-        for (unsigned int j=0;j<m2.relations[i]->getCouples().size();j++)
-        {
-            std::cout << "Label premiere note: : " << m2.relations[i]->getCouples()[j]->getPremiere().getID() << std::endl;
-        }*/
-
     }
+    std::cout << "la c fini\n";
 }
 
 void FenPrincipale::affichage_single_note(QString id, QString date)
@@ -194,6 +191,16 @@ void FenPrincipale::affichage_single_note(QString id, QString date)
 
 
     NotesManager2& m1 = NotesManager2::getManager();
+    try
+    {
+        m1.getNote(id.toStdString(),date.toStdString());
+    }
+    catch (NotesException& excep)   //si la note n'existe pas, abort
+    {
+        std::cout << excep.getInfo();
+        return;
+    }
+
     note& note_affichee = m1.getNote(id.toStdString(),date.toStdString());
 
     //On cache les champs qui sont potentiellement non nécéssaires, en fonction du type de note
@@ -201,10 +208,6 @@ void FenPrincipale::affichage_single_note(QString id, QString date)
     m_priorite_note->setHidden(true);
     m_statut_note->setHidden(true);
     m_chemin_note->setHidden(true);
-
-
-    if (id.toStdString() == "")
-        return;
 
     m_label_ID_note->setText("<b> ID : </b>"+id);
     QString titre = QString::fromStdString(note_affichee.getTitre());
@@ -265,7 +268,7 @@ void FenPrincipale::affichage_single_relation(QString titre)
             separateur="--->";
 
         m_liste_couples->addItem(QString::fromStdString(current.getCouples()[i]->getLabel())
-                                 + " *** "
+                                 + " / "
                                  + QString::fromStdString(current.getCouples()[i]->getPremiere().getID())
                                  + separateur
                                  + QString::fromStdString(current.getCouples()[i]->getSeconde().getID())

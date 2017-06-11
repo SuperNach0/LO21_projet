@@ -41,10 +41,19 @@ fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(
 
     /**** Remplissage des QList avec les notes du manager ****/
     NotesManager2& m1 = NotesManager2::getManager();
+    /*
     for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
     {
         m_notes_gauche->addItem(QString::fromStdString(it.current().getID()));
         m_notes_droite->addItem(QString::fromStdString(it.current().getID()));
+    }
+    */
+
+    for (unsigned int i = 0; i<m1.getNotes().size();i++)
+    {
+
+        m_notes_gauche->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
+        m_notes_droite->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
     }
 
 
@@ -84,10 +93,26 @@ void fenetre_creation_relation::save_relation()
 
     RelationManager& m = RelationManager::getManager();
 
+    std::string erreur ="";
+    try
+    {
+        m.getRelation(m_label_relation->text().toStdString());
+    } catch (NotesException& excep)
+    {
+        erreur = excep.getInfo();
+    }
+    if (erreur == "")
+    {
+        QMessageBox msgBox;
+        msgBox.setText("La relation existe déjà, veuillez recommencer avec un titre différent");
+        msgBox.exec();
+        return;
+    }
+
     //Création d'une relation avec titre et description
-    std::cout << "avant creation relation\n";
+
     Relation* nouvelle_relation = new Relation(m_label_relation->text().toStdString(),m_description_relation->toPlainText().toStdString());
-    std::cout << "apres creation relation\n";
+
 
     //les couples sont stockés dans le vector "couples" de la fenetre, on les ajoute tous à la relation "nouvelle_relation"
     for (unsigned int i =0;i<getCouples().size();i++)
@@ -98,7 +123,6 @@ void fenetre_creation_relation::save_relation()
     //on ajoute au manager la relation créée
     m.addRelation(*nouvelle_relation);
 
-    std::cout<<"fin\n";
     delete this; //on force la destruction pour l'affichage des relations
 }
 
@@ -114,8 +138,4 @@ void fenetre_creation_relation::save_couple()
     Couple* nouveau = new Couple(m.getNote(m_notes_gauche->currentItem()->text().toStdString()),m.getNote(m_notes_droite->currentItem()->text().toStdString()),label,orientation);
     m_couples.push_back(nouveau);
 
-    for (unsigned int i=0; i<m_couples.size();i++)
-    {
-        std::cout << "\nlabel = " << m_couples[i]->getLabel();
-    }
 }

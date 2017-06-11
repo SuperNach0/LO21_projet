@@ -92,17 +92,30 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
 
     //à faire : gérer cas ou il n'y pas de fichier selectionné
 
-    ///Si la note existe déjà
-    if (m1.getNote(m_id->text().toStdString()).getID()!="") //si la note n'existe pas, m1.getNote(...) renvoie un article avec un id vide
+    std::string erreur ="";
+    try
     {
+        m1.getNote(m_id->text().toStdString());
+    }
+    catch (NotesException& excep)
+    {
+        erreur = excep.getInfo();
+    }
+
+    std::cout << "OKKKKK\n";
+    if (erreur=="") ///Si la note existe déjà
+    {
+        std::cout << "pas11s\n";
         note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
+        std::cout << "22222\n";
 
         if (typeid(note_modif) == typeid(article))
         {
+
             article& current = static_cast<article&>(note_modif);
+            std::cout << "pass\n";
             article* article_nouv = new article(current);    //on copie la note à modifier
             note_modif.getOldNotes().push_back(article_nouv); //on ajoute la copie dans les anciennes versions
-
             //on fait les modifs : pas de modif pour un article
 
 
@@ -110,6 +123,7 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         else if (typeid(note_modif) == typeid(tache))
         {
             tache& current = static_cast<tache&>(note_modif);
+
             tache* tache_nouv = new tache(current);    //on copie la note à modifier
 
             note_modif.getOldNotes().push_back(tache_nouv); //on ajoute la copie dans les anciennes version
@@ -139,26 +153,35 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
     else    ///SI la note n'existe pas
     {
         try{
-            ///faudrait faire un Design pattern sur l'ajout d'une note pour éviter d'avoir 3 fonctions
         if (m_article->isChecked())
         {
-            m1.ajArticle(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
+                                    std::cout << "av\n";
+            article* nouveau = new article(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
+            //m1.ajArticle(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
+                                    std::cout << "appp\n";
+            m1.addNote(*nouveau);
+                                    std::cout << "apres apres\n";
         }
         if (m_tache->isChecked())
         {
             QString date = m_calendrier->selectedDate().toString("dddd dd MMMM yyyy");
             if (!m_case_calendrier->isChecked())    //si pas d'échéance
                 date = "";
-            m1.ajTache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
+            tache* nouveau = new tache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
+            //m1.ajTache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
+            m1.addNote(*nouveau);
         }
         if (m_media->isChecked())
         {
-            m1.ajMulti(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
+            media* nouveau = new media(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
+            //m1.ajMulti(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
+            m1.addNote(*nouveau);
         }
 
         } catch (NotesException& a)
         {
             std::cout<< "Erreur lors de la creation de la note, ID déjà utilise? (fenetre_creation_note->save() )\n";
+            std::cout << a.getInfo();
         }
     }
     this->close();
