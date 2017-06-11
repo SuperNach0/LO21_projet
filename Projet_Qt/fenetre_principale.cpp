@@ -163,23 +163,14 @@ void FenPrincipale::creation_tabs()
 /// mais c'est la seule solution que j'ai trouvé pour l'instant
 void FenPrincipale::affichage_notes_relations()
 {
-    NotesManager& m1 = NotesManager::getManager();
+    NotesManager2& m1 = NotesManager2::getManager();
     m_listeNotes->clear();
-<<<<<<< HEAD
-    /*
-    for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
-=======
-    for(NotesManager::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
->>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
-    {
-        m_listeNotes->addItem(QString::fromStdString(it.current().getID()));
-    }*/
-    std::cout << "la alrighlt\n";
+
     for (unsigned int i = 0; i<m1.getNotes().size();i++)
     {
         m_listeNotes->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
     }
-    std::cout << "la C CHO\n";
+
     RelationManager& m2 = RelationManager::getManager();
     m_listeRelatons->clear();
 
@@ -187,14 +178,14 @@ void FenPrincipale::affichage_notes_relations()
     {
         m_listeRelatons->addItem(QString::fromStdString(m2.getRelations()[i]->getTitre()));
     }
-    std::cout << "la c fini\n";
+
 }
 
 void FenPrincipale::affichage_single_note(QString id, QString date)
 {
 
 
-<<<<<<< HEAD
+
     NotesManager2& m1 = NotesManager2::getManager();
     try
     {
@@ -206,9 +197,7 @@ void FenPrincipale::affichage_single_note(QString id, QString date)
         return;
     }
 
-=======
-    NotesManager& m1 = NotesManager::getManager();
->>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
+
     note& note_affichee = m1.getNote(id.toStdString(),date.toStdString());
 
     //On cache les champs qui sont potentiellement non nécéssaires, en fonction du type de note
@@ -287,13 +276,13 @@ void FenPrincipale::affichage_single_relation(QString titre)
 
 void FenPrincipale::supprimerNote()
 {
-    NotesManager& m1 = NotesManager::getManager();
+    NotesManager2& m1 = NotesManager2::getManager();
     // If multiple selection is on, we need to erase all selected items
     for (int i = 0; i < m_listeNotes->selectedItems().size(); ++i)
     {
        // Get curent item on selected row
        QListWidgetItem *item = m_listeNotes->takeItem(m_listeNotes->currentRow());
-       m1.Supprimer(m1.getNote(item->text().toStdString()));
+       m1.SupprimerNote(m1.getNote(item->text().toStdString()));
     }
 }
 
@@ -339,7 +328,7 @@ void FenPrincipale :: popupCreationRelation()
 
 void FenPrincipale :: load_xml()
 {
-    NotesManager &m1 = NotesManager::getManager();
+    NotesManager2 &m1 = NotesManager2::getManager();
     QString filename = QFileDialog::getOpenFileName();
     m1.setFilename(filename);
     m1.load();
@@ -350,7 +339,7 @@ void FenPrincipale :: load_xml()
 fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
 {
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
-    NotesManager& m1 = NotesManager::getManager();
+    NotesManager2& m1 = NotesManager2::getManager();
     m_parent = parent;
     FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
     note& current = m1.getNote(fenetre_parente->getCurrentNote());

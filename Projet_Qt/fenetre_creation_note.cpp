@@ -88,7 +88,7 @@ void fenetre_creation_note :: choisir_fichier()
 
 void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tant qu'objet
 {
-    NotesManager& m1 = NotesManager::getManager();
+    NotesManager2& m1 = NotesManager2::getManager();
 
     //à faire : gérer cas ou il n'y pas de fichier selectionné
 
@@ -102,7 +102,7 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         erreur = excep.getInfo();
     }
 
-    if (erreur=="") ///Si la note existe déjà
+    if (erreur=="") ///Si il n'y a pas eu d'érreur, la note existe déjà
     {
         note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
 
@@ -110,7 +110,6 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         {
 
             article& current = static_cast<article&>(note_modif);
-            std::cout << "pass\n";
             article* article_nouv = new article(current);    //on copie la note à modifier
             note_modif.getOldNotes().push_back(article_nouv); //on ajoute la copie dans les anciennes versions
             //on fait les modifs : pas de modif pour un article

@@ -40,19 +40,7 @@ fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(
 
 
     /**** Remplissage des QList avec les notes du manager ****/
-<<<<<<< HEAD
     NotesManager2& m1 = NotesManager2::getManager();
-    /*
-    for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
-=======
-    NotesManager& m1 = NotesManager::getManager();
-    for(NotesManager::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
->>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
-    {
-        m_notes_gauche->addItem(QString::fromStdString(it.current().getID()));
-        m_notes_droite->addItem(QString::fromStdString(it.current().getID()));
-    }
-    */
 
     for (unsigned int i = 0; i<m1.getNotes().size();i++)
     {
@@ -133,7 +121,7 @@ void fenetre_creation_relation::save_relation()
 
 void fenetre_creation_relation::save_couple()
 {
-    NotesManager& m = NotesManager::getManager();
+    NotesManager2& m = NotesManager2::getManager();
     std::string label = m_label_couple->text().toStdString();
     bool orientation = true;
     if (!m_orientation->isChecked())

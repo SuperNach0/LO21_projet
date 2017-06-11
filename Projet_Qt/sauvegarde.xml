@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <notes>
     <article>
+        <id>Entre l'id poulet2</id>
+        <titre>Titre ici</titre>
+        <creation>2017-06-11 20:17:47</creation>
+        <modif>2017-06-11 20:17:47</modif>
+        <texte>texte/description/action ici</texte>
+    </article>
+    <article>
+        <id>Entre l'id poulet3</id>
+        <titre>Titre ici</titre>
+        <creation>2017-06-11 20:17:49</creation>
+        <modif>2017-06-11 20:17:49</modif>
+        <texte>texte/description/action ici</texte>
+    </article>
+    <article>
         <id>Entre l'id poulet</id>
         <titre>Titre ici</titre>
         <creation>2017-06-11 19:42:05</creation>
@@ -12,6 +26,13 @@
         <titre>Titre ici</titre>
         <creation>2017-06-11 19:42:42</creation>
         <modif>2017-06-11 19:42:42</modif>
+        <texte>texte/description/action ici</texte>
+    </article>
+    <article>
+        <id>WAWAWA</id>
+        <titre>Titre ici</titre>
+        <creation>2017-06-11 20:18:02</creation>
+        <modif>2017-06-11 20:18:02</modif>
         <texte>texte/description/action ici</texte>
     </article>
 </notes>

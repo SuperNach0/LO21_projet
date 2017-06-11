@@ -67,33 +67,7 @@ private:
     static void freeManager();
     bool checkReference(note& current) const;
 
-    //const iterator
-/*
-    class ConstIterator {
-        friend class RelationManager;
-        Relation** currentR;
-        unsigned int nbRemain;
-        ConstIterator(Relation** relation, unsigned int nb):currentR(relation),nbRemain(nb){}
-    public:
-        ConstIterator():nbRemain(0),currentR(0){}
-        bool isDone() const { return nbRemain==0; }
-        void next() {
-            if (isDone())
-                throw ("error, next on an iterator which is done");
-            nbRemain--;
-            currentR++;
-        }
-        const Relation& current() const {
-            if (isDone())
-                throw ("error, indirection on an iterator which is done");
-            return **currentR;
-        }
-    };
-    ConstIterator getIterator() const {
-        return ConstIterator(relations,nbRelations);
-    }
 
-*/
 };
 
 #endif // RELATIONS_H

@@ -58,36 +58,17 @@ return temps;
 }
 //**********************
 
-<<<<<<< HEAD
-////**************************MANAGER*********/
-=======
-/**************************MANAGER*********
-///
-void NotesManager2::addNote(note* n){
-for(unsigned int i=0; i<nbNote; i++){
-    if (Note[i]->getID()==n->getID()) throw NotesException("error, creation of an already existent note");
-}
-if (nbNote==nbMaxNote){
-    note** newNotes= new note*[nbMaxNote+5];
-    for(unsigned int i=0; i<nbNote; i++) newNotes[i]=Note[i];
-    note** oldNotes=Note;
-    Note=newNotes;
-    nbMaxNote+=5;
-    if (oldNotes) delete[] oldNotes;
-}
-Note[nbNote++]=n;
-}
->>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
+
+
+/**************************MANAGER************/
 
 
 void NotesManager2::addNote(note &note_a_ajouter)
 {
     for (unsigned int i = 0; i < notes.size(); i++)
     {
-                                std::cout << "avN\n";
         if (notes[i]->getID()==note_a_ajouter.getID())
             throw NotesException("Erreur, note deja existante\n");
-                                std::cout << "APN\n";
     }
 
     notes.push_back(&note_a_ajouter);
@@ -100,7 +81,7 @@ NotesManager2::NotesManager2():notes(0),filename(""){
 
 
 NotesManager2::~NotesManager2(){
-if (filename!="") save();               // SAVE PAS ENCORE DEFINIE car SAVE en Qt
+if (filename!="") save();
 for (unsigned int i = 0; i < notes.size(); i++)
 {
     delete notes[i];
@@ -379,8 +360,9 @@ while(!xml.atEnd() && !xml.hasError()) {
             NotesManager2::ajTache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
                                    priorite,echeance.toStdString(),state,
                                    creation.toStdString(),modif.toStdString());
-
                                    */
+
+
         }
 
     }

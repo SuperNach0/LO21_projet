@@ -79,7 +79,6 @@ public :
 
 
 };
-/********************************************************
 
 
 class NotesManager2
@@ -111,7 +110,7 @@ public:
    note& getNote (const std::string& id, const std::string& date="");
    note& getOldNote(const std::string& id);
    void addNote (note& note_a_ajouter);
-   //faudrait se débrou
+
    const std::vector<note*> getNotes() const {return notes;}
 
    void SupprimerNote (note& toDelete);
@@ -242,13 +241,8 @@ class NotesManager2 {
 
 
 };
-<<<<<<< HEAD
-*/
-
-=======
 
 */
->>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
 //******SOUS CLASSE ARTICLE /  note avec un texte ******//
 
 
@@ -261,10 +255,6 @@ public :
     article (const article& article_a_copier);
 
     virtual void afficher(std::ostream& f= std::cout) const;
-    //virtual void MiseAJour (); //PROBLEME : ne prend que le premier mot qu'on ecrit... jpese que le QString reglera le problème
-
-
-
 
 };
 

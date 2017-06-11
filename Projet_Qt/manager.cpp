@@ -14,6 +14,8 @@
 #include <time.h>
 #include "notes.h"
 #include "manager.h"
+
+/*
 template<class T>
  void Manager<T>:: add (T* a){
     for(unsigned int i=0; i<nb; i++){
@@ -426,4 +428,4 @@ void NotesManager::freeManager(){
     handler.instance=nullptr;
 }
 
-
+*/
