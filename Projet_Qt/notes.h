@@ -61,21 +61,18 @@ public :
     const std::string getModif() const {return Modif;}
     const std::string getTexte() const {return texte;}
     std::vector<note*>& getOldNotes() {return oldNotes;}
-
     void setTexte(const std::string& text) {texte = text;}
     void setTitre(const std::string& t) {titre = t;}
-
-
-
-    virtual void afficher(std::ostream& f= std::cout) const = 0; // virtuelle pure ( a definir dans les filles)
-
-
-
-    //virtual void MiseAJour () =0 ;
+    virtual void afficher(std::ostream& f= std::cout) const = 0;
 
     void setModif () ;
 
-   virtual ~note () {std::cout<<"suppression de la note "<<std::endl;}; //à rajouter dans le destructeur : destruction de toutes les vieilles versions
+   virtual ~note () {
+        std::cout<<"suppression de la note "<<std::endl;
+        for (unsigned int i=0;i<oldNotes.size();i++)
+            delete oldNotes[i];
+        oldNotes.clear();
+    }; //à rajouter dans le destructeur : destruction de toutes les vieilles versions
 
 
 };
@@ -98,7 +95,6 @@ private :
    ~NotesManager2();
    NotesManager2(const NotesManager2& m);
    NotesManager2& operator=(const NotesManager2& m);
-
 
    //void addNote (const QString& i, const QString& ti, const QString& te);//3
 
@@ -123,7 +119,7 @@ public:
    static NotesManager2& getManager();
    static void freeManager();
 
-
+   bool checkReferences(note& note_a_analyser) const;
 
 };
 

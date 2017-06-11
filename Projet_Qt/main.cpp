@@ -40,6 +40,8 @@
 *
 * 11/06 : Correction de l'ajout d'une relation avec un titre déjà utilisé
 *       : Pareil pour une note, maintenant plus d'article vide créé dans le getNote si la note n'existe pas
+*
+*       :Ajout des references avec \ref{id} mais ça ne fonctionne pas, je sais pas pourquoi
 */
 
 
@@ -162,14 +164,15 @@ int main(int argc,  char *argv[]){
 
          case 7 :
         {
-            std::cout << "ESSAIS CYRIL Manager note avec vector\n";
-            article* nouv = new article("id","titre","txt");
+            std::cout << "ESSAIS CYRIL references de notes\n";
+            article* nouv = new article("id","titre","txt, \ref{id} suite \ref{id2} okalm");
+            article* nouv1 = new article("id","titre","texte a lacon");
             article* nouv2 = new article("id2","titr2222e","txt");
             m1.addNote(*nouv);
             m1.addNote(*nouv2);
-            std::cout << "titre = " << m1.getNote("id2").getTitre();
-            std::cout << "txt = " << m1.getNote("id2").getTexte();
 
+
+            m1.checkReferences(m1.getNote("id"));
 
         }
 

@@ -1,5 +1,7 @@
 #include "relations.h"
 #include "manager.h"
+#include <regex>
+
 void RelationManager::addRelation(Relation& relation)
 {
     relations.push_back(&relation);
@@ -7,7 +9,7 @@ void RelationManager::addRelation(Relation& relation)
 
 
 RelationManager::RelationManager():relations(0){
-
+    addRelation(*(new Relation("References","Contient toutes les références entre notes")));
 } // constructeur de manager
 
 

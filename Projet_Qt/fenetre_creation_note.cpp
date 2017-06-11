@@ -102,29 +102,23 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         erreur = excep.getInfo();
     }
 
-    if (erreur=="") ///Si il n'y a pas eu d'érreur, la note existe déjà
+    if (erreur=="") ///Si il n'y a pas eu d'erreur, la note existe déjà
     {
         note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
 
         if (typeid(note_modif) == typeid(article))
         {
-
             article& current = static_cast<article&>(note_modif);
             article* article_nouv = new article(current);    //on copie la note à modifier
             note_modif.getOldNotes().push_back(article_nouv); //on ajoute la copie dans les anciennes versions
             //on fait les modifs : pas de modif pour un article
-
-
         }
         else if (typeid(note_modif) == typeid(tache))
         {
             tache& current = static_cast<tache&>(note_modif);
-
             tache* tache_nouv = new tache(current);    //on copie la note à modifier
-
             note_modif.getOldNotes().push_back(tache_nouv); //on ajoute la copie dans les anciennes version
             //on fait les modifs : echeance, priorité
-
             QString date = m_calendrier->selectedDate().toString("dddd dd MMMM yyyy");
             if (!m_case_calendrier->isChecked())    //si pas d'échéance
                 date = "";
@@ -140,11 +134,11 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
             note_modif.getOldNotes().push_back(media_nouv); //on ajoute la copie dans les anciennes versions
             current.setChemin(m_fichier->toStdString());
         }
-
         //Modifications qui ne dépendent pas du type de note
         note_modif.setTitre(m_titre->text().toStdString());
         note_modif.setTexte(m_texte->toPlainText().toStdString());
         note_modif.setModif();
+        m1.checkReferences(note_modif);
     }
     else    ///SI la note n'existe pas
     {
@@ -167,7 +161,7 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
             media* nouveau = new media(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
             m1.addNote(*nouveau);
         }
-
+        m1.checkReferences(m1.getNote(m_id->text().toStdString()));
         } catch (NotesException& a)
         {
             std::cout<< "Erreur lors de la creation de la note, ID déjà utilise? (fenetre_creation_note->save() )\n";

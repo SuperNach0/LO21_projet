@@ -13,6 +13,7 @@
 #include <time.h>
 #include "notes.h"
 #include "manager.h"
+#include "relations.h"
 std::string etatToString(enum etat s)
 {
     switch (s)
@@ -506,4 +507,55 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
      priorite=tache_a_copier.priorite;
      status=tache_a_copier.status;
      oldNotes.clear();
+ }
+
+ ///Vérifie si la note_a_analyser contient des références vers d'autres notes, et ajoute les relations dans le cas échéant
+ bool NotesManager2::checkReferences(note &note_a_analyser) const
+ {
+
+     std::string texte = note_a_analyser.getTexte(); //On récupère le texte de la note à analyser
+     std::cout << "texte de la note a analyser =" << std::endl;
+     std::cout << texte << std::endl;
+
+     bool reference_existe=false;
+     RelationManager& rm = RelationManager::getManager();
+     NotesManager2& nm = NotesManager2::getManager();
+
+
+     int position_debut = texte.find("\ref{");
+        std::cout << "position debut = " << position_debut << std::endl;
+     int position_fin = texte.find("}",position_debut);
+        std::cout << "position fin = " << position_fin << std::endl;
+     std::string id =""; //contiendra l'id de la note référencée par note_a_analyser
+
+
+     while (position_debut != std::string::npos && position_fin != std::string::npos)
+     {
+         reference_existe=true;
+         std::cout << "TROUVE : " << std::endl;
+         id = texte.substr(position_debut+4,position_fin-position_debut-4) ;
+         std::cout << id << std::endl;
+
+         try{
+         nm.getNote(id);
+        } catch (NotesException& excep)
+         {
+             std::cout << "Note non trouvee dans checkRef\n";
+             std::cout << excep.getInfo();
+             return false;
+         }
+
+         //ajout de la relation
+         rm.getRelation("References").addCouple(*(new Couple(note_a_analyser,
+                                                             nm.getNote(id),
+                                                             "Ref de" + note_a_analyser.getID() + "vers" + nm.getNote(id).getID(),
+                                                             1)));
+
+         position_debut = texte.find("\ref{",position_fin);
+            std::cout << "boucle: position debut = " << position_debut << std::endl;
+         position_fin = texte.find("}",position_debut);
+            std::cout << "boucle: position fin = " << position_debut << std::endl;
+
+     }
+    return reference_existe;
  }
