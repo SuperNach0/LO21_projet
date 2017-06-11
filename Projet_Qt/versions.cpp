@@ -4,7 +4,7 @@
 #include "manager.h"
 void FenPrincipale::editerNote()
 {
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
     note& note_a_editer = m1.getNote(m_listeNotes->currentItem()->text().toStdString());
 
     m_fenetre_creation = new fenetre_creation_note; //On crée une nouvelle fenetre de creation de note, et l'adresse est stockée dans m_fenetre_creation

@@ -51,7 +51,7 @@ int menu =0;
 int main(int argc,  char *argv[]){
 
 
-    NotesManager2 &m1 = NotesManager2::getManager();
+    NotesManager  &m1 = NotesManager::getManager();
     RelationManager& m2 = RelationManager::getManager();
 
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
@@ -68,7 +68,11 @@ int main(int argc,  char *argv[]){
     int menu =99; int j=0;
     while (menu!=10) {
 
+<<<<<<< HEAD
         std::cout << "  tu as actuellement "<<m1.getNotes().size() <<" notes ; que voulez vous faire  ?"<<std::endl<<
+=======
+        std::cout << "  tu as actuellement "<<m1.getnb()<<" notes ; que voulez vous faire  ?"<<std::endl<<
+>>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
                      "1- ajouter une note"<<std::endl<<
                      "2- afficher les notes "<<std::endl<<
                      "3- rechercher une note"<<std::endl<<
@@ -130,8 +134,12 @@ int main(int argc,  char *argv[]){
 
 
         case 2 :{
+<<<<<<< HEAD
             /*
             for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
+=======
+            for(NotesManager::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
+>>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
             {
                     it.current().afficher();
             }
@@ -142,8 +150,12 @@ int main(int argc,  char *argv[]){
             std::string tf;
             std::cout<<" titre/ partie du titre a trouver ?"<<std::endl;
             std::cin>> tf;
+<<<<<<< HEAD
             /*
             for(NotesManager2::Searchiterator it= m1.getSearchIterator(tf); !it.isDone(); it.
+=======
+            for(NotesManager::Searchiterator it= m1.getSearchIterator(tf); !it.isDone(); it.
+>>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
                     next())
                     {
                         it.current().afficher();
@@ -164,7 +176,7 @@ int main(int argc,  char *argv[]){
                 std::string td;
                 std::cin>> td;
 
-              m1.SupprimerNote(m1.getNote(td));
+              m1.Supprimer(m1.getNote(td));
             break;
                 }
 

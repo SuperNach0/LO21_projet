@@ -14,31 +14,31 @@
 #include <time.h>
 #include "notes.h"
 #include "manager.h"
-/*
-void NotesManager2::addNote(note* n){
-    for(unsigned int i=0; i<nbNote; i++){
-        if (Note[i]->getID()==n->getID()) throw NotesException("error, creation of an already existent note");
+template<class T>
+ void Manager<T>:: add (T* a){
+    for(unsigned int i=0; i<nb; i++){
+        if (type[i]->getID()==a->getID()) throw NotesException("error, creation of an already existent note");
     }
-    if (nbNote==nbMaxNote){
-        note** newNotes= new note*[nbMaxNote+5];
-        for(unsigned int i=0; i<nbNote; i++) newNotes[i]=Note[i];
-        note** oldNotes=Note;
-        Note=newNotes;
-        nbMaxNote+=5;
+    if (nb==nbMax){
+        T** newTab= new note*[nbMax+5];
+        for(unsigned int i=0; i<nb; i++) newTab[i]=type[i];
+        T** oldNotes=type;
+        type=newTab;
+        nbMax+=5;
         if (oldNotes) delete[] oldNotes;
     }
-    Note[nbNote++]=n;
+    type[nb++]=a;
 }
 
 
 
+//template<class T>
+//Manager<T>::Manager():T (nullptr),nb(0),nbMax(0),filename(""){}
 
-Manager::Manager():T (nullptr),nb(0),nbMax(0),filename(""){
-
-} // constructeur de manager
+// constructeur de manager
 
 
-Manager::~Manager(){
+NotesManager::~NotesManager(){
     if (filename!="") save();               // SAVE PAS ENCORE DEFINIE car SAVE en Qt
     for(unsigned int i=0; i<nb; i++) delete type[i];
     delete[] type;
@@ -46,20 +46,20 @@ Manager::~Manager(){
 }
 
 
-Manager::Handler Manager::handler=Handler();
+NotesManager::Handler NotesManager::handler=Handler();
 
 
-note& NotesManager2::getNote(const std::string& id, const std::string& date){
+note& NotesManager::getNote(const std::string& id, const std::string& date){
     // si l'article existe déjà, on en renvoie une référence
-    for(unsigned int i=0; i<nbNote; i++){
-        if (Note[i]->getID()==id && date=="")
-            return *Note[i];
-        else if (Note[i]->getID()==id && date!="")
+    for(unsigned int i=0; i<nb; i++){
+        if (type[i]->getID()==id && date=="")
+            return *type[i];
+        else if (type[i]->getID()==id && date!="")
         {
             unsigned int j =0;
-            while (j<Note[i]->getOldNotes().size() && Note[i]->getOldNotes()[j]->getModif() != date )
+            while (j<type[i]->getOldNotes().size() && type[i]->getOldNotes()[j]->getModif() != date )
                 j++;
-            return *Note[i]->getOldNotes()[j];
+            return *type[i]->getOldNotes()[j];
         }
     }
 
@@ -69,7 +69,7 @@ note& NotesManager2::getNote(const std::string& id, const std::string& date){
 
 }
 
-note& NotesManager2::getOldNote(const std::string& id)
+note& NotesManager::getOldNote(const std::string& id)
 {
     note& version_actuelle=getNote(id);
     for(unsigned int i=0; i<version_actuelle.getOldNotes().size(); i++)
@@ -80,42 +80,42 @@ note& NotesManager2::getOldNote(const std::string& id)
 }
 
 
-note& NotesManager2::ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea,const std::string& modif){
+note& NotesManager::ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea,const std::string& modif){
     article* n=new article(id,titre,txt,crea,modif);
-    addNote (n);
+    add (n);
     return *n;
 }
 
 
 
 
-note& NotesManager2::ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image,const std::string& crea,const std::string& modif){
+note& NotesManager::ajMulti(const std::string& id,const std::string& text,const std::string& description,const std::string& image,const std::string& crea,const std::string& modif){
 
     media* n=new media(id,text,description,image,crea,modif);
-    addNote (n);
+    add (n);
     return *n;
 }
 
-note& NotesManager2::ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea,const std::string& modif) {
+note& NotesManager::ajTache(const std::string& id,const std::string& texte, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea,const std::string& modif) {
     tache* n=new tache(id,texte,action,priorite,echeance,stat,crea,modif);
-    addNote (n);
+    add (n);
     return *n;
 }
 
 
 
-
-void Manager::Supprimer (T& toDelete)
+template <class T>
+void Manager<T>::Supprimer (T& toDelete)
 {
     int i=0;
-    while (T[i]->getID() != toDelete.getID())
+    while (type[i]->getID() != toDelete.getID())
     {
         i++;
     }
 
     for (i;i<nb;i++)
     {
-        T[i]=T[i+1];
+        type[i]=type[i+1];
     }
     nb--;
     delete &toDelete;
@@ -123,16 +123,18 @@ void Manager::Supprimer (T& toDelete)
 
 
                                                     // A FAIRE EN Qt PAREIL POUR SAVE
-void NotesManager2::load() {
+void NotesManager::load() {
     QFile fin(filename);
-    // If we can't open it, let's show an error message.
-    if (!fin.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        throw NotesException("Erreur ouverture fichier notes");
+   // If we can't open it, let's show an error message.
+    if (!fin.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        //throw NotesException("Erreur ouverture fichier notes");
+    return (void) 0;
     }
     // QXmlStreamReader takes any QIODevice.
     QXmlStreamReader xml(&fin);
     //qDebug()<<"debut fichier\n";
     // We'll parse the XML until we reach end of it.
+
     while(!xml.atEnd() && !xml.hasError()) {
         // Read next element.
         QXmlStreamReader::TokenType token = xml.readNext();
@@ -190,7 +192,7 @@ void NotesManager2::load() {
                     xml.readNext();
                 }
                 qDebug()<<"ajout note "<<identificateur<<"\n";
-                NotesManager2::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
+                NotesManager::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
 
             }
 
@@ -248,7 +250,7 @@ void NotesManager2::load() {
                     xml.readNext();
                 }
                 qDebug()<<"ajout note "<<identificateur<<"\n";
-                NotesManager2::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
+                NotesManager::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
                                          creation.toStdString(),modif.toStdString());
 
             }
@@ -333,7 +335,7 @@ void NotesManager2::load() {
                 qDebug()<<"ajout note "<<identificateur<<"\n";
 
 
-                NotesManager2::ajTache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
+                NotesManager::ajTache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
                                        priorite,echeance.toStdString(),state,
                                        creation.toStdString(),modif.toStdString());
 
@@ -353,7 +355,7 @@ void NotesManager2::load() {
 
 
 
-void NotesManager2::save() const {
+void NotesManager::save() const {
     QFile newfile(filename);
     if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text))
         throw NotesException("erreur sauvegarde notes : ouverture fichier xml");
@@ -361,7 +363,7 @@ void NotesManager2::save() const {
     stream.setAutoFormatting(true);
     stream.writeStartDocument();
     stream.writeStartElement("notes");
-    for(NotesManager2::ConstIterator it= this->getIterator(); !it.isDone(); it.next())
+    for(NotesManager::ConstIterator it= this->getIterator(); !it.isDone(); it.next())
     {
             std::cout<<typeid(it.current()).name()<<std::endl;
         if (typeid(it.current())==typeid(article)) {// ATRICLE
@@ -414,14 +416,14 @@ void NotesManager2::save() const {
     newfile.close();
 }
 
-
-Manager& Manager::getManager(){
-    if (!handler.instance) handler.instance=new Manager;
+NotesManager& NotesManager::getManager(){
+    if (!handler.instance) handler.instance=new NotesManager;
     return *handler.instance;
 }
 
-void Manager::freeManager(){
+void NotesManager::freeManager(){
     delete handler.instance;
     handler.instance=nullptr;
 }
-*/
+
+

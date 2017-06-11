@@ -88,7 +88,7 @@ void fenetre_creation_note :: choisir_fichier()
 
 void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tant qu'objet
 {
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
 
     //à faire : gérer cas ou il n'y pas de fichier selectionné
 
@@ -102,12 +102,9 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         erreur = excep.getInfo();
     }
 
-    std::cout << "OKKKKK\n";
     if (erreur=="") ///Si la note existe déjà
     {
-        std::cout << "pas11s\n";
         note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
-        std::cout << "22222\n";
 
         if (typeid(note_modif) == typeid(article))
         {
@@ -155,12 +152,8 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         try{
         if (m_article->isChecked())
         {
-                                    std::cout << "av\n";
             article* nouveau = new article(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
-            //m1.ajArticle(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
-                                    std::cout << "appp\n";
             m1.addNote(*nouveau);
-                                    std::cout << "apres apres\n";
         }
         if (m_tache->isChecked())
         {
@@ -168,13 +161,11 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
             if (!m_case_calendrier->isChecked())    //si pas d'échéance
                 date = "";
             tache* nouveau = new tache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
-            //m1.ajTache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
             m1.addNote(*nouveau);
         }
         if (m_media->isChecked())
         {
             media* nouveau = new media(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
-            //m1.ajMulti(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
             m1.addNote(*nouveau);
         }
 

@@ -58,7 +58,26 @@ return temps;
 }
 //**********************
 
+<<<<<<< HEAD
 ////**************************MANAGER*********/
+=======
+/**************************MANAGER*********
+///
+void NotesManager2::addNote(note* n){
+for(unsigned int i=0; i<nbNote; i++){
+    if (Note[i]->getID()==n->getID()) throw NotesException("error, creation of an already existent note");
+}
+if (nbNote==nbMaxNote){
+    note** newNotes= new note*[nbMaxNote+5];
+    for(unsigned int i=0; i<nbNote; i++) newNotes[i]=Note[i];
+    note** oldNotes=Note;
+    Note=newNotes;
+    nbMaxNote+=5;
+    if (oldNotes) delete[] oldNotes;
+}
+Note[nbNote++]=n;
+}
+>>>>>>> 94ffccbc65e850ee09c9a6fa6d25350140598a04
 
 
 void NotesManager2::addNote(note &note_a_ajouter)
