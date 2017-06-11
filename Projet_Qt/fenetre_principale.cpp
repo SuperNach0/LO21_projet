@@ -163,9 +163,9 @@ void FenPrincipale::creation_tabs()
 /// mais c'est la seule solution que j'ai trouvé pour l'instant
 void FenPrincipale::affichage_notes_relations()
 {
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
     m_listeNotes->clear();
-    for(NotesManager2::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
+    for(NotesManager::ConstIterator it= m1.getIterator(); !it.isDone(); it.next())
     {
         m_listeNotes->addItem(QString::fromStdString(it.current().getID()));
     }
@@ -193,7 +193,7 @@ void FenPrincipale::affichage_single_note(QString id, QString date)
 {
 
 
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
     note& note_affichee = m1.getNote(id.toStdString(),date.toStdString());
 
     //On cache les champs qui sont potentiellement non nécéssaires, en fonction du type de note
@@ -276,13 +276,13 @@ void FenPrincipale::affichage_single_relation(QString titre)
 
 void FenPrincipale::supprimerNote()
 {
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
     // If multiple selection is on, we need to erase all selected items
     for (int i = 0; i < m_listeNotes->selectedItems().size(); ++i)
     {
        // Get curent item on selected row
        QListWidgetItem *item = m_listeNotes->takeItem(m_listeNotes->currentRow());
-       m1.SupprimerNote(m1.getNote(item->text().toStdString()));
+       m1.Supprimer(m1.getNote(item->text().toStdString()));
     }
 }
 
@@ -328,7 +328,7 @@ void FenPrincipale :: popupCreationRelation()
 
 void FenPrincipale :: load_xml()
 {
-    NotesManager2 &m1 = NotesManager2::getManager();
+    NotesManager &m1 = NotesManager::getManager();
     QString filename = QFileDialog::getOpenFileName();
     m1.setFilename(filename);
     m1.load();
@@ -339,7 +339,7 @@ void FenPrincipale :: load_xml()
 fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
 {
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
     m_parent = parent;
     FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
     note& current = m1.getNote(fenetre_parente->getCurrentNote());

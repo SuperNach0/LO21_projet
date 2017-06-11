@@ -88,7 +88,7 @@ void fenetre_creation_note :: choisir_fichier()
 
 void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tant qu'objet
 {
-    NotesManager2& m1 = NotesManager2::getManager();
+    NotesManager& m1 = NotesManager::getManager();
 
     //à faire : gérer cas ou il n'y pas de fichier selectionné
 

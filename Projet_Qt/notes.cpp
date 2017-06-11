@@ -74,7 +74,7 @@ return temps;
 }
 //**********************
 
-////**************************MANAGER*********/
+/**************************MANAGER*********
 ///
 void NotesManager2::addNote(note* n){
 for(unsigned int i=0; i<nbNote; i++){

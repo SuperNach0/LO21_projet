@@ -79,7 +79,7 @@ public :
 
 
 };
-/********************************************************/
+/********************************************************
 
 class NotesManager2 {
  private :
@@ -199,7 +199,7 @@ class NotesManager2 {
 
 };
 
-
+*/
 //******SOUS CLASSE ARTICLE /  note avec un texte ******//
 
 

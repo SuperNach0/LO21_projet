@@ -10,38 +10,40 @@
 #endif // MANAGER_H
 
 
-/*
-  template<class T>  class Manager {
-private :
 
-     T** type;
+  template<class T>
+class Manager {
+protected :
+
+    T** type;
     unsigned int nb;
     unsigned int nbMax;
-    template<class Type> void add (Type* a);
     mutable  QString filename;
 
-    struct Handler {
-             Manager* instance; // pointeur sur l'unique instance
-             Handler():instance(nullptr){}
-            ~Handler() { delete instance; }
-        };
-    static Handler handler;
-    Manager();
-    ~Manager();
+
+
+
+public:
+     void add (T* a);
+
+    unsigned int getnb() const {return nb;}
+
+     virtual void Supprimer (T& toDelete);
+
+
+
+    QString getFilename() const { return filename; }
+    void setFilename(const QString& f) { filename=f; }
+
+    Manager(){};
+    virtual ~Manager<T>(){std::cout<<"manager(base) detruit"<<std::endl;}
     Manager(const Manager& m);
     Manager& operator=(const Manager& m);
 
 
-public:
-    unsigned int getnb() const {return nb;}
 
-    template<class Type> void Supprimer (Type& toDelete);
 
-    static Manager& getManager();
-    static void freeManager();
 
-    QString getFilename() const { return filename; }
-    void setFilename(const QString& f) { filename=f; }
 
 
      class ConstIterator {
@@ -113,14 +115,24 @@ public:
 };
 
 
-class NotesManager2 : public  Manager {
+
+class NotesManager :  public   Manager<note> {
  private :
 
     void addNote (const QString& i, const QString& ti, const QString& te);//3
+    struct Handler {
+             NotesManager* instance; // pointeur sur l'unique instance
+             Handler():instance(nullptr){}
+            ~Handler() { delete instance; }
+        };
+    static Handler handler;
+
 
 
  public:
 
+    static NotesManager& getManager();
+    static void freeManager();
 
 
     note& getNote (const std::string& id, const std::string& date=""); // return the article with identificator id (create a new one if it not exists)
@@ -133,6 +145,8 @@ class NotesManager2 : public  Manager {
 
     void load(); // load notes from file filename
     void save() const; // save notes in file filename
+    ~NotesManager();
+
 
 
 
@@ -146,4 +160,4 @@ class NotesManager2 : public  Manager {
 
 };
 
-*/
+
