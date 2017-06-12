@@ -510,52 +510,58 @@ article::article(const article &article_a_copier) : note(article_a_copier.id,art
  }
 
  ///Vérifie si la note_a_analyser contient des références vers d'autres notes, et ajoute les relations dans le cas échéant
- bool NotesManager2::checkReferences(note &note_a_analyser) const
+ void NotesManager2::checkReferences() const
  {
-
-     std::string texte = note_a_analyser.getTexte(); //On récupère le texte de la note à analyser
-     std::cout << "texte de la note a analyser =" << std::endl;
-     std::cout << texte << std::endl;
-
-     bool reference_existe=false;
      RelationManager& rm = RelationManager::getManager();
      NotesManager2& nm = NotesManager2::getManager();
 
+     //Suppression des couples correspondant à la note dans la relation References
+     Relation& rel_references = rm.getRelation("References");
+     rel_references.getCouples().clear();
 
-     int position_debut = texte.find("\ref{");
-        std::cout << "position debut = " << position_debut << std::endl;
-     int position_fin = texte.find("}",position_debut);
-        std::cout << "position fin = " << position_fin << std::endl;
-     std::string id =""; //contiendra l'id de la note référencée par note_a_analyser
-
-
-     while (position_debut != std::string::npos && position_fin != std::string::npos)
+     for (unsigned int i=0;i<nm.getNotes().size();i++)
      {
-         reference_existe=true;
-         std::cout << "TROUVE : " << std::endl;
-         id = texte.substr(position_debut+4,position_fin-position_debut-4) ;
-         std::cout << id << std::endl;
 
-         try{
-         nm.getNote(id);
-        } catch (NotesException& excep)
+         std::string texte = nm.getNotes()[i]->getTexte() + nm.getNotes()[i]->getTitre(); //On récupère le texte de la note à analyser
+
+         int position_debut_texte = texte.find("\\ref{");
+         int position_fin_texte = texte.find("}",position_debut_texte);
+
+
+         std::string id_texte =""; //contiendra l'id de la note courante
+
+
+         while ((position_debut_texte != std::string::npos && position_fin_texte != std::string::npos))
          {
-             std::cout << "Note non trouvee dans checkRef\n";
-             std::cout << excep.getInfo();
-             return false;
+             std::cout << "TROUVE : " << std::endl;
+             id_texte = texte.substr(position_debut_texte+5,position_fin_texte-position_debut_texte-5) ;
+             std::cout << id_texte << std::endl;
+
+             try{
+             nm.getNote(id_texte);
+
+            } catch (NotesException& excep)
+             {
+                 std::cout << "Note non trouvee dans checkRef\n";
+                 std::cout << excep.getInfo();
+                 QMessageBox msgBox;
+                 msgBox.setText("Un ou plusieurs identifiants référencés ne sont pas valides, veuillez les corriger");
+                 msgBox.exec();
+                 return;
+             }
+
+             //ajout de la relation
+             rel_references.addCouple(*(new Couple(*nm.getNotes()[i],
+                                                                 nm.getNote(id_texte),
+                                                                 "Ref de " + nm.getNotes()[i]->getID() + " vers " + nm.getNote(id_texte).getID(),
+                                                                 1)));
+
+
+             position_debut_texte = texte.find("\\ref{",position_fin_texte);
+             position_fin_texte = texte.find("}",position_debut_texte);
+
          }
 
-         //ajout de la relation
-         rm.getRelation("References").addCouple(*(new Couple(note_a_analyser,
-                                                             nm.getNote(id),
-                                                             "Ref de" + note_a_analyser.getID() + "vers" + nm.getNote(id).getID(),
-                                                             1)));
-
-         position_debut = texte.find("\ref{",position_fin);
-            std::cout << "boucle: position debut = " << position_debut << std::endl;
-         position_fin = texte.find("}",position_debut);
-            std::cout << "boucle: position fin = " << position_debut << std::endl;
-
      }
-    return reference_existe;
+    return;
  }

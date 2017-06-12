@@ -323,7 +323,6 @@ void FenPrincipale :: popupCreationRelation()
     m_fenetre_creation_relation = new fenetre_creation_relation(this);
     m_fenetre_creation_relation->show();
     connect(m_fenetre_creation_relation,SIGNAL(destroyed(QObject*)),this,SLOT(affichage_notes_relations())); //on connecte la destruction de la fenetre de creation à l'affichage des notes
-
 }
 
 void FenPrincipale :: load_xml()

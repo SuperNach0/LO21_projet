@@ -119,7 +119,7 @@ public:
    static NotesManager2& getManager();
    static void freeManager();
 
-   bool checkReferences(note& note_a_analyser) const;
+   void checkReferences() const;
 
 };
 

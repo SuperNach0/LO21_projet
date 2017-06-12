@@ -138,7 +138,6 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         note_modif.setTitre(m_titre->text().toStdString());
         note_modif.setTexte(m_texte->toPlainText().toStdString());
         note_modif.setModif();
-        m1.checkReferences(note_modif);
     }
     else    ///SI la note n'existe pas
     {
@@ -161,13 +160,14 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
             media* nouveau = new media(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
             m1.addNote(*nouveau);
         }
-        m1.checkReferences(m1.getNote(m_id->text().toStdString()));
+
         } catch (NotesException& a)
         {
             std::cout<< "Erreur lors de la creation de la note, ID déjà utilise? (fenetre_creation_note->save() )\n";
             std::cout << a.getInfo();
         }
     }
+    m1.checkReferences();
     this->close();
     delete this; //forcer la destruction pour que le signal soit bien reçu par la FenPrincipale
 }

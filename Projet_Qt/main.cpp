@@ -42,6 +42,9 @@
 *       : Pareil pour une note, maintenant plus d'article vide créé dans le getNote si la note n'existe pas
 *
 *       :Ajout des references avec \ref{id} mais ça ne fonctionne pas, je sais pas pourquoi
+*
+* 12/06 : Ajout des references avec \ref{id} marche
+*
 */
 
 
@@ -165,14 +168,13 @@ int main(int argc,  char *argv[]){
          case 7 :
         {
             std::cout << "ESSAIS CYRIL references de notes\n";
-            article* nouv = new article("id","titre","txt, \ref{id} suite \ref{id2} okalm");
-            article* nouv1 = new article("id","titre","texte a lacon");
+            article* nouv = new article("id","titre","txt, \\ref{id} suite \\ref{id2} okalm");
+            article* nouv1 = new article("id1","titre","texte a lacon");
             article* nouv2 = new article("id2","titr2222e","txt");
             m1.addNote(*nouv);
+            m1.addNote(*nouv1);
             m1.addNote(*nouv2);
-
-
-            m1.checkReferences(m1.getNote("id"));
+            m1.checkReferences();
 
         }
 
