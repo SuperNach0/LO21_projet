@@ -8,7 +8,7 @@
 /*
 
 
-* 30/05 : ajout d'un menu contextuel pour supprimer une note
+* 30/05 : ajout d'un menu contextuel pour SupprimerNote une note
 * 31/05 : modification du getNote : retourne un article("","","") si la note n'existe pas (en plus de throw une erreur) : à voir si on peut faire mieux
 *
 * 06/06 : affichage d'une seule note OK (enfin)
@@ -53,7 +53,7 @@ int menu =0;
 
 
 
-int main(int argc,  char *argv[]){
+int main(int argc,  char *argv[]) {
 
 
     NotesManager2  &m1 = NotesManager2::getManager();
@@ -73,12 +73,12 @@ int main(int argc,  char *argv[]){
     int menu =99; int j=0;
     while (menu!=10) {
 
-        std::cout << "  tu as actuellement "<<m1.getNotes().size() <<" notes ; que voulez vous faire  ?"<<std::endl<<
+        std::cout << "  tu as actuellement "<<m1.gettype().size() <<" notes ; que voulez vous faire  ?"<<std::endl<<
                      "1- ajouter une note"<<std::endl<<
                      "2- afficher les notes "<<std::endl<<
                      "3- rechercher une note"<<std::endl<<
                      "4- mettre a jour note(que tachepour le moment)"<<std::endl<<
-                     "5- supprimer une note"<<std::endl<<
+                     "5- SupprimerNote une note"<<std::endl<<
                      "7- tests cyril affichage relation note "<<std::endl<<
                      "10- quitter"<<std::endl;
         std::cin>>menu;
@@ -156,12 +156,12 @@ int main(int argc,  char *argv[]){
                 }
 
         case 5 :{
-                std::cout<<"id de la note à supprimer?"<<std::endl;
+                std::cout<<"id de la note à SupprimerNote?"<<std::endl;
                 std::string td;
                 std::cin>> td;
 
                m1.SupprimerNote(m1.getNote(td));
-             // m1.Supprimer(m1.getNote(td));
+             // m1.SupprimerNote(m1.getNote(td));
             break;
                 }
 
@@ -171,9 +171,9 @@ int main(int argc,  char *argv[]){
             article* nouv = new article("id","titre","txt, \\ref{id} suite \\ref{id2} okalm");
             article* nouv1 = new article("id1","titre","texte a lacon");
             article* nouv2 = new article("id2","titr2222e","txt");
-            m1.addNote(*nouv);
-            m1.addNote(*nouv1);
-            m1.addNote(*nouv2);
+            m1.add(*nouv);
+            m1.add(*nouv1);
+            m1.add(*nouv2);
             m1.checkReferences();
 
         }

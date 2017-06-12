@@ -145,7 +145,7 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         if (m_article->isChecked())
         {
             article* nouveau = new article(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString());
-            m1.addNote(*nouveau);
+            m1.add(*nouveau);
         }
         if (m_tache->isChecked())
         {
@@ -153,12 +153,12 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
             if (!m_case_calendrier->isChecked())    //si pas d'échéance
                 date = "";
             tache* nouveau = new tache(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_priorite->value(),date.toStdString(),(etat)m_statut->currentIndex());
-            m1.addNote(*nouveau);
+            m1.add(*nouveau);
         }
         if (m_media->isChecked())
         {
             media* nouveau = new media(m_id->text().toStdString(),m_titre->text().toStdString(),m_texte->toPlainText().toStdString(),m_fichier->toStdString());
-            m1.addNote(*nouveau);
+            m1.add(*nouveau);
         }
 
         } catch (NotesException& a)

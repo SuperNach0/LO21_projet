@@ -76,7 +76,7 @@ public :
 
 
 };
-
+/*
 
 class NotesManager2
 {
@@ -121,7 +121,7 @@ public:
 
    void checkReferences() const;
 
-};
+};*/
 
 //Vieux manager avec tableau
 /*

@@ -42,11 +42,11 @@ fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(
     /**** Remplissage des QList avec les notes du manager ****/
     NotesManager2& m1 = NotesManager2::getManager();
 
-    for (unsigned int i = 0; i<m1.getNotes().size();i++)
+    for (unsigned int i = 0; i<m1.gettype().size();i++)
     {
 
-        m_notes_gauche->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
-        m_notes_droite->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
+        m_notes_gauche->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
+        m_notes_droite->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
     }
 
 

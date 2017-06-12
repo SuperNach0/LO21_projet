@@ -166,9 +166,9 @@ void FenPrincipale::affichage_notes_relations()
     NotesManager2& m1 = NotesManager2::getManager();
     m_listeNotes->clear();
 
-    for (unsigned int i = 0; i<m1.getNotes().size();i++)
+    for (unsigned int i = 0; i<m1.gettype().size();i++)
     {
-        m_listeNotes->addItem(QString::fromStdString(m1.getNotes()[i]->getID()));
+        m_listeNotes->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
     }
 
     RelationManager& m2 = RelationManager::getManager();
