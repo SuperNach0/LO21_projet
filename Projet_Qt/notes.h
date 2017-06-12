@@ -109,7 +109,7 @@ public:
 
    const std::vector<note*> getNotes() const {return notes;}
 
-   void SupprimerNote (note& toDelete);
+   void SupprimerNote (note& toDelete, const std::string& date="");
    QString getFilename() const { return filename; }
    void setFilename(const QString& f) { filename=f; }
    void load(); // load notes from file filename

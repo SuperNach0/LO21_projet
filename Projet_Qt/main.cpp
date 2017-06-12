@@ -44,11 +44,17 @@
 *       :Ajout des references avec \ref{id} mais ça ne fonctionne pas, je sais pas pourquoi
 *
 * 12/06 : Ajout des references avec \ref{id} marche
+*       : Restauration des anciennes versions de note ok
+*
+*       : reste à faire :
+*           - gérer la corbeille et l'archivage des notes, faire que la suppression d'une note supprime les couples
+*           dans laquelle elle est impliquée
+*           - gérer l'affichage ergonomique des taches selon prio/échance + arborescence
+*           - améliorer la gestion mémoire au niveau de la suppression, il reste des trucs non libérés
+*
 *
 */
 
-
-int menu =0;
 
 
 
@@ -58,15 +64,11 @@ int main(int argc,  char *argv[]) {
 
     NotesManager2  &m1 = NotesManager2::getManager();
     RelationManager& m2 = RelationManager::getManager();
-
     ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
 
-
     FenPrincipale fenetre;
-
     fenetre.show();
-
     app.exec();
 
 

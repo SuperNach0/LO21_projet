@@ -158,9 +158,7 @@ void FenPrincipale::creation_tabs()
     m_onglets->addTab(m_page_affichage_relations, "Affichage des relations");
 }
 
-///ATTENTION, à chaque ajout de note, le dock de gauche supprime la liste et la réaffiche pour l'actualiser avec les nouveaux,
-/// ça va peut être causer des bugs plus tard
-/// mais c'est la seule solution que j'ai trouvé pour l'instant
+
 void FenPrincipale::affichage_notes_relations()
 {
     NotesManager2& m1 = NotesManager2::getManager();
@@ -183,8 +181,6 @@ void FenPrincipale::affichage_notes_relations()
 
 void FenPrincipale::affichage_single_note(QString id, QString date)
 {
-
-
 
     NotesManager2& m1 = NotesManager2::getManager();
     try
@@ -332,42 +328,6 @@ void FenPrincipale :: load_xml()
     m1.setFilename(filename);
     m1.load();
     this->affichage_notes_relations();
-}
-
-
-fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
-{
-    this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
-    NotesManager2& m1 = NotesManager2::getManager();
-    m_parent = parent;
-    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
-    note& current = m1.getNote(fenetre_parente->getCurrentNote());
-
-    m_layout_choix = new QVBoxLayout; //création layout
-    //Création des différents champs du formulaire
-    m_restaurer = new QPushButton("Restaurer",this);
-        //m_save->connect(m_save,SIGNAL(clicked(bool)),this,SLOT(save()));
-    m_quit = new QPushButton("Quitter",this);
-        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
-    m_listeNotes = new QListWidget(this);
-        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(choix_ancienne_version(QString)));
-
-
-    for (unsigned int i=0;i<current.getOldNotes().size();i++)
-    {
-        m_listeNotes->addItem(QString::fromStdString(current.getOldNotes()[i]->getModif()));
-    }
-
-    //Ajout des objets au layout
-    m_layout_choix->addWidget(new QLabel("<b>Modifié le :</b>"));
-    m_layout_choix->addWidget(m_listeNotes);
-    m_layout_choix->addWidget(m_restaurer);
-    m_layout_choix->addWidget(m_quit);
-
-
-
-    this->setLayout(m_layout_choix); //affectation du layout
-    this->move(100,100); //décalage de la nouvelle fenetre par rapport à la première
 }
 
 

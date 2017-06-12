@@ -415,7 +415,7 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
         delete &toDelete;
     }
     //on cherche la version de la note concernée
-    else //si la date n'est pas vide, on cherche à SupprimerNote une ancienne version
+    else //si la date n'est pas vide, on cherche à supprimer une ancienne version
     {
         unsigned int j=0;
         while (type[i]->getOldNotes()[j]->getModif() != date && j<type[i]->getOldNotes().size())
@@ -426,6 +426,63 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
     }
 }
 
+
+///Vérifie si la note_a_analyser contient des références vers d'autres notes, et ajoute les relations dans le cas échéant
+void NotesManager2::checkReferences() const
+{
+    RelationManager& rm = RelationManager::getManager();
+    NotesManager2& nm = NotesManager2::getManager();
+
+    //Suppression des couples correspondant à la note dans la relation References
+    Relation& rel_references = rm.getRelation("References");
+    rel_references.getCouples().clear();
+
+    for (unsigned int i=0;i<nm.gettype().size();i++)
+    {
+
+        std::string texte = nm.gettype ()[i]->getTexte() + nm.gettype()[i]->getTitre(); //On récupère le texte de la note à analyser
+
+        int position_debut_texte = texte.find("\\ref{");
+        int position_fin_texte = texte.find("}",position_debut_texte);
+
+
+        std::string id_texte =""; //contiendra l'id de la note courante
+
+
+        while ((position_debut_texte != std::string::npos && position_fin_texte != std::string::npos))
+        {
+            std::cout << "TROUVE : " << std::endl;
+            id_texte = texte.substr(position_debut_texte+5,position_fin_texte-position_debut_texte-5) ;
+            std::cout << id_texte << std::endl;
+
+            try{
+            nm.getNote(id_texte);
+
+           } catch (NotesException& excep)
+            {
+                std::cout << "Note non trouvee dans checkRef\n";
+                std::cout << excep.getInfo();
+                QMessageBox msgBox;
+                msgBox.setText("Un ou plusieurs identifiants référencés ne sont pas valides, veuillez les corriger");
+                msgBox.exec();
+                return;
+            }
+
+            //ajout de la relation
+            rel_references.addCouple(*(new Couple(*nm.gettype()[i],
+                                                                nm.getNote(id_texte),
+                                                                "Ref de " + nm.gettype()[i]->getID() + " vers " + nm.getNote(id_texte).getID(),
+                                                                1)));
+
+
+            position_debut_texte = texte.find("\\ref{",position_fin_texte);
+            position_fin_texte = texte.find("}",position_debut_texte);
+
+        }
+
+    }
+   return;
+}
 //********************************fin manager***********/
 
 
