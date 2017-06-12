@@ -54,6 +54,10 @@
 *
 *
 *
+* 13/06 : les deux manages différents sont ok  mais add pour une relation marche pas du coup c'est add relation de base
+*
+*       a faire : une fonction save et load pour les relations qui fonctionnent
+*                 ptet chercher pk add marche pas
 *
 */
 
