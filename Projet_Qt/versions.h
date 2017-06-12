@@ -14,6 +14,7 @@ fenetre_anciennes_versions(QWidget *parent);
 public slots:
 
 void choix_ancienne_version(QString date);
+void restaurer();
 
 private:
 

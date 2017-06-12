@@ -2,6 +2,44 @@
 #include "notes.h"
 #include "versions.h"
 #include "manager.h"
+
+
+fenetre_anciennes_versions::fenetre_anciennes_versions(QWidget* parent)
+{
+    this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
+    NotesManager2& m1 = NotesManager2::getManager();
+    m_parent = parent;
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+    note& current = m1.getNote(fenetre_parente->getCurrentNote());
+
+    m_layout_choix = new QVBoxLayout; //création layout
+    //Création des différents champs du formulaire
+    m_restaurer = new QPushButton("Restaurer",this);
+        m_restaurer->connect(m_restaurer,SIGNAL(clicked(bool)),this,SLOT(restaurer()));
+    m_quit = new QPushButton("Quitter",this);
+        m_quit->connect(m_quit,SIGNAL(clicked(bool)),this,SLOT(close()));
+    m_listeNotes = new QListWidget(this);
+        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(choix_ancienne_version(QString)));
+
+
+    for (unsigned int i=0;i<current.getOldNotes().size();i++)
+    {
+        m_listeNotes->addItem(QString::fromStdString(current.getOldNotes()[i]->getModif()));
+    }
+
+    //Ajout des objets au layout
+    m_layout_choix->addWidget(new QLabel("<b>Modifié le :</b>"));
+    m_layout_choix->addWidget(m_listeNotes);
+    m_layout_choix->addWidget(m_restaurer);
+    m_layout_choix->addWidget(m_quit);
+
+
+
+    this->setLayout(m_layout_choix); //affectation du layout
+    this->move(100,100); //décalage de la nouvelle fenetre par rapport à la première
+}
+
+
 void FenPrincipale::editerNote()
 {
     NotesManager2& m1 = NotesManager2::getManager();
@@ -54,7 +92,23 @@ void FenPrincipale::editerNote()
 
 void fenetre_anciennes_versions::choix_ancienne_version(QString date)
 {
-    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent);
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent); //on caste le parent pour accéder à ses méthodes
     std::cout << "id = " << fenetre_parente->getCurrentNote() << "date = " << date.toStdString() << std::endl;
     fenetre_parente->affichage_single_note(QString::fromStdString(fenetre_parente->getCurrentNote()), date);
+}
+
+void fenetre_anciennes_versions::restaurer()
+{
+    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent); //on caste le parent pour accéder à ses méthodes
+    std::string date = m_listeNotes->currentItem()->text().toStdString(); //on récupère la date de la version sélectionnée
+
+    NotesManager2& nm = NotesManager2::getManager();
+    note& ancienne_version = nm.getNote(fenetre_parente->getCurrentNote(),date); //on récupère une référence vers la version que l'on veut restaurer
+    nm.SupprimerNote(nm.getNote(ancienne_version.getID())); //on supprime la note dont on veut restaurer une ancienne version
+    nm.addNote(ancienne_version); //on ajoute l'ancienne version que l'on voulait restaurer
+
+    //nm.SupprimerNote(nm.getNote(fenetre_parente->getCurrentNote()),date); //on supprime
+
+
+
 }

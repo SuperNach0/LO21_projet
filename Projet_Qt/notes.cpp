@@ -124,16 +124,34 @@ throw NotesException("Version de note non trouvee\n");
 }
 
 
-void NotesManager2::SupprimerNote (note& toDelete)
+void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
 {
     unsigned int i=0;
-    while (notes[i]->getID() != toDelete.getID())
+    while (notes[i]->getID() != toDelete.getID() && i<notes.size()) //on recherche la note concernée
     {
         i++;
     }
-    notes.erase(notes.begin()+i);
-    toDelete.getOldNotes().clear();
-    delete &toDelete;
+    if (i==notes.size())
+    {
+        throw NotesException("Suppression impossible, note non trouvee\n");
+        return;
+    }
+    if (date=="")
+    {
+        notes.erase(notes.begin()+i);
+        toDelete.getOldNotes().clear();
+        delete &toDelete;
+    }
+    //on cherche la version de la note concernée
+    else //si la date n'est pas vide, on cherche à supprimer une ancienne version
+    {
+        unsigned int j=0;
+        while (notes[i]->getOldNotes()[j]->getModif() != date && j<notes[i]->getOldNotes().size())
+            j++;
+        notes[i]->getOldNotes()[j]->getOldNotes().clear();
+
+        notes[i]->getOldNotes().erase(notes[i]->getOldNotes().begin()+j);
+    }
 }
 
 
