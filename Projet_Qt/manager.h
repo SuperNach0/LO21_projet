@@ -5,6 +5,7 @@
 #include <QtWidgets>
 #include <iostream>
 #include <vector>
+#include "relations.h"
 
 
 #endif // MANAGER_H
@@ -18,13 +19,13 @@ protected :
 
 public:
 
-    void add (T& a);
+    void add (T& a_ajouter);
     void Supprimer (T& toDelete);
      const std::vector<T*> gettype() const {return type;}
    QString getFilename() const { return filename; }
    void setFilename(const QString& f) { filename=f; }
 
-   Manager(){}
+   Manager():type(0){}
 
    virtual ~Manager<T>(){std::cout<<"manager(base) detruit"<<std::endl;}
    Manager(const Manager& m);
@@ -73,5 +74,37 @@ public:
    static void freeManager();
 
    void checkReferences() const;
+
+};
+
+
+class RelationManager : public Manager<Relation> {
+
+private:
+
+
+    struct Handler {
+             RelationManager* instance; // pointeur sur l'unique instance
+             Handler():instance(nullptr){}
+            ~Handler() { delete instance; }
+        };
+    static Handler handler;
+    RelationManager();
+    ~RelationManager();
+
+
+
+ public:
+
+    Relation& getRelation (const std::string& titre);
+    void addRelation(Relation& relation);
+
+    static RelationManager& getManager();
+    static void freeManager();
+
+    void load(){} // load notes from file filename
+    void save(){} // save notes in file filename
+
+
 
 };

@@ -2,21 +2,21 @@
 #include "manager.h"
 #include <regex>
 
+
 void RelationManager::addRelation(Relation& relation)
 {
-    relations.push_back(&relation);
+    type.push_back(&relation);
 }
 
-
-RelationManager::RelationManager():relations(0){
-    addRelation(*(new Relation("References","Contient toutes les références entre notes")));
+RelationManager::RelationManager(){
+    RelationManager::addRelation(*(new Relation("References","Contient toutes les références entre notes")));
 } // constructeur de manager
 
 
 RelationManager::~RelationManager(){
-    for (unsigned int i=0;i<relations.size();i++)
-        delete relations[i];
-    relations.clear();
+    for (unsigned int i=0;i<type.size();i++)
+        delete type[i];
+    type.clear();
     std::cout<<"le RelationManager est detruit"<<std::endl;
 }
 
@@ -27,14 +27,14 @@ RelationManager::Handler RelationManager::handler=Handler();
 Relation& RelationManager::getRelation(const std::string& titre)
 {
     unsigned int i=0;
-    while (i<relations.size() && relations[i]->getTitre() != titre)
+    while (i<type.size() && type[i]->getTitre() != titre)
     {
         i++;
     }
-    if (i==relations.size())
+    if (i==type.size())
         throw NotesException("La relation n'existe pas\n");
 
-    return *relations[i];
+    return *type[i];
 }
 
 
@@ -65,6 +65,7 @@ void RelationManager::freeManager(){
     delete handler.instance;
     handler.instance=nullptr;
 }
+
 
 
 //********************************fin manager***********/

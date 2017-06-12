@@ -43,31 +43,6 @@ public:
 };
 
 
-class RelationManager {
 
-private:
-    std::vector<Relation*> relations;
-
-    struct Handler {
-             RelationManager* instance; // pointeur sur l'unique instance
-             Handler():instance(nullptr){}
-            ~Handler() { delete instance; }
-        };
-    static Handler handler;
-    RelationManager();
-    ~RelationManager();
-
-
-
- public:
-
-    Relation& getRelation (const std::string& titre);
-    void addRelation (Relation &relation);
-    std::vector<Relation*> getRelations() {return relations;}
-    static RelationManager& getManager();
-    static void freeManager();
-
-
-};
 
 #endif // RELATIONS_H

@@ -172,9 +172,9 @@ void FenPrincipale::affichage_notes_relations()
     RelationManager& m2 = RelationManager::getManager();
     m_listeRelatons->clear();
 
-    for (unsigned int i=0;i<m2.getRelations().size();i++)
+    for (unsigned int i=0;i<m2.gettype().size();i++)
     {
-        m_listeRelatons->addItem(QString::fromStdString(m2.getRelations()[i]->getTitre()));
+        m_listeRelatons->addItem(QString::fromStdString(m2.gettype()[i]->getTitre()));
     }
 
 }

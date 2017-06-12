@@ -22,7 +22,7 @@ void Manager<T>::add(T &a_ajouter)
 }
 
 
-NotesManager2::NotesManager2()//:type(0),filename("")
+NotesManager2::NotesManager2()// :Manager(0,"")
 {
 
 } // constructeur de manager
