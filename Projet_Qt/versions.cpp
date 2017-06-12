@@ -107,8 +107,7 @@ void fenetre_anciennes_versions::restaurer()
     nm.SupprimerNote(nm.getNote(ancienne_version.getID())); //on supprime la note dont on veut restaurer une ancienne version
     nm.addNote(ancienne_version); //on ajoute l'ancienne version que l'on voulait restaurer
 
+    this->close();
     //nm.SupprimerNote(nm.getNote(fenetre_parente->getCurrentNote()),date); //on supprime
-
-
 
 }

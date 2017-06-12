@@ -50,6 +50,7 @@
 *           - gérer la corbeille et l'archivage des notes, faire que la suppression d'une note supprime les couples
 *           dans laquelle elle est impliquée
 *           - gérer l'affichage ergonomique des taches selon prio/échance + arborescence
+*           - améliorer la gestion mémoire au niveau de la suppression, il reste des trucs non libérés
 *
 *
 */
