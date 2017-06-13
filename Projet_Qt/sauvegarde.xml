@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <sauvegarde>
     <notes>
         <article>
@@ -24,6 +24,18 @@
         </article>
     </notes>
     <relations>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>1?</titre>
+            <description>ezfz</description>
+        </relation>
         <relation>
             <titre>2</titre>
             <description>test</description>

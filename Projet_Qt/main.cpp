@@ -75,6 +75,9 @@ int main(int argc,  char *argv[]) {
 
     FenPrincipale fenetre;
     fenetre.show();
+
+     m1.load();
+   fenetre.affichage_notes_relations();
     app.exec();
 
 

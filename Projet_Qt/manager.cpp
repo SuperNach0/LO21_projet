@@ -29,7 +29,7 @@ NotesManager2::NotesManager2()// :Manager(0,"")
 
 
 NotesManager2::~NotesManager2(){
-if (filename!="") save();
+ save();
 for (unsigned int i = 0; i < type.size(); i++)
 {
     delete type[i];
@@ -367,9 +367,10 @@ while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "relati
                                          }
                                          if(xml.name() == "orientation") {
                                              xml.readNext(); orientation=xml.text().toString();
+
                                              qDebug()<<"orientation="<<orientation<<"\n";
-                                             if (orientation=="true") ori =  true;
-                                             else if (orientation=="flase") ori =  false;
+                                             if (orientation.toStdString()=="true") {ori =  1;std::cout<<ori<<std::endl;}
+                                             else {ori =  0;std::cout<<ori<<std::endl;}
                                          }
                                  }
                                // ...and next...
@@ -485,7 +486,7 @@ for (unsigned int i = 0; i<m2.gettype().size();i++)
                stream.writeTextElement("label",QString::fromStdString(m2.gettype()[i]->getCouples()[j]->getLabel()));
                if(m2.gettype()[i]->getCouples()[j]->isOriented())
                 stream.writeTextElement("orientation","true");
-               else  stream.writeTextElement("orientation","flase");
+               else  stream.writeTextElement("orientation","false");
           stream.writeEndElement();
         }
 

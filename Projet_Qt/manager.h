@@ -26,7 +26,7 @@ public:
    QString getFilename() const { return filename; }
    void setFilename(const QString& f) { filename=f; }
 
-   Manager():type(0){}
+   Manager():type(0),filename(QString::fromStdString("..\\sauvegarde.xml")){}
 
    virtual ~Manager<T>(){std::cout<<"manager(base) detruit"<<std::endl;}
    Manager(const Manager& m);

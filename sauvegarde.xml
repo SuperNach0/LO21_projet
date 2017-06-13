@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sauvegarde>
+    <notes>
+        <article>
+            <id>Entre l'id poulet</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-13 17:59:23</creation>
+            <modif>2017-06-13 17:59:23</modif>
+            <texte>texte/description/action ici</texte>
+        </article>
+        <article>
+            <id>Entre l'id pouletfzef</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-13 17:59:25</creation>
+            <modif>2017-06-13 17:59:25</modif>
+            <texte>texte/description/action ici</texte>
+        </article>
+        <article>
+            <id>Entre l'id pouletdrhe</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-13 18:10:40</creation>
+            <modif>2017-06-13 18:10:40</modif>
+            <texte>texte/description/action ici</texte>
+        </article>
+        <article>
+            <id>Entreazd</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-13 18:10:52</creation>
+            <modif>2017-06-13 18:10:52</modif>
+            <texte>texte/description/action ici</texte>
+        </article>
+    </notes>
+    <relations>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>ezfez</titre>
+            <description>Description de la relation ?</description>
+            <couple>
+                <premiere>Entre l'id poulet</premiere>
+                <seconde>Entre l'id pouletfzef</seconde>
+                <label>Label du couple ?</label>
+                <orientation>true</orientation>
+            </couple>
+            <couple>
+                <premiere>Entre l'id pouletfzef</premiere>
+                <seconde>Entre l'id pouletfzef</seconde>
+                <label>Label du couple ?</label>
+                <orientation>false</orientation>
+            </couple>
+        </relation>
+    </relations>
+</sauvegarde>

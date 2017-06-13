@@ -13,7 +13,7 @@ private:
     bool orientation;
 public:
 
-    Couple(note& note1, note& note2, std::string lab, bool orientation):premiere(&note1),seconde(&note2),label(lab),orientation(orientation){}
+    Couple(note& note1, note& note2, std::string lab, bool ori):premiere(&note1),seconde(&note2),label(lab),orientation(ori){}
     const note& getPremiere() const {return *premiere;}
     const note& getSeconde() const {return *seconde;}
     const std::string getLabel() const {return label;}
