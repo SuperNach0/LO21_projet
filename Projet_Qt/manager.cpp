@@ -84,240 +84,325 @@ void Manager<T>::Supprimer (T& toDelete)
 }
 
 
-                                                // A FAIRE EN Qt PAREIL POUR SAVE
+
+// A FAIRE EN Qt PAREIL POUR SAVE
+// A FAIRE EN Qt PAREIL POUR SAVE
 void NotesManager2::load() {
 QFile fin(filename);
 // If we can't open it, let's show an error message.
 if (!fin.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    throw NotesException("Erreur ouverture fichier notes");
+throw NotesException("Erreur ouverture fichier notes");
 }
 // QXmlStreamReader takes any QIODevice.
 QXmlStreamReader xml(&fin);
 //qDebug()<<"debut fichier\n";
 // We'll parse the XML until we reach end of it.
 while(!xml.atEnd() && !xml.hasError()) {
-    // Read next element.
-    QXmlStreamReader::TokenType token = xml.readNext();
-    // If token is just StartDocument, we'll go to next.
-    if(token == QXmlStreamReader::StartDocument) continue;
-    // If token is StartElement, we'll see if we can read it.
-    if(token == QXmlStreamReader::StartElement) {
-        // If it's named taches, we'll go to the next.
-        if(xml.name() == "notes") continue;
-        // If it's named tache, we'll dig the information from there.
-        if(xml.name() == "article") {// µ**********************************************ARTICLE
-            qDebug()<<"new article\n";
-            QString identificateur;
-            QString titre;
-            QString creation;
-            QString modif;
-            QString text;
-            QXmlStreamAttributes attributes = xml.attributes();
-            xml.readNext();
-            //We're going to loop over the things because the order might change.
-            //We'll continue the loop until we hit an EndElement named article.
-            while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "article")) {
-                if(xml.tokenType() == QXmlStreamReader::StartElement) {
-                    // We've found identificteur.
-                    if(xml.name() == "id") {
-                        xml.readNext(); identificateur=xml.text().toString();
-                        qDebug()<<"id="<<identificateur<<"\n";
-                    }
+// Read next element.
+QXmlStreamReader::TokenType token = xml.readNext();
+// If token is just StartDocument, we'll go to next.
+if(token == QXmlStreamReader::StartDocument) continue;
+// If token is StartElement, we'll see if we can read it.
+if(token == QXmlStreamReader::StartElement) {
+// If it's named notes, we'll go to the next.
+if(xml.name() == "notes") continue;
+// If it's named tache, we'll dig the information from there.
+if(xml.name() == "article") {// µ**********************************************ARTICLE
+qDebug()<<"new article\n";
+QString identificateur;
+QString titre;
+QString creation;
+QString modif;
+QString text;
+QXmlStreamAttributes attributes = xml.attributes();
+xml.readNext();
+//We're going to loop over the things because the order might change.
+//We'll continue the loop until we hit an EndElement named article.
+while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "article")) {
+if(xml.tokenType() == QXmlStreamReader::StartElement) {
+// We've found identificteur.
+if(xml.name() == "id") {
+xml.readNext(); identificateur=xml.text().toString();
+qDebug()<<"id="<<identificateur<<"\n";
+}
 
-                    // We've found titre.
-                    if(xml.name() == "titre") {
-                        xml.readNext(); titre=xml.text().toString();
-                        qDebug()<<"titre="<<titre<<"\n";
-                    }
-                    // We've found creation
-                    if(xml.name() == "creation") {
-                        xml.readNext();
-                        creation=xml.text().toString();
-                        qDebug()<<"creation="<<creation<<"\n";
-                    }
-                    // We've found modif
-                    if(xml.name() == "modif") {
-                        xml.readNext();
-                        modif=xml.text().toString();
-                        qDebug()<<"modif="<<modif<<"\n";
-                    }
-                    // We've found text
-                    if(xml.name() == "texte") {
-                        xml.readNext();
-                        text=xml.text().toString();
-                        qDebug()<<"texte="<<text<<"\n";
-                    }
-                }
-                // ...and next...
-                xml.readNext();
-            }
-            qDebug()<<"ajout note "<<identificateur<<"\n";
-            article* nouveau = new article(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
-            //NotesManager2::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
-            NotesManager2::add(*nouveau);
-        }
+// We've found titre.
+if(xml.name() == "titre") {
+xml.readNext(); titre=xml.text().toString();
+qDebug()<<"titre="<<titre<<"\n";
+}
+// We've found creation
+if(xml.name() == "creation") {
+xml.readNext();
+creation=xml.text().toString();
+qDebug()<<"creation="<<creation<<"\n";
+}
+// We've found modif
+if(xml.name() == "modif") {
+xml.readNext();
+modif=xml.text().toString();
+qDebug()<<"modif="<<modif<<"\n";
+}
+// We've found text
+if(xml.name() == "texte") {
+xml.readNext();
+text=xml.text().toString();
+qDebug()<<"texte="<<text<<"\n";
+}
+}
+// ...and next...
+xml.readNext();
+}
+qDebug()<<"ajout note "<<identificateur<<"\n";
+article* nouveau = new article(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
+//NotesManager2::ajArticle(identificateur.toStdString(),titre.toStdString(),text.toStdString(),creation.toStdString(),modif.toStdString());
+NotesManager2::add(*nouveau);
+}
 
-      else  if(xml.name() == "media") {// µ**********************************************MEDIAA
-            qDebug()<<"new media\n";
-            QString identificateur;
-            QString titre;
-            QString creation;
-            QString modif;
-            QString text;
-            QString path;
-            QXmlStreamAttributes attributes = xml.attributes();
-            xml.readNext();
-            //We're going to loop over the things because the order might change.
-            //We'll continue the loop until we hit an EndElement named article.
-            while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "media")) {
-                if(xml.tokenType() == QXmlStreamReader::StartElement) {
-                    // We've found identificteur.
-                    if(xml.name() == "id") {
-                        xml.readNext(); identificateur=xml.text().toString();
-                        qDebug()<<"id="<<identificateur<<"\n";
-                    }
+if(xml.name() == "media") {// µ**********************************************MEDIAA
+qDebug()<<"new media\n";
+QString identificateur;
+QString titre;
+QString creation;
+QString modif;
+QString text;
+QString path;
+QXmlStreamAttributes attributes = xml.attributes();
+xml.readNext();
+//We're going to loop over the things because the order might change.
+//We'll continue the loop until we hit an EndElement named article.
+while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "media")) {
+if(xml.tokenType() == QXmlStreamReader::StartElement) {
+// We've found identificteur.
+if(xml.name() == "id") {
+xml.readNext(); identificateur=xml.text().toString();
+qDebug()<<"id="<<identificateur<<"\n";
+}
 
-                    // We've found titre.
-                    if(xml.name() == "titre") {
-                        xml.readNext(); titre=xml.text().toString();
-                        qDebug()<<"titre="<<titre<<"\n";
-                    }
-                    // We've found creation
-                    if(xml.name() == "creation") {
-                        xml.readNext();
-                        creation=xml.text().toString();
-                        qDebug()<<"creation="<<creation<<"\n";
-                    }
-                    // We've found modif
-                    if(xml.name() == "modif") {
-                        xml.readNext();
-                        modif=xml.text().toString();
-                        qDebug()<<"modif="<<modif<<"\n";
-                    }
-                    // We've found text
-                    if(xml.name() == "texte") {
-                        xml.readNext();
-                        text=xml.text().toString();
-                        qDebug()<<"texte="<<text<<"\n";
-                    }
-                    // We've found path
-                    if(xml.name() == "chemin") {
-                        xml.readNext();
-                        path=xml.text().toString();
-                        qDebug()<<"chemin="<<path<<"\n";
-                    }
-                }
-                // ...and next...
-                xml.readNext();
-            }
-            qDebug()<<"ajout note "<<identificateur<<"\n";
-            media* nouveau = new media(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
-                                       creation.toStdString(),modif.toStdString());
-            NotesManager2::add(*nouveau);
+// We've found titre.
+if(xml.name() == "titre") {
+xml.readNext(); titre=xml.text().toString();
+qDebug()<<"titre="<<titre<<"\n";
+}
+// We've found creation
+if(xml.name() == "creation") {
+xml.readNext();
+creation=xml.text().toString();
+qDebug()<<"creation="<<creation<<"\n";
+}
+// We've found modif
+if(xml.name() == "modif") {
+xml.readNext();
+modif=xml.text().toString();
+qDebug()<<"modif="<<modif<<"\n";
+}
+// We've found text
+if(xml.name() == "texte") {
+xml.readNext();
+text=xml.text().toString();
+qDebug()<<"texte="<<text<<"\n";
+}
+// We've found path
+if(xml.name() == "chemin") {
+xml.readNext();
+path=xml.text().toString();
+qDebug()<<"chemin="<<path<<"\n";
+}
+}
+// ...and next...
+xml.readNext();
+}
+qDebug()<<"ajout note "<<identificateur<<"\n";
+media* nouveau = new media(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
+creation.toStdString(),modif.toStdString());
+NotesManager2::add(*nouveau);
 
-           // NotesManager2::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
-             //                        creation.toStdString(),modif.toStdString());
+// NotesManager2::ajMulti(identificateur.toStdString(),titre.toStdString(),text.toStdString(),path.toStdString(),
+//                        creation.toStdString(),modif.toStdString());
 
-        }
-
-
-        else if (xml.name()=="tache"){// **********************************************TACHE
-
-            qDebug()<<"new tache\n";
-            QString identificateur;
-            QString titre;
-            QString creation;
-            QString modif;
-            QString text;
-            int  priorite;
-            QString echeance;
-            QString status;
-            enum etat state;
-
-            QXmlStreamAttributes attributes = xml.attributes();
-            xml.readNext();
-            //We're going to loop over the things because the order might change.
-            //We'll continue the loop until we hit an EndElement named article.
-            while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "tache")) {
-                if(xml.tokenType() == QXmlStreamReader::StartElement) {
-                    // We've found identificteur.
-                    if(xml.name() == "id") {
-                        xml.readNext(); identificateur=xml.text().toString();
-                        qDebug()<<"id="<<identificateur<<"\n";
-                    }
-
-                    // We've found titre.
-                    if(xml.name() == "titre") {
-                        xml.readNext(); titre=xml.text().toString();
-                        qDebug()<<"titre="<<titre<<"\n";
-                    }
-                    // We've found creation
-                    if(xml.name() == "creation") {
-                        xml.readNext();
-                        creation=xml.text().toString();
-                        qDebug()<<"creation="<<creation<<"\n";
-                    }
-                    // We've found modif
-                    if(xml.name() == "modif") {
-                        xml.readNext();
-                        modif=xml.text().toString();
-                        qDebug()<<"modif="<<modif<<"\n";
-                    }
-                    // We've found text
-                    if(xml.name() == "texte") {
-                        xml.readNext();
-                        text=xml.text().toString();
-                        qDebug()<<"texte="<<text<<"\n";
-                    }
-                    // We've found echeance
-                    if(xml.name() == "echeance") {
-                        xml.readNext();
-                        echeance=xml.text().toString();
-                        qDebug()<<"echeance="<<echeance<<"\n";
-                    }
-                    // We've found priorite
-                    if(xml.name() == "priorite") {
-                        xml.readNext();
-                        priorite=xml.text().toInt();
-                        qDebug()<<"priorite="<<priorite<<"\n";
-                    }
-                     //We've found statu
-                    if(xml.name() == "status") {
-                        xml.readNext();
-                        status=xml.text().toString();
-                        qDebug()<<"status="<<status<<"\n";
+}
 
 
-                        if (status=="En attente") state=en_attente;
-                        else if (status=="En cours") state=en_cours;
-                        else if (status=="Terminee") state=terminee;
-
-                    }
-                }
-                // ...and next...
-                xml.readNext();
-            }
-            qDebug()<<"ajout note "<<identificateur<<"\n";
-
-            tache* nouveau = new tache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
-                                       priorite,echeance.toStdString(),state,
-                                       creation.toStdString(),modif.toStdString());
-            NotesManager2::add(*nouveau);
-
-            /*
-            NotesManager2::ajTache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
-                                   priorite,echeance.toStdString(),state,
-                                   creation.toStdString(),modif.toStdString());
-                                   */
 
 
-        }
+
+if (xml.name()=="tache"){// **********************************************TACHE
+
+qDebug()<<"new tache\n";
+QString identificateur;
+QString titre;
+QString creation;
+QString modif;
+QString text;
+int  priorite;
+QString echeance;
+QString status;
+enum etat state;
+
+QXmlStreamAttributes attributes = xml.attributes();
+xml.readNext();
+//We're going to loop over the things because the order might change.
+//We'll continue the loop until we hit an EndElement named article.
+while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "tache")) {
+if(xml.tokenType() == QXmlStreamReader::StartElement) {
+// We've found identificteur.
+if(xml.name() == "id") {
+xml.readNext(); identificateur=xml.text().toString();
+qDebug()<<"id="<<identificateur<<"\n";
+}
+
+// We've found titre.
+if(xml.name() == "titre") {
+xml.readNext(); titre=xml.text().toString();
+qDebug()<<"titre="<<titre<<"\n";
+}
+// We've found creation
+if(xml.name() == "creation") {
+xml.readNext();
+creation=xml.text().toString();
+qDebug()<<"creation="<<creation<<"\n";
+}
+// We've found modif
+if(xml.name() == "modif") {
+xml.readNext();
+modif=xml.text().toString();
+qDebug()<<"modif="<<modif<<"\n";
+}
+// We've found text
+if(xml.name() == "texte") {
+xml.readNext();
+text=xml.text().toString();
+qDebug()<<"texte="<<text<<"\n";
+}
+// We've found echeance
+if(xml.name() == "echeance") {
+xml.readNext();
+echeance=xml.text().toString();
+qDebug()<<"echeance="<<echeance<<"\n";
+}
+// We've found priorite
+if(xml.name() == "priorite") {
+xml.readNext();
+priorite=xml.text().toInt();
+qDebug()<<"priorite="<<priorite<<"\n";
+}
+//We've found statu
+if(xml.name() == "status") {
+xml.readNext();
+status=xml.text().toString();
+qDebug()<<"status="<<status<<"\n";
+
+
+if (status=="En attente") state=en_attente;
+else if (status=="En cours") state=en_cours;
+else if (status=="Terminee") state=terminee;
+
+}
+}
+// ...and next...
+xml.readNext();
+}
+qDebug()<<"ajout note "<<identificateur<<"\n";
+
+tache* nouveau = new tache(identificateur.toStdString(),titre.toStdString(),text.toStdString(),
+priorite,echeance.toStdString(),state,
+creation.toStdString(),modif.toStdString());
+NotesManager2::add(*nouveau);
+}
+if(xml.name() == "relations"){std::cout<<"on a atteind les relations"<<std::endl; continue;}
+
+
+if(xml.name() == "relation") {// µ**********************************************RELATION
+qDebug()<<"new relation\n";
+QString titre;
+QString description;
+std::vector<Couple*> couplees;
+
+QXmlStreamAttributes attributes = xml.attributes();
+xml.readNext();
+//We're going to loop over the things because the order might change.
+//We'll continue the loop until we hit an EndElement named article.
+while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "relation")) {
+    if(xml.tokenType() == QXmlStreamReader::StartElement) {
+    // We've found identificteur.
+    if(xml.name() == "titre") {
+    xml.readNext(); titre=xml.text().toString();
+    qDebug()<<"titre="<<titre<<"\n";
+    }
+
+    // We've found titre.
+    if(xml.name() == "description") {
+    xml.readNext(); description=xml.text().toString();
+    qDebug()<<"description="<<description<<"\n";
 
     }
+
+
+
+
+
+     if(xml.name() == "couple"){ qDebug()<<"dans un couple\n";
+                                 QString premiere;
+                                 QString seconde;
+                                 QString label;
+                                 QString orientation;
+                                 bool ori;
+
+                                 QXmlStreamAttributes attributes = xml.attributes();
+                                 xml.readNext();
+                                 while(!(xml.tokenType() == QXmlStreamReader::EndElement && xml.name() == "couple")) {
+                                     if(xml.tokenType() == QXmlStreamReader::StartElement) {
+                                         // We've found identificteur.
+                                         if(xml.name() == "premiere") {
+                                             xml.readNext(); premiere=xml.text().toString();
+                                             qDebug()<<"premiere="<<premiere<<"\n";
+                                         }
+                                         if(xml.name() == "seconde") {
+                                             xml.readNext(); seconde=xml.text().toString();
+                                             qDebug()<<"seconde="<<seconde<<"\n";
+                                         }
+                                         if(xml.name() == "label") {
+                                             xml.readNext(); label=xml.text().toString();
+                                             qDebug()<<"label="<<label<<"\n";
+                                         }
+                                         if(xml.name() == "orientation") {
+                                             xml.readNext(); orientation=xml.text().toString();
+                                             qDebug()<<"orientation="<<orientation<<"\n";
+                                             if (orientation=="true") ori =  true;
+                                             else if (orientation=="flase") ori =  false;
+                                         }
+                                 }
+                               // ...and next...
+                                xml.readNext();
+
+                                 }
+                                 NotesManager2  &m1 = NotesManager2::getManager();
+                                 Couple* nouv = new Couple (m1.getNote(premiere.toStdString()),m1.getNote(seconde.toStdString()),label.toStdString(),ori);
+                                 couplees.push_back(nouv);
+
+    }
+
+            }
+// ...and next...
+xml.readNext();
 }
+RelationManager& m2 = RelationManager::getManager();
+Relation* nouvo = new Relation (titre.toStdString(),description.toStdString());
+for (unsigned int k = 0; k<couplees.size();k++) {nouvo->addCouple(*couplees[k]);}
+m2.addRelation(*nouvo);
+
+
+
+
+
+}
+
+}
+}
+
 // Error handling.
 if(xml.hasError()) {
-    throw NotesException("Erreur lecteur fichier notes, parser xml");
+throw NotesException("Erreur lecteur fichier notes, parser xml");
 }
 // Removes any device() or data from the reader * and resets its internal state to the initial state.
 xml.clear();
@@ -392,7 +477,7 @@ for (unsigned int i = 0; i<m2.gettype().size();i++)
     stream.writeTextElement("titre",QString::fromStdString((m2.gettype()[i])->getTitre()));
      stream.writeTextElement("description",QString::fromStdString((m2.gettype()[i])->getDescription()));
 
-    stream.writeStartElement("couples");
+
         for (unsigned int j = 0; j<m2.gettype()[i]->getCouples().size();j++) {
            stream.writeStartElement("couple");
              stream.writeTextElement("premiere",QString::fromStdString((m2.gettype()[i]->getCouples()[j]->getPremiere().getID())));
@@ -402,7 +487,7 @@ for (unsigned int i = 0; i<m2.gettype().size();i++)
                 stream.writeTextElement("orientation","true");
                else  stream.writeTextElement("orientation","flase");
           stream.writeEndElement();
-        }stream.writeEndElement();
+        }
 
 
 

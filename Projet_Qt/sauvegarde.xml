@@ -1,86 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <sauvegarde>
     <notes>
         <article>
-            <id>Entre l'id pouletefze</id>
+            <id>Entre l'id poulet</id>
             <titre>Titre ici</titre>
-            <creation>2017-06-13 10:31:08</creation>
-            <modif>2017-06-13 10:31:08</modif>
+            <creation>2017-06-13 15:32:53</creation>
+            <modif>2017-06-13 15:32:53</modif>
             <texte>texte/description/action ici</texte>
         </article>
         <article>
-            <id>Entre l'id pouletzefz</id>
+            <id>Entre l'id pouletfz</id>
             <titre>Titre ici</titre>
-            <creation>2017-06-13 10:31:11</creation>
-            <modif>2017-06-13 10:31:11</modif>
+            <creation>2017-06-13 15:32:56</creation>
+            <modif>2017-06-13 15:32:56</modif>
+            <texte>texte/description/action ici</texte>
+        </article>
+        <article>
+            <id>Entre l'id pouletezfz</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-13 15:32:59</creation>
+            <modif>2017-06-13 15:32:59</modif>
             <texte>texte/description/action ici</texte>
         </article>
     </notes>
     <relations>
         <relation>
-            <titre>References</titre>
-            <description>Contient toutes les références entre notes</description>
-            <couples/>
-        </relation>
-        <relation>
-            <titre>chaal</titre>
-            <description>tetst du sqoihc</description>
-            <couples>
-                <couple>
-                    <premiere>Entre l'id pouletzefz</premiere>
-                    <seconde>Entre l'id pouletefze</seconde>
-                    <label>bite</label>
-                    <orientation>true</orientation>
-                </couple>
-                <couple>
-                    <premiere>Entre l'id pouletefze</premiere>
-                    <seconde>Entre l'id pouletzefz</seconde>
-                    <label>cul</label>
-                    <orientation>flase</orientation>
-                </couple>
-            </couples>
-        </relation>
-        <relation>
-            <titre>3 o</titre>
-            <description>ori</description>
-            <couples>
-                <couple>
-                    <premiere>Entre l'id pouletzefz</premiere>
-                    <seconde>Entre l'id pouletzefz</seconde>
-                    <label>Label du couple ?</label>
-                    <orientation>true</orientation>
-                </couple>
-                <couple>
-                    <premiere>Entre l'id pouletzefz</premiere>
-                    <seconde>Entre l'id pouletzefz</seconde>
-                    <label>Label du couple ?</label>
-                    <orientation>true</orientation>
-                </couple>
-                <couple>
-                    <premiere>Entre l'id pouletzefz</premiere>
-                    <seconde>Entre l'id pouletzefz</seconde>
-                    <label>Label du couple ?</label>
-                    <orientation>true</orientation>
-                </couple>
-            </couples>
-        </relation>
-        <relation>
             <titre>2</titre>
-            <description>non rtio</description>
-            <couples>
-                <couple>
-                    <premiere>Entre l'id pouletzefz</premiere>
-                    <seconde>Entre l'id pouletefze</seconde>
-                    <label>Label du couple ?</label>
-                    <orientation>flase</orientation>
-                </couple>
-                <couple>
-                    <premiere>Entre l'id pouletzefz</premiere>
-                    <seconde>Entre l'id pouletefze</seconde>
-                    <label>Label du couple ?</label>
-                    <orientation>flase</orientation>
-                </couple>
-            </couples>
+            <description>test</description>
+        </relation>
+        <relation>
+            <titre>oui</titre>
+            <description>zad</description>
+            <couple>
+                <premiere>Entre l'id pouletezfz</premiere>
+                <seconde>Entre l'id poulet</seconde>
+                <label>Label du couple ?</label>
+                <orientation>true</orientation>
+            </couple>
+            <couple>
+                <premiere>Entre l'id pouletezfz</premiere>
+                <seconde>Entre l'id poulet</seconde>
+                <label>Label du couple ?</label>
+                <orientation>flase</orientation>
+            </couple>
+            <couple>
+                <premiere>Entre l'id pouletezfz</premiere>
+                <seconde>Entre l'id poulet</seconde>
+                <label>Label du couple ?</label>
+                <orientation>flase</orientation>
+            </couple>
         </relation>
     </relations>
 </sauvegarde>

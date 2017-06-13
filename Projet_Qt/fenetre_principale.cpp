@@ -330,6 +330,7 @@ void FenPrincipale :: load_xml()
     m2.setFilename(filename);
     m1.load();
     this->affichage_notes_relations();
+
 }
 
 

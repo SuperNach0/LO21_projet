@@ -103,7 +103,7 @@ private:
     static RelationManager& getManager();
     static void freeManager();
 
-    void load(){} // load notes from file filename
+    void load() {}; // load notes from file filename
     void save(){} // save notes in file filename
 
 
