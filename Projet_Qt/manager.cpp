@@ -17,12 +17,11 @@ void Manager<T>::add(T &a_ajouter)
         if (type[i]->getID()==a_ajouter.getID())
             throw NotesException("Erreur, note deja existante\n");
     }
-
     type.push_back(&a_ajouter);
 }
 
 
-NotesManager2::NotesManager2()// :Manager(0,"")
+NotesManager2::NotesManager2()
 {
 
 } // constructeur de manager
@@ -80,13 +79,21 @@ void Manager<T>::Supprimer (T& toDelete)
     }
     type.erase(type.begin()+i);
     toDelete.getOldNotes().clear();
+
+    //Suppression des couples ou la note est impliquée
+    /*
+    for (unsigned int i=0;i<type.size();i++)
+    {
+        if (type[i]->getID == toDelete)
+    }*/
+
     delete &toDelete;
+
 }
 
 
 
-// A FAIRE EN Qt PAREIL POUR SAVE
-// A FAIRE EN Qt PAREIL POUR SAVE
+
 void NotesManager2::load() {
 QFile fin(filename);
 // If we can't open it, let's show an error message.
@@ -411,8 +418,6 @@ qDebug()<<"fin load\n";
 }
 
 
-
-
 void NotesManager2::save(){
 RelationManager &m2 = RelationManager::getManager();
 
@@ -549,10 +554,21 @@ void NotesManager2::checkReferences() const
 {
     RelationManager& rm = RelationManager::getManager();
     NotesManager2& nm = NotesManager2::getManager();
-
+    Relation* test_rel_reference;
+    try
+    {
+           test_rel_reference = &(rm.getRelation("References"));
+           std::cout << "References deja existante\n";
+    }
+    catch(NotesException& exception)
+    {
+        std::cout << "References n'existait pas, creation \n";
+        test_rel_reference = (new Relation("References","Contient toutes les références entre notes"));
+        rm.addRelation(*test_rel_reference);
+    }
+    Relation& rel_references = *test_rel_reference;
     //Suppression des couples correspondant à la note dans la relation References
-    Relation& rel_references = rm.getRelation("References");
-    rel_references.getCouples().clear();
+        rel_references.getCouples().clear();
 
     for (unsigned int i=0;i<nm.gettype().size();i++)
     {
