@@ -534,6 +534,25 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
     {
         type.erase(type.begin()+i);
         toDelete.getOldNotes().clear();
+
+        //Suppression des couples ou la note est présente
+        RelationManager& nm = RelationManager::getManager();
+        for (unsigned int i=0;i<nm.gettype().size();i++)
+        {
+            std::cout<< "pass boucle 1\n";
+            for (unsigned int j=0;j<nm.gettype()[i]->getCouples().size();j++)
+            {
+                std::cout << "passage\n";
+                if (nm.gettype()[i]->getCouples()[j]->getPremiere().getID()==toDelete.getID() ||
+                        nm.gettype()[i]->getCouples()[j]->getSeconde().getID()==toDelete.getID())
+                {
+                    std::cout << "passage if\n";
+                    nm.gettype()[i]->getCouples().erase(nm.gettype()[i]->getCouples().begin()+j);
+                    std::cout<<"suppression couple (a faire)\n";
+                }
+            }
+        }
+
         delete &toDelete;
     }
     //on cherche la version de la note concernée
@@ -613,12 +632,9 @@ void NotesManager2::checkReferences() const
 
         }
 
+
+
     }
    return;
 }
 //********************************fin manager***********/
-
-
-
-
-

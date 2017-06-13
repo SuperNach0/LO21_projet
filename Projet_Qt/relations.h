@@ -34,8 +34,7 @@ public:
     Relation(const std::string& tit, const std::string& desc) : couples(0),titre(tit),description(desc){}
     void addCouple(Couple& couple){couples.push_back(&couple);}
 
-
-
+    //void supprimerCouple(std::string& label) {}
     std::vector<Couple*>& getCouples(){return couples;}
     const std::string& getTitre() const {return titre;}
     const std::string& getDescription() const {return description;}
