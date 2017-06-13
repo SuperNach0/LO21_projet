@@ -328,12 +328,15 @@ qDebug()<<"fin load\n";
 
 
 void NotesManager2::save(){
+RelationManager &m2 = RelationManager::getManager();
+
 QFile newfile(filename);
 if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text))
     throw NotesException("erreur sauvegarde notes : ouverture fichier xml");
 QXmlStreamWriter stream(&newfile);
 stream.setAutoFormatting(true);
 stream.writeStartDocument();
+stream.writeStartElement("sauvegarde");
 stream.writeStartElement("notes");
 
 for (unsigned int i = 0; i<gettype().size();i++)
@@ -380,6 +383,34 @@ for (unsigned int i = 0; i<gettype().size();i++)
 
     }
 }
+stream.writeEndElement();
+stream.writeStartElement("relations");
+for (unsigned int i = 0; i<m2.gettype().size();i++)
+{
+
+    stream.writeStartElement("relation");
+    stream.writeTextElement("titre",QString::fromStdString((m2.gettype()[i])->getTitre()));
+     stream.writeTextElement("description",QString::fromStdString((m2.gettype()[i])->getDescription()));
+
+    stream.writeStartElement("couples");
+        for (unsigned int j = 0; j<m2.gettype()[i]->getCouples().size();j++) {
+           stream.writeStartElement("couple");
+             stream.writeTextElement("premiere",QString::fromStdString((m2.gettype()[i]->getCouples()[j]->getPremiere().getID())));
+              stream.writeTextElement("seconde",QString::fromStdString((m2.gettype()[i]->getCouples()[j]->getSeconde().getID())));
+               stream.writeTextElement("label",QString::fromStdString(m2.gettype()[i]->getCouples()[j]->getLabel()));
+               if(m2.gettype()[i]->getCouples()[j]->isOriented())
+                stream.writeTextElement("orientation","true");
+               else  stream.writeTextElement("orientation","flase");
+          stream.writeEndElement();
+        }stream.writeEndElement();
+
+
+
+
+    stream.writeEndElement();
+  }
+
+stream.writeEndElement();
 stream.writeEndElement();
 stream.writeEndDocument();
 newfile.close();

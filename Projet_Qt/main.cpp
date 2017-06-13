@@ -191,7 +191,7 @@ int main(int argc,  char *argv[]) {
 
 
     };
-
-
+ m1.freeManager();
+ m2.freeManager();
     return  0;
 }

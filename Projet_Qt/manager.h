@@ -9,6 +9,7 @@
 
 
 #endif // MANAGER_H
+class RelationManager;
 
 template<class T>
 class Manager {

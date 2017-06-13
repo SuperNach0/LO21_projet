@@ -324,8 +324,10 @@ void FenPrincipale :: popupCreationRelation()
 void FenPrincipale :: load_xml()
 {
     NotesManager2 &m1 = NotesManager2::getManager();
+    RelationManager &m2 = RelationManager::getManager();
     QString filename = QFileDialog::getOpenFileName();
     m1.setFilename(filename);
+    m2.setFilename(filename);
     m1.load();
     this->affichage_notes_relations();
 }

@@ -66,6 +66,16 @@ void RelationManager::freeManager(){
     handler.instance=nullptr;
 }
 
+void save()
+{
+
+}
+
+
+
+
+
+
 
 
 //********************************fin manager***********/
