@@ -108,6 +108,5 @@ void fenetre_anciennes_versions::restaurer()
     nm.add(ancienne_version); //on ajoute l'ancienne version que l'on voulait restaurer
 
     this->close();
-    //nm.SupprimerNote(nm.getNote(fenetre_parente->getCurrentNote()),date); //on supprime
 
 }

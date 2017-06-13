@@ -297,7 +297,6 @@ public :
     void setStatus(enum etat stat){status=stat;}
 
     virtual void afficher(std::ostream& f= std::cout) const ;
-    //virtual void MiseAJour () ;
 
 
 };

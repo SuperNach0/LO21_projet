@@ -1,4 +1,4 @@
-﻿#ifndef MANAGER_H
+#ifndef MANAGER_H
 #define MANAGER_H
 #include <QString>
 #include <QApplication>
@@ -16,13 +16,13 @@ class Manager {
 protected :
 
    std::vector<T*> type;
-   mutable  QString filename;
+   QString filename;
 
 public:
 
-    void add (T& a_ajouter);
-    void Supprimer (T& toDelete);
-     const std::vector<T*> gettype() const {return type;}
+   void add (T& a_ajouter);
+   void Supprimer (T& toDelete);
+   const std::vector<T*> gettype() const {return type;}
    QString getFilename() const { return filename; }
    void setFilename(const QString& f) { filename=f; }
 
