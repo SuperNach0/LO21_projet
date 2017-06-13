@@ -16,13 +16,13 @@ class Manager {
 protected :
 
    std::vector<T*> type;
-   QString filename;
+   mutable  QString filename;
 
 public:
 
-   void add (T& a_ajouter);
-   void Supprimer (T& toDelete);
-   const std::vector<T*> gettype() const {return type;}
+    void add (T& a_ajouter);
+    void Supprimer (T& toDelete);
+     const std::vector<T*> gettype() const {return type;}
    QString getFilename() const { return filename; }
    void setFilename(const QString& f) { filename=f; }
 
@@ -105,7 +105,6 @@ private:
 
     void load() {}; // load notes from file filename
     void save(){} // save notes in file filename
-
 
 
 

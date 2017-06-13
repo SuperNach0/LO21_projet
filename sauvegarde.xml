@@ -1,4 +1,47 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <sauvegarde>
-
+    <notes>
+        <tache>
+            <id>Entrez un id2</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-14 00:42:49</creation>
+            <modif>2017-06-14 00:42:49</modif>
+            <texte>texte/description/action i \ref{Entrez un id} ci</texte>
+            <echeance>samedi 17 juin 2017</echeance>
+            <priorite>3</priorite>
+            <status>En attente</status>
+        </tache>
+        <tache>
+            <id>Entrez un id3</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-14 00:43:12</creation>
+            <modif>2017-06-14 00:43:12</modif>
+            <texte>texte/description/action ici</texte>
+            <echeance></echeance>
+            <priorite>7</priorite>
+            <status>En attente</status>
+        </tache>
+        <media>
+            <id>Entrez un id4</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-14 00:43:33</creation>
+            <modif>2017-06-14 00:43:33</modif>
+            <texte>texte/description/action ici</texte>
+            <chemin>C:/Users/cyril/Documents/Cyril/Etudes/Travail/GI01/LO21/Projet LO21/LO21_projet/build-Projet_Qt-Desktop_Qt_5_8_0_MinGW_32bit-Debug/icone_exit.png</chemin>
+        </media>
+    </notes>
+    <relations>
+        <relation>
+            <titre>References</titre>
+            <description>Contient toutes les références entre notes</description>
+        </relation>
+        <relation>
+            <titre>R1</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+        <relation>
+            <titre>R2</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+    </relations>
 </sauvegarde>

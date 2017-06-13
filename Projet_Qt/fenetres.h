@@ -28,6 +28,8 @@ protected:
         QListWidget* m_listeNotes;
     QDockWidget* m_dock_affichage_relations;
         QListWidget* m_listeRelatons;
+    QDockWidget* m_dock_affichage_taches;
+        QListWidget* m_liste_taches;
 
     QWidget* m_fenetre_creation; //attribut vers la fenetre de création de note
     fenetre_anciennes_versions* m_fenetre_ancienne_versions;
@@ -52,6 +54,11 @@ protected:
             QLabel* m_titre_relation;
             QLabel* m_description_relation;
             QListWidget* m_liste_couples;
+        QWidget* m_page_arborescence;
+            QVBoxLayout* m_layout_onglet_arborescence;
+            QListWidget* liste_ascendants;
+            QListWidget* liste_descendants;
+            QLabel* m_label_arborescence;
 
 public:
 
@@ -69,6 +76,7 @@ public slots:
     void supprimerNote();
     void editerNote();
     void load_xml();
+    void affichage_arborescence(QString id);
 
 
 };

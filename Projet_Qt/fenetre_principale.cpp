@@ -89,6 +89,7 @@ void FenPrincipale::creation_docks()
         m_listeNotes->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_listeNotes,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(menuContextuel(QPoint)));
         connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_single_note(QString)));
+        connect(m_listeNotes,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_arborescence(QString)));
 
 
     m_dock_affichage_notes->setWidget(m_listeNotes);
@@ -105,6 +106,21 @@ void FenPrincipale::creation_docks()
     m_dock_affichage_relations->setWidget(m_listeRelatons);
     addDockWidget(Qt::RightDockWidgetArea, m_dock_affichage_relations);
 
+    ///3e dock
+    m_dock_affichage_taches = new QDockWidget("Tâches",this);
+    m_dock_affichage_taches->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+
+    m_liste_taches = new QListWidget(m_dock_affichage_taches);
+        connect(m_liste_taches,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_single_note(QString)));
+        connect(m_liste_taches,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_arborescence(QString)));
+
+
+    m_dock_affichage_taches->setWidget(m_liste_taches);
+    addDockWidget(Qt::LeftDockWidgetArea, m_dock_affichage_taches);
+
+
+
+
 }
 
 void FenPrincipale::creation_tabs()
@@ -115,6 +131,7 @@ void FenPrincipale::creation_tabs()
     // 2 : Créer les pages
     m_page_affichage_note = new QWidget;
     m_page_affichage_relations = new QWidget;
+    m_page_arborescence = new QWidget;
 
     // 3 : Créer le contenu des pages de widgets
 
@@ -152,10 +169,25 @@ void FenPrincipale::creation_tabs()
 
         m_page_affichage_relations->setLayout(layout_affichage_relations);
 
+        // Page arborescence
+        m_layout_onglet_arborescence = new QVBoxLayout;
+        m_page_arborescence->setLayout(m_layout_onglet_arborescence);
+        liste_ascendants = new QListWidget;
+        liste_descendants = new QListWidget;
+        m_label_arborescence = new QLabel("");
+
+        m_layout_onglet_arborescence->addWidget(new QLabel("<b> Notes ascendantes </b>"));
+        m_layout_onglet_arborescence->addWidget(liste_ascendants);
+        m_layout_onglet_arborescence->addWidget(m_label_arborescence);
+        m_layout_onglet_arborescence->addWidget(new QLabel("<b> Notes descendantes </b>"));
+        m_layout_onglet_arborescence->addWidget(liste_descendants);
+
+
 
     // 4 : ajouter les onglets au QTabWidget, en indiquant la page qu'ils contiennent
     m_onglets->addTab(m_page_affichage_note, "Affichage d'une note");
     m_onglets->addTab(m_page_affichage_relations, "Affichage des relations");
+    m_onglets->addTab(m_page_arborescence,"Affichage d'une arborescence");
 }
 
 
@@ -163,11 +195,30 @@ void FenPrincipale::affichage_notes_relations()
 {
     NotesManager2& m1 = NotesManager2::getManager();
     m_listeNotes->clear();
+    int min_priorite=99;
 
-    for (unsigned int i = 0; i<m1.gettype().size();i++)
+    for (unsigned int i = 0; i<m1.gettype().size();i++) //affichage notes
     {
         m_listeNotes->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
     }
+
+    m_liste_taches->clear();
+    while (min_priorite>=0) //affichage selon priorité
+    {
+        for (unsigned int i = 0; i<m1.gettype().size();i++) //affichage taches
+        {
+            if (typeid(*(m1.gettype()[i]))==typeid(tache))//si c'est une tache, on la met dans le dock
+            {
+                tache& current = static_cast<tache&>(*(m1.gettype()[i]));
+
+                    if (current.getPriorite()==min_priorite)
+                        m_liste_taches->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
+            }
+        }
+        min_priorite--;
+    }
+
+
 
     RelationManager& m2 = RelationManager::getManager();
     m_listeRelatons->clear();
@@ -181,7 +232,7 @@ void FenPrincipale::affichage_notes_relations()
 
 void FenPrincipale::affichage_single_note(QString id, QString date)
 {
-
+    std::cout << "affichage_single_note\n";
     NotesManager2& m1 = NotesManager2::getManager();
     try
     {
@@ -273,7 +324,7 @@ void FenPrincipale::affichage_single_relation(QString titre)
 void FenPrincipale::supprimerNote()
 {
     NotesManager2& m1 = NotesManager2::getManager();
-    // If multiple selection is on, we need to erase all selected items
+
     for (int i = 0; i < m_listeNotes->selectedItems().size(); ++i)
     {
        // Get curent item on selected row
@@ -334,3 +385,33 @@ void FenPrincipale :: load_xml()
 }
 
 
+void FenPrincipale::affichage_arborescence(QString id)
+{
+    NotesManager2& nm = NotesManager2::getManager();
+    RelationManager& rm = RelationManager::getManager();
+
+    if (id=="") //si aucune note n'est sélectionnée dans la fenetre principale
+        return;
+    note& note_a_afficher = nm.getNote(id.toStdString());
+    m_label_arborescence->setText(QString::fromStdString(note_a_afficher.getID()));
+            liste_ascendants->clear();
+            liste_descendants->clear();
+
+
+    for (unsigned int i=0;i<rm.gettype().size();i++) //parcourt des relations
+    {
+        for (unsigned int j=0;j<rm.gettype()[i]->getCouples().size();j++) //parcourt des couples de la relation
+        {
+            if (rm.gettype()[i]->getCouples()[j]->getPremiere().getID()==note_a_afficher.getID())
+            {
+                liste_descendants->addItem(QString::fromStdString(rm.gettype()[i]->getCouples()[j]->getSeconde().getID()));
+            }
+            if (rm.gettype()[i]->getCouples()[j]->getSeconde().getID()==note_a_afficher.getID())
+            {
+                liste_ascendants->addItem(QString::fromStdString(rm.gettype()[i]->getCouples()[j]->getPremiere().getID()));
+            }
+        }
+    }
+
+
+}

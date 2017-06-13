@@ -49,11 +49,6 @@ fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(
         m_notes_droite->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
     }
 
-
-    /****** Connexions slots/signaux ******/
-    //connect(m_couples,SIGNAL(itemSelectionChanged()),m_label_relation,SLOT()
-
-
     /****** Ajouts au layout ******/
     m_layout->addWidget(m_notes_gauche,0,0);
     m_layout->addWidget(m_notes_droite,0,1);

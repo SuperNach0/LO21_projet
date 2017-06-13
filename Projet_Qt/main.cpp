@@ -6,46 +6,6 @@
 #include "manager.h"
 
 /*
-
-
-* 30/05 : ajout d'un menu contextuel pour SupprimerNote une note
-* 31/05 : modification du getNote : retourne un article("","","") si la note n'existe pas (en plus de throw une erreur) : à voir si on peut faire mieux
-*
-* 06/06 : affichage d'une seule note OK (enfin)
-*       : j'ai modifié la classe note pour avoir direct un attribut "texte" qui était présent dans chaque sous classe
-*       : du coup j'ai enlevé tes fonctions "mise à jour" qui de toute façon ne sont pas utilisées avec la GUI
-*       : Edition d'une note OK, manque à gérer les versions (en progrès)
-*
-* 07/06 : affichage des versions de notes OK mashallah
-*       : reste à faire : gérer la restauration, mais ptètre plus urgent de faire d'abord les relations ?
-*
-* 08/06 : début taff relation
-*       : relation manager OP
-*       : création relation en progrès
-*       : création relation presque ok, j'ai pas beaucoup testé mais ça devrait être good, manque à faire un iterator
-*
-*
-* 09/06 : load fonctionne pour aricle normalement.
-*         il faudrait que tu mettes une actualisation de l'affichage des notes dès le chargment de la fenetre
-*         et pas que a la création sionon les anciennes ne s'afficheront pas !
-*          ATTENTION BUG : load sur un XML vide il kiffe pas
-*
-* 09/06 : bouton OK pour load (fichier..charger un xml)
-*       : actualisation des notes dès le chargement de la fenetre c bon
-*       : visualisation de la liste des relations c'est bon, manque affichage de chaque relation
-*
-* 10/06 : Affichage de chaque relation OK
-*       : un truc qui serait cool à faire : utiliser un design pattern pour pouvoir recycler le manager et/ou l'itérateur de NotesManager
-*       : mais du coup il faudrait changer NotesManager et utiliser un vector, ou changer RelationManager et y mettre un tableau...
-*
-* 11/06 : Correction de l'ajout d'une relation avec un titre déjà utilisé
-*       : Pareil pour une note, maintenant plus d'article vide créé dans le getNote si la note n'existe pas
-*
-*       :Ajout des references avec \ref{id} mais ça ne fonctionne pas, je sais pas pourquoi
-*
-* 12/06 : Ajout des references avec \ref{id} marche
-*       : Restauration des anciennes versions de note ok
-*
 *       : reste à faire :
 *           - gérer la corbeille et l'archivage des notes, faire que la suppression d'une note supprime les couples
 *           dans laquelle elle est impliquée
@@ -53,11 +13,8 @@
 *           - améliorer la gestion mémoire au niveau de la suppression, il reste des trucs non libérés
 *
 *
-*
 * 13/06 : les deux manages différents sont ok  mais add pour une relation marche pas du coup c'est add relation de base
 *
-*       a faire : une fonction save et load pour les relations qui fonctionnent
-*                 ptet chercher pk add marche pas
 *
 */
 
@@ -76,8 +33,8 @@ int main(int argc,  char *argv[]) {
     FenPrincipale fenetre;
     fenetre.show();
 
-     m1.load();
-   fenetre.affichage_notes_relations();
+    m1.load();
+    fenetre.affichage_notes_relations();
     app.exec();
 
 
@@ -194,7 +151,7 @@ int main(int argc,  char *argv[]) {
 
 
     };
- m1.freeManager();
- m2.freeManager();
+         m1.freeManager();
+         m2.freeManager();
     return  0;
 }

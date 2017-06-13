@@ -11,7 +11,7 @@ fenetre_creation_note::fenetre_creation_note() : QWidget()
 
     m_layout_choix = new QVBoxLayout; //création layout
     //Création des différents champs du formulaire
-    m_id = new QLineEdit("Entre l'id poulet",this);
+    m_id = new QLineEdit("Entrez un id",this);
     m_titre = new QLineEdit("Titre ici",this);
     m_date_creat = m_date_modif = QDateTime();
     m_date_creat = m_date_modif = QDateTime::currentDateTime();

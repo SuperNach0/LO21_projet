@@ -536,20 +536,20 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
         toDelete.getOldNotes().clear();
 
         //Suppression des couples ou la note est présente
-        RelationManager& nm = RelationManager::getManager();
-        for (unsigned int i=0;i<nm.gettype().size();i++)
+        RelationManager& rm = RelationManager::getManager();
+        for (unsigned int i=0;i<rm.gettype().size();i++)    //on parcourt les relations
         {
-            std::cout<< "pass boucle 1\n";
-            for (unsigned int j=0;j<nm.gettype()[i]->getCouples().size();j++)
+            for (unsigned int j=0;j<rm.gettype()[i]->getCouples().size();j++)   //on parcourt les couples
             {
-                std::cout << "passage\n";
-                if (nm.gettype()[i]->getCouples()[j]->getPremiere().getID()==toDelete.getID() ||
-                        nm.gettype()[i]->getCouples()[j]->getSeconde().getID()==toDelete.getID())
+                //Si l'une des notes du couple a le même id que la note a supprimer, on supprime ce couple
+
+                if (rm.gettype()[i]->getCouples()[j]->getPremiere().getID()==toDelete.getID() ||
+                        rm.gettype()[i]->getCouples()[j]->getSeconde().getID()==toDelete.getID())
                 {
-                    std::cout << "passage if\n";
-                    nm.gettype()[i]->getCouples().erase(nm.gettype()[i]->getCouples().begin()+j);
-                    std::cout<<"suppression couple (a faire)\n";
+                    rm.gettype()[i]->getCouples().erase(rm.gettype()[i]->getCouples().begin()+j);
+                    j--;    //si on effectue une suppression, j ne change pas car la taille du vector diminue
                 }
+
             }
         }
 
@@ -631,8 +631,6 @@ void NotesManager2::checkReferences() const
             position_fin_texte = texte.find("}",position_debut_texte);
 
         }
-
-
 
     }
    return;
