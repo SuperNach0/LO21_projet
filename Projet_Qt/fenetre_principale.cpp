@@ -300,12 +300,15 @@ void FenPrincipale::affichage_single_relation(QString titre)
     m_titre_relation->setText("<b> Titre : </b>"+QString::fromStdString(current.getTitre()));
     m_description_relation->setText("<b> Description : </b>"+QString::fromStdString(current.getDescription()));
 
-    QString separateur = "<--->";
-
     for (unsigned int i=0;i<current.getCouples().size();i++)
     {
+        QString separateur="<--->";
         if (current.getCouples()[i]->isOriented())
+        {
             separateur="--->";
+            std::cout << "note orientee\n";
+        }
+
 
         m_liste_couples->addItem(QString::fromStdString(current.getCouples()[i]->getLabel())
                                  + " / "

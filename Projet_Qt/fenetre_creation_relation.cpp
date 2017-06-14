@@ -118,9 +118,9 @@ void fenetre_creation_relation::save_couple()
 {
     NotesManager2& m = NotesManager2::getManager();
     std::string label = m_label_couple->text().toStdString();
-    bool orientation = true;
-    if (!m_orientation->isChecked())
-        orientation = false;
+    bool orientation = false;
+    if (m_orientation->isChecked())
+        orientation = true;
 
     //Création d'un nouveau couple en récupérant les 2 notes via les ID selectionés dans chaque liste de notes
     Couple* nouveau = new Couple(m.getNote(m_notes_gauche->currentItem()->text().toStdString()),m.getNote(m_notes_droite->currentItem()->text().toStdString()),label,orientation);
