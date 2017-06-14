@@ -197,22 +197,22 @@ void FenPrincipale::affichage_notes_relations()
     m_listeNotes->clear();
     int min_priorite=99;
 
-    for (unsigned int i = 0; i<m1.gettype().size();i++) //affichage notes
+    for (unsigned int i = 0; i<m1.getobjets().size();i++) //affichage notes
     {
-        m_listeNotes->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
+        m_listeNotes->addItem(QString::fromStdString(m1.getobjets()[i]->getID()));
     }
 
     m_liste_taches->clear();
     while (min_priorite>=0) //affichage selon priorité
     {
-        for (unsigned int i = 0; i<m1.gettype().size();i++) //affichage taches
+        for (unsigned int i = 0; i<m1.getobjets().size();i++) //affichage taches
         {
-            if (typeid(*(m1.gettype()[i]))==typeid(tache))//si c'est une tache, on la met dans le dock
+            if (typeid(*(m1.getobjets()[i]))==typeid(tache))//si c'est une tache, on la met dans le dock
             {
-                tache& current = static_cast<tache&>(*(m1.gettype()[i]));
+                tache& current = static_cast<tache&>(*(m1.getobjets()[i]));
 
                     if (current.getPriorite()==min_priorite)
-                        m_liste_taches->addItem(QString::fromStdString(m1.gettype()[i]->getID()));
+                        m_liste_taches->addItem(QString::fromStdString(m1.getobjets()[i]->getID()));
             }
         }
         min_priorite--;
@@ -223,9 +223,9 @@ void FenPrincipale::affichage_notes_relations()
     RelationManager& m2 = RelationManager::getManager();
     m_listeRelatons->clear();
 
-    for (unsigned int i=0;i<m2.gettype().size();i++)
+    for (unsigned int i=0;i<m2.getobjets().size();i++)
     {
-        m_listeRelatons->addItem(QString::fromStdString(m2.gettype()[i]->getTitre()));
+        m_listeRelatons->addItem(QString::fromStdString(m2.getobjets()[i]->getTitre()));
     }
 
 }
@@ -398,17 +398,17 @@ void FenPrincipale::affichage_arborescence(QString id)
             liste_descendants->clear();
 
 
-    for (unsigned int i=0;i<rm.gettype().size();i++) //parcourt des relations
+    for (unsigned int i=0;i<rm.getobjets().size();i++) //parcourt des relations
     {
-        for (unsigned int j=0;j<rm.gettype()[i]->getCouples().size();j++) //parcourt des couples de la relation
+        for (unsigned int j=0;j<rm.getobjets()[i]->getCouples().size();j++) //parcourt des couples de la relation
         {
-            if (rm.gettype()[i]->getCouples()[j]->getPremiere().getID()==note_a_afficher.getID())
+            if (rm.getobjets()[i]->getCouples()[j]->getPremiere().getID()==note_a_afficher.getID())
             {
-                liste_descendants->addItem(QString::fromStdString(rm.gettype()[i]->getCouples()[j]->getSeconde().getID()));
+                liste_descendants->addItem(QString::fromStdString(rm.getobjets()[i]->getCouples()[j]->getSeconde().getID()));
             }
-            if (rm.gettype()[i]->getCouples()[j]->getSeconde().getID()==note_a_afficher.getID())
+            if (rm.getobjets()[i]->getCouples()[j]->getSeconde().getID()==note_a_afficher.getID())
             {
-                liste_ascendants->addItem(QString::fromStdString(rm.gettype()[i]->getCouples()[j]->getPremiere().getID()));
+                liste_ascendants->addItem(QString::fromStdString(rm.getobjets()[i]->getCouples()[j]->getPremiere().getID()));
             }
         }
     }

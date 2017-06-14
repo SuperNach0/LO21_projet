@@ -2,16 +2,6 @@
 <sauvegarde>
     <notes>
         <tache>
-            <id>Entrez un id2</id>
-            <titre>Titre ici</titre>
-            <creation>2017-06-14 00:42:49</creation>
-            <modif>2017-06-14 00:42:49</modif>
-            <texte>texte/description/action i \ref{Entrez un id} ci</texte>
-            <echeance>samedi 17 juin 2017</echeance>
-            <priorite>3</priorite>
-            <status>En attente</status>
-        </tache>
-        <tache>
             <id>Entrez un id3</id>
             <titre>Titre ici</titre>
             <creation>2017-06-14 00:43:12</creation>
@@ -41,6 +31,10 @@
         </relation>
         <relation>
             <titre>R2</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+        <relation>
+            <titre>Label de la relation ?</titre>
             <description>Description de la relation ?</description>
         </relation>
     </relations>

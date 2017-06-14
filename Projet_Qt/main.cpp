@@ -41,7 +41,7 @@ int main(int argc,  char *argv[]) {
     int menu =99; int j=0;
     while (menu!=10) {
 
-        std::cout << "  tu as actuellement "<<m1.gettype().size() <<" notes ; que voulez vous faire  ?"<<std::endl<<
+        std::cout << "  tu as actuellement "<<m1.getobjets().size() <<" notes ; que voulez vous faire  ?"<<std::endl<<
                      "1- ajouter une note"<<std::endl<<
                      "2- afficher les notes "<<std::endl<<
                      "3- rechercher une note"<<std::endl<<

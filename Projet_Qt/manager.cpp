@@ -12,12 +12,12 @@
 template <class T>
 void Manager<T>::add(T &a_ajouter)
 {
-    for (unsigned int i = 0; i < type.size(); i++)
+    for (unsigned int i = 0; i < objets.size(); i++)
     {
-        if (type[i]->getID()==a_ajouter.getID())
+        if (objets[i]->getID()==a_ajouter.getID())
             throw NotesException("Erreur, note deja existante\n");
     }
-    type.push_back(&a_ajouter);
+    objets.push_back(&a_ajouter);
 }
 
 
@@ -29,11 +29,11 @@ NotesManager2::NotesManager2()
 
 NotesManager2::~NotesManager2(){
  save();
-for (unsigned int i = 0; i < type.size(); i++)
+for (unsigned int i = 0; i < objets.size(); i++)
 {
-    delete type[i];
+    delete objets[i];
 }
-type.clear();
+objets.clear();
 std::cout<<"le manager est detruit"<<std::endl;
 }
 
@@ -43,15 +43,15 @@ NotesManager2::Handler NotesManager2::handler=Handler();
 
 note& NotesManager2::getNote(const std::string& id, const std::string& date){
     // si l'article existe déjà, on en renvoie une référence, sinon on lance une exception
-    for(unsigned int i=0; i<type.size(); i++){
-        if (type[i]->getID()==id && date=="")
-            return *type[i];
-        else if (type[i]->getID()==id && date!="")
+    for(unsigned int i=0; i<objets.size(); i++){
+        if (objets[i]->getID()==id && date=="")
+            return *objets[i];
+        else if (objets[i]->getID()==id && date!="")
         {
             unsigned int j =0;
-            while (j<type[i]->getOldNotes().size() && type[i]->getOldNotes()[j]->getModif() != date )
+            while (j<objets[i]->getOldNotes().size() && objets[i]->getOldNotes()[j]->getModif() != date )
                 j++;
-            return *type[i]->getOldNotes()[j];
+            return *objets[i]->getOldNotes()[j];
         }
     }
 
@@ -73,18 +73,18 @@ template <class T>
 void Manager<T>::Supprimer (T& toDelete)
 {
     unsigned int i=0;
-    while (type[i]->getID() != toDelete.getID())
+    while (objets[i]->getID() != toDelete.getID())
     {
         i++;
     }
-    type.erase(type.begin()+i);
+    objets.erase(objets.begin()+i);
     toDelete.getOldNotes().clear();
 
     //Suppression des couples ou la note est impliquée
     /*
-    for (unsigned int i=0;i<type.size();i++)
+    for (unsigned int i=0;i<objets.size();i++)
     {
-        if (type[i]->getID == toDelete)
+        if (objets[i]->getID == toDelete)
     }*/
 
     delete &toDelete;
@@ -430,42 +430,42 @@ stream.writeStartDocument();
 stream.writeStartElement("sauvegarde");
 stream.writeStartElement("notes");
 
-for (unsigned int i = 0; i<gettype().size();i++)
+for (unsigned int i = 0; i<getobjets().size();i++)
 {
-    if (typeid(*gettype()[i])==typeid(article)) {// ATRICLE
+    if (typeid(*getobjets()[i])==typeid(article)) {// ATRICLE
     stream.writeStartElement("article");
-    stream.writeTextElement("id",QString::fromStdString((gettype()[i])->getID()));
-    stream.writeTextElement("titre",QString::fromStdString((gettype()[i])->getTitre()));
-     stream.writeTextElement("creation",QString::fromStdString((gettype()[i])->getCreation()));
-      stream.writeTextElement("modif",QString::fromStdString((gettype()[i])->getModif()));
-      stream.writeTextElement("texte",QString::fromStdString((gettype()[i])->getTexte()));
+    stream.writeTextElement("id",QString::fromStdString((getobjets()[i])->getID()));
+    stream.writeTextElement("titre",QString::fromStdString((getobjets()[i])->getTitre()));
+     stream.writeTextElement("creation",QString::fromStdString((getobjets()[i])->getCreation()));
+      stream.writeTextElement("modif",QString::fromStdString((getobjets()[i])->getModif()));
+      stream.writeTextElement("texte",QString::fromStdString((getobjets()[i])->getTexte()));
 
 
     stream.writeEndElement();
     }
 
-    else if (typeid(*gettype()[i])==typeid(media)) {
+    else if (typeid(*getobjets()[i])==typeid(media)) {
         stream.writeStartElement("media");
-        stream.writeTextElement("id",QString::fromStdString((gettype()[i])->getID()));
-        stream.writeTextElement("titre",QString::fromStdString((gettype()[i])->getTitre()));
-         stream.writeTextElement("creation",QString::fromStdString((gettype()[i])->getCreation()));
-          stream.writeTextElement("modif",QString::fromStdString((gettype()[i])->getModif()));
-          stream.writeTextElement("texte",QString::fromStdString((gettype()[i])->getTexte()));
-      const media& med = static_cast<const media&>(*gettype()[i]);
+        stream.writeTextElement("id",QString::fromStdString((getobjets()[i])->getID()));
+        stream.writeTextElement("titre",QString::fromStdString((getobjets()[i])->getTitre()));
+         stream.writeTextElement("creation",QString::fromStdString((getobjets()[i])->getCreation()));
+          stream.writeTextElement("modif",QString::fromStdString((getobjets()[i])->getModif()));
+          stream.writeTextElement("texte",QString::fromStdString((getobjets()[i])->getTexte()));
+      const media& med = static_cast<const media&>(*getobjets()[i]);
       stream.writeTextElement("chemin",QString::fromStdString(med.getChemin()));
 
 
         stream.writeEndElement();
     }
 
-     else if (typeid(*gettype()[i])==typeid(tache)) {
+     else if (typeid(*getobjets()[i])==typeid(tache)) {
         stream.writeStartElement("tache");
-        stream.writeTextElement("id",QString::fromStdString((gettype()[i])->getID()));
-        stream.writeTextElement("titre",QString::fromStdString((gettype()[i])->getTitre()));
-         stream.writeTextElement("creation",QString::fromStdString((gettype()[i])->getCreation()));
-         stream.writeTextElement("modif",QString::fromStdString((gettype()[i])->getModif()));
-       stream.writeTextElement("texte",QString::fromStdString((gettype()[i])->getTexte()));
-       const tache& task = static_cast<const tache&>(*gettype()[i]);
+        stream.writeTextElement("id",QString::fromStdString((getobjets()[i])->getID()));
+        stream.writeTextElement("titre",QString::fromStdString((getobjets()[i])->getTitre()));
+         stream.writeTextElement("creation",QString::fromStdString((getobjets()[i])->getCreation()));
+         stream.writeTextElement("modif",QString::fromStdString((getobjets()[i])->getModif()));
+       stream.writeTextElement("texte",QString::fromStdString((getobjets()[i])->getTexte()));
+       const tache& task = static_cast<const tache&>(*getobjets()[i]);
        stream.writeTextElement("echeance",QString::fromStdString(task.getecheance()));
        stream.writeTextElement("priorite",QString::number(task.getPriorite()));
         stream.writeTextElement("status",QString::fromStdString(etatToString(task.getEtat())));
@@ -476,20 +476,20 @@ for (unsigned int i = 0; i<gettype().size();i++)
 }
 stream.writeEndElement();
 stream.writeStartElement("relations");
-for (unsigned int i = 0; i<m2.gettype().size();i++)
+for (unsigned int i = 0; i<m2.getobjets().size();i++)
 {
 
     stream.writeStartElement("relation");
-    stream.writeTextElement("titre",QString::fromStdString((m2.gettype()[i])->getTitre()));
-     stream.writeTextElement("description",QString::fromStdString((m2.gettype()[i])->getDescription()));
+    stream.writeTextElement("titre",QString::fromStdString((m2.getobjets()[i])->getTitre()));
+     stream.writeTextElement("description",QString::fromStdString((m2.getobjets()[i])->getDescription()));
 
 
-        for (unsigned int j = 0; j<m2.gettype()[i]->getCouples().size();j++) {
+        for (unsigned int j = 0; j<m2.getobjets()[i]->getCouples().size();j++) {
            stream.writeStartElement("couple");
-             stream.writeTextElement("premiere",QString::fromStdString((m2.gettype()[i]->getCouples()[j]->getPremiere().getID())));
-              stream.writeTextElement("seconde",QString::fromStdString((m2.gettype()[i]->getCouples()[j]->getSeconde().getID())));
-               stream.writeTextElement("label",QString::fromStdString(m2.gettype()[i]->getCouples()[j]->getLabel()));
-               if(m2.gettype()[i]->getCouples()[j]->isOriented())
+             stream.writeTextElement("premiere",QString::fromStdString((m2.getobjets()[i]->getCouples()[j]->getPremiere().getID())));
+              stream.writeTextElement("seconde",QString::fromStdString((m2.getobjets()[i]->getCouples()[j]->getSeconde().getID())));
+               stream.writeTextElement("label",QString::fromStdString(m2.getobjets()[i]->getCouples()[j]->getLabel()));
+               if(m2.getobjets()[i]->getCouples()[j]->isOriented())
                 stream.writeTextElement("orientation","true");
                else  stream.writeTextElement("orientation","false");
           stream.writeEndElement();
@@ -521,32 +521,32 @@ handler.instance=nullptr;
 void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
 {
     unsigned int i=0;
-    while (type[i]->getID() != toDelete.getID() && i<type.size()) //on recherche la note concernée
+    while (objets[i]->getID() != toDelete.getID() && i<objets.size()) //on recherche la note concernée
     {
         i++;
     }
-    if (i==type.size())
+    if (i==objets.size())
     {
         throw NotesException("Suppression impossible, note non trouvee\n");
         return;
     }
     if (date=="")
     {
-        type.erase(type.begin()+i);
+        objets.erase(objets.begin()+i);
         toDelete.getOldNotes().clear();
 
         //Suppression des couples ou la note est présente
         RelationManager& rm = RelationManager::getManager();
-        for (unsigned int i=0;i<rm.gettype().size();i++)    //on parcourt les relations
+        for (unsigned int i=0;i<rm.getobjets().size();i++)    //on parcourt les relations
         {
-            for (unsigned int j=0;j<rm.gettype()[i]->getCouples().size();j++)   //on parcourt les couples
+            for (unsigned int j=0;j<rm.getobjets()[i]->getCouples().size();j++)   //on parcourt les couples
             {
                 //Si l'une des notes du couple a le même id que la note a supprimer, on supprime ce couple
 
-                if (rm.gettype()[i]->getCouples()[j]->getPremiere().getID()==toDelete.getID() ||
-                        rm.gettype()[i]->getCouples()[j]->getSeconde().getID()==toDelete.getID())
+                if (rm.getobjets()[i]->getCouples()[j]->getPremiere().getID()==toDelete.getID() ||
+                        rm.getobjets()[i]->getCouples()[j]->getSeconde().getID()==toDelete.getID())
                 {
-                    rm.gettype()[i]->getCouples().erase(rm.gettype()[i]->getCouples().begin()+j);
+                    rm.getobjets()[i]->getCouples().erase(rm.getobjets()[i]->getCouples().begin()+j);
                     j--;    //si on effectue une suppression, j ne change pas car la taille du vector diminue
                 }
 
@@ -559,11 +559,11 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
     else //si la date n'est pas vide, on cherche à supprimer une ancienne version
     {
         unsigned int j=0;
-        while (type[i]->getOldNotes()[j]->getModif() != date && j<type[i]->getOldNotes().size())
+        while (objets[i]->getOldNotes()[j]->getModif() != date && j<objets[i]->getOldNotes().size())
             j++;
-        type[i]->getOldNotes()[j]->getOldNotes().clear();
+        objets[i]->getOldNotes()[j]->getOldNotes().clear();
 
-        type[i]->getOldNotes().erase(type[i]->getOldNotes().begin()+j);
+        objets[i]->getOldNotes().erase(objets[i]->getOldNotes().begin()+j);
     }
 }
 
@@ -589,10 +589,10 @@ void NotesManager2::checkReferences() const
     //Suppression des couples correspondant à la note dans la relation References
         rel_references.getCouples().clear();
 
-    for (unsigned int i=0;i<nm.gettype().size();i++)
+    for (unsigned int i=0;i<nm.getobjets().size();i++)
     {
 
-        std::string texte = nm.gettype ()[i]->getTexte() + nm.gettype()[i]->getTitre(); //On récupère le texte de la note à analyser
+        std::string texte = nm.getobjets ()[i]->getTexte() + nm.getobjets()[i]->getTitre(); //On récupère le texte de la note à analyser
 
         int position_debut_texte = texte.find("\\ref{");
         int position_fin_texte = texte.find("}",position_debut_texte);
@@ -621,9 +621,9 @@ void NotesManager2::checkReferences() const
             }
 
             //ajout de la relation
-            rel_references.addCouple(*(new Couple(*nm.gettype()[i],
+            rel_references.addCouple(*(new Couple(*nm.getobjets()[i],
                                                                 nm.getNote(id_texte),
-                                                                "Ref de " + nm.gettype()[i]->getID() + " vers " + nm.getNote(id_texte).getID(),
+                                                                "Ref de " + nm.getobjets()[i]->getID() + " vers " + nm.getNote(id_texte).getID(),
                                                                 1)));
 
 

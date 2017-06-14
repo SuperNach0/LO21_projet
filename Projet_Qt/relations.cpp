@@ -5,7 +5,7 @@
 
 void RelationManager::addRelation(Relation& relation)
 {
-    type.push_back(&relation);
+    objets.push_back(&relation);
 }
 
 RelationManager::RelationManager(){
@@ -13,9 +13,9 @@ RelationManager::RelationManager(){
 
 
 RelationManager::~RelationManager(){
-    for (unsigned int i=0;i<type.size();i++)
-        delete type[i];
-    type.clear();
+    for (unsigned int i=0;i<objets.size();i++)
+        delete objets[i];
+    objets.clear();
     std::cout<<"le RelationManager est detruit"<<std::endl;
 }
 
@@ -25,14 +25,14 @@ RelationManager::Handler RelationManager::handler=Handler();
 Relation& RelationManager::getRelation(const std::string& titre)
 {
     unsigned int i=0;
-    while (i<type.size() && type[i]->getTitre() != titre)
+    while (i<objets.size() && objets[i]->getTitre() != titre)
     {
         i++;
     }
-    if (i==type.size())
+    if (i==objets.size())
         throw NotesException("La relation n'existe pas\n");
 
-    return *type[i];
+    return *objets[i];
 }
 
 

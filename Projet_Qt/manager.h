@@ -15,18 +15,18 @@ template<class T>
 class Manager {
 protected :
 
-   std::vector<T*> type;
+   std::vector<T*> objets;
    mutable  QString filename;
 
 public:
 
     void add (T& a_ajouter);
     void Supprimer (T& toDelete);
-     const std::vector<T*> gettype() const {return type;}
+     const std::vector<T*> getobjets() const {return objets;}
    QString getFilename() const { return filename; }
    void setFilename(const QString& f) { filename=f; }
 
-   Manager():type(0),filename(QString::fromStdString("..\\sauvegarde.xml")){}
+   Manager():objets(0),filename(QString::fromStdString("..\\sauvegarde.xml")){}
 
    virtual ~Manager<T>(){std::cout<<"manager(base) detruit"<<std::endl;}
    Manager(const Manager& m);
