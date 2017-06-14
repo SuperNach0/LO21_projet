@@ -25,31 +25,27 @@ FenPrincipale::FenPrincipale()
         QAction *actionNewLink = new QAction("&Nouvelle Relation",this);
             actionNewLink->setShortcut(QKeySequence("Ctrl+R"));
             connect(actionNewLink,SIGNAL(triggered(bool)),this,SLOT(popupCreationRelation()));
+            /*
         QAction *actionLoadXml = new QAction("&Charger un xml",this);
             actionLoadXml->setShortcut(QKeySequence("Ctrl+L"));
             connect(actionLoadXml,SIGNAL(triggered(bool)),this,SLOT(load_xml()));
+            menuFichier->addAction(actionLoadXml);
+            */
 
         menuFichier->addAction(actionQuitter);
         menuFichier->addAction(actionNewNote);
         menuFichier->addAction(actionNewLink);
-        menuFichier->addAction(actionLoadXml);
+
 
 
     //ajout d'un 2e menu
     QMenu *menuEdition = menuBar()->addMenu("&Edition");
-        //ajout d'un sous-menu
-        QMenu* s_menuOptions = menuEdition->addMenu("Options");
-            //ajout de 2 actions dans le sous-menu
+        //ajout d'actions
             QAction* retablir = new QAction("Rétablir");
-            s_menuOptions->addAction(retablir);
+            menuEdition->addAction(retablir);
 
             QAction* annuler = new QAction("Annuler");
-            s_menuOptions->addAction(annuler);
-
-
-        //ajout d'une action
-        QAction* action_test = new QAction("&test");
-        menuEdition->addAction(action_test);
+            menuEdition->addAction(annuler);
 
     //Barre d'outils
     m_toolbar = addToolBar("fichier");
@@ -331,6 +327,7 @@ void FenPrincipale::supprimerNote()
        QListWidgetItem *item = m_listeNotes->takeItem(m_listeNotes->currentRow());
        m1.SupprimerNote(m1.getNote(item->text().toStdString()));
     }
+    affichage_arborescence("");
 }
 
 

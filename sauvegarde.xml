@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sauvegarde>
     <notes>
-        <tache>
+        <article>
+            <id>Entrez un id2</id>
+            <titre>Titre ici</titre>
+            <creation>2017-06-14 14:54:17</creation>
+            <modif>2017-06-14 14:54:17</modif>
+            <texte>texte/description/action ici</texte>
+        </article>
+        <article>
             <id>Entrez un id3</id>
             <titre>Titre ici</titre>
-            <creation>2017-06-14 00:43:12</creation>
-            <modif>2017-06-14 00:43:12</modif>
+            <creation>2017-06-14 14:55:44</creation>
+            <modif>2017-06-14 14:55:44</modif>
             <texte>texte/description/action ici</texte>
-            <echeance></echeance>
-            <priorite>7</priorite>
-            <status>En attente</status>
-        </tache>
-        <media>
-            <id>Entrez un id4</id>
-            <titre>Titre ici</titre>
-            <creation>2017-06-14 00:43:33</creation>
-            <modif>2017-06-14 00:43:33</modif>
-            <texte>texte/description/action ici</texte>
-            <chemin>C:/Users/cyril/Documents/Cyril/Etudes/Travail/GI01/LO21/Projet LO21/LO21_projet/build-Projet_Qt-Desktop_Qt_5_8_0_MinGW_32bit-Debug/icone_exit.png</chemin>
-        </media>
+        </article>
     </notes>
     <relations>
         <relation>
@@ -35,6 +31,18 @@
         </relation>
         <relation>
             <titre>Label de la relation ?</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+        <relation>
+            <titre>Label de la relation ?ezze</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+        <relation>
+            <titre>Label de la relation ?aa</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+        <relation>
+            <titre>Label de la relation ?rr</titre>
             <description>Description de la relation ?</description>
         </relation>
     </relations>

@@ -565,6 +565,7 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
 
         objets[i]->getOldNotes().erase(objets[i]->getOldNotes().begin()+j);
     }
+
 }
 
 
