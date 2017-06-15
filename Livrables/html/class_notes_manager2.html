@@ -68,7 +68,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Classe fille héritant de <a class="el" href="class_manager.html">Manager&lt;note&gt;</a> et chargée des notes. dispose du Deseign Pattern Singleton.  
+<p>Classe fille héritant de <a class="el" href="class_manager.html">Manager&lt;note&gt;</a> et chargée des notes. dispose du Design Pattern Singleton.  
  <a href="class_notes_manager2.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="manager_8h_source.html">manager.h</a>&gt;</code></p>
@@ -87,7 +87,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a53819d123894c31bbbab66b3d0bf0ff0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnote.html">note</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_manager2.html#a53819d123894c31bbbab66b3d0bf0ff0">getNote</a> (const std::string &amp;id, const std::string &amp;date=&quot;&quot;)</td></tr>
 <tr class="memdesc:a53819d123894c31bbbab66b3d0bf0ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Méthode retournant une référence sur la note correspondant à l'id fourni ou une de ses version antécédente correspondante si une date est fournie.  <a href="#a53819d123894c31bbbab66b3d0bf0ff0">More...</a><br /></td></tr>
 <tr class="separator:a53819d123894c31bbbab66b3d0bf0ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac020f8488f0f71f92de1e8131a64d943"><td class="memItemLeft" align="right" valign="top">s void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_manager2.html#ac020f8488f0f71f92de1e8131a64d943">SupprimerNote</a> (<a class="el" href="classnote.html">note</a> &amp;toDelete, const std::string &amp;date=&quot;&quot;)</td></tr>
+<tr class="memitem:ac020f8488f0f71f92de1e8131a64d943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_manager2.html#ac020f8488f0f71f92de1e8131a64d943">SupprimerNote</a> (<a class="el" href="classnote.html">note</a> &amp;toDelete, const std::string &amp;date=&quot;&quot;)</td></tr>
 <tr class="memdesc:ac020f8488f0f71f92de1e8131a64d943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Méthode Supprimant une note possédant l'id fourni et les couples dans lesquels elle est impliquée.  <a href="#ac020f8488f0f71f92de1e8131a64d943">More...</a><br /></td></tr>
 <tr class="separator:ac020f8488f0f71f92de1e8131a64d943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2248b5b1620b2039fdba9b3c6476c6cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_manager2.html#a2248b5b1620b2039fdba9b3c6476c6cc">load</a> ()</td></tr>
@@ -109,7 +109,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a5ad1071a0ca361daea98576c433774c8 inherit pub_methods_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53786650c42236c2c346cda79cb3cee3 inherit pub_methods_class_manager"><td class="memItemLeft" align="right" valign="top"><a id="a53786650c42236c2c346cda79cb3cee3"></a>
 const std::vector&lt; <a class="el" href="classnote.html">note</a> *&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manager.html#a53786650c42236c2c346cda79cb3cee3">getobjets</a> () const</td></tr>
-<tr class="memdesc:a53786650c42236c2c346cda79cb3cee3 inherit pub_methods_class_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">accesseur en lecture du vector contennat les objets T. <br /></td></tr>
+<tr class="memdesc:a53786650c42236c2c346cda79cb3cee3 inherit pub_methods_class_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">accesseur en lecture du vector contenant les objets T. <br /></td></tr>
 <tr class="separator:a53786650c42236c2c346cda79cb3cee3 inherit pub_methods_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f6a3a94521559731ef49005d7669464 inherit pub_methods_class_manager"><td class="memItemLeft" align="right" valign="top"><a id="a5f6a3a94521559731ef49005d7669464"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manager.html#a5f6a3a94521559731ef49005d7669464">getFilename</a> () const</td></tr>
@@ -131,11 +131,11 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a392bc750d869bacbe50337531213f248"><td class="memItemLeft" align="right" valign="top"><a id="a392bc750d869bacbe50337531213f248"></a>
 static <a class="el" href="class_notes_manager2.html">NotesManager2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_manager2.html#a392bc750d869bacbe50337531213f248">getManager</a> ()</td></tr>
-<tr class="memdesc:a392bc750d869bacbe50337531213f248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie une référence sur le <a class="el" href="class_notes_manager2.html" title="Classe fille héritant de Manager&lt;note&gt; et chargée des notes. dispose du Deseign Pattern Singleton...">NotesManager2</a> si il existe déja, sinon, le créé.(fait partie du singleton) <br /></td></tr>
+<tr class="memdesc:a392bc750d869bacbe50337531213f248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie une référence sur le <a class="el" href="class_notes_manager2.html" title="Classe fille héritant de Manager&lt;note&gt; et chargée des notes. dispose du Design Pattern Singleton...">NotesManager2</a> si il existe déja, sinon, le créé.(fait partie du singleton) <br /></td></tr>
 <tr class="separator:a392bc750d869bacbe50337531213f248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdc16834a0e2ab7c8b3937674c725a0d"><td class="memItemLeft" align="right" valign="top"><a id="abdc16834a0e2ab7c8b3937674c725a0d"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_manager2.html#abdc16834a0e2ab7c8b3937674c725a0d">freeManager</a> ()</td></tr>
-<tr class="memdesc:abdc16834a0e2ab7c8b3937674c725a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">libère l'instance unique de <a class="el" href="class_notes_manager2.html" title="Classe fille héritant de Manager&lt;note&gt; et chargée des notes. dispose du Deseign Pattern Singleton...">NotesManager2</a>.(fait partie du singleton) <br /></td></tr>
+<tr class="memdesc:abdc16834a0e2ab7c8b3937674c725a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">libère l'instance unique de <a class="el" href="class_notes_manager2.html" title="Classe fille héritant de Manager&lt;note&gt; et chargée des notes. dispose du Design Pattern Singleton...">NotesManager2</a>.(fait partie du singleton) <br /></td></tr>
 <tr class="separator:abdc16834a0e2ab7c8b3937674c725a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -149,7 +149,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>filename</b></td><
 <tr class="separator:a312ccc5f1d3cf73f9c76b32777f1bcf9 inherit pro_attribs_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Classe fille héritant de <a class="el" href="class_manager.html">Manager&lt;note&gt;</a> et chargée des notes. dispose du Deseign Pattern Singleton. </p>
+<div class="textblock"><p>Classe fille héritant de <a class="el" href="class_manager.html">Manager&lt;note&gt;</a> et chargée des notes. dispose du Design Pattern Singleton. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a53819d123894c31bbbab66b3d0bf0ff0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53819d123894c31bbbab66b3d0bf0ff0">&#9670;&nbsp;</a></span>getNote()</h2>
@@ -181,7 +181,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>filename</b></td><
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>: id de la note demmandée </td></tr>
-    <tr><td class="paramname">date</td><td>: date correspondante à la version recherchée </td></tr>
+    <tr><td class="paramname">date</td><td>: date correspondante à la version recherchée. Si la date est non renseignée, c'est la note active qui est recherchée. </td></tr>
   </table>
   </dd>
 </dl>

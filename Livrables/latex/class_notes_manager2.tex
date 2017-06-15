@@ -2,7 +2,7 @@
 \label{class_notes_manager2}\index{Notes\+Manager2@{Notes\+Manager2}}
 
 
-Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes. dispose du Deseign Pattern Singleton.  
+Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes. dispose du Design Pattern Singleton.  
 
 
 
@@ -20,7 +20,7 @@ Inheritance diagram for Notes\+Manager2\+:\begin{figure}[H]
 \item 
 \hyperlink{classnote}{note} \& \hyperlink{class_notes_manager2_a53819d123894c31bbbab66b3d0bf0ff0}{get\+Note} (const std\+::string \&id, const std\+::string \&date=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Méthode retournant une référence sur la note correspondant à l\textquotesingle{}id fourni ou une de ses version antécédente correspondante si une date est fournie. \end{DoxyCompactList}\item 
-s void \hyperlink{class_notes_manager2_ac020f8488f0f71f92de1e8131a64d943}{Supprimer\+Note} (\hyperlink{classnote}{note} \&to\+Delete, const std\+::string \&date=\char`\"{}\char`\"{})
+void \hyperlink{class_notes_manager2_ac020f8488f0f71f92de1e8131a64d943}{Supprimer\+Note} (\hyperlink{classnote}{note} \&to\+Delete, const std\+::string \&date=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Méthode Supprimant une note possédant l\textquotesingle{}id fourni et les couples dans lesquels elle est impliquée. \end{DoxyCompactList}\item 
 void \hyperlink{class_notes_manager2_a2248b5b1620b2039fdba9b3c6476c6cc}{load} ()
 \begin{DoxyCompactList}\small\item\em Méthode qui charge les données du fichier xml et qui crée les objets qui y sont sauvegardés. \end{DoxyCompactList}\item 
@@ -42,7 +42,7 @@ static void \hyperlink{class_notes_manager2_abdc16834a0e2ab7c8b3937674c725a0d}{f
 
 
 \subsection{Detailed Description}
-Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes. dispose du Deseign Pattern Singleton. 
+Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes. dispose du Design Pattern Singleton. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_notes_manager2_a53819d123894c31bbbab66b3d0bf0ff0}\label{class_notes_manager2_a53819d123894c31bbbab66b3d0bf0ff0}} 
@@ -59,7 +59,7 @@ Méthode retournant une référence sur la note correspondant à l\textquotesing
 \begin{DoxyParams}{Parameters}
 {\em id} & \+: id de la note demmandée \\
 \hline
-{\em date} & \+: date correspondante à la version recherchée \\
+{\em date} & \+: date correspondante à la version recherchée. Si la date est non renseignée, c\textquotesingle{}est la note active qui est recherchée. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_notes_manager2_a2248b5b1620b2039fdba9b3c6476c6cc}\label{class_notes_manager2_a2248b5b1620b2039fdba9b3c6476c6cc}} 

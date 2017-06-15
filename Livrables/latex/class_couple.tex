@@ -1,23 +1,60 @@
 \hypertarget{class_couple}{}\section{Couple Class Reference}
 \label{class_couple}\index{Couple@{Couple}}
+
+
+Classe définissant les couples.  
+
+
+
+
+{\ttfamily \#include $<$relations.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_couple_aa1f1400e92e062c0ecdd6f81fdc47d07}\label{class_couple_aa1f1400e92e062c0ecdd6f81fdc47d07}} 
-{\bfseries Couple} (\hyperlink{classnote}{note} \&note1, \hyperlink{classnote}{note} \&note2, std\+::string lab, bool ori)
-\item 
+\hyperlink{class_couple_aa1f1400e92e062c0ecdd6f81fdc47d07}{Couple} (\hyperlink{classnote}{note} \&note1, \hyperlink{classnote}{note} \&note2, std\+::string lab, bool ori)
+\begin{DoxyCompactList}\small\item\em Constructeur de couple. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_couple_a25c14d126cb78805740000253b32f6d7}\label{class_couple_a25c14d126cb78805740000253b32f6d7}} 
-const \hyperlink{classnote}{note} \& {\bfseries get\+Premiere} () const
-\item 
+const \hyperlink{classnote}{note} \& \hyperlink{class_couple_a25c14d126cb78805740000253b32f6d7}{get\+Premiere} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de retournant une référence sur la première note du couple. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_couple_a837894fc5a70507b67c5c3f19da7b9da}\label{class_couple_a837894fc5a70507b67c5c3f19da7b9da}} 
-const \hyperlink{classnote}{note} \& {\bfseries get\+Seconde} () const
-\item 
+const \hyperlink{classnote}{note} \& \hyperlink{class_couple_a837894fc5a70507b67c5c3f19da7b9da}{get\+Seconde} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de retournant une référence sur la seconde note du couple. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_couple_acf2f8ba4907cf728a5d8110ac2abdff3}\label{class_couple_acf2f8ba4907cf728a5d8110ac2abdff3}} 
-const std\+::string {\bfseries get\+Label} () const
-\item 
+const std\+::string \hyperlink{class_couple_acf2f8ba4907cf728a5d8110ac2abdff3}{get\+Label} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du label du couple. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_couple_aa105334f2fa5185c963b54c265720f2e}\label{class_couple_aa105334f2fa5185c963b54c265720f2e}} 
-bool {\bfseries is\+Oriented} () const
-\end{DoxyCompactItemize}
+bool \hyperlink{class_couple_aa105334f2fa5185c963b54c265720f2e}{is\+Oriented} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de l\textquotesingle{}orientation du couple. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe définissant les couples. 
+
+possède un attribut pointeur sur le première note du couple, un attibut pointant sur la seconde note du couple un label définissant le couple un booleen qui détermine si la relation est orientée ou non. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_couple_aa1f1400e92e062c0ecdd6f81fdc47d07}\label{class_couple_aa1f1400e92e062c0ecdd6f81fdc47d07}} 
+\index{Couple@{Couple}!Couple@{Couple}}
+\index{Couple@{Couple}!Couple@{Couple}}
+\subsubsection{\texorpdfstring{Couple()}{Couple()}}
+{\footnotesize\ttfamily Couple\+::\+Couple (\begin{DoxyParamCaption}\item[{\hyperlink{classnote}{note} \&}]{note1,  }\item[{\hyperlink{classnote}{note} \&}]{note2,  }\item[{std\+::string}]{lab,  }\item[{bool}]{ori }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur de couple. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em note1} & \+: référence sur la première note \\
+\hline
+{\em note2} & \+: référence sur la seconde note \\
+\hline
+{\em label} & \+: de du couple \\
+\hline
+{\em orientation} & \+: (0 \+:non, 1\+: Oui) \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -3,7 +3,13 @@
 
 #include "notes.h"
 
-
+/// Classe définissant les couples.
+/**  possède un attribut pointeur sur le première note du couple,
+ *  un attibut pointant sur la seconde note du couple
+ *  un label définissant le couple
+ *  un booleen qui détermine si la relation est orientée ou non.
+ *
+ */
 class Couple
 {
 private:
@@ -13,15 +19,31 @@ private:
     bool orientation;
 public:
 
+    /// Constructeur de couple.
+     /**
+      *   @param note1 : référence sur la première note
+      *   @param note2 : référence sur la seconde note
+      *   @param label : de du couple
+      *   @param orientation : (0 :non, 1: Oui)
+      */
     Couple(note& note1, note& note2, std::string lab, bool ori):premiere(&note1),seconde(&note2),label(lab),orientation(ori){}
+     /// accesseur en lecture de retournant une référence sur la première note du couple.
     const note& getPremiere() const {return *premiere;}
+    /// accesseur en lecture de retournant une référence sur la seconde note du couple.
     const note& getSeconde() const {return *seconde;}
+    /// accesseur en lecture du label du couple.
     const std::string getLabel() const {return label;}
+    ///accesseur en lecture de l'orientation du couple.
     bool isOriented() const {return orientation;}
 
 };
 
-
+/// Classe définissant les relations.
+/**  possède un attribut vector<Couple*> qui contient les couple appartennant à la relation.
+ *  un titre pour la relation
+ *  une description
+ *
+ */
 class Relation
 {
 private:
@@ -31,13 +53,28 @@ private:
     std::string description;
 
 public:
+    /// Constructeur de relation. initialise une relation avec un titre, une description, et initialise le vector vide.
+     /**
+      *   @param tit : référence sur la première note
+      *   @param desc : référence sur la seconde note
+      */
     Relation(const std::string& tit, const std::string& desc) : couples(0),titre(tit),description(desc){}
+    ///Ajoute un couple à la relation
+    /**
+     *   @param couple référence sur le couple à ajouter.
+     *
+     */
     void addCouple(Couple& couple){couples.push_back(&couple);}
-
-    //void supprimerCouple(std::string& label) {}
+    /// accesseur du vector contennant les couples de la relation.
     std::vector<Couple*>& getCouples(){return couples;}
+    /// accesseur en lecture du titre de la relation.
     const std::string& getTitre() const {return titre;}
+    /// accesseur en lecture de la decription de la relation.
     const std::string& getDescription() const {return description;}
+    /// met à jour le  la description de la relation.
+  /**
+   * @param desc : la nouvelle description de la relation.
+   */
     void setDescription(std::string desc){description=desc;}
 
 };

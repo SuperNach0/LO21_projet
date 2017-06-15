@@ -60,12 +60,18 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classfenetre__creation__note-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">fenetre_creation_note Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classe Fenetre de création de note.  
+ <a href="classfenetre__creation__note.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="fenetres_8h_source.html">fenetres.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for fenetre_creation_note:</div>
 <div class="dyncontent">
@@ -78,10 +84,19 @@ Inheritance diagram for fenetre_creation_note:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
 <tr class="memitem:aca59451560c2499954b64ed21db04eb2"><td class="memItemLeft" align="right" valign="top"><a id="aca59451560c2499954b64ed21db04eb2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>choisir_fichier</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfenetre__creation__note.html#aca59451560c2499954b64ed21db04eb2">choisir_fichier</a> ()</td></tr>
+<tr class="memdesc:aca59451560c2499954b64ed21db04eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une fenetre de sélection de fichier pour la création d'un média. <br /></td></tr>
 <tr class="separator:aca59451560c2499954b64ed21db04eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a148abe3a7d3ba11210f456d4cddce196"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfenetre__creation__note.html#a148abe3a7d3ba11210f456d4cddce196">save</a> ()</td></tr>
+<tr class="memdesc:a148abe3a7d3ba11210f456d4cddce196"><td class="mdescLeft">&#160;</td><td class="mdescRight">sauvegarde/mise à jour de la note dans le <a class="el" href="class_notes_manager2.html" title="Classe fille héritant de Manager&lt;note&gt; et chargée des notes. dispose du Design Pattern Singleton...">NotesManager2</a>  <a href="#a148abe3a7d3ba11210f456d4cddce196">More...</a><br /></td></tr>
 <tr class="separator:a148abe3a7d3ba11210f456d4cddce196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5f6330502db3b9ea8950ce1f859a8c42"><td class="memItemLeft" align="right" valign="top"><a id="a5f6330502db3b9ea8950ce1f859a8c42"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfenetre__creation__note.html#a5f6330502db3b9ea8950ce1f859a8c42">fenetre_creation_note</a> ()</td></tr>
+<tr class="memdesc:a5f6330502db3b9ea8950ce1f859a8c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur, initialise tous les widgets de la fenetre et realise les connexions avec les slots. <br /></td></tr>
+<tr class="separator:a5f6330502db3b9ea8950ce1f859a8c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -150,7 +165,10 @@ QPushButton *&#160;</td><td class="memItemRight" valign="bottom"><b>m_save</b></
 QPushButton *&#160;</td><td class="memItemRight" valign="bottom"><b>m_quit</b></td></tr>
 <tr class="separator:ab3d04eb71646774146d2c12e8f0a53ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Classe Fenetre de création de note. </p>
+<p>Cette fenêtre va servir à créer ou éditer une note. Elle possède 3 radio bouttons pour chosir le type de note, qui affichent ou masquent les champs nécéssaires, selon le type de note sélectionné. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a148abe3a7d3ba11210f456d4cddce196"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a148abe3a7d3ba11210f456d4cddce196">&#9670;&nbsp;</a></span>save</h2>
 
@@ -173,6 +191,8 @@ QPushButton *&#160;</td><td class="memItemRight" valign="bottom"><b>m_quit</b></
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>sauvegarde/mise à jour de la note dans le <a class="el" href="class_notes_manager2.html" title="Classe fille héritant de Manager&lt;note&gt; et chargée des notes. dispose du Design Pattern Singleton...">NotesManager2</a> </p>
 <p>Si il n'y a pas eu d'erreur, la note existe déjà</p>
 <p>SI la note n'existe pas </p>
 

@@ -66,6 +66,11 @@ $(function() {
 <div class="title">fenetre_anciennes_versions Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classe Fenetre d'affichage des anciennes versions.  
+ <a href="classfenetre__anciennes__versions.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="versions_8h_source.html">versions.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for fenetre_anciennes_versions:</div>
 <div class="dyncontent">
@@ -77,19 +82,85 @@ Inheritance diagram for fenetre_anciennes_versions:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr class="memitem:aff29c8425f322a7e82c950bc77f5ce6d"><td class="memItemLeft" align="right" valign="top"><a id="aff29c8425f322a7e82c950bc77f5ce6d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>choix_ancienne_version</b> (QString date)</td></tr>
+<tr class="memitem:aff29c8425f322a7e82c950bc77f5ce6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfenetre__anciennes__versions.html#aff29c8425f322a7e82c950bc77f5ce6d">choix_ancienne_version</a> (QString date)</td></tr>
+<tr class="memdesc:aff29c8425f322a7e82c950bc77f5ce6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slot appelé lors d'un clic sur l'une des notes du QListWidget. Cela provoque l'affichage de la version de la note dans la fenetre principale.  <a href="#aff29c8425f322a7e82c950bc77f5ce6d">More...</a><br /></td></tr>
 <tr class="separator:aff29c8425f322a7e82c950bc77f5ce6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a4e824ee33424c6fb8f6fd7331ee900"><td class="memItemLeft" align="right" valign="top"><a id="a6a4e824ee33424c6fb8f6fd7331ee900"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>restaurer</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfenetre__anciennes__versions.html#a6a4e824ee33424c6fb8f6fd7331ee900">restaurer</a> ()</td></tr>
+<tr class="memdesc:a6a4e824ee33424c6fb8f6fd7331ee900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slot appelé lors d'un clic sur "Restaurer". Supprime la note active et la remplace par la version sélectionnée. <br /></td></tr>
 <tr class="separator:a6a4e824ee33424c6fb8f6fd7331ee900"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4e97516e26d1506c22fade6a4a641c45"><td class="memItemLeft" align="right" valign="top"><a id="a4e97516e26d1506c22fade6a4a641c45"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>fenetre_anciennes_versions</b> (QWidget *parent)</td></tr>
+<tr class="memitem:a4e97516e26d1506c22fade6a4a641c45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfenetre__anciennes__versions.html#a4e97516e26d1506c22fade6a4a641c45">fenetre_anciennes_versions</a> (QWidget *parent)</td></tr>
+<tr class="memdesc:a4e97516e26d1506c22fade6a4a641c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur, initialise la fenetre d'affichage des anciennes versions avec un QListWidget.  <a href="#a4e97516e26d1506c22fade6a4a641c45">More...</a><br /></td></tr>
 <tr class="separator:a4e97516e26d1506c22fade6a4a641c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Classe Fenetre d'affichage des anciennes versions. </p>
+<p>Cette fenêtre sert à afficher, sélectionner et éventuellement restaurer une version d'une note. Les versions sont affichées selon la note depuis laquelle le menu contextuel et l'action "Anciennces versions" a été activée. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4e97516e26d1506c22fade6a4a641c45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e97516e26d1506c22fade6a4a641c45">&#9670;&nbsp;</a></span>fenetre_anciennes_versions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">fenetre_anciennes_versions::fenetre_anciennes_versions </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructeur, initialise la fenetre d'affichage des anciennes versions avec un QListWidget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>Widget/Fenetre parente d'où provient la fenetre </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aff29c8425f322a7e82c950bc77f5ce6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff29c8425f322a7e82c950bc77f5ce6d">&#9670;&nbsp;</a></span>choix_ancienne_version</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fenetre_anciennes_versions::choix_ancienne_version </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>date</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Slot appelé lors d'un clic sur l'une des notes du QListWidget. Cela provoque l'affichage de la version de la note dans la fenetre principale. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">date</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="versions_8h_source.html">versions.h</a></li>
 <li>versions.cpp</li>

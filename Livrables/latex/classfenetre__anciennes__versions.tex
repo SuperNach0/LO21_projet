@@ -1,5 +1,14 @@
 \hypertarget{classfenetre__anciennes__versions}{}\section{fenetre\+\_\+anciennes\+\_\+versions Class Reference}
 \label{classfenetre__anciennes__versions}\index{fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}}
+
+
+Classe Fenetre d\textquotesingle{}affichage des anciennes versions.  
+
+
+
+
+{\ttfamily \#include $<$versions.\+h$>$}
+
 Inheritance diagram for fenetre\+\_\+anciennes\+\_\+versions\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,18 +18,57 @@ Inheritance diagram for fenetre\+\_\+anciennes\+\_\+versions\+:\begin{figure}[H]
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classfenetre__anciennes__versions_aff29c8425f322a7e82c950bc77f5ce6d}\label{classfenetre__anciennes__versions_aff29c8425f322a7e82c950bc77f5ce6d}} 
-void {\bfseries choix\+\_\+ancienne\+\_\+version} (Q\+String date)
-\item 
+void \hyperlink{classfenetre__anciennes__versions_aff29c8425f322a7e82c950bc77f5ce6d}{choix\+\_\+ancienne\+\_\+version} (Q\+String date)
+\begin{DoxyCompactList}\small\item\em Slot appelé lors d\textquotesingle{}un clic sur l\textquotesingle{}une des notes du Q\+List\+Widget. Cela provoque l\textquotesingle{}affichage de la version de la note dans la fenetre principale. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classfenetre__anciennes__versions_a6a4e824ee33424c6fb8f6fd7331ee900}\label{classfenetre__anciennes__versions_a6a4e824ee33424c6fb8f6fd7331ee900}} 
-void {\bfseries restaurer} ()
-\end{DoxyCompactItemize}
+void \hyperlink{classfenetre__anciennes__versions_a6a4e824ee33424c6fb8f6fd7331ee900}{restaurer} ()
+\begin{DoxyCompactList}\small\item\em Slot appelé lors d\textquotesingle{}un clic sur \char`\"{}\+Restaurer\char`\"{}. Supprime la note active et la remplace par la version sélectionnée. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{classfenetre__anciennes__versions_a4e97516e26d1506c22fade6a4a641c45}{fenetre\+\_\+anciennes\+\_\+versions} (Q\+Widget $\ast$parent)
+\begin{DoxyCompactList}\small\item\em Constructeur, initialise la fenetre d\textquotesingle{}affichage des anciennes versions avec un Q\+List\+Widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe Fenetre d\textquotesingle{}affichage des anciennes versions. 
+
+Cette fenêtre sert à afficher, sélectionner et éventuellement restaurer une version d\textquotesingle{}une note. Les versions sont affichées selon la note depuis laquelle le menu contextuel et l\textquotesingle{}action \char`\"{}\+Anciennces versions\char`\"{} a été activée. 
+
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classfenetre__anciennes__versions_a4e97516e26d1506c22fade6a4a641c45}\label{classfenetre__anciennes__versions_a4e97516e26d1506c22fade6a4a641c45}} 
-{\bfseries fenetre\+\_\+anciennes\+\_\+versions} (Q\+Widget $\ast$parent)
-\end{DoxyCompactItemize}
+\index{fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}!fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}}
+\index{fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}!fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}}
+\subsubsection{\texorpdfstring{fenetre\+\_\+anciennes\+\_\+versions()}{fenetre\_anciennes\_versions()}}
+{\footnotesize\ttfamily fenetre\+\_\+anciennes\+\_\+versions\+::fenetre\+\_\+anciennes\+\_\+versions (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent }\end{DoxyParamCaption})}
+
+
+
+Constructeur, initialise la fenetre d\textquotesingle{}affichage des anciennes versions avec un Q\+List\+Widget. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & Widget/\+Fenetre parente d\textquotesingle{}où provient la fenetre \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfenetre__anciennes__versions_aff29c8425f322a7e82c950bc77f5ce6d}\label{classfenetre__anciennes__versions_aff29c8425f322a7e82c950bc77f5ce6d}} 
+\index{fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}!choix\+\_\+ancienne\+\_\+version@{choix\+\_\+ancienne\+\_\+version}}
+\index{choix\+\_\+ancienne\+\_\+version@{choix\+\_\+ancienne\+\_\+version}!fenetre\+\_\+anciennes\+\_\+versions@{fenetre\+\_\+anciennes\+\_\+versions}}
+\subsubsection{\texorpdfstring{choix\+\_\+ancienne\+\_\+version}{choix\_ancienne\_version}}
+{\footnotesize\ttfamily void fenetre\+\_\+anciennes\+\_\+versions\+::choix\+\_\+ancienne\+\_\+version (\begin{DoxyParamCaption}\item[{Q\+String}]{date }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Slot appelé lors d\textquotesingle{}un clic sur l\textquotesingle{}une des notes du Q\+List\+Widget. Cela provoque l\textquotesingle{}affichage de la version de la note dans la fenetre principale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

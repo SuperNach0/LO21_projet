@@ -1,5 +1,14 @@
 \hypertarget{classfenetre__creation__relation}{}\section{fenetre\+\_\+creation\+\_\+relation Class Reference}
 \label{classfenetre__creation__relation}\index{fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}}
+
+
+Classe Fenetre de création de relation.  
+
+
+
+
+{\ttfamily \#include $<$fenetres.\+h$>$}
+
 Inheritance diagram for fenetre\+\_\+creation\+\_\+relation\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,33 +19,73 @@ Inheritance diagram for fenetre\+\_\+creation\+\_\+relation\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classfenetre__creation__relation_ac5b715961f109f3bb403d8ca37faed71}\label{classfenetre__creation__relation_ac5b715961f109f3bb403d8ca37faed71}} 
-void {\bfseries affichage\+\_\+couples} ()
-\item 
+void \hyperlink{classfenetre__creation__relation_ac5b715961f109f3bb403d8ca37faed71}{affichage\+\_\+couples} ()
+\begin{DoxyCompactList}\small\item\em Affiche les couples au fur et à mesure de leur création/ajout dans la relation en cours de création. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classfenetre__creation__relation_ad8b233b34d0e2775108683e09a8d966d}\label{classfenetre__creation__relation_ad8b233b34d0e2775108683e09a8d966d}} 
-void {\bfseries save\+\_\+couple} ()
-\item 
+void \hyperlink{classfenetre__creation__relation_ad8b233b34d0e2775108683e09a8d966d}{save\+\_\+couple} ()
+\begin{DoxyCompactList}\small\item\em Sauvegarde un couple dans le vector m\+\_\+couples. Ce dernier sera utilisé pour remplir les couples de la relation. \end{DoxyCompactList}\item 
 void \hyperlink{classfenetre__creation__relation_af9891e79cff26ef704cfdae9cfa46752}{save\+\_\+relation} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sauvegarde/mise à jour de la relation dans le \hyperlink{class_relation_manager}{Relation\+Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classfenetre__creation__relation_ae7f98f1b23dbe45b922b61293348a07f}\label{classfenetre__creation__relation_ae7f98f1b23dbe45b922b61293348a07f}} 
-{\bfseries fenetre\+\_\+creation\+\_\+relation} (Q\+Widget $\ast$parent)
-\item 
+\hyperlink{classfenetre__creation__relation_ae7f98f1b23dbe45b922b61293348a07f}{fenetre\+\_\+creation\+\_\+relation} (Q\+Widget $\ast$parent)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classfenetre__creation__relation_a843417e0a1f6350f8a3919eb92cf67dd}\label{classfenetre__creation__relation_a843417e0a1f6350f8a3919eb92cf67dd}} 
-std\+::vector$<$ \hyperlink{class_couple}{Couple} $\ast$ $>$ {\bfseries get\+Couples} ()
-\item 
-\mbox{\Hypertarget{classfenetre__creation__relation_a83c62031d4d8d973aca33e38d9079c49}\label{classfenetre__creation__relation_a83c62031d4d8d973aca33e38d9079c49}} 
-void {\bfseries lock\+\_\+id\+\_\+relation} (std\+::string titre)
-\end{DoxyCompactItemize}
+std\+::vector$<$ \hyperlink{class_couple}{Couple} $\ast$ $>$ \hyperlink{classfenetre__creation__relation_a843417e0a1f6350f8a3919eb92cf67dd}{get\+Couples} ()
+\begin{DoxyCompactList}\small\item\em Retourne la liste des couples de la relation en cours de création. \end{DoxyCompactList}\item 
+void \hyperlink{classfenetre__creation__relation_a83c62031d4d8d973aca33e38d9079c49}{lock\+\_\+id\+\_\+relation} (std\+::string titre)
+\begin{DoxyCompactList}\small\item\em Transforme la fenetre en mode \char`\"{}édition\char`\"{}. On ne peut plus changer le titre et ce dernier est fixé au titre de la relation éditée. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe Fenetre de création de relation. 
+
+Cette fenêtre va servir à créer ou éditer une relation. Des Qlist\+Widgets permettent de sélectionner des identifiants de notes, pour créer des couples qui seront ajoutés à la relation 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfenetre__creation__relation_ae7f98f1b23dbe45b922b61293348a07f}\label{classfenetre__creation__relation_ae7f98f1b23dbe45b922b61293348a07f}} 
+\index{fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}!fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}}
+\index{fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}!fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}}
+\subsubsection{\texorpdfstring{fenetre\+\_\+creation\+\_\+relation()}{fenetre\_creation\_relation()}}
+{\footnotesize\ttfamily fenetre\+\_\+creation\+\_\+relation\+::fenetre\+\_\+creation\+\_\+relation (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent }\end{DoxyParamCaption})}
+
+
+
+Constructeur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \+: contient l\textquotesingle{}adresse du widget/fenetre parente à la fenetre de création de relation, afin de pouvoir appeler ses méthodes \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfenetre__creation__relation_a83c62031d4d8d973aca33e38d9079c49}\label{classfenetre__creation__relation_a83c62031d4d8d973aca33e38d9079c49}} 
+\index{fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}!lock\+\_\+id\+\_\+relation@{lock\+\_\+id\+\_\+relation}}
+\index{lock\+\_\+id\+\_\+relation@{lock\+\_\+id\+\_\+relation}!fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}}
+\subsubsection{\texorpdfstring{lock\+\_\+id\+\_\+relation()}{lock\_id\_relation()}}
+{\footnotesize\ttfamily void fenetre\+\_\+creation\+\_\+relation\+::lock\+\_\+id\+\_\+relation (\begin{DoxyParamCaption}\item[{std\+::string}]{titre }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Transforme la fenetre en mode \char`\"{}édition\char`\"{}. On ne peut plus changer le titre et ce dernier est fixé au titre de la relation éditée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em titre} & \+: titre de la relation sélectionnée dans son dock \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classfenetre__creation__relation_af9891e79cff26ef704cfdae9cfa46752}\label{classfenetre__creation__relation_af9891e79cff26ef704cfdae9cfa46752}} 
 \index{fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}!save\+\_\+relation@{save\+\_\+relation}}
 \index{save\+\_\+relation@{save\+\_\+relation}!fenetre\+\_\+creation\+\_\+relation@{fenetre\+\_\+creation\+\_\+relation}}
 \subsubsection{\texorpdfstring{save\+\_\+relation}{save\_relation}}
 {\footnotesize\ttfamily void fenetre\+\_\+creation\+\_\+relation\+::save\+\_\+relation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Sauvegarde/mise à jour de la relation dans le \hyperlink{class_relation_manager}{Relation\+Manager}. 
 
 Si la relation existe déjà 
 

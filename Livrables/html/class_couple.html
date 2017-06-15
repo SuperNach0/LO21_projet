@@ -65,25 +65,97 @@ $(function() {
 <div class="title">Couple Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classe définissant les couples.  
+ <a href="class_couple.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="relations_8h_source.html">relations.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa1f1400e92e062c0ecdd6f81fdc47d07"><td class="memItemLeft" align="right" valign="top"><a id="aa1f1400e92e062c0ecdd6f81fdc47d07"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Couple</b> (<a class="el" href="classnote.html">note</a> &amp;note1, <a class="el" href="classnote.html">note</a> &amp;note2, std::string lab, bool ori)</td></tr>
+<tr class="memitem:aa1f1400e92e062c0ecdd6f81fdc47d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_couple.html#aa1f1400e92e062c0ecdd6f81fdc47d07">Couple</a> (<a class="el" href="classnote.html">note</a> &amp;note1, <a class="el" href="classnote.html">note</a> &amp;note2, std::string lab, bool ori)</td></tr>
+<tr class="memdesc:aa1f1400e92e062c0ecdd6f81fdc47d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur de couple.  <a href="#aa1f1400e92e062c0ecdd6f81fdc47d07">More...</a><br /></td></tr>
 <tr class="separator:aa1f1400e92e062c0ecdd6f81fdc47d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25c14d126cb78805740000253b32f6d7"><td class="memItemLeft" align="right" valign="top"><a id="a25c14d126cb78805740000253b32f6d7"></a>
-const <a class="el" href="classnote.html">note</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getPremiere</b> () const</td></tr>
+const <a class="el" href="classnote.html">note</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_couple.html#a25c14d126cb78805740000253b32f6d7">getPremiere</a> () const</td></tr>
+<tr class="memdesc:a25c14d126cb78805740000253b32f6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">accesseur en lecture de retournant une référence sur la première note du couple. <br /></td></tr>
 <tr class="separator:a25c14d126cb78805740000253b32f6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a837894fc5a70507b67c5c3f19da7b9da"><td class="memItemLeft" align="right" valign="top"><a id="a837894fc5a70507b67c5c3f19da7b9da"></a>
-const <a class="el" href="classnote.html">note</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSeconde</b> () const</td></tr>
+const <a class="el" href="classnote.html">note</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_couple.html#a837894fc5a70507b67c5c3f19da7b9da">getSeconde</a> () const</td></tr>
+<tr class="memdesc:a837894fc5a70507b67c5c3f19da7b9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">accesseur en lecture de retournant une référence sur la seconde note du couple. <br /></td></tr>
 <tr class="separator:a837894fc5a70507b67c5c3f19da7b9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf2f8ba4907cf728a5d8110ac2abdff3"><td class="memItemLeft" align="right" valign="top"><a id="acf2f8ba4907cf728a5d8110ac2abdff3"></a>
-const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getLabel</b> () const</td></tr>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_couple.html#acf2f8ba4907cf728a5d8110ac2abdff3">getLabel</a> () const</td></tr>
+<tr class="memdesc:acf2f8ba4907cf728a5d8110ac2abdff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">accesseur en lecture du label du couple. <br /></td></tr>
 <tr class="separator:acf2f8ba4907cf728a5d8110ac2abdff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa105334f2fa5185c963b54c265720f2e"><td class="memItemLeft" align="right" valign="top"><a id="aa105334f2fa5185c963b54c265720f2e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOriented</b> () const</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_couple.html#aa105334f2fa5185c963b54c265720f2e">isOriented</a> () const</td></tr>
+<tr class="memdesc:aa105334f2fa5185c963b54c265720f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">accesseur en lecture de l'orientation du couple. <br /></td></tr>
 <tr class="separator:aa105334f2fa5185c963b54c265720f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Classe définissant les couples. </p>
+<p>possède un attribut pointeur sur le première note du couple, un attibut pointant sur la seconde note du couple un label définissant le couple un booleen qui détermine si la relation est orientée ou non. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa1f1400e92e062c0ecdd6f81fdc47d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1f1400e92e062c0ecdd6f81fdc47d07">&#9670;&nbsp;</a></span>Couple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Couple::Couple </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnote.html">note</a> &amp;&#160;</td>
+          <td class="paramname"><em>note1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classnote.html">note</a> &amp;&#160;</td>
+          <td class="paramname"><em>note2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>lab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ori</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructeur de couple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">note1</td><td>: référence sur la première note </td></tr>
+    <tr><td class="paramname">note2</td><td>: référence sur la seconde note </td></tr>
+    <tr><td class="paramname">label</td><td>: de du couple </td></tr>
+    <tr><td class="paramname">orientation</td><td>: (0 :non, 1: Oui) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="relations_8h_source.html">relations.h</a></li>
 </ul>

@@ -1,8 +1,10 @@
 var searchData=
 [
   ['add',['add',['../class_manager.html#a4eac07f3408be9a9c86273383e282b53',1,'Manager']]],
+  ['addcouple',['addCouple',['../class_relation.html#ad51e21a7258d6980f479dbb21f9e510c',1,'Relation']]],
   ['addrelation',['addRelation',['../class_relation_manager.html#a2933861a9b973a35031e799ef9d369b5',1,'RelationManager']]],
   ['affichage_5farborescence',['affichage_arborescence',['../class_fen_principale.html#adf2a7193704aaf0b73b5b10b3133488c',1,'FenPrincipale']]],
+  ['affichage_5fcouples',['affichage_couples',['../classfenetre__creation__relation.html#ac5b715961f109f3bb403d8ca37faed71',1,'fenetre_creation_relation']]],
   ['affichage_5fnotes_5frelations',['affichage_notes_relations',['../class_fen_principale.html#a1e99bb2ccb692e8d084b0c667bfd364f',1,'FenPrincipale']]],
   ['affichage_5fsingle_5fnote',['affichage_single_note',['../class_fen_principale.html#a6cc4b79a54ed443cced0fb03f7f83619',1,'FenPrincipale']]],
   ['affichage_5fsingle_5frelation',['affichage_single_relation',['../class_fen_principale.html#a67e142066003277638ed8b7dc67b19e9',1,'FenPrincipale']]],
