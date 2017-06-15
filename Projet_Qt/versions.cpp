@@ -65,7 +65,7 @@ void FenPrincipale::editerNote()
         if (current.getecheance()!="")
         {
             fenetre->m_case_calendrier->setChecked(true);
-            ///afficher sur le calendrier la date d'échéance
+            //afficher sur le calendrier la date d'échéance
         }
 
 
@@ -134,6 +134,6 @@ void FenPrincipale::supprimerRelation()
     if (i == rm.getobjets().size())
         throw NotesException("La relation a supprimer n'existe pas\n");
     rm.getobjets().erase(rm.getobjets().begin()+i);
-    */ ///A FINIR
+    */ //A FINIR
 
 }
