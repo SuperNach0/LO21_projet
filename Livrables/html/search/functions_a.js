@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7emanager',['~Manager',['../class_manager.html#aa40cf01ea01fc0fdc029992ff8e8ad74',1,'Manager']]],
-  ['_7enote',['~note',['../classnote.html#abaece2737aa27cf5efb19e75bedcc41f',1,'note']]]
+  ['tache',['tache',['../classtache.html#a88ffefc43bb6ee19cb9c6741551ec606',1,'tache::tache(const std::string i, std::string t, std::string txt, unsigned int p, std::string e, enum etat Status, std::string crea=&quot;&quot;, std::string modif=&quot;&quot;)'],['../classtache.html#a6d56536f238c28e385a94ba7db828b00',1,'tache::tache(const tache &amp;tache_a_copier)']]]
 ];

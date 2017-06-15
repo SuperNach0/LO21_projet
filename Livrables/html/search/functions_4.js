@@ -2,6 +2,8 @@ var searchData=
 [
   ['getchemin',['getChemin',['../classmedia.html#ae9e1c7e0038e5b8036c1f06871ecd19a',1,'media']]],
   ['getcreation',['getCreation',['../classnote.html#a5b11e6f329d9b94c80ce7c3bcc2e303f',1,'note']]],
+  ['getcurrentnote',['getCurrentNote',['../class_fen_principale.html#a693e4a09cc7dd941184d0ea7860409da',1,'FenPrincipale']]],
+  ['getcurrentrelation',['getCurrentRelation',['../class_fen_principale.html#afe1f6fbbdd799fa55e804343ce4583af',1,'FenPrincipale']]],
   ['getecheance',['getecheance',['../classtache.html#a6cb88e9c76bba2ba9cdbcb4a24533138',1,'tache']]],
   ['getetat',['getEtat',['../classtache.html#a428f13ec94d058a857a7e060cd69d1f7',1,'tache']]],
   ['getfilename',['getFilename',['../class_manager.html#a5f6a3a94521559731ef49005d7669464',1,'Manager']]],
