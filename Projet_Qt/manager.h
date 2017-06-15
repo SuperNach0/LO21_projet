@@ -64,7 +64,7 @@ public:
 public:
 
    note& getNote (const std::string& id, const std::string& date="");
-   note& getOldNote(const std::string& id);
+
    void SupprimerNote (note& toDelete, const std::string& date="");
 
    void load(); // load notes from file filename

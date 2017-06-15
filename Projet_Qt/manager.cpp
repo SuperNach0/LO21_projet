@@ -58,18 +58,6 @@ note& NotesManager2::getNote(const std::string& id, const std::string& date){
     throw NotesException("La note n'existe pas\n");
 }
 
-
-note& NotesManager2::getOldNote(const std::string& id)
-{
-note& version_actuelle=getNote(id);
-for(unsigned int i=0; i<version_actuelle.getOldNotes().size(); i++)
-{
-    if (version_actuelle.getOldNotes()[i]->getID()==id) return *version_actuelle.getOldNotes()[i];
-}
-throw NotesException("Version de note non trouvee\n");
-}
-
-
 template <class T>
 void Manager<T>::Supprimer (T& toDelete)
 {
