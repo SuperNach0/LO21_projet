@@ -1,5 +1,14 @@
 \hypertarget{class_relation_manager}{}\section{Relation\+Manager Class Reference}
 \label{class_relation_manager}\index{Relation\+Manager@{Relation\+Manager}}
+
+
+Classe fille héritant de \hyperlink{class_manager}{Manager$<$\+Relation$>$} et chargée des relations. dispose du Deseign Pattern Singleton.  
+
+
+
+
+{\ttfamily \#include $<$manager.\+h$>$}
+
 Inheritance diagram for Relation\+Manager\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,28 +18,62 @@ Inheritance diagram for Relation\+Manager\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_relation_manager_a7e5900e270c2249831355c70b2fd94b8}\label{class_relation_manager_a7e5900e270c2249831355c70b2fd94b8}} 
-\hyperlink{class_relation}{Relation} \& {\bfseries get\+Relation} (const std\+::string \&titre)
-\item 
-\mbox{\Hypertarget{class_relation_manager_a2933861a9b973a35031e799ef9d369b5}\label{class_relation_manager_a2933861a9b973a35031e799ef9d369b5}} 
-void {\bfseries add\+Relation} (\hyperlink{class_relation}{Relation} \&relation)
-\item 
+\hyperlink{class_relation}{Relation} \& \hyperlink{class_relation_manager_a7e5900e270c2249831355c70b2fd94b8}{get\+Relation} (const std\+::string \&titre)
+\begin{DoxyCompactList}\small\item\em Renvoie une référence sur la relation possédant le titre fournit en paramètre. Exeption sinon. \end{DoxyCompactList}\item 
+void \hyperlink{class_relation_manager_a2933861a9b973a35031e799ef9d369b5}{add\+Relation} (\hyperlink{class_relation}{Relation} \&relation)
+\begin{DoxyCompactList}\small\item\em ajoute une relation au vector du \hyperlink{class_relation_manager}{Relation\+Manager} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_relation_manager_a593a538680d22c21a8d1a8dd981f6b44}\label{class_relation_manager_a593a538680d22c21a8d1a8dd981f6b44}} 
-void {\bfseries load} ()
-\item 
+void \hyperlink{class_relation_manager_a593a538680d22c21a8d1a8dd981f6b44}{load} ()
+\begin{DoxyCompactList}\small\item\em le load général est définit dans \hyperlink{class_notes_manager2}{Notes\+Manager2} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_relation_manager_ac9b805487819264d8ef7faab68521822}\label{class_relation_manager_ac9b805487819264d8ef7faab68521822}} 
-void {\bfseries save} ()
-\end{DoxyCompactItemize}
+void \hyperlink{class_relation_manager_ac9b805487819264d8ef7faab68521822}{save} ()
+\begin{DoxyCompactList}\small\item\em le save général est définit dans \hyperlink{class_notes_manager2}{Notes\+Manager2} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_relation_manager_a525665dcd2599872667dd32f36506f41}\label{class_relation_manager_a525665dcd2599872667dd32f36506f41}} 
-static \hyperlink{class_relation_manager}{Relation\+Manager} \& {\bfseries get\+Manager} ()
-\item 
+static \hyperlink{class_relation_manager}{Relation\+Manager} \& \hyperlink{class_relation_manager_a525665dcd2599872667dd32f36506f41}{get\+Manager} ()
+\begin{DoxyCompactList}\small\item\em Renvoie une référence sur le \hyperlink{class_relation_manager}{Relation\+Manager} si il existe déja, sinon, le créé.(fait partie du singleton) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_relation_manager_a4c967c4473a2bd29ab558ebf74aed149}\label{class_relation_manager_a4c967c4473a2bd29ab558ebf74aed149}} 
-static void {\bfseries free\+Manager} ()
-\end{DoxyCompactItemize}
+static void \hyperlink{class_relation_manager_a4c967c4473a2bd29ab558ebf74aed149}{free\+Manager} ()
+\begin{DoxyCompactList}\small\item\em libère l\textquotesingle{}instance unique de \hyperlink{class_relation_manager}{Relation\+Manager}.(fait partie du singleton) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classe fille héritant de \hyperlink{class_manager}{Manager$<$\+Relation$>$} et chargée des relations. dispose du Deseign Pattern Singleton. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_relation_manager_a2933861a9b973a35031e799ef9d369b5}\label{class_relation_manager_a2933861a9b973a35031e799ef9d369b5}} 
+\index{Relation\+Manager@{Relation\+Manager}!add\+Relation@{add\+Relation}}
+\index{add\+Relation@{add\+Relation}!Relation\+Manager@{Relation\+Manager}}
+\subsubsection{\texorpdfstring{add\+Relation()}{addRelation()}}
+{\footnotesize\ttfamily void Relation\+Manager\+::add\+Relation (\begin{DoxyParamCaption}\item[{\hyperlink{class_relation}{Relation} \&}]{relation }\end{DoxyParamCaption})}
+
+
+
+ajoute une relation au vector du \hyperlink{class_relation_manager}{Relation\+Manager} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em relation} & \+: référence sur la relation à ajouter. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_relation_manager_a7e5900e270c2249831355c70b2fd94b8}\label{class_relation_manager_a7e5900e270c2249831355c70b2fd94b8}} 
+\index{Relation\+Manager@{Relation\+Manager}!get\+Relation@{get\+Relation}}
+\index{get\+Relation@{get\+Relation}!Relation\+Manager@{Relation\+Manager}}
+\subsubsection{\texorpdfstring{get\+Relation()}{getRelation()}}
+{\footnotesize\ttfamily \hyperlink{class_relation}{Relation} \& Relation\+Manager\+::get\+Relation (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{titre }\end{DoxyParamCaption})}
+
+
+
+Renvoie une référence sur la relation possédant le titre fournit en paramètre. Exeption sinon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em titre} & \+: le titre de la relation à rechercher. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

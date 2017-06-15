@@ -1,35 +1,41 @@
 \hypertarget{class_manager}{}\section{Manager$<$ T $>$ Class Template Reference}
 \label{class_manager}\index{Manager$<$ T $>$@{Manager$<$ T $>$}}
+
+
+Classe mère Template abstraite Managers.  
+
+
+
+
+{\ttfamily \#include $<$manager.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_manager_a4eac07f3408be9a9c86273383e282b53}\label{class_manager_a4eac07f3408be9a9c86273383e282b53}} 
-void {\bfseries add} (T \&a\+\_\+ajouter)
-\item 
-\mbox{\Hypertarget{class_manager_a5ad1071a0ca361daea98576c433774c8}\label{class_manager_a5ad1071a0ca361daea98576c433774c8}} 
-void {\bfseries Supprimer} (T \&to\+Delete)
-\item 
+void \hyperlink{class_manager_a4eac07f3408be9a9c86273383e282b53}{add} (T \&a\+\_\+ajouter)
+\begin{DoxyCompactList}\small\item\em fonction qui vérifie si l\textquotesingle{}id de l\textquotesingle{}objet de type T fourni en paramètre existe déja en parcourant le vector (exeption si c\textquotesingle{}est le cas),et qui l\textquotesingle{}ajoute à l\textquotesingle{}arrièredu vector si ce n\textquotesingle{}est pas le cas. \end{DoxyCompactList}\item 
+void \hyperlink{class_manager_a5ad1071a0ca361daea98576c433774c8}{Supprimer} (T \&to\+Delete)
+\begin{DoxyCompactList}\small\item\em fonction qui supprime du vector l\textquotesingle{}objet de type T fourni en paramètre \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_manager_a53786650c42236c2c346cda79cb3cee3}\label{class_manager_a53786650c42236c2c346cda79cb3cee3}} 
-const std\+::vector$<$ T $\ast$ $>$ {\bfseries getobjets} () const
-\item 
+const std\+::vector$<$ T $\ast$ $>$ \hyperlink{class_manager_a53786650c42236c2c346cda79cb3cee3}{getobjets} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du vector contennat les objets T. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_manager_a5f6a3a94521559731ef49005d7669464}\label{class_manager_a5f6a3a94521559731ef49005d7669464}} 
-Q\+String {\bfseries get\+Filename} () const
-\item 
-\mbox{\Hypertarget{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}\label{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}} 
-void {\bfseries set\+Filename} (const Q\+String \&f)
-\item 
-\mbox{\Hypertarget{class_manager_a5fe23721cb4bf2f0eafbb983e5ed48ac}\label{class_manager_a5fe23721cb4bf2f0eafbb983e5ed48ac}} 
-{\bfseries Manager} (const \hyperlink{class_manager}{Manager} \&m)
-\item 
-\mbox{\Hypertarget{class_manager_a105090c64755ac39343b4aef80404727}\label{class_manager_a105090c64755ac39343b4aef80404727}} 
-\hyperlink{class_manager}{Manager} \& {\bfseries operator=} (const \hyperlink{class_manager}{Manager} \&m)
-\item 
+Q\+String \hyperlink{class_manager_a5f6a3a94521559731ef49005d7669464}{get\+Filename} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du chemin du fichier xml. \end{DoxyCompactList}\item 
+void \hyperlink{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}{set\+Filename} (const Q\+String \&f)
+\begin{DoxyCompactList}\small\item\em met à jour le chemin du du fichier xml. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_manager_a18fae41f0e313921265b84b5355ac733}\label{class_manager_a18fae41f0e313921265b84b5355ac733}} 
+\hyperlink{class_manager_a18fae41f0e313921265b84b5355ac733}{Manager} ()
+\begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{class_manager}{Manager}, initialise le vector (vide) et definit le chemin par défaut du fichier xml. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_manager_aa40cf01ea01fc0fdc029992ff8e8ad74}\label{class_manager_aa40cf01ea01fc0fdc029992ff8e8ad74}} 
+virtual \hyperlink{class_manager_aa40cf01ea01fc0fdc029992ff8e8ad74}{$\sim$\+Manager} ()
+\begin{DoxyCompactList}\small\item\em destructeur de \hyperlink{class_manager}{Manager} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_manager_add6a6361b3ebef4e6e744c2b12f9e57d}\label{class_manager_add6a6361b3ebef4e6e744c2b12f9e57d}} 
-virtual void {\bfseries load} ()=0
-\item 
+virtual void \hyperlink{class_manager_add6a6361b3ebef4e6e744c2b12f9e57d}{load} ()=0
+\begin{DoxyCompactList}\small\item\em méthode virtuelle pure pour charger les notes à définir dans les filles \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_manager_a952734cfd645e6b257ef19ab06d4ded4}\label{class_manager_a952734cfd645e6b257ef19ab06d4ded4}} 
-virtual void {\bfseries save} ()=0
-\end{DoxyCompactItemize}
+virtual void \hyperlink{class_manager_a952734cfd645e6b257ef19ab06d4ded4}{save} ()=0
+\begin{DoxyCompactList}\small\item\em méthode virtuelle pure pour sauvegarder les notes à définir dans les filles \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,6 +45,65 @@ std\+::vector$<$ T $\ast$ $>$ {\bfseries objets}
 \mbox{\Hypertarget{class_manager_a312ccc5f1d3cf73f9c76b32777f1bcf9}\label{class_manager_a312ccc5f1d3cf73f9c76b32777f1bcf9}} 
 Q\+String {\bfseries filename}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Manager$<$ T $>$}
+
+Classe mère Template abstraite Managers. 
+
+Cette classe regroupe les attributs et les méthodes communes aux différents Managers. Elle est composée d\textquotesingle{}un vector de template$<$classe T$>$ qui stockera et manipulera les objets T, et d\textquotesingle{}un chemin de fichier (par défaut) qui mène au fichier .xml dans lequel les objets seront sauvegardés. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_manager_a4eac07f3408be9a9c86273383e282b53}\label{class_manager_a4eac07f3408be9a9c86273383e282b53}} 
+\index{Manager@{Manager}!add@{add}}
+\index{add@{add}!Manager@{Manager}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{class_manager}{Manager}$<$ T $>$\+::add (\begin{DoxyParamCaption}\item[{T \&}]{a\+\_\+ajouter }\end{DoxyParamCaption})}
+
+
+
+fonction qui vérifie si l\textquotesingle{}id de l\textquotesingle{}objet de type T fourni en paramètre existe déja en parcourant le vector (exeption si c\textquotesingle{}est le cas),et qui l\textquotesingle{}ajoute à l\textquotesingle{}arrièredu vector si ce n\textquotesingle{}est pas le cas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T\&} & \+: référence sur l\textquotesingle{}objet à ajouter. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}\label{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}} 
+\index{Manager@{Manager}!set\+Filename@{set\+Filename}}
+\index{set\+Filename@{set\+Filename}!Manager@{Manager}}
+\subsubsection{\texorpdfstring{set\+Filename()}{setFilename()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{class_manager}{Manager}$<$ T $>$\+::set\+Filename (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour le chemin du du fichier xml. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \+: le chemin du nouveau fichier xml. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_manager_a5ad1071a0ca361daea98576c433774c8}\label{class_manager_a5ad1071a0ca361daea98576c433774c8}} 
+\index{Manager@{Manager}!Supprimer@{Supprimer}}
+\index{Supprimer@{Supprimer}!Manager@{Manager}}
+\subsubsection{\texorpdfstring{Supprimer()}{Supprimer()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{class_manager}{Manager}$<$ T $>$\+::Supprimer (\begin{DoxyParamCaption}\item[{T \&}]{to\+Delete }\end{DoxyParamCaption})}
+
+
+
+fonction qui supprime du vector l\textquotesingle{}objet de type T fourni en paramètre 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T\&} & \+: référence sur l\textquotesingle{}objet à supprimer. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

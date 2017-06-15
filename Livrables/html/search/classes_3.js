@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['handler',['Handler',['../struct_notes_manager2_1_1_handler.html',1,'NotesManager2']]]
+  ['manager',['Manager',['../class_manager.html',1,'']]],
+  ['manager_3c_20note_20_3e',['Manager&lt; note &gt;',['../class_manager.html',1,'']]],
+  ['manager_3c_20relation_20_3e',['Manager&lt; Relation &gt;',['../class_manager.html',1,'']]],
+  ['media',['media',['../classmedia.html',1,'']]]
 ];

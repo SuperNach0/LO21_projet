@@ -100,11 +100,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>affichage_single_rela
 <tr class="memitem:a55596abf1539b9b6012fc89f0e9c3d6a"><td class="memItemLeft" align="right" valign="top"><a id="a55596abf1539b9b6012fc89f0e9c3d6a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>menuContextuel</b> (const QPoint &amp;)</td></tr>
 <tr class="separator:a55596abf1539b9b6012fc89f0e9c3d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6518d75ce88927fbd121e465bae896f4"><td class="memItemLeft" align="right" valign="top"><a id="a6518d75ce88927fbd121e465bae896f4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>menuContextuel2</b> (const QPoint &amp;)</td></tr>
+<tr class="separator:a6518d75ce88927fbd121e465bae896f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdbd0250f3c3e037bfa7cd27c5162baf"><td class="memItemLeft" align="right" valign="top"><a id="abdbd0250f3c3e037bfa7cd27c5162baf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>supprimerNote</b> ()</td></tr>
 <tr class="separator:abdbd0250f3c3e037bfa7cd27c5162baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dbafe44ea212955ba0b7d674ab5cc9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fen_principale.html#a7dbafe44ea212955ba0b7d674ab5cc9d">supprimerRelation</a> ()</td></tr>
+<tr class="separator:a7dbafe44ea212955ba0b7d674ab5cc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8b916f06d0c149b1411781e7129fab5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fen_principale.html#ab8b916f06d0c149b1411781e7129fab5">editerNote</a> ()</td></tr>
 <tr class="separator:ab8b916f06d0c149b1411781e7129fab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e9dfdb793047a0ff1a360324d3a251"><td class="memItemLeft" align="right" valign="top"><a id="a03e9dfdb793047a0ff1a360324d3a251"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editerRelation</b> ()</td></tr>
+<tr class="separator:a03e9dfdb793047a0ff1a360324d3a251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60879a209bf90971f1919a685c9538dd"><td class="memItemLeft" align="right" valign="top"><a id="a60879a209bf90971f1919a685c9538dd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>load_xml</b> ()</td></tr>
 <tr class="separator:a60879a209bf90971f1919a685c9538dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,9 +124,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>affichage_arborescenc
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a529a35ea032da250ad37f7355d1388be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fen_principale.html#a529a35ea032da250ad37f7355d1388be">FenPrincipale</a> ()</td></tr>
 <tr class="separator:a529a35ea032da250ad37f7355d1388be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29bdfee5e7a363a205932eeb721dab51"><td class="memItemLeft" align="right" valign="top"><a id="a29bdfee5e7a363a205932eeb721dab51"></a>
-const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentNote</b> ()</td></tr>
-<tr class="separator:a29bdfee5e7a363a205932eeb721dab51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a693e4a09cc7dd941184d0ea7860409da"><td class="memItemLeft" align="right" valign="top"><a id="a693e4a09cc7dd941184d0ea7860409da"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentNote</b> () const</td></tr>
+<tr class="separator:a693e4a09cc7dd941184d0ea7860409da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe1f6fbbdd799fa55e804343ce4583af"><td class="memItemLeft" align="right" valign="top"><a id="afe1f6fbbdd799fa55e804343ce4583af"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentRelation</b> () const</td></tr>
+<tr class="separator:afe1f6fbbdd799fa55e804343ce4583af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -297,6 +308,32 @@ QLabel *&#160;</td><td class="memItemRight" valign="bottom"><b>m_label_arboresce
 </table>
 </div><div class="memdoc">
 <p>afficher sur le calendrier la date d'échéance </p>
+
+</div>
+</div>
+<a id="a7dbafe44ea212955ba0b7d674ab5cc9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dbafe44ea212955ba0b7d674ab5cc9d">&#9670;&nbsp;</a></span>supprimerRelation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FenPrincipale::supprimerRelation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A FINIR </p>
 
 </div>
 </div>

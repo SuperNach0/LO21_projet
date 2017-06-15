@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['media',['media',['../classmedia.html#a672a7ed2084d2b0d4928dd076bda3919',1,'media::media(const std::string i, std::string t, std::string txt, std::string im, std::string crea=&quot;&quot;, std::string modif=&quot;&quot;)'],['../classmedia.html#a57057824b696efef18a77f814ef086af',1,'media::media(const media &amp;media_a_copier)']]]
+  ['load',['load',['../class_manager.html#add6a6361b3ebef4e6e744c2b12f9e57d',1,'Manager::load()'],['../class_notes_manager2.html#a2248b5b1620b2039fdba9b3c6476c6cc',1,'NotesManager2::load()'],['../class_relation_manager.html#a593a538680d22c21a8d1a8dd981f6b44',1,'RelationManager::load()']]]
 ];

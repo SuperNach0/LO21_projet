@@ -55,7 +55,7 @@ protected :
 
 public :
     /// Constructeur de notes.
-     /** Ceconstructeur crée une nouvelle note avec les paramètres fournis.
+     /** Ce constructeur crée une nouvelle note avec les paramètres fournis.
       * Si crea (date de création) n'est pas renseigné, il s'agit d'une nouvelle note et le constructeur appelle la fonction formatTime() qui récupèrela date et l'heure du système.
       * cette date est donc affectée à la date de création de la note et aussi à la date de dernière modification.
       * Si ces dattes sont fournis, ils sont affectédd aux attributs correspondants.
@@ -88,7 +88,7 @@ public :
     const std::string getModif() const {return Modif;}
         /// accesseur en lecture du texte de la note.
     const std::string getTexte() const {return texte;}
-        /// accesseur du vector contennat les anciennes versions de la note.
+        /// accesseur du vector contennant les anciennes versions de la note.
     std::vector<note*>& getOldNotes() {return oldNotes;}
       /// met à jour le  texte de la note.
     /**

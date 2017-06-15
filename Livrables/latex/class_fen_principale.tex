@@ -30,10 +30,18 @@ void {\bfseries affichage\+\_\+single\+\_\+relation} (Q\+String titre)
 \mbox{\Hypertarget{class_fen_principale_a55596abf1539b9b6012fc89f0e9c3d6a}\label{class_fen_principale_a55596abf1539b9b6012fc89f0e9c3d6a}} 
 void {\bfseries menu\+Contextuel} (const Q\+Point \&)
 \item 
+\mbox{\Hypertarget{class_fen_principale_a6518d75ce88927fbd121e465bae896f4}\label{class_fen_principale_a6518d75ce88927fbd121e465bae896f4}} 
+void {\bfseries menu\+Contextuel2} (const Q\+Point \&)
+\item 
 \mbox{\Hypertarget{class_fen_principale_abdbd0250f3c3e037bfa7cd27c5162baf}\label{class_fen_principale_abdbd0250f3c3e037bfa7cd27c5162baf}} 
 void {\bfseries supprimer\+Note} ()
 \item 
+void \hyperlink{class_fen_principale_a7dbafe44ea212955ba0b7d674ab5cc9d}{supprimer\+Relation} ()
+\item 
 void \hyperlink{class_fen_principale_ab8b916f06d0c149b1411781e7129fab5}{editer\+Note} ()
+\item 
+\mbox{\Hypertarget{class_fen_principale_a03e9dfdb793047a0ff1a360324d3a251}\label{class_fen_principale_a03e9dfdb793047a0ff1a360324d3a251}} 
+void {\bfseries editer\+Relation} ()
 \item 
 \mbox{\Hypertarget{class_fen_principale_a60879a209bf90971f1919a685c9538dd}\label{class_fen_principale_a60879a209bf90971f1919a685c9538dd}} 
 void {\bfseries load\+\_\+xml} ()
@@ -46,8 +54,11 @@ void {\bfseries affichage\+\_\+arborescence} (Q\+String id)
 \item 
 \hyperlink{class_fen_principale_a529a35ea032da250ad37f7355d1388be}{Fen\+Principale} ()
 \item 
-\mbox{\Hypertarget{class_fen_principale_a29bdfee5e7a363a205932eeb721dab51}\label{class_fen_principale_a29bdfee5e7a363a205932eeb721dab51}} 
-const std\+::string {\bfseries get\+Current\+Note} ()
+\mbox{\Hypertarget{class_fen_principale_a693e4a09cc7dd941184d0ea7860409da}\label{class_fen_principale_a693e4a09cc7dd941184d0ea7860409da}} 
+const std\+::string {\bfseries get\+Current\+Note} () const
+\item 
+\mbox{\Hypertarget{class_fen_principale_afe1f6fbbdd799fa55e804343ce4583af}\label{class_fen_principale_afe1f6fbbdd799fa55e804343ce4583af}} 
+const std\+::string {\bfseries get\+Current\+Relation} () const
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -182,7 +193,13 @@ L\+A\+Y\+O\+UT P\+R\+I\+N\+C\+I\+P\+AL
 \subsubsection{\texorpdfstring{editer\+Note}{editerNote}}
 {\footnotesize\ttfamily void Fen\+Principale\+::editer\+Note (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
 
-afficher sur le calendrier la date d\textquotesingle{}échéance 
+afficher sur le calendrier la date d\textquotesingle{}échéance \mbox{\Hypertarget{class_fen_principale_a7dbafe44ea212955ba0b7d674ab5cc9d}\label{class_fen_principale_a7dbafe44ea212955ba0b7d674ab5cc9d}} 
+\index{Fen\+Principale@{Fen\+Principale}!supprimer\+Relation@{supprimer\+Relation}}
+\index{supprimer\+Relation@{supprimer\+Relation}!Fen\+Principale@{Fen\+Principale}}
+\subsubsection{\texorpdfstring{supprimer\+Relation}{supprimerRelation}}
+{\footnotesize\ttfamily void Fen\+Principale\+::supprimer\+Relation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+A F\+I\+N\+IR 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

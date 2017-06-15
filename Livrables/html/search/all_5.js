@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handler',['Handler',['../struct_notes_manager2_1_1_handler.html',1,'NotesManager2']]]
+  ['load',['load',['../class_manager.html#add6a6361b3ebef4e6e744c2b12f9e57d',1,'Manager::load()'],['../class_notes_manager2.html#a2248b5b1620b2039fdba9b3c6476c6cc',1,'NotesManager2::load()'],['../class_relation_manager.html#a593a538680d22c21a8d1a8dd981f6b44',1,'RelationManager::load()']]]
 ];

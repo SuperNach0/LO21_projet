@@ -567,7 +567,7 @@ void NotesManager2::SupprimerNote (note& toDelete, const std::string& date)
 }
 
 
-///Vérifie si la note_a_analyser contient des références vers d'autres notes, et ajoute les relations dans le cas échéant
+
 void NotesManager2::checkReferences() const
 {
     RelationManager& rm = RelationManager::getManager();
