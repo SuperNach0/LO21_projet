@@ -18,8 +18,16 @@ class note;
 
 class NotesManager2;
 
+
+/// Cette classe récupère un string correspondant à une erreur et a pour fonction de l'afficher sur la sortie standard.
+
 class NotesException{
 public:
+    /// Cette fonction affiche sur la sortie standard l'erreur rencontrée .
+    /** lors d'un test(ex :id déjà existant), utiliser un throw puis cette fonction avec le essage d'erreur en paramètre
+        @param message : le message à afficher
+         @return info : le message à afficher
+     */
     NotesException(const std::string& message):info(message){}
     std::string getInfo() const { return info; }
 private:
@@ -29,7 +37,12 @@ private:
 
 
 
-//****************** SUPER CLASSE NOTE***********************/
+/// Classe mère abstraite des types de notes
+/** Cette classe regroupe  les attributs et les méthodes communes aux différents types de notes, ainsi qu'un vector contenant les anciennes versions.
+ *  Classe à utiliser lors de l'implémentatuion d'un nouveau type de note.
+ * Son but principal est d'éviter la redondance de code.
+ *
+ */
 class note {
 
 protected :
@@ -41,7 +54,18 @@ protected :
     std::vector<note*> oldNotes;
 
 public :
+    /// Constructeur de notes.
+     /** Ceconstructeur crée une nouvelle note avec les paramètres fournis.
+      * Si crea (date de création) n'est pas renseigné, il s'agit d'une nouvelle note et le constructeur appelle la fonction formatTime() qui récupèrela date et l'heure du système.
+      * cette date est donc affectée à la date de création de la note et aussi à la date de dernière modification.
+      * Si ces dattes sont fournis, ils sont affectédd aux attributs correspondants.
+         @param i id unique de la note
+         @param t titre de la note
+         @param txt texte décrivant la note
+         @param creadate de création de la note
+         @param modif date de dernière modification de la note
 
+      */
      note (std::string i,std::string t,std::string txt,std::string crea="",std::string modif =""): id(i),titre(t),texte(txt),oldNotes(0)
      { if  (crea=="") {
         this->Creation = formatTime();
@@ -54,226 +78,110 @@ public :
      }
 
 
-
+    /// accesseur en lecture de l'id de la note.
     const std::string getID() const {return id;}
+        /// accesseur en lecture du titre de la note.
     const std::string getTitre() const {return titre;}
+        /// accesseur en lecture de la date de création de la note.
     const std::string getCreation() const {return Creation;}
+        /// accesseur en lecture de la date de modification de la note.
     const std::string getModif() const {return Modif;}
+        /// accesseur en lecture du texte de la note.
     const std::string getTexte() const {return texte;}
+        /// accesseur du vector contennat les anciennes versions de la note.
     std::vector<note*>& getOldNotes() {return oldNotes;}
+      /// met à jour le  texte de la note.
+    /**
+     * @param text le nouveau texte de la note.
+     */
     void setTexte(const std::string& text) {texte = text;}
+      /// met à jour le titre de la note.
+    /**
+     * @param titre le nouveau titre de la note.
+     */
     void setTitre(const std::string& t) {titre = t;}
-    virtual void afficher(std::ostream& f= std::cout) const = 0;
-
+     /// fonction virtuelle  qui affiche les attributs de la note sur la sortie standard.
+    virtual void afficher(std::ostream& f= std::cout) const ;
+        /// fonction mettant à jour la date de modificaton avec l'heure du système
     void setModif () ;
-
+        ///Destructeur de note supprimmant les anciennes versions présentes dans le vector.
    virtual ~note () {
         std::cout<<"suppression de la note "<<std::endl;
         for (unsigned int i=0;i<oldNotes.size();i++)
             delete oldNotes[i];
         oldNotes.clear();
-    }; //à rajouter dans le destructeur : destruction de toutes les vieilles versions
-
-
-};
-/*
-
-class NotesManager2
-{
-private :
-   std::vector<note*> notes;
-
-   mutable  QString filename;
-
-   struct Handler {
-            NotesManager2* instance; // pointeur sur l'unique instance
-            Handler():instance(nullptr){}
-           ~Handler() { delete instance; }
-       };
-   static Handler handler;
-   NotesManager2();
-   ~NotesManager2();
-   NotesManager2(const NotesManager2& m);
-   NotesManager2& operator=(const NotesManager2& m);
-
-   //void addNote (const QString& i, const QString& ti, const QString& te);//3
-
-
-
-
-public:
-
-   note& getNote (const std::string& id, const std::string& date="");
-   note& getOldNote(const std::string& id);
-   void addNote (note& note_a_ajouter);
-
-   const std::vector<note*> getNotes() const {return notes;}
-
-   void SupprimerNote (note& toDelete, const std::string& date="");
-   QString getFilename() const { return filename; }
-   void setFilename(const QString& f) { filename=f; }
-   void load(); // load notes from file filename
-   void save(); // save notes in file filename
-
-
-   static NotesManager2& getManager();
-   static void freeManager();
-
-   void checkReferences() const;
-
-};*/
-
-//Vieux manager avec tableau
-/*
-class NotesManager2 {
- private :
-    note** Note;
-    unsigned int nbNote;
-    unsigned int nbMaxNote;
-    void addNote (note * n);
-    mutable  QString filename;
-
-    struct Handler {
-             NotesManager2* instance; // pointeur sur l'unique instance
-             Handler():instance(nullptr){}
-            ~Handler() { delete instance; }
-        };
-    static Handler handler;
-    NotesManager2();
-    ~NotesManager2();
-    NotesManager2(const NotesManager2& m);
-    NotesManager2& operator=(const NotesManager2& m);
-    void addNote (const QString& i, const QString& ti, const QString& te);//3
-
-
- public:
-
-    unsigned int getnbNote() const {return nbNote;}
-    note& getNote (const std::string& id, const std::string& date=""); // return the article with identificator id (create a new one if it not exists)
-    note& getOldNote(const std::string& id);
-    note& ajArticle(const std::string& id,const std::string& titre,const std::string& txt,const std::string& crea="",const std::string& modif="");
-    note& ajMulti(const std::string& id,const std::string& titre,const std::string& description,const std::string& image,const std::string& crea="",const std::string& modif="");
-    note& ajTache(const std::string& id,const std::string& titre, const std::string& action , const unsigned int priorite, const std::string& echeance, enum etat stat,const std::string& crea="",const std::string& modif="");
-
-
-
-    void SupprimerNote (note& toDelete);
-
-
-
-
-
-    QString getFilename() const { return filename; }
-    void setFilename(const QString& f) { filename=f; }
-    void load(); // load notes from file filename
-    void save() const; // save notes in file filename
-    static NotesManager2& getManager();
-    static void freeManager();
-
-    class ConstIterator {
-        friend class NotesManager2;
-        note** currentA;
-        unsigned int nbRemain;
-        ConstIterator(note** a, unsigned nb):currentA(a),nbRemain(nb){}
-    public:
-        ConstIterator():nbRemain(0),currentA(0){}
-        bool isDone() const { return nbRemain==0; }
-        void next() {
-            if (isDone())
-                throw NotesException("error, next on an iterator which is done");
-            nbRemain--;
-            currentA++;
-        }
-        const note& current() const {
-            if (isDone())
-                throw NotesException("error, indirection on an iterator which is done");
-            return **currentA;
-        }
     };
-    ConstIterator getIterator() const {
-        return ConstIterator(Note,nbNote);
-    }
-
-    class Searchiterator{
-          friend class NotesManager2;
-          note ** currentA;
-          int nbRemain;
-          std::string toFind;
-          Searchiterator(note **a, int nb, std::string tf): currentA(a),nbRemain(nb), toFind(tf){
-             while (nbRemain > 0 && (**currentA).getTitre().find(toFind)== std::string::npos){
-              currentA++;
-              nbRemain--;}
-
-          }
-
-      public:
-          bool isDone () const { return nbRemain ==0;}
-
-          void next ()
-          {
-              if (isDone())
-                  throw NotesException("ERROR : fin de la collection");
-              currentA++;
-              nbRemain --;
-              while (nbRemain > 0 && (**currentA).getTitre().find(toFind)== std::string::npos)
-              {
-                  currentA++;
-                  nbRemain--;
-              }
-
-          }
-
-          note & current () const {return ** currentA;}
-
-     };
-
-          Searchiterator getSearchIterator(std::string tf) const
-          {
-              return Searchiterator(Note,nbNote,tf);
-          }
-
-
-
 
 
 };
 
-*/
-//******SOUS CLASSE ARTICLE /  note avec un texte ******//
 
+/// Classe fille de note.
+/** cette classe n'ajoute pas de nouvel attribut car texte est commun à toutes les notes
+ */
 
 class article : public note {
 
 public :
-
+       /// constructeur similaire à celui de note.
+    /**
+     * @param i : id unique de l'article
+     * @param t : titre de l'article
+     * @param txt : texte décrivant l'article
+     * @param crea : date de création de l'article
+     * @param modif : date de derniere modification de l'article
+     */
     article (  std::string i, std::string t,std::string txt, std::string crea="",std::string modif="")
         : note (i,t,txt,crea,modif){}
+     /// constructeur de recopie de article.
     article (const article& article_a_copier);
-
+    /// appelle la fonction afficher() de note (pas d'attribut supplémentaire).
     virtual void afficher(std::ostream& f= std::cout) const;
 
 };
 
-class media : public note { // héritage nécessaire ? ou ptite énumération ?
+/// Classe fille de note.
+/** cette classe est une note possédant un attibut supplémentaire contennant le chemin vers un fichier (texte,image,vidéo...)
+ */
+
+class media : public note {
 
 protected :
 
-    std::string chemin ;//à changer avec QT : chemin vers l'image ?
+    std::string chemin ;
 
 public :
+    /// constructeur utilisant le constructeur de note en ajoutant l'attribut correspondant au chemin
+    /**
+     * @param i : id unique du média
+     * @param t : titre du média
+     * @param txt : texte décrivant le média
+     * @param im  : chemin du fichier média
+     * @param crea : date de création du média
+     * @param modif :date  de derniere modification du média
+     */
     media ( const std::string i, std::string t,std::string txt, std::string im ,std::string crea="",std::string modif="" )
         : note (i,t,txt,crea,modif),chemin(im){}
+    /// constructeur de recopie
     media(const media& media_a_copier);
+    /// accesseur en lecture du chemin du média
     const std::string getChemin() const {return chemin;}
+    /// met à jour le chemin du média.
+  /**
+   * @param text : le nouveau chemin.
+   */
     void setChemin(const std::string& text) {chemin = text;}
 
+     /// appelle la fonction afficher() de note et affiche le chemin en plus sur la sortie standard.
     virtual void afficher(std::ostream& f= std::cout) const ;
-    //virtual void MiseAJour ();
+
 
 };
+/// Classe fille de note.
+/** cette classe est une note possédant une priorité soud forme d'un entier, une date d'échéance et un statut qui peut etre en_attente, en_cours ,terminee.
+ */
 
-
-class tache : public note{// faut ajouter l'optionalité des trucs : constructeur ?
+class tache : public note{
 
 protected :
     unsigned int priorite;
@@ -282,20 +190,43 @@ protected :
 
 public :
 
-
+    /// constructeur utilisant le constructeur de note en ajoutant les nouveaux attributs.
+    /**
+     * @param i : id unique de la tâche
+     * @param t : titre de la tâche
+     * @param txt : texte décrivant la tâche
+     * @param p : priorité de la tâche
+     * @param e : échéance de la tâche
+     * @param Status : l'état actuel de la tâche
+     * @param crea : date de création de la tâche
+     * @param modif :date  de derniere modification de la tâche
+     */
     tache ( const std::string i, std::string t,std::string txt, unsigned int p , std::string e,enum etat Status,std::string crea="",std::string modif="" )
         : note (i,t,txt,crea,modif),priorite(p), echeance (e),status(Status){}
-
-    tache(const tache &tache_a_copier); //constructeur recopie (sert pour gérer les versions)
-
+    ///constructeur de recopie
+    tache(const tache &tache_a_copier);
+     /// accesseur en lecture de l'échéance
     const std::string getecheance() const {return echeance;}
+    /// accesseur en lecture du statut
     enum etat getEtat() const  {return status;}
+    /// accesseur en lecture de la priorité
     unsigned int getPriorite() const {return priorite;}
-
+    /// met à jour la priorité
+  /**
+   * @param prio :la nouvelle priorité
+   */
     void setPriorite(int prio){priorite=prio;}
+    /// met à jour l'échéance
+  /**
+   * @param date :la nouvelle échéance
+   */
     void setEcheance(const std::string& date){echeance=date;}
+    /// met à jour le statut
+  /**
+   * @param stat :le nouveau statut
+   */
     void setStatus(enum etat stat){status=stat;}
-
+     /// appelle la fonction afficher() de note et affiche les attribust de tâche sur la sortie standard.
     virtual void afficher(std::ostream& f= std::cout) const ;
 
 

@@ -9,6 +9,14 @@
 
 
 #endif // MANAGER_H
+
+
+/// Classe mère Template abstraite Managers.
+/** Cette classe regroupe  les attributs et les méthodes communes aux différents Managers.
+ * Elle est composée d'un vector de template<classe T> qui stockera et manipulera les objets T,
+ *  et d'un chemin de fichier (par défaut) qui mène au fichier .xml dans lequel les objets seront sauvegardés.
+ *
+ */
 class RelationManager;
 
 template<class T>
@@ -20,17 +28,27 @@ protected :
 
 public:
 
+   /// fonction qui vérifie si l'id de l'objet de type T fourni en paramètre existe déja en parcourant le vector (exeption si c'est le cas),et qui l'ajoute à l'arrièredu  vector si ce n'est pas le cas.
+  /**
+  * @param T& : référence sur l'objet à ajouter.
+  */
     void add (T& a_ajouter);
+    /// fonction qui supprime du vector l'objet de type T fourni en paramètre
+   /**
+   * @param T& : référence sur l'objet à supprimer.
+   */
     void Supprimer (T& toDelete);
+    ///accesseur en lecture du vector contennat les objets T.
      const std::vector<T*> getobjets() const {return objets;}
+     ///accesseur en lecture du chemin du fichier xml.
    QString getFilename() const { return filename; }
+
    void setFilename(const QString& f) { filename=f; }
 
    Manager():objets(0),filename(QString::fromStdString("..\\sauvegarde.xml")){}
 
    virtual ~Manager<T>(){std::cout<<"manager(base) detruit"<<std::endl;}
-   Manager(const Manager& m);
-   Manager& operator=(const Manager& m);
+
    virtual void load () =0 ;
    virtual void save () =0 ;
 
@@ -51,7 +69,7 @@ public:
             ~Handler() { delete instance; }
         };
     static Handler handler;
-   NotesManager2();
+   NotesManager2(){};
    ~NotesManager2();
 
 

@@ -1,0 +1,146 @@
+\hypertarget{classtache}{}\section{tache Class Reference}
+\label{classtache}\index{tache@{tache}}
+
+
+Classe fille de note.  
+
+
+
+
+{\ttfamily \#include $<$notes.\+h$>$}
+
+Inheritance diagram for tache\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtache}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classtache_a88ffefc43bb6ee19cb9c6741551ec606}{tache} (const std\+::string i, std\+::string t, std\+::string txt, unsigned int p, std\+::string e, enum etat Status, std\+::string crea=\char`\"{}\char`\"{}, std\+::string modif=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em constructeur utilisant le constructeur de note en ajoutant les nouveaux attributs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classtache_a6d56536f238c28e385a94ba7db828b00}\label{classtache_a6d56536f238c28e385a94ba7db828b00}} 
+\hyperlink{classtache_a6d56536f238c28e385a94ba7db828b00}{tache} (const \hyperlink{classtache}{tache} \&tache\+\_\+a\+\_\+copier)
+\begin{DoxyCompactList}\small\item\em constructeur de recopie \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classtache_a6cb88e9c76bba2ba9cdbcb4a24533138}\label{classtache_a6cb88e9c76bba2ba9cdbcb4a24533138}} 
+const std\+::string \hyperlink{classtache_a6cb88e9c76bba2ba9cdbcb4a24533138}{getecheance} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de l\textquotesingle{}échéance \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classtache_a428f13ec94d058a857a7e060cd69d1f7}\label{classtache_a428f13ec94d058a857a7e060cd69d1f7}} 
+enum etat \hyperlink{classtache_a428f13ec94d058a857a7e060cd69d1f7}{get\+Etat} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du statut \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classtache_abc6d0d265927c2cd4f7e9cb21643ccbb}\label{classtache_abc6d0d265927c2cd4f7e9cb21643ccbb}} 
+unsigned int \hyperlink{classtache_abc6d0d265927c2cd4f7e9cb21643ccbb}{get\+Priorite} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de la priorité \end{DoxyCompactList}\item 
+void \hyperlink{classtache_a35292bd0bec7a172bf3c70ca3a441153}{set\+Priorite} (int prio)
+\begin{DoxyCompactList}\small\item\em met à jour la priorité \end{DoxyCompactList}\item 
+void \hyperlink{classtache_adaea7e42b4e6fc8f8903152300968e26}{set\+Echeance} (const std\+::string \&date)
+\begin{DoxyCompactList}\small\item\em met à jour l\textquotesingle{}échéance \end{DoxyCompactList}\item 
+void \hyperlink{classtache_afd4cda07440e36dc0f47079b110d022e}{set\+Status} (enum etat stat)
+\begin{DoxyCompactList}\small\item\em met à jour le statut \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classtache_af319d97c3f228649dce7c24da39307aa}\label{classtache_af319d97c3f228649dce7c24da39307aa}} 
+virtual void \hyperlink{classtache_af319d97c3f228649dce7c24da39307aa}{afficher} (std\+::ostream \&f=std\+::cout) const
+\begin{DoxyCompactList}\small\item\em appelle la fonction \hyperlink{classtache_af319d97c3f228649dce7c24da39307aa}{afficher()} de note et affiche les attribust de tâche sur la sortie standard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtache_a50a5f64a76ff14f1467e2b0080618ab9}\label{classtache_a50a5f64a76ff14f1467e2b0080618ab9}} 
+unsigned int {\bfseries priorite}
+\item 
+\mbox{\Hypertarget{classtache_ac49ccbd0d4cd98706d0f45feb4ebe60f}\label{classtache_ac49ccbd0d4cd98706d0f45feb4ebe60f}} 
+std\+::string {\bfseries echeance}
+\item 
+\mbox{\Hypertarget{classtache_acb16537d9ba98cde8d2abc3ac03acf77}\label{classtache_acb16537d9ba98cde8d2abc3ac03acf77}} 
+enum etat {\bfseries status}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe fille de note. 
+
+cette classe est une note possédant une priorité soud forme d\textquotesingle{}un entier, une date d\textquotesingle{}échéance et un statut qui peut etre en\+\_\+attente, en\+\_\+cours ,terminee. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtache_a88ffefc43bb6ee19cb9c6741551ec606}\label{classtache_a88ffefc43bb6ee19cb9c6741551ec606}} 
+\index{tache@{tache}!tache@{tache}}
+\index{tache@{tache}!tache@{tache}}
+\subsubsection{\texorpdfstring{tache()}{tache()}}
+{\footnotesize\ttfamily tache\+::tache (\begin{DoxyParamCaption}\item[{const std\+::string}]{i,  }\item[{std\+::string}]{t,  }\item[{std\+::string}]{txt,  }\item[{unsigned int}]{p,  }\item[{std\+::string}]{e,  }\item[{enum etat}]{Status,  }\item[{std\+::string}]{crea = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string}]{modif = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur utilisant le constructeur de note en ajoutant les nouveaux attributs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & \+: id unique de la tâche \\
+\hline
+{\em t} & \+: titre de la tâche \\
+\hline
+{\em txt} & \+: texte décrivant la tâche \\
+\hline
+{\em p} & \+: priorité de la tâche \\
+\hline
+{\em e} & \+: échéance de la tâche \\
+\hline
+{\em Status} & \+: l\textquotesingle{}état actuel de la tâche \\
+\hline
+{\em crea} & \+: date de création de la tâche \\
+\hline
+{\em modif} & \+:date de derniere modification de la tâche \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtache_adaea7e42b4e6fc8f8903152300968e26}\label{classtache_adaea7e42b4e6fc8f8903152300968e26}} 
+\index{tache@{tache}!set\+Echeance@{set\+Echeance}}
+\index{set\+Echeance@{set\+Echeance}!tache@{tache}}
+\subsubsection{\texorpdfstring{set\+Echeance()}{setEcheance()}}
+{\footnotesize\ttfamily void tache\+::set\+Echeance (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{date }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour l\textquotesingle{}échéance 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & \+:la nouvelle échéance \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtache_a35292bd0bec7a172bf3c70ca3a441153}\label{classtache_a35292bd0bec7a172bf3c70ca3a441153}} 
+\index{tache@{tache}!set\+Priorite@{set\+Priorite}}
+\index{set\+Priorite@{set\+Priorite}!tache@{tache}}
+\subsubsection{\texorpdfstring{set\+Priorite()}{setPriorite()}}
+{\footnotesize\ttfamily void tache\+::set\+Priorite (\begin{DoxyParamCaption}\item[{int}]{prio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour la priorité 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prio} & \+:la nouvelle priorité \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtache_afd4cda07440e36dc0f47079b110d022e}\label{classtache_afd4cda07440e36dc0f47079b110d022e}} 
+\index{tache@{tache}!set\+Status@{set\+Status}}
+\index{set\+Status@{set\+Status}!tache@{tache}}
+\subsubsection{\texorpdfstring{set\+Status()}{setStatus()}}
+{\footnotesize\ttfamily void tache\+::set\+Status (\begin{DoxyParamCaption}\item[{enum etat}]{stat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour le statut 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stat} & \+:le nouveau statut \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+notes.\+h\item 
+notes.\+cpp\end{DoxyCompactItemize}

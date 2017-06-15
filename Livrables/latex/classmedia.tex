@@ -1,0 +1,96 @@
+\hypertarget{classmedia}{}\section{media Class Reference}
+\label{classmedia}\index{media@{media}}
+
+
+Classe fille de note.  
+
+
+
+
+{\ttfamily \#include $<$notes.\+h$>$}
+
+Inheritance diagram for media\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmedia}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmedia_a672a7ed2084d2b0d4928dd076bda3919}{media} (const std\+::string i, std\+::string t, std\+::string txt, std\+::string im, std\+::string crea=\char`\"{}\char`\"{}, std\+::string modif=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em constructeur utilisant le constructeur de note en ajoutant l\textquotesingle{}attribut correspondant au chemin \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmedia_a57057824b696efef18a77f814ef086af}\label{classmedia_a57057824b696efef18a77f814ef086af}} 
+\hyperlink{classmedia_a57057824b696efef18a77f814ef086af}{media} (const \hyperlink{classmedia}{media} \&media\+\_\+a\+\_\+copier)
+\begin{DoxyCompactList}\small\item\em constructeur de recopie \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmedia_ae9e1c7e0038e5b8036c1f06871ecd19a}\label{classmedia_ae9e1c7e0038e5b8036c1f06871ecd19a}} 
+const std\+::string \hyperlink{classmedia_ae9e1c7e0038e5b8036c1f06871ecd19a}{get\+Chemin} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du chemin du média \end{DoxyCompactList}\item 
+void \hyperlink{classmedia_a9e44b8025a205867c9f853d160da1f6e}{set\+Chemin} (const std\+::string \&text)
+\begin{DoxyCompactList}\small\item\em met à jour le chemin du média. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmedia_a94e61f8a8d8588dfe947d4a6badd8a93}\label{classmedia_a94e61f8a8d8588dfe947d4a6badd8a93}} 
+virtual void \hyperlink{classmedia_a94e61f8a8d8588dfe947d4a6badd8a93}{afficher} (std\+::ostream \&f=std\+::cout) const
+\begin{DoxyCompactList}\small\item\em appelle la fonction \hyperlink{classmedia_a94e61f8a8d8588dfe947d4a6badd8a93}{afficher()} de note et affiche le chemin en plus sur la sortie standard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmedia_a3bd13d97a0f128b7f7d175fd3a006312}\label{classmedia_a3bd13d97a0f128b7f7d175fd3a006312}} 
+std\+::string {\bfseries chemin}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe fille de note. 
+
+cette classe est une note possédant un attibut supplémentaire contennant le chemin vers un fichier (texte,image,vidéo...) 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmedia_a672a7ed2084d2b0d4928dd076bda3919}\label{classmedia_a672a7ed2084d2b0d4928dd076bda3919}} 
+\index{media@{media}!media@{media}}
+\index{media@{media}!media@{media}}
+\subsubsection{\texorpdfstring{media()}{media()}}
+{\footnotesize\ttfamily media\+::media (\begin{DoxyParamCaption}\item[{const std\+::string}]{i,  }\item[{std\+::string}]{t,  }\item[{std\+::string}]{txt,  }\item[{std\+::string}]{im,  }\item[{std\+::string}]{crea = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string}]{modif = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructeur utilisant le constructeur de note en ajoutant l\textquotesingle{}attribut correspondant au chemin 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & \+: id unique du média \\
+\hline
+{\em t} & \+: titre du média \\
+\hline
+{\em txt} & \+: texte décrivant le média \\
+\hline
+{\em im} & \+: chemin du fichier média \\
+\hline
+{\em crea} & \+: date de création du média \\
+\hline
+{\em modif} & \+:date de derniere modification du média \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmedia_a9e44b8025a205867c9f853d160da1f6e}\label{classmedia_a9e44b8025a205867c9f853d160da1f6e}} 
+\index{media@{media}!set\+Chemin@{set\+Chemin}}
+\index{set\+Chemin@{set\+Chemin}!media@{media}}
+\subsubsection{\texorpdfstring{set\+Chemin()}{setChemin()}}
+{\footnotesize\ttfamily void media\+::set\+Chemin (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour le chemin du média. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: le nouveau chemin. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+notes.\+h\item 
+notes.\+cpp\end{DoxyCompactItemize}
