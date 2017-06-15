@@ -1,0 +1,47 @@
+\hypertarget{class_manager}{}\section{Manager$<$ T $>$ Class Template Reference}
+\label{class_manager}\index{Manager$<$ T $>$@{Manager$<$ T $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_manager_a4eac07f3408be9a9c86273383e282b53}\label{class_manager_a4eac07f3408be9a9c86273383e282b53}} 
+void {\bfseries add} (T \&a\+\_\+ajouter)
+\item 
+\mbox{\Hypertarget{class_manager_a5ad1071a0ca361daea98576c433774c8}\label{class_manager_a5ad1071a0ca361daea98576c433774c8}} 
+void {\bfseries Supprimer} (T \&to\+Delete)
+\item 
+\mbox{\Hypertarget{class_manager_a53786650c42236c2c346cda79cb3cee3}\label{class_manager_a53786650c42236c2c346cda79cb3cee3}} 
+const std\+::vector$<$ T $\ast$ $>$ {\bfseries getobjets} () const
+\item 
+\mbox{\Hypertarget{class_manager_a5f6a3a94521559731ef49005d7669464}\label{class_manager_a5f6a3a94521559731ef49005d7669464}} 
+Q\+String {\bfseries get\+Filename} () const
+\item 
+\mbox{\Hypertarget{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}\label{class_manager_a5da0f2b938c233c901d1b3f56ce6b77f}} 
+void {\bfseries set\+Filename} (const Q\+String \&f)
+\item 
+\mbox{\Hypertarget{class_manager_a5fe23721cb4bf2f0eafbb983e5ed48ac}\label{class_manager_a5fe23721cb4bf2f0eafbb983e5ed48ac}} 
+{\bfseries Manager} (const \hyperlink{class_manager}{Manager} \&m)
+\item 
+\mbox{\Hypertarget{class_manager_a105090c64755ac39343b4aef80404727}\label{class_manager_a105090c64755ac39343b4aef80404727}} 
+\hyperlink{class_manager}{Manager} \& {\bfseries operator=} (const \hyperlink{class_manager}{Manager} \&m)
+\item 
+\mbox{\Hypertarget{class_manager_add6a6361b3ebef4e6e744c2b12f9e57d}\label{class_manager_add6a6361b3ebef4e6e744c2b12f9e57d}} 
+virtual void {\bfseries load} ()=0
+\item 
+\mbox{\Hypertarget{class_manager_a952734cfd645e6b257ef19ab06d4ded4}\label{class_manager_a952734cfd645e6b257ef19ab06d4ded4}} 
+virtual void {\bfseries save} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_manager_a1da8f0213719b1f4e7eab848835f77dd}\label{class_manager_a1da8f0213719b1f4e7eab848835f77dd}} 
+std\+::vector$<$ T $\ast$ $>$ {\bfseries objets}
+\item 
+\mbox{\Hypertarget{class_manager_a312ccc5f1d3cf73f9c76b32777f1bcf9}\label{class_manager_a312ccc5f1d3cf73f9c76b32777f1bcf9}} 
+Q\+String {\bfseries filename}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+manager.\+h\item 
+manager.\+cpp\end{DoxyCompactItemize}

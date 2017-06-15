@@ -1,0 +1,144 @@
+\hypertarget{classnote}{}\section{note Class Reference}
+\label{classnote}\index{note@{note}}
+
+
+Classe mère abstraite des types de notes.  
+
+
+
+
+{\ttfamily \#include $<$notes.\+h$>$}
+
+Inheritance diagram for note\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classnote}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnote_a020b9fbf3603286e010cee5454195302}{note} (std\+::string i, std\+::string t, std\+::string txt, std\+::string crea=\char`\"{}\char`\"{}, std\+::string modif=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructeur de notes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_a6308957958b5b3b0d82d62d504bbc670}\label{classnote_a6308957958b5b3b0d82d62d504bbc670}} 
+const std\+::string \hyperlink{classnote_a6308957958b5b3b0d82d62d504bbc670}{get\+ID} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de l\textquotesingle{}id de la note. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_aa22a099db95d5c357f19838fabe3e5fb}\label{classnote_aa22a099db95d5c357f19838fabe3e5fb}} 
+const std\+::string \hyperlink{classnote_aa22a099db95d5c357f19838fabe3e5fb}{get\+Titre} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du titre de la note. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_a5b11e6f329d9b94c80ce7c3bcc2e303f}\label{classnote_a5b11e6f329d9b94c80ce7c3bcc2e303f}} 
+const std\+::string \hyperlink{classnote_a5b11e6f329d9b94c80ce7c3bcc2e303f}{get\+Creation} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de la date de création de la note. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_a9ca3911596e876e0747a1ff803a7d930}\label{classnote_a9ca3911596e876e0747a1ff803a7d930}} 
+const std\+::string \hyperlink{classnote_a9ca3911596e876e0747a1ff803a7d930}{get\+Modif} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture de la date de modification de la note. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_a45af8038b60447374ba961a414910a49}\label{classnote_a45af8038b60447374ba961a414910a49}} 
+const std\+::string \hyperlink{classnote_a45af8038b60447374ba961a414910a49}{get\+Texte} () const
+\begin{DoxyCompactList}\small\item\em accesseur en lecture du texte de la note. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_a8cfc267bcce6a99035df33e420a18f38}\label{classnote_a8cfc267bcce6a99035df33e420a18f38}} 
+std\+::vector$<$ \hyperlink{classnote}{note} $\ast$ $>$ \& \hyperlink{classnote_a8cfc267bcce6a99035df33e420a18f38}{get\+Old\+Notes} ()
+\begin{DoxyCompactList}\small\item\em accesseur du vector contennat les anciennes versions de la note. \end{DoxyCompactList}\item 
+void \hyperlink{classnote_a2895efc80041830db954a5af4b0670bf}{set\+Texte} (const std\+::string \&text)
+\begin{DoxyCompactList}\small\item\em met à jour le texte de la note. \end{DoxyCompactList}\item 
+void \hyperlink{classnote_a70884d3640a6f4440ddb9bd30925b5e7}{set\+Titre} (const std\+::string \&t)
+\begin{DoxyCompactList}\small\item\em met à jour le titre de la note. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_a8fce1df255349a335517128f8e9af543}\label{classnote_a8fce1df255349a335517128f8e9af543}} 
+virtual void \hyperlink{classnote_a8fce1df255349a335517128f8e9af543}{afficher} (std\+::ostream \&f=std\+::cout) const
+\begin{DoxyCompactList}\small\item\em fonction virtuelle qui affiche les attributs de la note sur la sortie standard. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_ab90880ae93348a23d0f84f2c2931e0bf}\label{classnote_ab90880ae93348a23d0f84f2c2931e0bf}} 
+void \hyperlink{classnote_ab90880ae93348a23d0f84f2c2931e0bf}{set\+Modif} ()
+\begin{DoxyCompactList}\small\item\em fonction mettant à jour la date de modificaton avec l\textquotesingle{}heure du système \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnote_abaece2737aa27cf5efb19e75bedcc41f}\label{classnote_abaece2737aa27cf5efb19e75bedcc41f}} 
+virtual \hyperlink{classnote_abaece2737aa27cf5efb19e75bedcc41f}{$\sim$note} ()
+\begin{DoxyCompactList}\small\item\em Destructeur de note supprimmant les anciennes versions présentes dans le vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnote_a0d600e9189e2de40a0f598be7abf2383}\label{classnote_a0d600e9189e2de40a0f598be7abf2383}} 
+std\+::string {\bfseries id}
+\item 
+\mbox{\Hypertarget{classnote_a5d6bc3a8fea49cec225f3715fe773a39}\label{classnote_a5d6bc3a8fea49cec225f3715fe773a39}} 
+std\+::string {\bfseries titre}
+\item 
+\mbox{\Hypertarget{classnote_ad2368e2d1305df655be46f20dc022871}\label{classnote_ad2368e2d1305df655be46f20dc022871}} 
+std\+::string {\bfseries Creation}
+\item 
+\mbox{\Hypertarget{classnote_a026b48f2e5b88d6cb832f5d23c0b52a7}\label{classnote_a026b48f2e5b88d6cb832f5d23c0b52a7}} 
+std\+::string {\bfseries Modif}
+\item 
+\mbox{\Hypertarget{classnote_a1ae5b932bd6cd2360659548d814628c2}\label{classnote_a1ae5b932bd6cd2360659548d814628c2}} 
+std\+::string {\bfseries texte}
+\item 
+\mbox{\Hypertarget{classnote_add61c3e248f40e52c83c8adb60a81516}\label{classnote_add61c3e248f40e52c83c8adb60a81516}} 
+std\+::vector$<$ \hyperlink{classnote}{note} $\ast$ $>$ {\bfseries old\+Notes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe mère abstraite des types de notes. 
+
+Cette classe regroupe les attributs et les méthodes communes aux différents types de notes, ainsi qu\textquotesingle{}un vector contenant les anciennes versions. Classe à utiliser lors de l\textquotesingle{}implémentatuion d\textquotesingle{}un nouveau type de note. Son but principal est d\textquotesingle{}éviter la redondance de code. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnote_a020b9fbf3603286e010cee5454195302}\label{classnote_a020b9fbf3603286e010cee5454195302}} 
+\index{note@{note}!note@{note}}
+\index{note@{note}!note@{note}}
+\subsubsection{\texorpdfstring{note()}{note()}}
+{\footnotesize\ttfamily note\+::note (\begin{DoxyParamCaption}\item[{std\+::string}]{i,  }\item[{std\+::string}]{t,  }\item[{std\+::string}]{txt,  }\item[{std\+::string}]{crea = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string}]{modif = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur de notes. 
+
+Ceconstructeur crée une nouvelle note avec les paramètres fournis. Si crea (date de création) n\textquotesingle{}est pas renseigné, il s\textquotesingle{}agit d\textquotesingle{}une nouvelle note et le constructeur appelle la fonction format\+Time() qui récupèrela date et l\textquotesingle{}heure du système. cette date est donc affectée à la date de création de la note et aussi à la date de dernière modification. Si ces dattes sont fournis, ils sont affectédd aux attributs correspondants. 
+\begin{DoxyParams}{Parameters}
+{\em i} & id unique de la note \\
+\hline
+{\em t} & titre de la note \\
+\hline
+{\em txt} & texte décrivant la note \\
+\hline
+{\em creadate} & de création de la note \\
+\hline
+{\em modif} & date de dernière modification de la note \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classnote_a2895efc80041830db954a5af4b0670bf}\label{classnote_a2895efc80041830db954a5af4b0670bf}} 
+\index{note@{note}!set\+Texte@{set\+Texte}}
+\index{set\+Texte@{set\+Texte}!note@{note}}
+\subsubsection{\texorpdfstring{set\+Texte()}{setTexte()}}
+{\footnotesize\ttfamily void note\+::set\+Texte (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour le texte de la note. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & le nouveau texte de la note. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classnote_a70884d3640a6f4440ddb9bd30925b5e7}\label{classnote_a70884d3640a6f4440ddb9bd30925b5e7}} 
+\index{note@{note}!set\+Titre@{set\+Titre}}
+\index{set\+Titre@{set\+Titre}!note@{note}}
+\subsubsection{\texorpdfstring{set\+Titre()}{setTitre()}}
+{\footnotesize\ttfamily void note\+::set\+Titre (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+met à jour le titre de la note. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em titre} & le nouveau titre de la note. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+notes.\+h\item 
+notes.\+cpp\end{DoxyCompactItemize}

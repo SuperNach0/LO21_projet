@@ -21,10 +21,7 @@ void Manager<T>::add(T &a_ajouter)
 }
 
 
-NotesManager2::NotesManager2()
-{
 
-} // constructeur de manager
 
 
 NotesManager2::~NotesManager2(){
