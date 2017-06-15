@@ -39,7 +39,7 @@ public:
    * @param T& : référence sur l'objet à supprimer.
    */
     void Supprimer (T& toDelete);
-    ///accesseur en lecture du vector contennat les objets T.
+    ///accesseur en lecture du vector contenant les objets T.
      const std::vector<T*> getobjets() const {return objets;}
      ///accesseur en lecture du chemin du fichier xml.
    QString getFilename() const { return filename; }
@@ -63,7 +63,7 @@ public:
 
 
 
-/// Classe fille héritant de Manager<note> et chargée des notes. dispose du Deseign Pattern Singleton.
+/// Classe fille héritant de Manager<note> et chargée des notes. dispose du Design Pattern Singleton.
 
 class NotesManager2 :  public Manager<note> {
 
@@ -83,7 +83,7 @@ public:
    ///Méthode retournant une référence sur la note correspondant à l'id fourni ou une de ses version antécédente correspondante si une date est fournie
    /**
     * @param id : id de la note demmandée
-    * @param date : date correspondante à la version recherchée
+    * @param date : date correspondante à la version recherchée. Si la date est non renseignée, c'est la note active qui est recherchée.
     */
    note& getNote (const std::string& id, const std::string& date="");
 
@@ -94,7 +94,7 @@ public:
     * sinon, la fonction vérifie parmi les relations si la note est impliquée dans des couples, si c'est le cas, les couples sont aussi supprimés.
     * @param id : id de la note demmandée
     * @param date : date correspondante à la version recherchée
-    */s
+    */
    void SupprimerNote (note& toDelete, const std::string& date="");
 
    ///Méthode qui charge les données du fichier xml et qui crée les objets qui y sont sauvegardés

@@ -10,7 +10,7 @@ fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
     m_parent = parent;
     m_couples.clear(); //on reset les couples à chaque ajout de relation
-    FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent); //on caste si l'on veut accéder aux attributs du parent
+    //FenPrincipale* fenetre_parente = static_cast<FenPrincipale*>(m_parent); //on caste si l'on veut accéder aux attributs du parent
 
 
     m_layout = new QGridLayout(this); //création layout

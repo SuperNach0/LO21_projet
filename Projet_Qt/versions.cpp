@@ -73,8 +73,6 @@ void FenPrincipale::editerNote()
     else if (typeid(note_a_editer) == typeid(media))
     {
         fenetre->m_media->setChecked(true);
-        media& current = static_cast<media&>(note_a_editer);
-
     }
     else
         throw NotesException("Erreur, type inconnu!");
@@ -114,7 +112,6 @@ void fenetre_anciennes_versions::restaurer()
 void FenPrincipale::editerRelation()
 {
     std::cout << "Edition relation\n";
-    RelationManager& rm = RelationManager::getManager();
     m_fenetre_creation_relation = new fenetre_creation_relation(this);
 
     fenetre_creation_relation* fenetre = static_cast<fenetre_creation_relation*>(m_fenetre_creation_relation);

@@ -11,6 +11,7 @@
 *           dans laquelle elle est impliquée
 *           - gérer l'affichage ergonomique des taches selon prio/échance + arborescence
 *           - améliorer la gestion mémoire au niveau de la suppression, il reste des trucs non libérés
+*           - Annuler/Rétablir
 *
 *
 * 13/06 : les deux manages différents sont ok  mais add pour une relation marche pas du coup c'est add relation de base

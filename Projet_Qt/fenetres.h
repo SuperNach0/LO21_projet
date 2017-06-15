@@ -9,6 +9,7 @@
 /* *********** FENETRE PRINCIPALE ************* */
 
 class fenetre_anciennes_versions;
+class fenetre_creation_relation;
 
 /// Classe Fenetre principale
 /** Cette fenêtre va servir à visualiser tous les différents objets : liste des notes, liste des taches selon leur priorité,
@@ -16,8 +17,6 @@ class fenetre_anciennes_versions;
  * ou de la note/relation sélectionnée dans le dock adéquat.
  *
  */
-class fenetre_creation_relation;
-
 class FenPrincipale : public QMainWindow
 {
     Q_OBJECT
@@ -123,15 +122,24 @@ public slots:
 };
 
 /* ********** FENETRE DE CREATION DE NOTE ************* */
+/// Classe Fenetre de création de note
+/** Cette fenêtre va servir à créer ou éditer une note. Elle possède 3 radio bouttons pour chosir le type de note, qui affichent ou masquent les champs nécéssaires,
+ * selon le type de note sélectionné.
+ *
+ */
 class fenetre_creation_note : public QWidget
 {
     Q_OBJECT
     friend FenPrincipale;
 public:
+    ///Constructeur, initialise tous les widgets de la fenetre et realise les connexions avec les slots.
     fenetre_creation_note();
 
 public slots:
+    ///Affiche une fenetre de sélection de fichier pour la création d'un média
     void choisir_fichier();
+
+    ///sauvegarde/mise à jour de la note dans le NotesManager2
     void save();
 
 protected:
@@ -162,6 +170,11 @@ protected:
 
 
 /* ********** FENETRE DE CREATION DE RELATION ********* */
+/// Classe Fenetre de création de relation
+/** Cette fenêtre va servir à créer ou éditer une relation. Des QlistWidgets permettent de sélectionner des identifiants de notes,
+ * pour créer des couples qui seront ajoutés à la relation
+ *
+ */
 class fenetre_creation_relation : public QWidget
 {
     Q_OBJECT
@@ -181,15 +194,29 @@ private:
     std::vector<Couple*> m_couples;
 
 public:
+    ///Constructeur
+    /**
+     * @param parent : contient l'adresse du widget/fenetre parente à la fenetre de création de relation, afin de pouvoir appeler ses méthodes
+     */
     fenetre_creation_relation(QWidget *parent);
+
+    ///Retourne la liste des couples de la relation en cours de création
     std::vector<Couple*> getCouples() {return m_couples;}
+    ///Transforme la fenetre en mode "édition". On ne peut plus changer le titre et ce dernier est fixé au titre de la relation éditée
+    /**
+     * @param titre : titre de la relation sélectionnée dans son dock
+     */
     void lock_id_relation(std::string titre) {
         m_label_relation->setText(QString::fromStdString(titre));
         m_label_relation->setDisabled(true);}
 
 public slots:
+    ///Affiche les couples au fur et à mesure de leur création/ajout dans la relation en cours de création.
     void affichage_couples();
+    ///Sauvegarde un couple dans le vector m_couples. Ce dernier sera utilisé pour remplir les couples de la relation.
     void save_couple();
+
+    ///Sauvegarde/mise à jour de la relation dans le RelationManager
     void save_relation();
 
 

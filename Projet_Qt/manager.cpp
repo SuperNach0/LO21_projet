@@ -580,8 +580,8 @@ void NotesManager2::checkReferences() const
 
         std::string texte = nm.getobjets ()[i]->getTexte() + nm.getobjets()[i]->getTitre(); //On récupère le texte de la note à analyser
 
-        int position_debut_texte = texte.find("\\ref{");
-        int position_fin_texte = texte.find("}",position_debut_texte);
+        unsigned int position_debut_texte = texte.find("\\ref{");
+        unsigned int position_fin_texte = texte.find("}",position_debut_texte);
 
 
         std::string id_texte =""; //contiendra l'id de la note courante
