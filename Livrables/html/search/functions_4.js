@@ -10,6 +10,7 @@ var searchData=
   ['getetat',['getEtat',['../classtache.html#a428f13ec94d058a857a7e060cd69d1f7',1,'tache']]],
   ['getfilename',['getFilename',['../class_manager.html#a5f6a3a94521559731ef49005d7669464',1,'Manager']]],
   ['getid',['getID',['../classnote.html#a6308957958b5b3b0d82d62d504bbc670',1,'note']]],
+  ['getinfo',['getInfo',['../class_notes_exception.html#a5108cf9d122f28f9cb51c0c31c4f2a35',1,'NotesException']]],
   ['getlabel',['getLabel',['../class_couple.html#acf2f8ba4907cf728a5d8110ac2abdff3',1,'Couple']]],
   ['getmanager',['getManager',['../class_notes_manager2.html#a392bc750d869bacbe50337531213f248',1,'NotesManager2::getManager()'],['../class_relation_manager.html#a525665dcd2599872667dd32f36506f41',1,'RelationManager::getManager()']]],
   ['getmodif',['getModif',['../classnote.html#a9ca3911596e876e0747a1ff803a7d930',1,'note']]],

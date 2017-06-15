@@ -2,7 +2,7 @@
 \label{class_notes_manager2}\index{Notes\+Manager2@{Notes\+Manager2}}
 
 
-Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes. dispose du Design Pattern Singleton.  
+Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes, elle dispose du Design Pattern Singleton.  
 
 
 
@@ -19,7 +19,7 @@ Inheritance diagram for Notes\+Manager2\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classnote}{note} \& \hyperlink{class_notes_manager2_a53819d123894c31bbbab66b3d0bf0ff0}{get\+Note} (const std\+::string \&id, const std\+::string \&date=\char`\"{}\char`\"{})
-\begin{DoxyCompactList}\small\item\em Méthode retournant une référence sur la note correspondant à l\textquotesingle{}id fourni ou une de ses version antécédente correspondante si une date est fournie. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Méthode retournant une référence sur la note correspondant à l\textquotesingle{}id fourni ou la version antérieure correspondante si une date est fournie. \end{DoxyCompactList}\item 
 void \hyperlink{class_notes_manager2_ac020f8488f0f71f92de1e8131a64d943}{Supprimer\+Note} (\hyperlink{classnote}{note} \&to\+Delete, const std\+::string \&date=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Méthode Supprimant une note possédant l\textquotesingle{}id fourni et les couples dans lesquels elle est impliquée. \end{DoxyCompactList}\item 
 void \hyperlink{class_notes_manager2_a2248b5b1620b2039fdba9b3c6476c6cc}{load} ()
@@ -28,21 +28,21 @@ void \hyperlink{class_notes_manager2_a03224a8a150d7d7a40a6633ab2afc7c0}{save} ()
 \begin{DoxyCompactList}\small\item\em Méthode chargée de sauvegarder les objets de tous les managers dans le fichier xml. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_notes_manager2_a41ec18388f556565d78794ae042511b2}\label{class_notes_manager2_a41ec18388f556565d78794ae042511b2}} 
 void \hyperlink{class_notes_manager2_a41ec18388f556565d78794ae042511b2}{check\+References} () const
-\begin{DoxyCompactList}\small\item\em Vérifie si les notes contient des références vers d\textquotesingle{}autres notes, et ajoute les couples dans la relation \char`\"{}références\char`\"{}le cas échéant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Vérifie si les notes contiennent des références vers d\textquotesingle{}autres notes, et ajoute les couples dans la relation \char`\"{}références\char`\"{} le cas échéant. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_notes_manager2_a392bc750d869bacbe50337531213f248}\label{class_notes_manager2_a392bc750d869bacbe50337531213f248}} 
 static \hyperlink{class_notes_manager2}{Notes\+Manager2} \& \hyperlink{class_notes_manager2_a392bc750d869bacbe50337531213f248}{get\+Manager} ()
-\begin{DoxyCompactList}\small\item\em Renvoie une référence sur le \hyperlink{class_notes_manager2}{Notes\+Manager2} si il existe déja, sinon, le créé.(fait partie du singleton) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Renvoie une référence sur le \hyperlink{class_notes_manager2}{Notes\+Manager2} si il existe déja, sinon, le créé. (Design pattern singleton) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_notes_manager2_abdc16834a0e2ab7c8b3937674c725a0d}\label{class_notes_manager2_abdc16834a0e2ab7c8b3937674c725a0d}} 
 static void \hyperlink{class_notes_manager2_abdc16834a0e2ab7c8b3937674c725a0d}{free\+Manager} ()
-\begin{DoxyCompactList}\small\item\em libère l\textquotesingle{}instance unique de \hyperlink{class_notes_manager2}{Notes\+Manager2}.(fait partie du singleton) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em libère l\textquotesingle{}instance unique de \hyperlink{class_notes_manager2}{Notes\+Manager2}. (Design pattern singleton) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
-Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes. dispose du Design Pattern Singleton. 
+Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et chargée des notes, elle dispose du Design Pattern Singleton. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_notes_manager2_a53819d123894c31bbbab66b3d0bf0ff0}\label{class_notes_manager2_a53819d123894c31bbbab66b3d0bf0ff0}} 
@@ -53,11 +53,11 @@ Classe fille héritant de \hyperlink{class_manager}{Manager$<$note$>$} et charg�
 
 
 
-Méthode retournant une référence sur la note correspondant à l\textquotesingle{}id fourni ou une de ses version antécédente correspondante si une date est fournie. 
+Méthode retournant une référence sur la note correspondant à l\textquotesingle{}id fourni ou la version antérieure correspondante si une date est fournie. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em id} & \+: id de la note demmandée \\
+{\em id} & \+: id de la note demandée \\
 \hline
 {\em date} & \+: date correspondante à la version recherchée. Si la date est non renseignée, c\textquotesingle{}est la note active qui est recherchée. \\
 \hline
@@ -86,7 +86,7 @@ Implements \hyperlink{class_manager_add6a6361b3ebef4e6e744c2b12f9e57d}{Manager$<
 
 Méthode chargée de sauvegarder les objets de tous les managers dans le fichier xml. 
 
-déclenchée pendant le destructeur, elle appelle les \hyperlink{class_notes_manager2_a392bc750d869bacbe50337531213f248}{get\+Manager()} de chaque \hyperlink{class_manager}{Manager} afin d\textquotesingle{}accéder à leurs vector et sauvegarde leur contennu. Elle définit les balises du xml en fonction de l\textquotesingle{}objet à sauvegarder pour que \hyperlink{class_notes_manager2_a2248b5b1620b2039fdba9b3c6476c6cc}{load()} puisse les reconnaitre. 
+appelée pendant le destructeur, elle appelle les \hyperlink{class_notes_manager2_a392bc750d869bacbe50337531213f248}{get\+Manager()} de chaque \hyperlink{class_manager}{Manager} afin d\textquotesingle{}accéder à leurs vector et sauvegarde leur contennu. Elle définit les balises du xml en fonction de l\textquotesingle{}objet à sauvegarder pour que \hyperlink{class_notes_manager2_a2248b5b1620b2039fdba9b3c6476c6cc}{load()} puisse les reconnaitre. 
 
 Implements \hyperlink{class_manager_a952734cfd645e6b257ef19ab06d4ded4}{Manager$<$ note $>$}.
 

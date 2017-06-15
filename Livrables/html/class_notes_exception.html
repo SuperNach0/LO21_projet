@@ -66,7 +66,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Cette classe récupère un string correspondant à une erreur et a pour fonction de l'afficher sur la sortie standard.  
+<p>Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une erreur de ce type dans les passages sensibles.  
  <a href="class_notes_exception.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="notes_8h_source.html">notes.h</a>&gt;</code></p>
@@ -74,14 +74,14 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a557a49cbc09d8bcbd088ed09edebd086"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_exception.html#a557a49cbc09d8bcbd088ed09edebd086">NotesException</a> (const std::string &amp;message)</td></tr>
-<tr class="memdesc:a557a49cbc09d8bcbd088ed09edebd086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cette fonction affiche sur la sortie standard l'erreur rencontrée .  <a href="#a557a49cbc09d8bcbd088ed09edebd086">More...</a><br /></td></tr>
+<tr class="memdesc:a557a49cbc09d8bcbd088ed09edebd086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur. Lors d'un test ou d'un passage sensible, utiliser un try puis catch un objet de ce type.  <a href="#a557a49cbc09d8bcbd088ed09edebd086">More...</a><br /></td></tr>
 <tr class="separator:a557a49cbc09d8bcbd088ed09edebd086"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5108cf9d122f28f9cb51c0c31c4f2a35"><td class="memItemLeft" align="right" valign="top"><a id="a5108cf9d122f28f9cb51c0c31c4f2a35"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getInfo</b> () const</td></tr>
+<tr class="memitem:a5108cf9d122f28f9cb51c0c31c4f2a35"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notes_exception.html#a5108cf9d122f28f9cb51c0c31c4f2a35">getInfo</a> () const</td></tr>
+<tr class="memdesc:a5108cf9d122f28f9cb51c0c31c4f2a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le message d'erreur contenu dans l'objet de type <a class="el" href="class_notes_exception.html" title="Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une e...">NotesException</a>.  <a href="#a5108cf9d122f28f9cb51c0c31c4f2a35">More...</a><br /></td></tr>
 <tr class="separator:a5108cf9d122f28f9cb51c0c31c4f2a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Cette classe récupère un string correspondant à une erreur et a pour fonction de l'afficher sur la sortie standard. </p>
+<div class="textblock"><p>Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une erreur de ce type dans les passages sensibles. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a557a49cbc09d8bcbd088ed09edebd086"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a557a49cbc09d8bcbd088ed09edebd086">&#9670;&nbsp;</a></span>NotesException()</h2>
@@ -107,14 +107,48 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getInfo</b> ()
 </table>
 </div><div class="memdoc">
 
-<p>Cette fonction affiche sur la sortie standard l'erreur rencontrée . </p>
-<p>lors d'un test(ex :id déjà existant), utiliser un throw puis cette fonction avec le essage d'erreur en paramètre </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Constructeur. Lors d'un test ou d'un passage sensible, utiliser un try puis catch un objet de ce type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">message</td><td>: le message à afficher </td></tr>
+    <tr><td class="paramname">message</td><td>: le message d'erreur à afficher </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>info : le message à afficher </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5108cf9d122f28f9cb51c0c31c4f2a35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5108cf9d122f28f9cb51c0c31c4f2a35">&#9670;&nbsp;</a></span>getInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string NotesException::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne le message d'erreur contenu dans l'objet de type <a class="el" href="class_notes_exception.html" title="Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une e...">NotesException</a>. </p>
+<p>Navec le essage d'erreur en paramètre </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>: le message d'erreur </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>info : le message d'erreur </dd></dl>
 
 </div>
 </div>

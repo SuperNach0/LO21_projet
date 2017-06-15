@@ -2,7 +2,7 @@
 \label{class_notes_exception}\index{Notes\+Exception@{Notes\+Exception}}
 
 
-Cette classe récupère un string correspondant à une erreur et a pour fonction de l\textquotesingle{}afficher sur la sortie standard.  
+Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une erreur de ce type dans les passages sensibles.  
 
 
 
@@ -13,14 +13,13 @@ Cette classe récupère un string correspondant à une erreur et a pour fonction
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_notes_exception_a557a49cbc09d8bcbd088ed09edebd086}{Notes\+Exception} (const std\+::string \&message)
-\begin{DoxyCompactList}\small\item\em Cette fonction affiche sur la sortie standard l\textquotesingle{}erreur rencontrée . \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_notes_exception_a5108cf9d122f28f9cb51c0c31c4f2a35}\label{class_notes_exception_a5108cf9d122f28f9cb51c0c31c4f2a35}} 
-std\+::string {\bfseries get\+Info} () const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructeur. Lors d\textquotesingle{}un test ou d\textquotesingle{}un passage sensible, utiliser un try puis catch un objet de ce type. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_notes_exception_a5108cf9d122f28f9cb51c0c31c4f2a35}{get\+Info} () const
+\begin{DoxyCompactList}\small\item\em Retourne le message d\textquotesingle{}erreur contenu dans l\textquotesingle{}objet de type \hyperlink{class_notes_exception}{Notes\+Exception}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Cette classe récupère un string correspondant à une erreur et a pour fonction de l\textquotesingle{}afficher sur la sortie standard. 
+Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une erreur de ce type dans les passages sensibles. 
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_notes_exception_a557a49cbc09d8bcbd088ed09edebd086}\label{class_notes_exception_a557a49cbc09d8bcbd088ed09edebd086}} 
@@ -31,15 +30,33 @@ Cette classe récupère un string correspondant à une erreur et a pour fonction
 
 
 
-Cette fonction affiche sur la sortie standard l\textquotesingle{}erreur rencontrée . 
+Constructeur. Lors d\textquotesingle{}un test ou d\textquotesingle{}un passage sensible, utiliser un try puis catch un objet de ce type. 
 
-lors d\textquotesingle{}un test(ex \+:id déjà existant), utiliser un throw puis cette fonction avec le essage d\textquotesingle{}erreur en paramètre 
+
 \begin{DoxyParams}{Parameters}
-{\em message} & \+: le message à afficher \\
+{\em message} & \+: le message d\textquotesingle{}erreur à afficher \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_notes_exception_a5108cf9d122f28f9cb51c0c31c4f2a35}\label{class_notes_exception_a5108cf9d122f28f9cb51c0c31c4f2a35}} 
+\index{Notes\+Exception@{Notes\+Exception}!get\+Info@{get\+Info}}
+\index{get\+Info@{get\+Info}!Notes\+Exception@{Notes\+Exception}}
+\subsubsection{\texorpdfstring{get\+Info()}{getInfo()}}
+{\footnotesize\ttfamily std\+::string Notes\+Exception\+::get\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retourne le message d\textquotesingle{}erreur contenu dans l\textquotesingle{}objet de type \hyperlink{class_notes_exception}{Notes\+Exception}. 
+
+Navec le essage d\textquotesingle{}erreur en paramètre 
+\begin{DoxyParams}{Parameters}
+{\em message} & \+: le message d\textquotesingle{}erreur \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-info \+: le message à afficher 
+info \+: le message d\textquotesingle{}erreur 
 \end{DoxyReturn}
 
 
