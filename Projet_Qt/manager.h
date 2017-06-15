@@ -87,14 +87,14 @@ public:
     */
    note& getNote (const std::string& id, const std::string& date="");
 
-   note& getOldNote(const std::string& id);
+
 
    ///Méthode Supprimant une note possédant l'id fourni et les couples dans lesquels elle est impliquée
    /** Si une date est fournie, on supprime juste la version correspondante
     * sinon, la fonction vérifie parmi les relations si la note est impliquée dans des couples, si c'est le cas, les couples sont aussi supprimés.
     * @param id : id de la note demmandée
     * @param date : date correspondante à la version recherchée
-    */
+    */s
    void SupprimerNote (note& toDelete, const std::string& date="");
 
    ///Méthode qui charge les données du fichier xml et qui crée les objets qui y sont sauvegardés
