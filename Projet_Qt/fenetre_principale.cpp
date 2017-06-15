@@ -8,7 +8,7 @@
 
 FenPrincipale::FenPrincipale()
 {
-    ///LAYOUT PRINCIPAL
+    //LAYOUT PRINCIPAL
     m_layout_principal = new QVBoxLayout;
     this->setWindowTitle("Plurinotes");
 
@@ -85,7 +85,7 @@ void FenPrincipale::creation_docks()
     m_dock_affichage_notes->setWidget(m_listeNotes);
     addDockWidget(Qt::LeftDockWidgetArea, m_dock_affichage_notes);
 
-    ///2e dock
+    //2e dock
     m_dock_affichage_relations = new QDockWidget("Relations",this);
     m_dock_affichage_relations->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
@@ -98,7 +98,7 @@ void FenPrincipale::creation_docks()
     m_dock_affichage_relations->setWidget(m_listeRelatons);
     addDockWidget(Qt::RightDockWidgetArea, m_dock_affichage_relations);
 
-    ///3e dock
+    //3e dock
     m_dock_affichage_taches = new QDockWidget("Tâches",this);
     m_dock_affichage_taches->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
@@ -282,7 +282,6 @@ void FenPrincipale::affichage_single_note(QString id, QString date)
 }
 
 
-//CHOIX A METTRE DANS LE RAPPORT : Une relation est caractérisée par son titre, pas 2 relations avec le même titre
 void FenPrincipale::affichage_single_relation(QString titre)
 {
 

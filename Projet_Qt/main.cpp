@@ -28,7 +28,7 @@ int main(int argc,  char *argv[]) {
 
     NotesManager2  &m1 = NotesManager2::getManager();
     RelationManager& m2 = RelationManager::getManager();
-    ///pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
+    //pour afficher/retirer l'interface graphique, (dé)commenter les 4 lignes suivantes
     QApplication app(argc, argv);
 
     FenPrincipale fenetre;

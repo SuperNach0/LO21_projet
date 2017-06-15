@@ -19,16 +19,20 @@ class note;
 class NotesManager2;
 
 
-/// Cette classe récupère un string correspondant à une erreur et a pour fonction de l'afficher sur la sortie standard.
+/// Cette classe récupère dans son constructeur un string correspondant à une erreur. On peut catch une erreur de ce type dans les passages sensibles.
 
 class NotesException{
 public:
-    /// Cette fonction affiche sur la sortie standard l'erreur rencontrée .
-    /** lors d'un test(ex :id déjà existant), utiliser un throw puis cette fonction avec le essage d'erreur en paramètre
-        @param message : le message à afficher
-         @return info : le message à afficher
+    ///Constructeur. Lors d'un test ou d'un passage sensible, utiliser un try puis catch un objet de ce type.
+    /**
+     * @param message : le message d'erreur à afficher
      */
     NotesException(const std::string& message):info(message){}
+    /// Retourne le message d'erreur contenu dans l'objet de type NotesException.
+    /** Navec le essage d'erreur en paramètre
+        @param message : le message d'erreur
+         @return info : le message d'erreur
+     */
     std::string getInfo() const { return info; }
 private:
     std::string info;
@@ -38,7 +42,7 @@ private:
 
 
 /// Classe mère abstraite des types de notes
-/** Cette classe regroupe  les attributs et les méthodes communes aux différents types de notes, ainsi qu'un vector contenant les anciennes versions.
+/** Cette classe regroupe les attributs et les méthodes communes aux différents types de notes, ainsi qu'un vector contenant les anciennes versions.
  *  Classe à utiliser lors de l'implémentatuion d'un nouveau type de note.
  * Son but principal est d'éviter la redondance de code.
  *
@@ -56,13 +60,13 @@ protected :
 public :
     /// Constructeur de notes.
      /** Ce constructeur crée une nouvelle note avec les paramètres fournis.
-      * Si crea (date de création) n'est pas renseigné, il s'agit d'une nouvelle note et le constructeur appelle la fonction formatTime() qui récupèrela date et l'heure du système.
+      * Si crea (date de création) n'est pas renseigné, il s'agit d'une nouvelle note et le constructeur appelle la fonction formatTime() qui récupère la date et l'heure du système.
       * cette date est donc affectée à la date de création de la note et aussi à la date de dernière modification.
-      * Si ces dattes sont fournis, ils sont affectédd aux attributs correspondants.
+      * Si ces dates sont fournis, ils sont affectés aux attributs correspondants.
          @param i : id unique de la note
          @param t : titre de la note
          @param txt : texte décrivant la note
-         @param creadate : de création de la note
+         @param creadate : date de création de la note
          @param modif : date de dernière modification de la note
 
       */
@@ -78,7 +82,7 @@ public :
      }
 
 
-    /// accesseur en lecture de l'id de la note.
+        /// accesseur en lecture de l'id de la note.
     const std::string getID() const {return id;}
         /// accesseur en lecture du titre de la note.
     const std::string getTitre() const {return titre;}
@@ -88,7 +92,7 @@ public :
     const std::string getModif() const {return Modif;}
         /// accesseur en lecture du texte de la note.
     const std::string getTexte() const {return texte;}
-        /// accesseur du vector contennant les anciennes versions de la note.
+        /// accesseur du vector contenant les anciennes versions de la note.
     std::vector<note*>& getOldNotes() {return oldNotes;}
     /// met à jour le  texte de la note.
   /**
@@ -158,7 +162,7 @@ public :
      * @param txt : texte décrivant le média
      * @param im  : chemin du fichier média
      * @param crea : date de création du média
-     * @param modif :date  de derniere modification du média
+     * @param modif :date de derniere modification du média
      */
     media ( const std::string i, std::string t,std::string txt, std::string im ,std::string crea="",std::string modif="" )
         : note (i,t,txt,crea,modif),chemin(im){}
@@ -178,7 +182,7 @@ public :
 
 };
 /// Classe fille de note.
-/** cette classe est une note possédant une priorité soud forme d'un entier, une date d'échéance et un statut qui peut etre en_attente, en_cours ,terminee.
+/** cette classe est une note possédant une priorité sous la forme d'un entier, une date d'échéance et un statut qui peut etre en_attente, en_cours ,terminee.
  */
 
 class tache : public note{
@@ -226,7 +230,7 @@ public :
    * @param stat :le nouveau statut
    */
     void setStatus(enum etat stat){status=stat;}
-     /// appelle la fonction afficher() de note et affiche les attribust de tâche sur la sortie standard.
+     /// appelle la fonction afficher() de note et affiche les attributs de tâche sur la sortie standard.
     virtual void afficher(std::ostream& f= std::cout) const ;
 
 

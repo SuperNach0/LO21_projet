@@ -90,7 +90,7 @@ void fenetre_creation_relation::save_relation()
     {
         erreur = excep.getInfo();
     }
-    if (erreur == "")///Si la relation existe déjà
+    if (erreur == "")//Si la relation existe déjà
     {
         QMessageBox msgBox;
         msgBox.setText("La relation existe déjà, veuillez recommencer avec un titre différent");

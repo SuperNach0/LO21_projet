@@ -103,7 +103,7 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         erreur = excep.getInfo();
     }
 
-    if (erreur=="") ///Si il n'y a pas eu d'erreur, la note existe déjà
+    if (erreur=="") //Si il n'y a pas eu d'erreur, la note existe déjà
     {
         note& note_modif = m1.getNote(m_id->text().toStdString()); //On récupère une référence vers la note à modifier
 
@@ -140,7 +140,7 @@ void fenetre_creation_note :: save() //Sauvegarde/modification d'une note en tan
         note_modif.setTexte(m_texte->toPlainText().toStdString());
         note_modif.setModif();
     }
-    else    ///SI la note n'existe pas
+    else    //SI la note n'existe pas
     {
         try{
         if (m_article->isChecked())
