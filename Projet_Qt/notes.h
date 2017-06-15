@@ -59,11 +59,11 @@ public :
       * Si crea (date de création) n'est pas renseigné, il s'agit d'une nouvelle note et le constructeur appelle la fonction formatTime() qui récupèrela date et l'heure du système.
       * cette date est donc affectée à la date de création de la note et aussi à la date de dernière modification.
       * Si ces dattes sont fournis, ils sont affectédd aux attributs correspondants.
-         @param i id unique de la note
-         @param t titre de la note
-         @param txt texte décrivant la note
-         @param creadate de création de la note
-         @param modif date de dernière modification de la note
+         @param i : id unique de la note
+         @param t : titre de la note
+         @param txt : texte décrivant la note
+         @param creadate : de création de la note
+         @param modif : date de dernière modification de la note
 
       */
      note (std::string i,std::string t,std::string txt,std::string crea="",std::string modif =""): id(i),titre(t),texte(txt),oldNotes(0)
@@ -90,14 +90,14 @@ public :
     const std::string getTexte() const {return texte;}
         /// accesseur du vector contennant les anciennes versions de la note.
     std::vector<note*>& getOldNotes() {return oldNotes;}
-      /// met à jour le  texte de la note.
-    /**
-     * @param text le nouveau texte de la note.
-     */
+    /// met à jour le  texte de la note.
+  /**
+   * @param text : le nouveau texte de la note.
+   */
     void setTexte(const std::string& text) {texte = text;}
       /// met à jour le titre de la note.
     /**
-     * @param titre le nouveau titre de la note.
+     * @param titre : le nouveau titre de la note.
      */
     void setTitre(const std::string& t) {titre = t;}
      /// fonction virtuelle  qui affiche les attributs de la note sur la sortie standard.
