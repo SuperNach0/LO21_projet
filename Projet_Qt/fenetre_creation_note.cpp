@@ -7,6 +7,7 @@
 
 fenetre_creation_note::fenetre_creation_note() : QWidget()
 {
+    this->setWindowTitle("Création d'une note");
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
 
     m_layout_choix = new QVBoxLayout; //création layout

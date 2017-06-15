@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FenPrincipale_t {
-    QByteArrayData data[16];
-    char stringdata0[226];
+    QByteArrayData data[19];
+    char stringdata0[275];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,18 +43,23 @@ QT_MOC_LITERAL(8, 117, 4), // "date"
 QT_MOC_LITERAL(9, 122, 25), // "affichage_single_relation"
 QT_MOC_LITERAL(10, 148, 5), // "titre"
 QT_MOC_LITERAL(11, 154, 14), // "menuContextuel"
-QT_MOC_LITERAL(12, 169, 13), // "supprimerNote"
-QT_MOC_LITERAL(13, 183, 10), // "editerNote"
-QT_MOC_LITERAL(14, 194, 8), // "load_xml"
-QT_MOC_LITERAL(15, 203, 22) // "affichage_arborescence"
+QT_MOC_LITERAL(12, 169, 15), // "menuContextuel2"
+QT_MOC_LITERAL(13, 185, 13), // "supprimerNote"
+QT_MOC_LITERAL(14, 199, 17), // "supprimerRelation"
+QT_MOC_LITERAL(15, 217, 10), // "editerNote"
+QT_MOC_LITERAL(16, 228, 14), // "editerRelation"
+QT_MOC_LITERAL(17, 243, 8), // "load_xml"
+QT_MOC_LITERAL(18, 252, 22) // "affichage_arborescence"
 
     },
     "FenPrincipale\0popup\0\0popupAnciennesVersions\0"
     "popupCreationRelation\0affichage_notes_relations\0"
     "affichage_single_note\0id\0date\0"
     "affichage_single_relation\0titre\0"
-    "menuContextuel\0supprimerNote\0editerNote\0"
-    "load_xml\0affichage_arborescence"
+    "menuContextuel\0menuContextuel2\0"
+    "supprimerNote\0supprimerRelation\0"
+    "editerNote\0editerRelation\0load_xml\0"
+    "affichage_arborescence"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +69,7 @@ static const uint qt_meta_data_FenPrincipale[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -72,18 +77,21 @@ static const uint qt_meta_data_FenPrincipale[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   74,    2, 0x0a /* Public */,
-       3,    0,   75,    2, 0x0a /* Public */,
-       4,    0,   76,    2, 0x0a /* Public */,
-       5,    0,   77,    2, 0x0a /* Public */,
-       6,    2,   78,    2, 0x0a /* Public */,
-       6,    1,   83,    2, 0x2a /* Public | MethodCloned */,
-       9,    1,   86,    2, 0x0a /* Public */,
-      11,    1,   89,    2, 0x0a /* Public */,
-      12,    0,   92,    2, 0x0a /* Public */,
-      13,    0,   93,    2, 0x0a /* Public */,
-      14,    0,   94,    2, 0x0a /* Public */,
-      15,    1,   95,    2, 0x0a /* Public */,
+       1,    0,   89,    2, 0x0a /* Public */,
+       3,    0,   90,    2, 0x0a /* Public */,
+       4,    0,   91,    2, 0x0a /* Public */,
+       5,    0,   92,    2, 0x0a /* Public */,
+       6,    2,   93,    2, 0x0a /* Public */,
+       6,    1,   98,    2, 0x2a /* Public | MethodCloned */,
+       9,    1,  101,    2, 0x0a /* Public */,
+      11,    1,  104,    2, 0x0a /* Public */,
+      12,    1,  107,    2, 0x0a /* Public */,
+      13,    0,  110,    2, 0x0a /* Public */,
+      14,    0,  111,    2, 0x0a /* Public */,
+      15,    0,  112,    2, 0x0a /* Public */,
+      16,    0,  113,    2, 0x0a /* Public */,
+      17,    0,  114,    2, 0x0a /* Public */,
+      18,    1,  115,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -94,6 +102,9 @@ static const uint qt_meta_data_FenPrincipale[] = {
     QMetaType::Void, QMetaType::QString,    7,
     QMetaType::Void, QMetaType::QString,   10,
     QMetaType::Void, QMetaType::QPoint,    2,
+    QMetaType::Void, QMetaType::QPoint,    2,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -116,10 +127,13 @@ void FenPrincipale::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 5: _t->affichage_single_note((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 6: _t->affichage_single_relation((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 7: _t->menuContextuel((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
-        case 8: _t->supprimerNote(); break;
-        case 9: _t->editerNote(); break;
-        case 10: _t->load_xml(); break;
-        case 11: _t->affichage_arborescence((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: _t->menuContextuel2((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 9: _t->supprimerNote(); break;
+        case 10: _t->supprimerRelation(); break;
+        case 11: _t->editerNote(); break;
+        case 12: _t->editerRelation(); break;
+        case 13: _t->load_xml(); break;
+        case 14: _t->affichage_arborescence((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -150,13 +164,13 @@ int FenPrincipale::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 12;
+        _id -= 15;
     }
     return _id;
 }

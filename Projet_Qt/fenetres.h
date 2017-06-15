@@ -63,7 +63,8 @@ protected:
 public:
 
     FenPrincipale();
-    const std::string getCurrentNote() {return m_listeNotes->currentItem()->text().toStdString();}
+    const std::string getCurrentNote() const {return m_listeNotes->currentItem()->text().toStdString();}
+    const std::string getCurrentRelation() const {return m_listeRelatons->currentItem()->text().toStdString();}
 
 public slots:
     void popup();
@@ -73,8 +74,11 @@ public slots:
     void affichage_single_note(QString id, QString date="");
     void affichage_single_relation(QString titre);
     void menuContextuel(const QPoint&);
+    void menuContextuel2(const QPoint&);
     void supprimerNote();
+    void supprimerRelation();
     void editerNote();
+    void editerRelation();
     void load_xml();
     void affichage_arborescence(QString id);
 
@@ -124,6 +128,7 @@ protected:
 class fenetre_creation_relation : public QWidget
 {
     Q_OBJECT
+
 private:
 
     QWidget* m_parent;
@@ -141,6 +146,9 @@ private:
 public:
     fenetre_creation_relation(QWidget *parent);
     std::vector<Couple*> getCouples() {return m_couples;}
+    void lock_id_relation(std::string titre) {
+        m_label_relation->setText(QString::fromStdString(titre));
+        m_label_relation->setDisabled(true);}
 
 public slots:
     void affichage_couples();

@@ -2,36 +2,20 @@
 <sauvegarde>
     <notes>
         <article>
-            <id>Entrez un id</id>
+            <id>id1</id>
             <titre>Titre ici</titre>
-            <creation>2017-06-14 15:22:23</creation>
-            <modif>2017-06-14 15:22:23</modif>
+            <creation>2017-06-15 11:50:34</creation>
+            <modif>2017-06-15 11:50:34</modif>
             <texte>texte/description/action ici</texte>
         </article>
-        <article>
-            <id>Entrez un id2</id>
+        <media>
+            <id>id4</id>
             <titre>Titre ici</titre>
-            <creation>2017-06-14 15:22:25</creation>
-            <modif>2017-06-14 15:22:25</modif>
+            <creation>2017-06-15 11:53:11</creation>
+            <modif>2017-06-15 11:53:11</modif>
             <texte>texte/description/action ici</texte>
-        </article>
-        <article>
-            <id>id_article1</id>
-            <titre>info</titre>
-            <creation>2017-06-14 15:25:33</creation>
-            <modif>2017-06-14 15:25:33</modif>
-            <texte>Exemple de note</texte>
-        </article>
-        <tache>
-            <id>id_tache1</id>
-            <titre>finir projet LO21</titre>
-            <creation>2017-06-14 15:26:23</creation>
-            <modif>2017-06-14 15:26:23</modif>
-            <texte>rapport + doc + vidéo à faire</texte>
-            <echeance>jeudi 15 juin 2017</echeance>
-            <priorite>9</priorite>
-            <status>En cours</status>
-        </tache>
+            <chemin>C:/Users/cyril/Documents/Cyril/Etudes/Travail/GI01/LO21/Projet LO21/LO21_projet/build-Projet_Qt-Desktop_Qt_5_8_0_MinGW_32bit-Debug/icone_exit.png</chemin>
+        </media>
     </notes>
     <relations>
         <relation>
@@ -39,65 +23,33 @@
             <description>Contient toutes les références entre notes</description>
         </relation>
         <relation>
+            <titre>R1</titre>
+            <description>Description de la relation ?</description>
+        </relation>
+        <relation>
             <titre>Label de la relation ?</titre>
             <description>Description de la relation ?</description>
             <couple>
-                <premiere>Entrez un id</premiere>
-                <seconde>Entrez un id2</seconde>
+                <premiere>id1</premiere>
+                <seconde>id4</seconde>
                 <label>Label du couple ?</label>
                 <orientation>true</orientation>
             </couple>
             <couple>
-                <premiere>Entrez un id</premiere>
-                <seconde>Entrez un id2</seconde>
-                <label>Label du couple ?</label>
-                <orientation>true</orientation>
-            </couple>
-        </relation>
-        <relation>
-            <titre>R1</titre>
-            <description>relation entre article et note</description>
-            <couple>
-                <premiere>id_article1</premiere>
-                <seconde>id_tache1</seconde>
-                <label>Couple1</label>
-                <orientation>true</orientation>
-            </couple>
-        </relation>
-        <relation>
-            <titre>R2</titre>
-            <description>Relation article et note</description>
-            <couple>
-                <premiere>id_article1</premiere>
-                <seconde>id_tache1</seconde>
-                <label>Couple1</label>
-                <orientation>true</orientation>
-            </couple>
-            <couple>
-                <premiere>id_tache1</premiere>
-                <seconde>id_article1</seconde>
-                <label>Couple1</label>
-                <orientation>false</orientation>
-            </couple>
-        </relation>
-        <relation>
-            <titre>R11</titre>
-            <description>Description de la relation ?</description>
-            <couple>
-                <premiere>Entrez un id2</premiere>
-                <seconde>Entrez un id</seconde>
+                <premiere>id1</premiere>
+                <seconde>id4</seconde>
                 <label>Label du couple ?</label>
                 <orientation>true</orientation>
             </couple>
             <couple>
-                <premiere>Entrez un id2</premiere>
-                <seconde>Entrez un id</seconde>
+                <premiere>id1</premiere>
+                <seconde>id4</seconde>
                 <label>Label du couple ?</label>
-                <orientation>false</orientation>
+                <orientation>true</orientation>
             </couple>
             <couple>
-                <premiere>Entrez un id2</premiere>
-                <seconde>Entrez un id</seconde>
+                <premiere>id4</premiere>
+                <seconde>id4</seconde>
                 <label>Label du couple ?</label>
                 <orientation>false</orientation>
             </couple>
