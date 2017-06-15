@@ -110,3 +110,33 @@ void fenetre_anciennes_versions::restaurer()
     this->close();
 
 }
+
+void FenPrincipale::editerRelation()
+{
+    std::cout << "Edition relation\n";
+    RelationManager& rm = RelationManager::getManager();
+    m_fenetre_creation_relation = new fenetre_creation_relation(this);
+
+    fenetre_creation_relation* fenetre = static_cast<fenetre_creation_relation*>(m_fenetre_creation_relation);
+    m_fenetre_creation_relation->show();
+    fenetre->lock_id_relation(getCurrentRelation());
+}
+
+void FenPrincipale::supprimerRelation()
+{
+    std::cout<< "Suppression Relation\n";
+    /*
+    RelationManager& rm = RelationManager::getManager();
+    Relation& toDelete = rm.getRelation(this->getCurrentRelation());
+
+    int i=0;
+    while (i<rm.getobjets().size() && rm.getobjets()[i]->getTitre()==toDelete.getTitre())
+    {
+        i++;
+    }
+    if (i == rm.getobjets().size())
+        throw NotesException("La relation a supprimer n'existe pas\n");
+    rm.getobjets().erase(rm.getobjets().begin()+i);
+    */ ///A FINIR
+
+}

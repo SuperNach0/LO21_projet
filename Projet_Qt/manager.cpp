@@ -69,6 +69,7 @@ for(unsigned int i=0; i<version_actuelle.getOldNotes().size(); i++)
 throw NotesException("Version de note non trouvee\n");
 }
 
+
 template <class T>
 void Manager<T>::Supprimer (T& toDelete)
 {
@@ -578,7 +579,6 @@ void NotesManager2::checkReferences() const
     try
     {
            test_rel_reference = &(rm.getRelation("References"));
-           std::cout << "References deja existante\n";
     }
     catch(NotesException& exception)
     {
@@ -604,7 +604,7 @@ void NotesManager2::checkReferences() const
 
         while ((position_debut_texte != std::string::npos && position_fin_texte != std::string::npos))
         {
-            std::cout << "TROUVE : " << std::endl;
+            std::cout << "Reference trouvee " << std::endl;
             id_texte = texte.substr(position_debut_texte+5,position_fin_texte-position_debut_texte-5) ;
             std::cout << id_texte << std::endl;
 

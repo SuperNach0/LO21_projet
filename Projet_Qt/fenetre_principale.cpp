@@ -10,7 +10,7 @@ FenPrincipale::FenPrincipale()
 {
     ///LAYOUT PRINCIPAL
     m_layout_principal = new QVBoxLayout;
-
+    this->setWindowTitle("Plurinotes");
 
     //********* MENU FICHIER ***************
 
@@ -25,12 +25,6 @@ FenPrincipale::FenPrincipale()
         QAction *actionNewLink = new QAction("&Nouvelle Relation",this);
             actionNewLink->setShortcut(QKeySequence("Ctrl+R"));
             connect(actionNewLink,SIGNAL(triggered(bool)),this,SLOT(popupCreationRelation()));
-            /*
-        QAction *actionLoadXml = new QAction("&Charger un xml",this);
-            actionLoadXml->setShortcut(QKeySequence("Ctrl+L"));
-            connect(actionLoadXml,SIGNAL(triggered(bool)),this,SLOT(load_xml()));
-            menuFichier->addAction(actionLoadXml);
-            */
 
         menuFichier->addAction(actionQuitter);
         menuFichier->addAction(actionNewNote);
@@ -96,6 +90,8 @@ void FenPrincipale::creation_docks()
     m_dock_affichage_relations->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
     m_listeRelatons = new QListWidget(m_dock_affichage_relations);
+        m_listeRelatons->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(m_listeRelatons,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(menuContextuel2(QPoint)));
         connect(m_listeRelatons,SIGNAL(currentTextChanged(QString)),this,SLOT(affichage_single_relation(QString)));
 
 
@@ -344,6 +340,20 @@ void FenPrincipale::menuContextuel(const QPoint &pos)
     myMenu.addAction("Editer",this,SLOT(editerNote()));
     myMenu.addAction("Anciennes versions",this,SLOT(popupAnciennesVersions()));
     myMenu.addAction("Supprimer", this, SLOT(supprimerNote()));
+
+    // Show context menu at handling position
+    myMenu.exec(globalPos);
+}
+
+void FenPrincipale::menuContextuel2(const QPoint &pos)
+{
+    // Handle global position
+    QPoint globalPos = m_listeRelatons->mapToGlobal(pos);
+
+    // Create menu and insert some actions
+    QMenu myMenu;
+    myMenu.addAction("Editer",this,SLOT(editerRelation()));
+    myMenu.addAction("Supprimer",this,SLOT(supprimerRelation()));
 
     // Show context menu at handling position
     myMenu.exec(globalPos);

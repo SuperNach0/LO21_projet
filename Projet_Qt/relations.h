@@ -38,6 +38,7 @@ public:
     std::vector<Couple*>& getCouples(){return couples;}
     const std::string& getTitre() const {return titre;}
     const std::string& getDescription() const {return description;}
+    void setDescription(std::string desc){description=desc;}
 
 };
 

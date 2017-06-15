@@ -6,6 +6,7 @@
 
 fenetre_creation_relation::fenetre_creation_relation(QWidget *parent):m_couples(0)
 {
+    this->setWindowTitle("Création d'une relation");
     this->setWindowModality(Qt::ApplicationModal); //pour que la fenetre parente ne soit pas utilisable quand celle ci est ouverte
     m_parent = parent;
     m_couples.clear(); //on reset les couples à chaque ajout de relation
@@ -89,29 +90,41 @@ void fenetre_creation_relation::save_relation()
     {
         erreur = excep.getInfo();
     }
-    if (erreur == "")
+    if (erreur == "")///Si la relation existe déjà
     {
         QMessageBox msgBox;
         msgBox.setText("La relation existe déjà, veuillez recommencer avec un titre différent");
-        msgBox.exec();
-        return;
+        //msgBox.exec();
+
+        FenPrincipale* fenetre= static_cast<FenPrincipale*>(m_parent);
+        Relation& relation_editee = m.getRelation(fenetre->getCurrentRelation());
+        relation_editee.setDescription(this->m_description_relation->toPlainText().toStdString());
+
+        for (unsigned int i =0;i<getCouples().size();i++)
+        {
+            relation_editee.addCouple(*getCouples()[i]);
+        }
+
     }
-
-    //Création d'une relation avec titre et description
-
-    Relation* nouvelle_relation = new Relation(m_label_relation->text().toStdString(),m_description_relation->toPlainText().toStdString());
-
-
-    //les couples sont stockés dans le vector "couples" de la fenetre, on les ajoute tous à la relation "nouvelle_relation"
-    for (unsigned int i =0;i<getCouples().size();i++)
+    else //la relation n'existait pas
     {
-        nouvelle_relation->addCouple(*getCouples()[i]);
-    }
+        //Création d'une relation avec titre et description
 
-    //on ajoute au manager la relation créée
-    m.addRelation(*nouvelle_relation);
+        Relation* nouvelle_relation = new Relation(m_label_relation->text().toStdString(),m_description_relation->toPlainText().toStdString());
 
-    delete this; //on force la destruction pour l'affichage des relations
+
+        //les couples sont stockés dans le vector "couples" de la fenetre, on les ajoute tous à la relation "nouvelle_relation"
+        for (unsigned int i =0;i<getCouples().size();i++)
+        {
+            nouvelle_relation->addCouple(*getCouples()[i]);
+        }
+
+        //on ajoute au manager la relation créée
+        m.addRelation(*nouvelle_relation);
+
+     }
+        delete this; //on force la destruction pour l'affichage des relations
+
 }
 
 void fenetre_creation_relation::save_couple()
